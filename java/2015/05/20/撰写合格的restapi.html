@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(转)撰写合格的REST API</title>
+  <meta name="description" content="目录">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://yourdomain.com/java/2015/05/20/%E6%92%B0%E5%86%99%E5%90%88%E6%A0%BC%E7%9A%84restapi.html">
+  <link rel="alternate" type="application/rss+xml" title="fulin87的笔记" href="http://yourdomain.com/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">fulin87的笔记</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">(转)撰写合格的REST API</h1>
+    <p class="post-meta"><time datetime="2015-05-20T00:00:00+08:00" itemprop="datePublished">May 20, 2015</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="section">目录</h2>
+
+<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">目录</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">介绍</a></li>
+  <li><a href="#rfc" id="markdown-toc-rfc">RFC一致性</a></li>
+  <li><a href="#methods" id="markdown-toc-methods">Methods</a></li>
+  <li><a href="#headers" id="markdown-toc-headers">Headers</a></li>
+  <li><a href="#status-code" id="markdown-toc-status-code">Status Code</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">安全性</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">请求数据验证</a></li>
+  <li><a href="#section-4" id="markdown-toc-section-4">数据完整性验证</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">访问控制</a></li>
+  <li><a href="#https" id="markdown-toc-https">HTTPS</a></li>
+  <li><a href="#section-6" id="markdown-toc-section-6">其他</a></li>
+</ul>
+
+<h2 id="section-1">介绍</h2>
+<p>REST API是一个系统的backend和frontend（或者3rd party）打交道的通道，承前启后，有很多很多隐式需求，比如调用接口与RFC保持一致，API的内在和外在的安全性等等，并非提供几个endpoint，返回相应的json数据那么简单。在这篇文章里讲讲如何撰写REST API。<a href="http://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&amp;mid=208060670&amp;idx=1&amp;sn=ce67b8896985e8448137052b338093e0">原文</a></p>
+
+<h2 id="rfc">RFC一致性</h2>
+
+<p>REST API一般用来将某种资源和允许的对资源的操作暴露给外界，使调用者能够以正确的方式操作资源。这里，在输入输出的处理上，要符合HTTP/1.1（不久的将来，要符合HTTP/2.0）的RFC，保证接口的一致性。这里主要讲输入的method/headers和输出的status code。</p>
+
+<h2 id="methods">Methods</h2>
+
+<p>HTTP协议提供了很多methods来操作数据：</p>
+
+<ul>
+  <li>GET: 获取某个资源，GET操作应该是幂等（idempotence）的，且无副作用。</li>
+  <li>POST: 创建一个新的资源。</li>
+  <li>PUT: 替换某个已有的资源。PUT操作虽然有副作用，但其应该是幂等的。</li>
+  <li>PATCH（RFC5789）: 修改某个已有的资源。</li>
+  <li>DELETE：删除某个资源。DELETE操作有副作用，但也是幂等的。</li>
+</ul>
+
+<p>幂等在HTTP/1.1中定义如下：</p>
+
+<blockquote>
+  <p>Methods can also have the property of “idempotence” in that (aside from error or expiration issues) the side-effects of N &gt; 0 identical requests is the same as for a single request. 如今鲜有人在撰写REST API时，</p>
+</blockquote>
+
+<p>简单说来就是一个操作符合幂等性，那么相同的数据和参数下，执行一次或多次产生的效果（副作用）是一样的。</p>
+
+<p>现在大多的REST framwork对HTTP methods都有正确的支持，有些旧的framework可能未必对PATCH有支持，需要注意。如果自己手写REST API，一定要注意区分POST/PUT/PATCH/DELETE的应用场景。</p>
+
+<h2 id="headers">Headers</h2>
+
+<p>很多REST API犯的比较大的一个问题是：不怎么理会request headers。对于REST API，有一些HTTP headers很重要：</p>
+
+<p>Accept：服务器需要返回什么样的content。如果客户端要求返回”application/xml”，服务器端只能返回”application/json”，那么最好返回status code 406 not acceptable（RFC2616），当然，返回application/json也并不违背RFC的定义。一个合格的REST API需要根据Accept头来灵活返回合适的数据。</p>
+
+<p>If-Modified-Since/If-None-Match：如果客户端提供某个条件，那么当这条件满足时，才返回数据，否则返回304 not modified。比如客户端已经缓存了某个数据，它只是想看看有没有新的数据时，会用这两个header之一，服务器如果不理不睬，依旧做足全套功课，返回200 ok，那就既不专业，也不高效了。</p>
+
+<p>If-Match：在对某个资源做PUT/PATCH/DELETE操作时，服务器应该要求客户端提供If-Match头，只有客户端提供的Etag与服务器对应资源的Etag一致，才进行操作，否则返回412 precondition failed。这个头非常重要，下文详解。</p>
+
+<h2 id="status-code">Status Code</h2>
+
+<p>很多REST API犯下的另一个错误是：返回数据时不遵循RFC定义的status code，而是一律200 ok + error message。这么做在client + API都是同一公司所为还凑合可用，但一旦把API暴露给第三方，不但贻笑大方，还会留下诸多互操作上的隐患。</p>
+
+<p>以上仅仅是最基本的一些考虑，要做到完全符合RFC，除了参考RFC本身以外，erlang社区的webmachine或者clojure下的liberator都是不错的实现，是目前为数不多的REST API done right的library/framework。</p>
+
+<p>（liberator的decision tree，沿袭了webmachine的思想，请自行google其文档查看大图）</p>
+
+<h2 id="section-2">安全性</h2>
+
+<p>前面说过，REST API承前启后，是系统暴露给外界的接口，所以，其安全性非常重要。安全并单单不意味着加密解密，而是一致性（integrity），机密性（confidentiality）和可用性（availibility）。</p>
+
+<h2 id="section-3">请求数据验证</h2>
+
+<p>我们从数据流入REST API的第一步 —— 请求数据的验证 —— 来保证安全性。你可以把请求数据验证看成一个巨大的漏斗，把不必要的访问统统过滤在第一线：</p>
+
+<p>Request headers是否合法：如果出现了某些不该有的头，或者某些必须包含的头没有出现或者内容不合法，根据其错误类型一律返回4xx。比如说你的API需要某个特殊的私有头（e.g. X-Request-ID），那么凡是没有这个头的请求一律拒绝。这可以防止各类漫无目的的webot或crawler的请求，节省服务器的开销。</p>
+
+<p>Request URI和Request body是否合法：如果请求带有了不该有的数据，或者某些必须包含的数据没有出现或内容不合法，一律返回4xx。比如说，API只允许querystring中含有query，那么”?sort=desc”这样的请求需要直接被拒绝。有不少攻击会在querystring和request body里做文章，最好的对应策略是，过滤所有含有不该出现的数据的请求。</p>
+
+<h2 id="section-4">数据完整性验证</h2>
+
+<p>REST API往往需要对backend的数据进行修改。修改是个很可怕的操作，我们既要保证正常的服务请求能够正确处理，还需要防止各种潜在的攻击，如replay。数据完整性验证的底线是：保证要修改的数据和服务器里的数据是一致的 —— 这是通过Etag来完成。</p>
+
+<p>Etag可以认为是某个资源的一个唯一的版本号。当客户端请求某个资源时，该资源的Etag一同被返回，而当客户端需要修改该资源时，需要通过”If-Match”头来提供这个Etag。服务器检查客户端提供的Etag是否和服务器同一资源的Etag相同，如果相同，才进行修改，否则返回412 precondition failed。</p>
+
+<p>使用Etag可以防止错误更新。比如A拿到了Resource X的Etag X1，B也拿到了Resource X的Etag X1。B对X做了修改，修改后系统生成的新的Etag是X2。这时A也想更新X，由于A持有旧的Etag，服务器拒绝更新，直至A重新获取了X后才能正常更新。</p>
+
+<p>Etag类似一把锁，是数据完整性的最重要的一道保障。Etag能把绝大多数integrity的问题扼杀在摇篮中，当然，race condition还是存在的：如果B的修改还未进入数据库，而A的修改请求正好通过了Etag的验证时，依然存在一致性问题。这就需要在数据库写入时做一致性写入的前置检查。</p>
+
+<h2 id="section-5">访问控制</h2>
+
+<p>REST API需要清晰定义哪些操作能够公开访问，哪些操作需要授权访问。一般而言，如果对REST API的安全性要求比较高，那么，所有的API的所有操作均需得到授权。</p>
+
+<p>在HTTP协议之上处理授权有很多方法，如HTTP BASIC Auth，OAuth，HMAC Auth等，其核心思想都是验证某个请求是由一个合法的请求者发起。Basic Auth会把用户的密码暴露在网络之中，并非最安全的解决方案，OAuth的核心部分与HMAC Auth差不多，只不过多了很多与token分发相关的内容。这里我们主要讲讲HMAC Auth的思想。</p>
+
+<p>回到Security的三个属性：一致性，机密性，和可用性。HMAC Auth保证一致性：请求的数据在传输过程中未被修改，因此可以安全地用于验证请求的合法性。</p>
+
+<p>HMAC主要在请求头中使用两个字段：Authorization和Date（或X-Auth-Timestamp）。Authorization字段的内容由”:”分隔成两部分，”:”前是access-key，”:”后是HTTP请求的HMAC值。在API授权的时候一般会为调用者生成access-key和access-secret，前者可以暴露在网络中，后者必须安全保存。当客户端调用API时，用自己的access-secret按照要求对request的headers/body计算HMAC，然后把自己的access-key和HMAC填入Authorization头中。服务器拿到这个头，从数据库（或者缓存）中取出access-key对应的secret，按照相同的方式计算HMAC，如果其与Authorization header中的一致，则请求是合法的，且未被修改过的；否则不合法。</p>
+
+<p>GET /photos/puppy.jpg HTTP/1.1
+Host: johnsmith.s3.amazonaws.com
+Date: Mon, 26 Mar 2007 19:37:58 +0000</p>
+
+<p>Authorization: AWS AKIAIOSFODNN7EXAMPLE:frJIUN8DYpKDtOLCwo//yllqDzg=</p>
+
+<p>（Amazon HMAC图示）</p>
+
+<p>在做HMAC的时候，request headers中的request method，request URI，Date/X-Auth-Timestamp等header会被计算在HMAC中。将时间戳计算在HMAC中的好处是可以防止replay攻击。客户端和服务器之间的UTC时间正常来说偏差很小，那么，一个请求携带的时间戳，和该请求到达服务器时服务器的时间戳，中间差别太大，超过某个阈值（比如说120s），那么可以认为是replay，服务器主动丢弃该请求。</p>
+
+<p>使用HMAC可以很大程度上防止DOS攻击 —— 无效的请求在验证HMAC阶段就被丢弃，最大程度保护服务器的计算资源。</p>
+
+<h2 id="https">HTTPS</h2>
+
+<p>HMAC Auth尽管在保证请求的一致性上非常安全，可以用于鉴别请求是否由合法的请求者发起，但请求的数据和服务器返回的响应都是明文传输，对某些要求比较高的API来说，安全级别还不够。这时候，需要部署HTTPS。在其之上再加一层屏障。</p>
+
+<h2 id="section-6">其他</h2>
+
+<p>做到了接口一致性（符合RFC）和安全性，REST API可以算得上是合格了。当然，一个实现良好的REST API还应该有如下功能：</p>
+
+<p>rate limiting：访问限制。</p>
+
+<p>metrics：服务器应该收集每个请求的访问时间，到达时间，处理时间，latency，便于了解API的性能和客户端的访问分布，以便更好地优化性能和应对突发请求。</p>
+
+<p>docs：丰富的接口文档 - API的调用者需要详尽的文档来正确调用API，可以用swagger来实现。</p>
+
+<p>hooks/event propogation：其他系统能够比较方便地与该API集成。比如说添加了某资源后，通过kafka或者rabbitMQ向外界暴露某个消息，相应的subscribers可以进行必要的处理。不过要注意的是，hooks/event propogation可能会破坏REST API的幂等性，需要小心使用。</p>
+
+<p>各个社区里面比较成熟的REST API framework/library：</p>
+
+<p>Python: django-rest-framework（django），eve（flask）。各有千秋。可惜python没有好的类似webmachine的实现。</p>
+
+<p>Erlang/Elixir: webmachine/ewebmachine。</p>
+
+<p>Ruby: webmachine-ruby。</p>
+
+<p>Clojure：liberator。</p>
+
+<p>其它语言接触不多，就不介绍了。可以通过访问该语言在github上相应的awesome repo（google awesome XXX，如awesome python），查看REST API相关的部分。</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">fulin87的笔记</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>fulin87的笔记</li>
+          <li><a href="mailto:your-email@domain.com">your-email@domain.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/fulin87"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">fulin87</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/fulin87"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">fulin87</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>唯天下之至诚，胜天下之至伪；唯天下之至拙，胜天下之至巧。
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

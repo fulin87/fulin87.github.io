@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fulin87的笔记</title>
+    <description>唯天下之至诚，胜天下之至伪；唯天下之至拙，胜天下之至巧。
+</description>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 13 Nov 2015 18:52:40 +0800</pubDate>
+    <lastBuildDate>Fri, 13 Nov 2015 18:52:40 +0800</lastBuildDate>
+    <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>打造自己的python开发环境</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#pythonpip&quot; id=&quot;markdown-toc-pythonpip&quot;&gt;python的包管理工具pip&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pip&quot; id=&quot;markdown-toc-pip&quot;&gt;pip工具的使用&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pythonipython&quot; id=&quot;markdown-toc-pythonipython&quot;&gt;python的命令行开发工具ipython&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pythonpip&quot;&gt;python的包管理工具pip&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;1,访问：[get-pip.py](https://bootstrap.pypa.io/get-pip.py) 访问需要的python文件。
+2,将源代码copy到一个文本文件，将文本文件重命名的get-pip.py。
+3,通过命令行进入上述文本文件的所在位置，运行一下命令： 
+`python get-pip.py`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;pip&quot;&gt;pip工具的使用&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;pip list              //查看已经安装的python包
+pip show package      //查看packageName的详细情况
+pip install package   //安装包package
+pip uninstall package //卸载包package
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;pythonipython&quot;&gt;python的命令行开发工具ipython&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt; python ipython  //安装ipython&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;很多时候，配置一个开发环境不容易，这是一个学习的过程，也是一个过坑的过程，把这些过程记录下来，战胜自己的遗忘&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 13 Nov 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/fulin/2015/11/13/build-my-python-tool.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/fulin/2015/11/13/build-my-python-tool.html</guid>
+        
+        
+        <category>fulin</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 09 Nov 2015 13:07:11 +0800</pubDate>
+        <link>http://yourdomain.com/fulin/2015/11/09/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/fulin/2015/11/09/welcome-to-jekyll.html</guid>
+        
+        
+        <category>fulin</category>
+        
+      </item>
+    
+      <item>
+        <title>使用 hexo 创建github个人站点的最佳实践</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;目录&lt;/h2&gt;
+&lt;p&gt;[TOC]
+## 一些背景情况
+    使用github有一段时间了，一直想在github上创建自己的博客。来记录一下自己学习中的心得体会。
+    我之前的做法是自己在本地编写好html,js然后通过git提交到github。时间长了，感觉非常的繁琐。尤其是写html实在是太麻烦了。现在markdown非常流行，我也非常喜欢markdown简洁高效的编写体验。无意中发现了nodeJs中hexo这个专为个人博客打造的神器。
+    以下我来记录一下自己在使用hexo过程中的一些感受。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;环境搭建&lt;/h2&gt;
+&lt;p&gt;    首先，需要在计算机上安装git，node，hexo。下面是官网的地址：
+&amp;gt; git  : &lt;a href=&quot;http://www.git-scm.com/download/&quot;&gt;git官网&lt;/a&gt;
+&amp;gt; node : &lt;a href=&quot;https://nodejs.org/&quot;&gt;node官网&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;    详细的安装过程，请参照 &lt;strong&gt;&lt;a href=&quot;https://hexo.io/docs/&quot;&gt;hexo官方文档&lt;/a&gt;,&lt;/strong&gt;这份hexo的官方文档中有非常详细的说明，上面详细的介绍了git和node的安装方法，以及hexo的使用方法。虽然使用的是英文，但是我相信，上过初中的人都能看懂。
+    具体安装过程，我就不多说了，但是有一点非常的重要，&lt;strong&gt;需要切记：&lt;/strong&gt;把git和node配置到环境变量之中。尤其是git,必须配，如果不配后面再使用hexo进行部署的时候会失败。
+    同时还需要说明一点的就是，最新版的node默认安装了一个node 的包管理工具:npm。这是一个非常强大的神奇，类似于python中的pip。使用npm几乎可以完成绝大多数node下依赖包的安装。如果你不懂，没关系，照着文档做就好了，渐渐的你就明白了。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;我曾经遇到的困难，我是怎么克服的&lt;/h2&gt;
+&lt;p&gt;    如果你认真的完成了第一步，我相信，你基本已经可以自己开发博客了，这里我主要说两点，这两点都是困扰我很久的问题，希望遇到同样问题的朋友少走弯路。&lt;/p&gt;
+
+&lt;h3 id=&quot;markdown&quot;&gt;怎样高效的书写markdown&lt;/h3&gt;
+&lt;p&gt;    书写markdown的工具，如果在windows下我推荐使用&lt;strong&gt;&lt;a href=&quot;https://www.zybuluo.com&quot;&gt;CmdMarkdown&lt;/a&gt;&lt;/strong&gt;,这是一个优秀的markdown编辑器，有在线版本，也有客户端，还自带同步功能。支持即写即看，所以你懂的。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;部署报错了怎么办&lt;/h3&gt;
+&lt;p&gt;    我相信，如果你按照文档中说的走，一般不会报错。应该可以正常进行，现在的你，可能已经熟练的在写博客了。但是如果你向我当初一样，那么粗心就糟了。
+#### git环境变量
+    我之前一直在最后一步使用hexo d 命令部署的时候出错，困扰了我很久，我在网上也找了很久，才解决这个问题，就是因为git环境变量没有配置导致的，所以，请你一定要注意。
+    git环境变量配置了，部署的时候还是报错。这种情况我也遇到了，这个时候，请你删除目录下.deploy_git文件夹，然后再次运行hexo g命令和hexo d命令。
+### 每次编写博客，文件怎么管理
+    在你的工作目录中有一个文件夹是~\source_posts文件夹，这个文件夹下面存放的文件是.md的扩展名。这些就是你的markdown格式的博客类型。每次写博客都把markdown文件存放在这个目录下，使用hexo g和hexo d命令之后博客就自动部署完成了，是不是感觉非常的爽？&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 20 Jul 2015 13:07:11 +0800</pubDate>
+        <link>http://yourdomain.com/fulin/2015/07/20/use-hexo-build-bolg.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/fulin/2015/07/20/use-hexo-build-bolg.html</guid>
+        
+        
+        <category>fulin</category>
+        
+      </item>
+    
+      <item>
+        <title>并行SSH运维工具pssh</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;目录&lt;/h2&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;目录&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;介绍&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;下载安装&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;参数命令介绍&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;实例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;PSSH provides parallel versions of OpenSSH and related tools. Included are pssh, pscp, prsync, pnuke, and pslurp. The project includes psshlib which can be used within custom applications.&lt;/p&gt;
+
+&lt;p&gt;The source code is written in Python and can be cloned from: https://github.com/robinbowes/pssh.git&lt;/p&gt;
+
+&lt;p&gt;PSSH is supported on Python 2.4 and greater (including Python 3.1 and greater). It was originally written and maintained by Brent N. Chun. Due to his busy schedule, Brent handed over maintenance to Andrew McNabb in October 2009.&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;下载安装&lt;/h2&gt;
+
+&lt;p&gt;https://github.com/robinbowes/pssh/archive/master.zip&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; unzip master.zip
+&amp;gt; cd pssh-master
+&amp;gt; python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;参数命令介绍&lt;/h2&gt;
+
+&lt;p&gt;介绍pssh参数  pssh   在多个主机上并行地运行命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   -h 执行命令的远程主机列表  或者 -H user@ip:port  文件内容格式[user@]host[:port]
+   -l 远程机器的用户名
+   -P 执行时输出执行信息
+   -p 一次最大允许多少连接
+   -o 输出内容重定向到一个文件
+   -e 执行错误重定向到一个文件
+   -t 设置命令执行的超时时间
+   -A 提示输入密码并且把密码传递给ssh
+   -O 设置ssh参数的具体配置，参照ssh_config配置文件
+   -x 传递多个SSH 命令，多个命令用空格分开，用引号括起来
+   -X 同-x 但是一次只能传递一个命令
+   -i 显示标准输出和标准错误在每台host执行完毕后
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其他命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pscp     传输文件到多个hosts，类似scp
+pslurp   从多台远程机器拷贝文件到本地
+pnuke    并行在远程主机杀进程
+prsync   使用rsync协议从本地计算机同步到远程主机
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;实例&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;pssh -H nginx@192.168.1.102:9000 -P date
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Tue, 16 Jun 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/java/2015/06/16/pssh%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/java/2015/06/16/pssh%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7.html</guid>
+        
+        <category>pssh</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 15 Jun 2015 13:07:11 +0800</pubDate>
+        <link>http://yourdomain.com/fulin/2015/06/15/python.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/fulin/2015/06/15/python.html</guid>
+        
+        
+        <category>fulin</category>
+        
+      </item>
+    
+      <item>
+        <title>好的生活习惯</title>
+        <description>&lt;p&gt;    &lt;em&gt;读了很多年的书，也工作了很多年，到头来发现，有一个好的生活习惯比什么都重要….&lt;/em&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;不良的嗜好&lt;/h3&gt;
+
+&lt;p&gt;    抽烟，喝酒，赌博，好色。这些都是不良的嗜好，这些不好的习惯会极大的影响自己的精力，身体，浪费宝贵的时间。如果有这些嗜好，戒掉还来得及，在自己还没有老去的时候。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;早睡早起的习惯&lt;/h3&gt;
+&lt;p&gt;    以前读历史书，发现蒋公有一个很好的习惯，那就是早睡早起，这当然与他的军人背景有关，同时蒋公的所有照片中，他都是精神抖擞，衣着整洁的，这与毛公好像不太一样。说实话，我挺佩服蒋公的。
+    现在自己马上要步入而立之年了。人到中年才发现早睡早起不仅身体会感觉舒爽，一天的时间似乎都充裕了…早起，看朝阳升起，看彩霞，呼吸新鲜的空气，做一顿有营养的早餐，&lt;strong&gt;我感觉自己是如此的幸福。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;bash
+时间像奔腾澎湃的急湍，它一去无还，毫不留恋。 —— 塞万提斯
+你因成功而内心充满喜悦的时候，就没有时间颓废。 —— 弗兰克·迈耶
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;阅读的习惯&lt;/h3&gt;
+&lt;p&gt;    要想进步，必须学习。作为一个崇拜技术，热爱科学的人来说，阅读技术书籍是少不了的，同时我们还需要阅读一些技术之外的书籍，它可以扩充我们的视野，让我们的人生路越走越宽。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;坚韧的习惯&lt;/h3&gt;
+&lt;p&gt;    世界是嘈杂的，浮躁的，功利的；另一方面，世界也是公平的，精彩的，因果的。我宁愿相信，有付出就有回报。所以，我们需要有做事情的毅力，需要坚韧。
+    随着年龄的增长，我发现我已经不再会去迷恋天才，崇拜权威，我会欣赏那些有毅力的人，有耐力的人，坚韧不拔的人。那些在逆境中默默奋斗的人。那些为了解决一个问题而反复研究的人。&lt;/p&gt;
+
+&lt;h1 id=&quot;this-is--a-test&quot;&gt;this is  a test&lt;/h1&gt;
+
+</description>
+        <pubDate>Wed, 27 May 2015 13:07:11 +0800</pubDate>
+        <link>http://yourdomain.com/fulin/2015/05/27/good-life.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/fulin/2015/05/27/good-life.html</guid>
+        
+        
+        <category>fulin</category>
+        
+      </item>
+    
+      <item>
+        <title>eclipse中svn插件的问题及解决</title>
+        <description>&lt;h2 id=&quot;eclipsesvn&quot;&gt;eclipse中的svn插件的问题&lt;/h2&gt;
+&lt;p&gt;    eclipse中的svn插件叫subclipse。一般可以通过&lt;strong&gt;Help &amp;gt; eclipse marketPlace &amp;gt; find&lt;/strong&gt;找到所需要的插件，直接安装就可以了。
+    但是这样安装的插件有一个问题，就是版本不好控制。一般eclipse marketPlace中的插件都是最新版本的。所以有可能会造成兼容性的问题。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;兼容性问题的最佳实践&lt;/h2&gt;
+&lt;p&gt;    实践表明,eclipse的kepler这个版本与subclipse的1.8.6这个版本具有很好的兼容性。
+    安装eclipse的插件有好几种方式，我比较喜欢的方式是增加links文件夹的方式。当把subclipse插件安装完成之后，引入项目，还有可能遇到的问题是插件无法识别项目，具体的表现是：
+&lt;strong&gt;右键 &amp;gt; team&lt;/strong&gt;之后找不到提交和更新的选项。这个时候应该选择&lt;strong&gt;shire project &amp;gt; svn&lt;/strong&gt;。正常情况下到这一步就OK了，如果报错，应该就是兼容性造成的。&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 20 May 2015 13:07:11 +0800</pubDate>
+        <link>http://yourdomain.com/fulin/2015/05/20/eclipse.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/fulin/2015/05/20/eclipse.html</guid>
+        
+        
+        <category>fulin</category>
+        
+      </item>
+    
+      <item>
+        <title>改变</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;从现在开始&lt;/h2&gt;
+&lt;p&gt;我们每天都在说要改变，但是我们每天还是在重复同样的事情。
+ &lt;strong&gt;改变&lt;/strong&gt;从现在开始！&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 20 May 2015 13:07:11 +0800</pubDate>
+        <link>http://yourdomain.com/fulin/2015/05/20/change.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/fulin/2015/05/20/change.html</guid>
+        
+        
+        <category>fulin</category>
+        
+      </item>
+    
+      <item>
+        <title>(转)撰写合格的REST API</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;目录&lt;/h2&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;目录&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;介绍&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#rfc&quot; id=&quot;markdown-toc-rfc&quot;&gt;RFC一致性&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#methods&quot; id=&quot;markdown-toc-methods&quot;&gt;Methods&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#headers&quot; id=&quot;markdown-toc-headers&quot;&gt;Headers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#status-code&quot; id=&quot;markdown-toc-status-code&quot;&gt;Status Code&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;安全性&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;请求数据验证&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;数据完整性验证&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;访问控制&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#https&quot; id=&quot;markdown-toc-https&quot;&gt;HTTPS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;其他&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;REST API是一个系统的backend和frontend（或者3rd party）打交道的通道，承前启后，有很多很多隐式需求，比如调用接口与RFC保持一致，API的内在和外在的安全性等等，并非提供几个endpoint，返回相应的json数据那么简单。在这篇文章里讲讲如何撰写REST API。&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&amp;amp;mid=208060670&amp;amp;idx=1&amp;amp;sn=ce67b8896985e8448137052b338093e0&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;rfc&quot;&gt;RFC一致性&lt;/h2&gt;
+
+&lt;p&gt;REST API一般用来将某种资源和允许的对资源的操作暴露给外界，使调用者能够以正确的方式操作资源。这里，在输入输出的处理上，要符合HTTP/1.1（不久的将来，要符合HTTP/2.0）的RFC，保证接口的一致性。这里主要讲输入的method/headers和输出的status code。&lt;/p&gt;
+
+&lt;h2 id=&quot;methods&quot;&gt;Methods&lt;/h2&gt;
+
+&lt;p&gt;HTTP协议提供了很多methods来操作数据：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GET: 获取某个资源，GET操作应该是幂等（idempotence）的，且无副作用。&lt;/li&gt;
+  &lt;li&gt;POST: 创建一个新的资源。&lt;/li&gt;
+  &lt;li&gt;PUT: 替换某个已有的资源。PUT操作虽然有副作用，但其应该是幂等的。&lt;/li&gt;
+  &lt;li&gt;PATCH（RFC5789）: 修改某个已有的资源。&lt;/li&gt;
+  &lt;li&gt;DELETE：删除某个资源。DELETE操作有副作用，但也是幂等的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;幂等在HTTP/1.1中定义如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Methods can also have the property of “idempotence” in that (aside from error or expiration issues) the side-effects of N &amp;gt; 0 identical requests is the same as for a single request. 如今鲜有人在撰写REST API时，&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;简单说来就是一个操作符合幂等性，那么相同的数据和参数下，执行一次或多次产生的效果（副作用）是一样的。&lt;/p&gt;
+
+&lt;p&gt;现在大多的REST framwork对HTTP methods都有正确的支持，有些旧的framework可能未必对PATCH有支持，需要注意。如果自己手写REST API，一定要注意区分POST/PUT/PATCH/DELETE的应用场景。&lt;/p&gt;
+
+&lt;h2 id=&quot;headers&quot;&gt;Headers&lt;/h2&gt;
+
+&lt;p&gt;很多REST API犯的比较大的一个问题是：不怎么理会request headers。对于REST API，有一些HTTP headers很重要：&lt;/p&gt;
+
+&lt;p&gt;Accept：服务器需要返回什么样的content。如果客户端要求返回”application/xml”，服务器端只能返回”application/json”，那么最好返回status code 406 not acceptable（RFC2616），当然，返回application/json也并不违背RFC的定义。一个合格的REST API需要根据Accept头来灵活返回合适的数据。&lt;/p&gt;
+
+&lt;p&gt;If-Modified-Since/If-None-Match：如果客户端提供某个条件，那么当这条件满足时，才返回数据，否则返回304 not modified。比如客户端已经缓存了某个数据，它只是想看看有没有新的数据时，会用这两个header之一，服务器如果不理不睬，依旧做足全套功课，返回200 ok，那就既不专业，也不高效了。&lt;/p&gt;
+
+&lt;p&gt;If-Match：在对某个资源做PUT/PATCH/DELETE操作时，服务器应该要求客户端提供If-Match头，只有客户端提供的Etag与服务器对应资源的Etag一致，才进行操作，否则返回412 precondition failed。这个头非常重要，下文详解。&lt;/p&gt;
+
+&lt;h2 id=&quot;status-code&quot;&gt;Status Code&lt;/h2&gt;
+
+&lt;p&gt;很多REST API犯下的另一个错误是：返回数据时不遵循RFC定义的status code，而是一律200 ok + error message。这么做在client + API都是同一公司所为还凑合可用，但一旦把API暴露给第三方，不但贻笑大方，还会留下诸多互操作上的隐患。&lt;/p&gt;
+
+&lt;p&gt;以上仅仅是最基本的一些考虑，要做到完全符合RFC，除了参考RFC本身以外，erlang社区的webmachine或者clojure下的liberator都是不错的实现，是目前为数不多的REST API done right的library/framework。&lt;/p&gt;
+
+&lt;p&gt;（liberator的decision tree，沿袭了webmachine的思想，请自行google其文档查看大图）&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;安全性&lt;/h2&gt;
+
+&lt;p&gt;前面说过，REST API承前启后，是系统暴露给外界的接口，所以，其安全性非常重要。安全并单单不意味着加密解密，而是一致性（integrity），机密性（confidentiality）和可用性（availibility）。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;请求数据验证&lt;/h2&gt;
+
+&lt;p&gt;我们从数据流入REST API的第一步 —— 请求数据的验证 —— 来保证安全性。你可以把请求数据验证看成一个巨大的漏斗，把不必要的访问统统过滤在第一线：&lt;/p&gt;
+
+&lt;p&gt;Request headers是否合法：如果出现了某些不该有的头，或者某些必须包含的头没有出现或者内容不合法，根据其错误类型一律返回4xx。比如说你的API需要某个特殊的私有头（e.g. X-Request-ID），那么凡是没有这个头的请求一律拒绝。这可以防止各类漫无目的的webot或crawler的请求，节省服务器的开销。&lt;/p&gt;
+
+&lt;p&gt;Request URI和Request body是否合法：如果请求带有了不该有的数据，或者某些必须包含的数据没有出现或内容不合法，一律返回4xx。比如说，API只允许querystring中含有query，那么”?sort=desc”这样的请求需要直接被拒绝。有不少攻击会在querystring和request body里做文章，最好的对应策略是，过滤所有含有不该出现的数据的请求。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;数据完整性验证&lt;/h2&gt;
+
+&lt;p&gt;REST API往往需要对backend的数据进行修改。修改是个很可怕的操作，我们既要保证正常的服务请求能够正确处理，还需要防止各种潜在的攻击，如replay。数据完整性验证的底线是：保证要修改的数据和服务器里的数据是一致的 —— 这是通过Etag来完成。&lt;/p&gt;
+
+&lt;p&gt;Etag可以认为是某个资源的一个唯一的版本号。当客户端请求某个资源时，该资源的Etag一同被返回，而当客户端需要修改该资源时，需要通过”If-Match”头来提供这个Etag。服务器检查客户端提供的Etag是否和服务器同一资源的Etag相同，如果相同，才进行修改，否则返回412 precondition failed。&lt;/p&gt;
+
+&lt;p&gt;使用Etag可以防止错误更新。比如A拿到了Resource X的Etag X1，B也拿到了Resource X的Etag X1。B对X做了修改，修改后系统生成的新的Etag是X2。这时A也想更新X，由于A持有旧的Etag，服务器拒绝更新，直至A重新获取了X后才能正常更新。&lt;/p&gt;
+
+&lt;p&gt;Etag类似一把锁，是数据完整性的最重要的一道保障。Etag能把绝大多数integrity的问题扼杀在摇篮中，当然，race condition还是存在的：如果B的修改还未进入数据库，而A的修改请求正好通过了Etag的验证时，依然存在一致性问题。这就需要在数据库写入时做一致性写入的前置检查。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;访问控制&lt;/h2&gt;
+
+&lt;p&gt;REST API需要清晰定义哪些操作能够公开访问，哪些操作需要授权访问。一般而言，如果对REST API的安全性要求比较高，那么，所有的API的所有操作均需得到授权。&lt;/p&gt;
+
+&lt;p&gt;在HTTP协议之上处理授权有很多方法，如HTTP BASIC Auth，OAuth，HMAC Auth等，其核心思想都是验证某个请求是由一个合法的请求者发起。Basic Auth会把用户的密码暴露在网络之中，并非最安全的解决方案，OAuth的核心部分与HMAC Auth差不多，只不过多了很多与token分发相关的内容。这里我们主要讲讲HMAC Auth的思想。&lt;/p&gt;
+
+&lt;p&gt;回到Security的三个属性：一致性，机密性，和可用性。HMAC Auth保证一致性：请求的数据在传输过程中未被修改，因此可以安全地用于验证请求的合法性。&lt;/p&gt;
+
+&lt;p&gt;HMAC主要在请求头中使用两个字段：Authorization和Date（或X-Auth-Timestamp）。Authorization字段的内容由”:”分隔成两部分，”:”前是access-key，”:”后是HTTP请求的HMAC值。在API授权的时候一般会为调用者生成access-key和access-secret，前者可以暴露在网络中，后者必须安全保存。当客户端调用API时，用自己的access-secret按照要求对request的headers/body计算HMAC，然后把自己的access-key和HMAC填入Authorization头中。服务器拿到这个头，从数据库（或者缓存）中取出access-key对应的secret，按照相同的方式计算HMAC，如果其与Authorization header中的一致，则请求是合法的，且未被修改过的；否则不合法。&lt;/p&gt;
+
+&lt;p&gt;GET /photos/puppy.jpg HTTP/1.1
+Host: johnsmith.s3.amazonaws.com
+Date: Mon, 26 Mar 2007 19:37:58 +0000&lt;/p&gt;
+
+&lt;p&gt;Authorization: AWS AKIAIOSFODNN7EXAMPLE:frJIUN8DYpKDtOLCwo//yllqDzg=&lt;/p&gt;
+
+&lt;p&gt;（Amazon HMAC图示）&lt;/p&gt;
+
+&lt;p&gt;在做HMAC的时候，request headers中的request method，request URI，Date/X-Auth-Timestamp等header会被计算在HMAC中。将时间戳计算在HMAC中的好处是可以防止replay攻击。客户端和服务器之间的UTC时间正常来说偏差很小，那么，一个请求携带的时间戳，和该请求到达服务器时服务器的时间戳，中间差别太大，超过某个阈值（比如说120s），那么可以认为是replay，服务器主动丢弃该请求。&lt;/p&gt;
+
+&lt;p&gt;使用HMAC可以很大程度上防止DOS攻击 —— 无效的请求在验证HMAC阶段就被丢弃，最大程度保护服务器的计算资源。&lt;/p&gt;
+
+&lt;h2 id=&quot;https&quot;&gt;HTTPS&lt;/h2&gt;
+
+&lt;p&gt;HMAC Auth尽管在保证请求的一致性上非常安全，可以用于鉴别请求是否由合法的请求者发起，但请求的数据和服务器返回的响应都是明文传输，对某些要求比较高的API来说，安全级别还不够。这时候，需要部署HTTPS。在其之上再加一层屏障。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;其他&lt;/h2&gt;
+
+&lt;p&gt;做到了接口一致性（符合RFC）和安全性，REST API可以算得上是合格了。当然，一个实现良好的REST API还应该有如下功能：&lt;/p&gt;
+
+&lt;p&gt;rate limiting：访问限制。&lt;/p&gt;
+
+&lt;p&gt;metrics：服务器应该收集每个请求的访问时间，到达时间，处理时间，latency，便于了解API的性能和客户端的访问分布，以便更好地优化性能和应对突发请求。&lt;/p&gt;
+
+&lt;p&gt;docs：丰富的接口文档 - API的调用者需要详尽的文档来正确调用API，可以用swagger来实现。&lt;/p&gt;
+
+&lt;p&gt;hooks/event propogation：其他系统能够比较方便地与该API集成。比如说添加了某资源后，通过kafka或者rabbitMQ向外界暴露某个消息，相应的subscribers可以进行必要的处理。不过要注意的是，hooks/event propogation可能会破坏REST API的幂等性，需要小心使用。&lt;/p&gt;
+
+&lt;p&gt;各个社区里面比较成熟的REST API framework/library：&lt;/p&gt;
+
+&lt;p&gt;Python: django-rest-framework（django），eve（flask）。各有千秋。可惜python没有好的类似webmachine的实现。&lt;/p&gt;
+
+&lt;p&gt;Erlang/Elixir: webmachine/ewebmachine。&lt;/p&gt;
+
+&lt;p&gt;Ruby: webmachine-ruby。&lt;/p&gt;
+
+&lt;p&gt;Clojure：liberator。&lt;/p&gt;
+
+&lt;p&gt;其它语言接触不多，就不介绍了。可以通过访问该语言在github上相应的awesome repo（google awesome XXX，如awesome python），查看REST API相关的部分。&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 May 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/java/2015/05/20/%E6%92%B0%E5%86%99%E5%90%88%E6%A0%BC%E7%9A%84restapi.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/java/2015/05/20/%E6%92%B0%E5%86%99%E5%90%88%E6%A0%BC%E7%9A%84restapi.html</guid>
+        
+        <category>REST API</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>Linux环境获取系统性能数据</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;目录&lt;/h2&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;目录&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;1. 介绍&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#linux&quot; id=&quot;markdown-toc-linux&quot;&gt;2. Linux环境获取系统性能数据&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#cpu&quot; id=&quot;markdown-toc-cpu&quot;&gt;2.1 CPU利用率&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#cpu-1&quot; id=&quot;markdown-toc-cpu-1&quot;&gt;2.2 进程CPU利用率&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;2.3 内存利用率&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#load&quot; id=&quot;markdown-toc-load&quot;&gt;2.4 系统load&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;2.5 网卡流量信息&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;2.6 磁盘（文件系统）空间信息&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;2.7 磁盘读写信息&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;1. 介绍&lt;/h2&gt;
+&lt;p&gt;记录linux环境获取系统性能数据&lt;/p&gt;
+
+&lt;h2 id=&quot;linux&quot;&gt;2. Linux环境获取系统性能数据&lt;/h2&gt;
+
+&lt;h3 id=&quot;cpu&quot;&gt;2.1 CPU利用率&lt;/h3&gt;
+&lt;p&gt;/proc/stat文件里包含系统cpu使用情况，2-8列对应的CPU消耗含义是用户态消耗(user)、用户态nice消耗(nice)、内核态消耗(sys)、空闲时间(idle)、等待IO消耗(iowait)、硬件中断消耗(hardirq)、软中断消耗(softirq)。（man proc）&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ cat /proc/stat
+cpu  2339504870 2641995 716723851 70316975284 7219566 328971 304057999 0 0
+cpu0 211214357 275710 57674236 2778331292 3688175 10421 12279511 0 0
+cpu1 140100049 278788 47142039 2857686940 180452 32028 14960093 0 0
+...
+&lt;/code&gt;
+要计算t1~t2时间内系统的cpu利用率，需要在t1、t2时刻分别采集cpu使用信息&lt;/p&gt;
+
+&lt;p&gt;```
+t1_all = t1(user + nice + sys + idle + iowait + hardirq + sortirq)
+t1_used = t1(user + nice + sys + iowait + hardirq + sortirq)
+t2_all = t2(user + nice + sys + idle + iowait + hardirq + sortirq
+t2_used = t2(user + nice + sys + iowait + hardirq + sortirq)&lt;/p&gt;
+
+&lt;p&gt;cpu_usage = (t2_used - t1_used) / (t2_all - t1_all)
+```&lt;/p&gt;
+
+&lt;h3 id=&quot;cpu-1&quot;&gt;2.2 进程CPU利用率&lt;/h3&gt;
+
+&lt;p&gt;/proc/$pid/stat文件里包含某个进程的cpu使用信息，14、15、16、17列对应进程用户态消耗(user)、内核态消耗(sys)、用户态等待子进程的消耗(user_child)、内核态等待子进程的消耗(sys_child)。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$cat /proc/24076/stat
+24076 (redis-server) S 1 24076 24076 0 -1 4202560 5755 147 0 0 1864 3298 0 0 20 0 3 0 70238536 159555584 5145 18446744073709551615 1 1 0 0 0 0 0 4097 17610 18446744073709551615 0 0 17 4 0 0 0 0 0
+&lt;/code&gt;
+t1、t2时刻分别采集/proc/stat、/proc/$pid/stat，获取总的cpu消耗，以及进程的cpu消耗&lt;/p&gt;
+
+&lt;p&gt;```
+t1_all = t1(user + nice + sys + idle + iowait + hardirq + sortirq)
+t1_pid = t1(user + sys + user_child + sys_child)
+t2_all = t2(user + nice + sys + idle + iowait + hardirq + sortirq)
+t2_pid = t2(user + sys + user_child + sys_child)&lt;/p&gt;
+
+&lt;p&gt;pid_cpu_usage = (t2_pid - t1_pid) / (t2_all - t1_all)
+```&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;2.3 内存利用率&lt;/h3&gt;
+&lt;p&gt;/proc/meminfo文件里包含系统内存使用信息&lt;/p&gt;
+
+&lt;p&gt;```
+$ cat /proc/meminfo
+MemTotal:       198450624 kB
+MemFree:        184950332 kB&lt;/p&gt;
+
+&lt;p&gt;mem_usage = 1 - MemFree / MemTotal
+```&lt;/p&gt;
+
+&lt;h3 id=&quot;load&quot;&gt;2.4 系统load&lt;/h3&gt;
+&lt;p&gt;/proc/uptime的前3列包含了最近1min、5min、15min系统的平均load（正在运行或等待IO的进程数，进程state为R或D）&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$cat /proc/loadavg
+0.02 0.09 0.08 1/2362 855
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;2.5 网卡流量信息&lt;/h3&gt;
+&lt;p&gt;/proc/net/dev包含所有网卡的流量信息，第1、2、10、11列分别代表网卡当前接受字节数（recv_bytes）、接受包个数(recv_packets)、发送字节数(send_bytes)、发送个数(send_packets)。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$cat /proc/net/dev
+Inter-|   Receive                                                |  Transmit
+ face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls     carrier compressed
+ lo:25047448261 37947893    0    0    0     0          0         0 25047448261 37947893    0    0    0     0       0          0
+ eth0:2566932970457 7620547348    0    0    2     0          0     62732 728662220296 6145797287    0    0    0     0       0          0
+ eth1:2023304550582 7268848253    0    0    0     0          0     77924 742443231982 6129090809    0    0    0     0       0          0
+&lt;/code&gt;
+t1~t2时间内的平均流量为&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+avg_recv_bytes = (t2_recv_bytes - t1_recv_bytes) / (t2 - t1)
+avg_send_bytes = (t2_send_bytes - t1_send_bytes) / (t2 - t1)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;2.6 磁盘（文件系统）空间信息&lt;/h3&gt;
+&lt;p&gt;通过statfs系统调用可获取当前文件系统的空间占用情况&lt;/p&gt;
+
+&lt;p&gt;```
+struct statfs {
+    long    f_type;     /* type of file system (see below) &lt;em&gt;/
+    long    f_bsize;    /&lt;/em&gt; optimal transfer block size &lt;em&gt;/
+    long    f_blocks;   /&lt;/em&gt; total data blocks in file system &lt;em&gt;/
+    long    f_bfree;    /&lt;/em&gt; free blocks in fs &lt;em&gt;/
+    long    f_bavail;   /&lt;/em&gt; free blocks avail to non-superuser */
+    …
+};&lt;/p&gt;
+
+&lt;p&gt;disk_usage = 1 - f_bfree / f_blocks
+```&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;2.7 磁盘读写信息&lt;/h3&gt;
+&lt;p&gt;/proc/diskstats包含磁盘的IO信息，第4-9列分别为当前磁盘读次数(read)，磁盘读扇区数(read_sec)、磁盘读毫秒数(read_ms)、磁盘写次数(write)、磁盘写扇区数(write_sec)、磁盘写毫秒数(write_ms)。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$cat /proc/diskstats
+8       4 sda4 3 0 12 8 0 0 0 0 0 8 8
+8       5 sda5 87928 55284 2842138 17349 1230958 7932106 73380432 4931382 0 503343 4947504
+8      16 sdb 393 35 3418 37 17 2 152 0 0 37 37
+8      32 sdc 788 114 10690 10132 14550036 226568635 1929026928 623148463 0 4917530 623154797
+&lt;/code&gt;
+t1~t2时间内磁盘平均读写次数、扇区数、IO利用率计算如下&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+avg_read = (t2_read - t1_read) / (t2 - t1)
+avg_read_sec = (t2_read_sec - t1_read_sec) / (t2 - t1)
+avg_write = (t2_write - t1_write) / (t2 - t1)
+avg_write_sec = (t2_write_sec - t1_write_sec) / (t2 - t1)
+io_util = (t2_read_ms + t2_write_ms - t1_read_ms - t1_write_ms) / (t2 - t1) (t1~t2时间段内IO的时间百分比）
+&lt;/code&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 13 May 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/tools/2015/05/13/linux%E7%8E%AF%E5%A2%83%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD%E6%95%B0%E6%8D%AE.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/tools/2015/05/13/linux%E7%8E%AF%E5%A2%83%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD%E6%95%B0%E6%8D%AE.html</guid>
+        
+        <category>Linux环境获取系统性能数据</category>
+        
+        
+        <category>tools</category>
+        
+      </item>
+    
+  </channel>
+</rss>
