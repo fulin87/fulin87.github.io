@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Welcome to Jekyll!</title>
-  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
+  <title>plantUML的使用</title>
+  <meta name="description" content="  经常需要画一些图，比如类图，时序图，用例图等，最近接触到一款有趣的工具，是eclipse的一个插件:plantUML。这里只记录最基础的地方，以后再来完善">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/color/2015/05/19/jekyll.html">
-  <link rel="alternate" type="application/rss+xml" title="fulin87的笔记" href="http://yourdomain.com/feed.xml">
+  <link rel="canonical" href="http://colorful.ren/java/2016/09/20/plantuml.html">
+  <link rel="alternate" type="application/rss+xml" title="fulin87的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
 
@@ -33,6 +33,7 @@
       </a>
 
       <div class="trigger">
+		<!--
         
           
           <a class="page-link" href="/about/">About</a>
@@ -44,6 +45,8 @@
         
           
         
+		-->
+		<img src="/image/fulin.JPG"/>
       </div>
     </nav>
 
@@ -57,25 +60,23 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Welcome to Jekyll!</h1>
-    <p class="post-meta"><time datetime="2015-05-19T13:07:11+08:00" itemprop="datePublished">May 19, 2015</time></p>
+    <h1 class="post-title" itemprop="name headline">plantUML的使用</h1>
+    <p class="post-meta"><time datetime="2016-09-20T13:07:11+08:00" itemprop="datePublished">Sep 20, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>You’ll find this post in your <code>_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code>jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+    <blockquote>
+  <p>经常需要画一些图，比如类图，时序图，用例图等，最近接触到一款有趣的工具，是eclipse的一个插件:plantUML。这里只记录最基础的地方，以后再来完善</p>
+</blockquote>
 
-<p>To add new posts, simply add a file in the <code>_posts</code> directory that follows the convention <code>YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<h3 id="section">安装</h3>
+<p>直接访问 <strong><a href="http://plantuml.com/">plantUML官网</a></strong></p>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<h3 id="section-1">问题</h3>
+<p>安装好插件之后，此时只能使用plantUML画一些时序图，并不能从类文件直接生成类图，这时候还需要安装和配置一个十分牛*的画图工具： <strong><a href="http://www.graphviz.org/">Graphviz</a></strong></p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
-
-<p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
-
+<h3 id="graphviz">Graphviz的使用</h3>
+<p>仅仅使用Graphviz就已经可以画图了，直接使用Graphedit.exe程序就可以画图了，具体参照官网。</p>
 
   </div>
 
@@ -87,17 +88,18 @@
     <footer class="site-footer">
 
   <div class="wrapper">
-
-    <h2 class="footer-heading">fulin87的笔记</h2>
-
+  
     <div class="footer-col-wrapper">
+
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
+		
           <li>fulin87的笔记</li>
-          <li><a href="mailto:your-email@domain.com">your-email@domain.com</a></li>
+          <li><a href="mailto:fulin87@sina.com">fulin87@sina.com</a></li>
         </ul>
       </div>
 
+	  
       <div class="footer-col footer-col-2">
         <ul class="social-media-list">
           
@@ -119,8 +121,10 @@
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>唯天下之至诚，胜天下之至伪；唯天下之至拙，胜天下之至巧。
-</p>
+		 <ul class="social-media-list">
+			<li>唯天下之至诚，胜天下之至伪</li>
+			<li>唯天下之至拙，胜天下之至巧</li>
+		 </ul>
       </div>
     </div>
 
