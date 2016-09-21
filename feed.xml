@@ -5,9 +5,156 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 20 Sep 2016 14:41:31 +0800</pubDate>
-    <lastBuildDate>Tue, 20 Sep 2016 14:41:31 +0800</lastBuildDate>
+    <pubDate>Wed, 21 Sep 2016 13:35:32 +0800</pubDate>
+    <lastBuildDate>Wed, 21 Sep 2016 13:35:32 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>mysql 基础知识</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;大道至简，世间的道理都是相似的……   &lt;br /&gt;
+  就比如学东西吧，以前总是东学一点，西学一点。到头来发现什么都会，什么都不精，所以，到头来才明白：少才是多，less is more。数据库，以后就选择mysql了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;mysql&quot;&gt;mysql的安装&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;因为仅做学习使用，这里只讲centos下的 mysql 安装过程，其他环境下的不做过多解释。而且，这里介绍的也是最方便的安装过程，不一定是最好的方式&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;操作系统信息&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; Description:		CentOS Linux release 7.2.1511 (Core) 
+ Release:		7.2.1511
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;首先查看本系统有没有安装 mariadb&lt;/p&gt;
+
+   	$ rpm -qa |　grep -i mariadb    //这里的-i是忽略大小写
+
+    &lt;pre&gt;&lt;code&gt;   mariadb-libs-5.5.44-2.el7.centos.x86_64
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果有安装，则需要卸载(–nodeps意思是如果有依赖关系，则同时卸载掉)&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; $ rpm -e --nodeps mariadb-libs-5.5.44-2.el7.centos.x86_64 
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;下载mysql的安装包&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-server-5.6.21-1.rhel5.x86_64.rpm
+ $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-devel-5.6.21-1.rhel5.x86_64.rpm
+ $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-client-5.6.21-1.rhel5.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装rpm软件包&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; $ rpm -ivh MySQL-****.rpm 	
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装MySQL-server会报一个错，因为缺少依赖，使用yum安装即可&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; $ yum install -y libaio
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;初始化MySQL及设置密码&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; $ /usr/bin/mysql_install_db
+ $ service mysql start
+ $ cat /root/.mysql_secret  #查看root账号密码
+ $ mysql -uroot -pAsTsb42   #AsTsb42是看到的密码
+ mysql&amp;gt; SET PASSWORD = PASSWORD(&#39;123456&#39;);    #设置密码为123456
+ mysql&amp;gt; exit
+ $ mysql -uroot -p123456
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;远程登陆用户设置&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; use mysql;
+ mysql&amp;gt; select host,user,password from user;
+ mysql&amp;gt; update user set password=password(&#39;123456&#39;) where user=&#39;root&#39;;
+ mysql&amp;gt; update user set host=&#39;%&#39; where user=&#39;root&#39; and host=&#39;localhost&#39;;
+ mysql&amp;gt; flush privileges;
+ mysql&amp;gt; exit
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;修改mysql的配置文件&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; $ vi /etc/my.cnf.d/my-default.cnf
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;加入如下内容：&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; [client]
+ password=123456
+ port=3306
+ default-character-set=utf8
+	
+ [mysqld]
+ port=3306
+ character_set_server=utf8
+ character_set_client=utf8
+ collation_server=utf8_general_ci
+ collation_database=utf8_general_ci
+ lower_case_table_names=1
+ max_connections=1000
+	
+ [mysql]
+ default-character-set=utf8
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;mysql的默认安装位置&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; /var/lib/mysql/               #数据库目录
+ /usr/share/mysql              #配置文件目录
+ /usr/bin                      #相关命令目录
+ /etc/init.d/mysql             #启动脚本
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;mysql的启动和停止&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; $ service mysql stop
+ $ service mysql start
+ $ service mysql restart
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;设置开机自启动&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; $ chkconfig mysql on
+ $ chkconfig --list | grep mysql
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;mysql-1&quot;&gt;mysql基础的命令&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;	-- 查看mysql版本信息
+	select version(); 
+	
+	-- 查看字符集
+	show variables like &#39;%collation%&#39;;  
+	show variables like &#39;%char%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Wed, 21 Sep 2016 00:00:00 +0800</pubDate>
+        <link>http://colorful.ren/mysql/2016/09/21/mysql.html</link>
+        <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/21/mysql.html</guid>
+        
+        
+        <category>mysql</category>
+        
+      </item>
     
       <item>
         <title>plantUML的使用</title>
@@ -359,7 +506,7 @@ set hls                     &quot;检索时高亮显示匹配项
 set helplang=cn             &quot;帮助系统设置为中文
 set foldmethod=syntax       &quot;代码折叠
 set nobackup                &quot;不要普通的加~备份文件
-set nowritebackup			&quot;不要容灾的备份文件
+set nowritebackup	    &quot;不要容灾的备份文件
 &quot;\}\}
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -383,7 +530,9 @@ O                     表示在上一行的行首插入
 I                     表示当前字符的后面插入
 i                     表示当前字符的前面插入
 :12,15 co 20          将从12到15行的内容复制后粘贴到20行
-:34					  跳转到34行
+:34		      跳转到34行
+f+		      查找当前行的下一个+号
+.		      重复执行上一次修改
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;掌握这些功能，就能处理平时大部分的服务器端编辑任务，当然，VI的功能是非常强大的，号称是伪装成编辑器的操作系统，也有人说这是神的编辑器。这个工具，需要我们持久的学习。&lt;/p&gt;
@@ -392,44 +541,6 @@ i                     表示当前字符的前面插入
         <pubDate>Thu, 19 Nov 2015 00:00:00 +0800</pubDate>
         <link>http://colorful.ren/fulin/2015/11/19/vim.html</link>
         <guid isPermaLink="true">http://colorful.ren/fulin/2015/11/19/vim.html</guid>
-        
-        
-        <category>fulin</category>
-        
-      </item>
-    
-      <item>
-        <title>打造自己的python开发环境</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#pythonpip&quot; id=&quot;markdown-toc-pythonpip&quot;&gt;python的包管理工具pip&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#pip&quot; id=&quot;markdown-toc-pip&quot;&gt;pip工具的使用&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#pythonipython&quot; id=&quot;markdown-toc-pythonipython&quot;&gt;python的命令行开发工具ipython&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;pythonpip&quot;&gt;python的包管理工具pip&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;1,访问：[get-pip.py](https://bootstrap.pypa.io/get-pip.py) 访问需要的python文件。
-2,将源代码copy到一个文本文件，将文本文件重命名的get-pip.py。
-3,通过命令行进入上述文本文件的所在位置，运行一下命令： 
-`python get-pip.py`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;pip&quot;&gt;pip工具的使用&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;pip list              //查看已经安装的python包
-pip show package      //查看packageName的详细情况
-pip install package   //安装包package
-pip uninstall package //卸载包package
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;pythonipython&quot;&gt;python的命令行开发工具ipython&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt; python ipython  //安装ipython&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;很多时候，配置一个开发环境不容易，这是一个学习的过程，也是一个过坑的过程，把这些过程记录下来，战胜自己的遗忘&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 13 Nov 2015 00:00:00 +0800</pubDate>
-        <link>http://colorful.ren/fulin/2015/11/13/build-my-python-tool.html</link>
-        <guid isPermaLink="true">http://colorful.ren/fulin/2015/11/13/build-my-python-tool.html</guid>
         
         
         <category>fulin</category>
