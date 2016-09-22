@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>vi的基本配置和常用命令</title>
-  <meta name="description" content="vi的配置和使用要注意的问题">
+  <title>mysql中sql优化的思路和原则</title>
+  <meta name="description" content="  大部分系统的性能瓶颈都是IO操作，数据库的IO消耗是其中的重要组成部分，SQL语句性能的优化是很有必要的，如果一开始不注意，后期的改动成本是比较大的">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/fulin/2015/11/19/vim.html">
+  <link rel="canonical" href="http://colorful.ren/mysql/2016/09/22/mysql-update.html">
   <link rel="alternate" type="application/rss+xml" title="fulin87的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
@@ -60,88 +60,112 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">vi的基本配置和常用命令</h1>
-    <p class="post-meta"><time datetime="2015-11-19T00:00:00+08:00" itemprop="datePublished">Nov 19, 2015</time></p>
+    <h1 class="post-title" itemprop="name headline">mysql中sql优化的思路和原则</h1>
+    <p class="post-meta"><time datetime="2016-09-22T00:00:00+08:00" itemprop="datePublished">Sep 22, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h2 id="vi">vi的配置和使用要注意的问题</h2>
+    <blockquote>
+  <p>大部分系统的性能瓶颈都是IO操作，数据库的IO消耗是其中的重要组成部分，SQL语句性能的优化是很有必要的，如果一开始不注意，后期的改动成本是比较大的</p>
+</blockquote>
 
-<pre><code>   vi或者vim功能的强大是毋庸置疑的。全键盘的操作体验，快速定位，流畅的编辑能力。
-但是还是有一些细节是需要注意的。
-   这里记录一下我平时使用vim的配置情况和一些容易忘记的命令,方便以后查阅。
+<h3 id="sql">SQL优化的思路</h3>
+
+<pre><code>1.优化更需要优化的sql；
+2.定位优化对象的性能瓶颈：优化前需了解查询的瓶颈是IO还是CPU可通过PROFILING很容易定位查询的瓶颈。
+3.明确优化目标；
+4.从Explain入手；
+5.多使用profile；
 </code></pre>
 
-<h3 id="vivimrc">vi的基本配置(.vimrc文件的配置)</h3>
-<pre><code>syn on                      "语法支持
+<h3 id="sql-1">SQL优化的基本原则</h3>
 
-"common conf \{\{             通用配置
+<ul>
+  <li>
+    <p>永远用小结果集驱动大结果集</p>
 
-"设置文件的代码输出
-set encoding=utf-8          
-set termencoding=utf-8     
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,chinese,cp936
- 
-"vim的菜单乱码解决
-source $VIMRUNTIME/delmenu.vim 
-source $VIMRUNTIME/menu.vim
+    <p><code>From子句中sql解析顺序为从右向左，执行时会以最左边的表为基础表循环与右边表数据做笛卡尔积，所以以小结果集驱动能减少循环次数，从而减少对被驱动结果集的访问，从而减少被驱动表的锁定。</code></p>
+  </li>
+  <li>
+    <p>尽可能在索引中完成排序</p>
 
-"vim提示信息乱码的解决
-language messages zh_CH.utf-8
+    <p><code>排序算法有两种：a.查出排序字段和行指针，排序，再通过行指针获得行数据所需列，返回结果集；b.取出所有排序列数据，在排序缓冲区中排完序直接返回结果集。索引排序是利用索引的有序性对数据排序的。</code></p>
+  </li>
+  <li>只取出子集需要的colums</li>
+  <li>仅仅使用最有效的过滤条件</li>
+  <li>尽可能避免复杂的Join和子查询</li>
+</ul>
 
-set ai                      "自动缩进
-set bs=2                    "在insert模式下用退格键删除
-set showmatch               "代码匹配
-set laststatus=2            "总是显示状态行
-set expandtab               "以下三个配置配合使用，设置tab和缩进空格数
-set shiftwidth=4
-set tabstop=4
-set cursorline              "为光标所在行加下划线
-set number                  "显示行号
-set autoread                "文件在Vim之外修改过，自动重新读入
-set ignorecase              "检索时忽略大小写
-set fileencodings=uft-8     "使用utf-8或gbk打开文件
-set hls                     "检索时高亮显示匹配项
-set helplang=cn             "帮助系统设置为中文
-set foldmethod=syntax       "代码折叠
-set nobackup                "不要普通的加~备份文件
-set nowritebackup	    "不要容灾的备份文件
-"\}\}
+<h3 id="section">索引相关的总结</h3>
+
+<blockquote>
+  <p>什么是索引，可以把索引想象成数据库的目录，查找某一样东西之前，先在目录中确定好位置，直奔位置而去，这就是提高查询效率的原因。</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p>索引的好处</p>
+
+    <pre><code> 提高数据检索效率，降低数据库的IO成本
+ 降低数据排序成本：要求排序字段和索引键字段一致
+ 降低数据分组成本：因为分组之前会先排序，同意如果分组字段与索引字段一致，会降低分组消耗的成本。
 </code></pre>
+  </li>
+  <li>
+    <p>索引的弊端</p>
 
-<p><em>这里需要注意在vim的配置文件中的引号是注释的作用</em></p>
-
-<h3 id="vi-1">vi最常用的命令</h3>
-<pre><code>gg                    表示移动到文件的首行
-G                     表示移动到文件的末行
-28G                   表示移动到28行
-^                     表示移动到行首
-$                     表示移动到行尾
-/abc                  表示正向查找"abc"
-?abc                  表示反向查找"abc"
-yy                    表示复制当前行
-yw                    表示复制单词
-p                     表示粘贴到当前位置
-n                     表示正向查找下一个关键字
-N                     表示反向查找下一个关键字
-o                     表示在下一行的行首插入
-O                     表示在上一行的行首插入
-I                     表示当前字符的后面插入
-i                     表示当前字符的前面插入
-:12,15 co 20          将从12到15行的内容复制后粘贴到20行     
-:34		      跳转到34行
-f+		      查找当前行的下一个+号
-.		      重复执行上一次修改
-;                     重复上一次的查找
-,                     反向执行上一次的查找
-:s/test/abcde         将当前行的第一个test替换成abcde
-:s/te/abc/g           将当前行的所有te替换成abc
-:%s/test/&amp;/gn         统计字符串test在当前文件中出现的次数
+    <pre><code> 索引是独立于基础数据的数据库对象，因此它会占用存储空间
+ 数据新增、更新会导致索引的同步更新，所以会增加数据新增、更新所消耗的成本
 </code></pre>
+  </li>
+  <li>
+    <p>否需要创建索引</p>
 
-<p>掌握这些功能，就能处理平时大部分的服务器端编辑任务，当然，VI的功能是非常强大的，号称是伪装成编辑器的操作系统，也有人说这是神的编辑器。这个工具，需要我们持久的学习。</p>
+    <pre><code> 较为频繁的作为查询条件的字段需要创建索引
+ 唯一性太差的字段不适合单独创建索引，即使频繁作为查询条件
+ 更新非常频繁的字段不适合创建索引
+ 不会出现在where子句中的字段不要创建索引
+</code></pre>
+  </li>
+  <li>
+    <p>索引语法</p>
 
+    <ul>
+      <li>
+        <p>唯一索引</p>
+
+        <pre><code>  ALTER TABLE tableName ADD UNIQUE indexName (column);
+  CREATE UNIQUE INDEX indexName ON tableName (column);
+</code></pre>
+      </li>
+      <li>
+        <p>普通索引</p>
+
+        <pre><code>  ALTER TABLE tableName ADD INDEX indexName(column);
+  CREATE INDEX indexName ON tableName(column);
+</code></pre>
+      </li>
+      <li>
+        <p>主键索引</p>
+
+        <pre><code>  ALTER TABLE tableName ADD PRIMARY KEY (column);
+</code></pre>
+      </li>
+      <li>
+        <p>全文索引</p>
+
+        <pre><code>  ALTER TABLE tableName ADD FULLTEXT (column);
+</code></pre>
+      </li>
+      <li>
+        <p>组合索引</p>
+
+        <pre><code>  ALTER TABLE tableName ADD INDEX indexName(col1,col2,...);
+</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
 
   </div>
 
