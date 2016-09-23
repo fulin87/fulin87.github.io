@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>与ruby有关的笔记</title>
-  <meta name="description" content="背景	ruby这几年的名气越来越大了，甚至传说ruby是进行web开发效率最高的语言。前段时间折腾自己的github个人博客，接触到jekyll，进而接触到ruby，就稍微了解了一下。感觉ruby跟python和node这两种语言非常接近。	这里记一下自己了解到的一点点有限的知识，防止遗忘。">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://colorful.ren/ruby/2015/11/20/ruby.html">
-  <link rel="alternate" type="application/rss+xml" title="fulin87的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">fulin87的笔记</a>
+    <a class="site-title" href="/">2B程序员的笔记</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -65,39 +65,41 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h3 id="section">背景</h3>
-<pre><code>	ruby这几年的名气越来越大了，甚至传说ruby是进行web开发效率最高的语言。前段
-时间折腾自己的github个人博客，接触到jekyll，进而接触到ruby，就稍微了解了一下。
-感觉ruby跟python和node这两种语言非常接近。
-	这里记一下自己了解到的一点点有限的知识，防止遗忘。
-</code></pre>
+    <ul id="markdown-toc">
+  <li><a href="#rubygem" id="markdown-toc-rubygem">ruby的包管理工具:gem</a></li>
+  <li><a href="#ruby" id="markdown-toc-ruby">将ruby的源更换为淘宝的源</a></li>
+</ul>
+
+<blockquote>
+  <p>ruby这几年的名气越来越大了，甚至传说ruby是进行web开发效率最高的语言。前段时间折腾自己的github个人博客，接触到jekyll，进而接触到ruby，就稍微了解了一下。感觉ruby跟python和node这两种语言非常接近。这里记一下自己了解到的一点点有限的知识，防止遗忘。</p>
+</blockquote>
 
 <h3 id="rubygem">ruby的包管理工具:gem</h3>
-<pre><code>	像ruby，pyhon,node这几种语言都有自己的包管理工具，用起来真的感觉非常的爽，
-唯一不好的地方是：有时候下载的网速太慢了。遇到这种情况，就需要更换源。
-	gem -v 										#gem版本
-	gem source 									#gem资源
-	gem sources -a url ｜gem sources -r url 	   	#gem添加或删除配置源
-	gem update 									#更新所有包
-	gem update --system 							#更新RubyGems软件
-	gem install rake 							#安装rake,从本地或远程服务器
-	gem install rake --remote 					#安装rake,从远程服务器
-	gem install watir -v(或者--version) 1.6.2	#指定安装版本的
-	gem uninstall rake 							#卸载rake包
-	gem list d 									#列出本地以d打头的包
-	gem query -n ''[0-9]'' --local 				#查找本地含有数字的包
-	gem search log --both 						#从本地和远程服务器上查找含有log字符串的包
-	gem search log --remoter 					#只从远程服务器上查找含有log字符串的包
-	gem search -r log 							#只从远程服务器上查找含有log字符串的包
-	gem help 									#提醒式的帮助
-	gem help install							#列出install命令 帮助
-	gem help examples 							#列出gem命令使用一些例子
-	gem build rake.gemspec 						#把rake.gemspec编译成rake.gem
-	gem check -v pkg/rake-0.4.0.gem 				#检测rake是否有效
-	gem cleanup 								#清除所有包旧版本，保留最新版本
-	gem contents rake	 						#显示rake包中所包含的文件
-	gem dependency rails -v 0.10.1 				#列出与rails相互依赖的包
-	gem environment 							#查看gem的环境
+<p>像ruby，pyhon,node这几种语言都有自己的包管理工具，用起来真的感觉非常的爽，唯一不好的地方是：有时候下载的网速太慢了。遇到这种情况，就需要更换源。</p>
+
+<pre><code>gem -v 									#gem版本
+gem source								#gem资源
+gem sources -a url ｜gem sources -r url				        #gem添加或删除配置源
+gem update							        #更新所有包
+gem update --system							#更新RubyGems软件
+gem install rake							#安装rake,从本地或远程服务器
+gem install rake --remote					        #安装rake,从远程服务器
+gem install watir -v(或者--version) 1.6.2	        		#指定安装版本的
+gem uninstall rake							#卸载rake包
+gem list d 							        #列出本地以d打头的包
+gem query -n ''[0-9]'' --local 						#查找本地含有数字的包
+gem search log --both 							#从本地和远程服务器上查找含有log字符串的包
+gem search log --remoter 						#只从远程服务器上查找含有log字符串的包
+gem search -r log 							#只从远程服务器上查找含有log字符串的包
+gem help 								#提醒式的帮助
+gem help install							#列出install命令 帮助
+gem help examples 							#列出gem命令使用一些例子
+gem build rake.gemspec 							#把rake.gemspec编译成rake.gem
+gem check -v pkg/rake-0.4.0.gem 					#检测rake是否有效
+gem cleanup 								#清除所有包旧版本，保留最新版本
+gem contents rake	 						#显示rake包中所包含的文件
+gem dependency rails -v 0.10.1 						#列出与rails相互依赖的包
+gem environment 							#查看gem的环境
 </code></pre>
 
 <h3 id="ruby">将ruby的源更换为淘宝的源</h3>
@@ -127,7 +129,7 @@ $ gem install jekyll  #安装jekyll包
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
 		
-          <li>fulin87的笔记</li>
+          <li>2B程序员的笔记</li>
           <li><a href="mailto:fulin87@sina.com">fulin87@sina.com</a></li>
         </ul>
       </div>

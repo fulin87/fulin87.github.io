@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>mysql中sql优化的思路和原则</title>
-  <meta name="description" content="  大部分系统的性能瓶颈都是IO操作，数据库的IO消耗是其中的重要组成部分，SQL语句性能的优化是很有必要的，如果一开始不注意，后期的改动成本是比较大的">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://colorful.ren/mysql/2016/09/22/mysql-update.html">
-  <link rel="alternate" type="application/rss+xml" title="fulin87的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">fulin87的笔记</a>
+    <a class="site-title" href="/">2B程序员的笔记</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -65,7 +65,13 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <blockquote>
+    <ul id="markdown-toc">
+  <li><a href="#sql" id="markdown-toc-sql">SQL优化的思路</a></li>
+  <li><a href="#sql-1" id="markdown-toc-sql-1">SQL优化的基本原则</a></li>
+  <li><a href="#section" id="markdown-toc-section">索引相关的总结</a></li>
+</ul>
+
+<blockquote>
   <p>大部分系统的性能瓶颈都是IO操作，数据库的IO消耗是其中的重要组成部分，SQL语句性能的优化是很有必要的，如果一开始不注意，后期的改动成本是比较大的</p>
 </blockquote>
 
@@ -183,7 +189,7 @@
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
 		
-          <li>fulin87的笔记</li>
+          <li>2B程序员的笔记</li>
           <li><a href="mailto:fulin87@sina.com">fulin87@sina.com</a></li>
         </ul>
       </div>

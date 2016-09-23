@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>vi的基本配置和常用命令</title>
-  <meta name="description" content="vi的配置和使用要注意的问题">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://colorful.ren/fulin/2015/11/19/vim.html">
-  <link rel="alternate" type="application/rss+xml" title="fulin87的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">fulin87的笔记</a>
+    <a class="site-title" href="/">2B程序员的笔记</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -65,12 +65,14 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h2 id="vi">vi的配置和使用要注意的问题</h2>
+    <ul id="markdown-toc">
+  <li><a href="#vivimrc" id="markdown-toc-vivimrc">vi的基本配置(.vimrc文件的配置)</a></li>
+  <li><a href="#vi" id="markdown-toc-vi">vi最常用的命令</a></li>
+</ul>
 
-<pre><code>   vi或者vim功能的强大是毋庸置疑的。全键盘的操作体验，快速定位，流畅的编辑能力。
-但是还是有一些细节是需要注意的。
-   这里记录一下我平时使用vim的配置情况和一些容易忘记的命令,方便以后查阅。
-</code></pre>
+<blockquote>
+  <p>vi或者vim功能的强大是毋庸置疑的。全键盘的操作体验，快速定位，流畅的编辑能力。但是还是有一些细节是需要注意的。这里记录一下我平时使用vim的配置情况和一些容易忘记的命令,方便以后查阅。</p>
+</blockquote>
 
 <h3 id="vivimrc">vi的基本配置(.vimrc文件的配置)</h3>
 <pre><code>syn on                      "语法支持
@@ -112,7 +114,7 @@ set nowritebackup	    "不要容灾的备份文件
 
 <p><em>这里需要注意在vim的配置文件中的引号是注释的作用</em></p>
 
-<h3 id="vi-1">vi最常用的命令</h3>
+<h3 id="vi">vi最常用的命令</h3>
 <pre><code>gg                    表示移动到文件的首行
 G                     表示移动到文件的末行
 28G                   表示移动到28行
@@ -159,7 +161,7 @@ f+		      查找当前行的下一个+号
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
 		
-          <li>fulin87的笔记</li>
+          <li>2B程序员的笔记</li>
           <li><a href="mailto:fulin87@sina.com">fulin87@sina.com</a></li>
         </ul>
       </div>

@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Object的equals和hashCode和clone方法</title>
-  <meta name="description" content="  Object类是Java中其他所有类的祖先，没有Object类Java面向对象无从谈起。作为其他所有类的基类，Object具有哪些属性和行为，是Java语言设计背后的思维体现。Object类位于java.lang包中，java.lang包包含着Java最基础和核心的类，在编译时会自动导入。Object类没有定...">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://colorful.ren/java/2016/09/06/java-equals-hashcode.html">
-  <link rel="alternate" type="application/rss+xml" title="fulin87的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">fulin87的笔记</a>
+    <a class="site-title" href="/">2B程序员的笔记</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -65,7 +65,13 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <blockquote>
+    <ul id="markdown-toc">
+  <li><a href="#equals" id="markdown-toc-equals">equals方法</a></li>
+  <li><a href="#hashcode" id="markdown-toc-hashcode">hashCode方法</a></li>
+  <li><a href="#clone" id="markdown-toc-clone">clone方法</a></li>
+</ul>
+
+<blockquote>
   <p>Object类是Java中其他所有类的祖先，没有Object类Java面向对象无从谈起。作为其他所有类的基类，Object具有哪些属性和行为，是Java语言设计背后的思维体现。
 Object类位于java.lang包中，java.lang包包含着Java最基础和核心的类，在编译时会自动导入。Object类没有定义属性，一共有13个方法,这里我重点记录3个方法：equals,hashCode,clone，</p>
 </blockquote>
@@ -124,7 +130,7 @@ hashCode()具有如下约定：</p>
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
 		
-          <li>fulin87的笔记</li>
+          <li>2B程序员的笔记</li>
           <li><a href="mailto:fulin87@sina.com">fulin87@sina.com</a></li>
         </ul>
       </div>
