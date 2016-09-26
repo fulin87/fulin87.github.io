@@ -5,9 +5,265 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 23 Sep 2016 14:55:48 +0800</pubDate>
-    <lastBuildDate>Fri, 23 Sep 2016 14:55:48 +0800</lastBuildDate>
+    <pubDate>Mon, 26 Sep 2016 18:41:32 +0800</pubDate>
+    <lastBuildDate>Mon, 26 Sep 2016 18:41:32 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>mysql的数据备份和恢复</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysql&quot; id=&quot;markdown-toc-mysql&quot;&gt;mysql的二进制日志&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;数据库的备份和恢复是每个DBA必须掌握的技能。作为开发人员来说，适当的了解，也是有必要的。曾经我就遇到过一个面试官问过我：是否会进行数据库备份和恢复，什么是热备份，什么是冷备份。当然，我不能说这是DBA的工作，只能怪自己学的不够广。当学会了数据库的备份和恢复，再次使用数据库的时候，视野就更开阔了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;mysql&quot;&gt;mysql的二进制日志&lt;/h3&gt;
+
+&lt;p&gt;说起mysql的备份和恢复，就必须说mysql的二进制日志，它记录的是所有mysql数据库发生变更的信息，因此对数据库非常重要&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;主要作用有以下几个方面&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;可以用于数据库基于时间点的还原&lt;/li&gt;
+      &lt;li&gt;可以用来分析数据库发生变更的情况，比如程序程序bug导致数据库数据更改等。&lt;/li&gt;
+      &lt;li&gt;二进制日志还可以用来重建数据库&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;二进制日志功能配置&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;开启bin_log日志功能,在my.cnf中修改，在[mysqld]下增加:&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code&gt; log-bin=/tmp/mysql-log
+ binlog_format=mixed
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;查看二进制日志功能是否开启&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show variables like &#39;%log_bin%&#39;;
+ +---------------------------------+----------------------+
+ | Variable_name                   | Value                |
+ +---------------------------------+----------------------+
+ | log_bin                         | ON                   |
+ | log_bin_basename                | /tmp/mysql-log       |
+ | log_bin_index                   | /tmp/mysql-log.index |
+ | log_bin_trust_function_creators | OFF                  |
+ | log_bin_use_v1_row_events       | OFF                  |
+ | sql_log_bin                     | ON                   |
+ +---------------------------------+----------------------+
+ 6 rows in set
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;查看二进制文件的情况&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show master logs;
+ +------------------+-----------+
+ | Log_name         | File_size |
+ +------------------+-----------+
+ | mysql-log.000001 |       143 |
+ | mysql-log.000002 |       562 |
+ +------------------+-----------+
+ 2 rows in set
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;或者&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show binary logs;
+ +------------------+-----------+
+ | Log_name         | File_size |
+ +------------------+-----------+
+ | mysql-log.000001 |       143 |
+ | mysql-log.000002 |       562 |
+ +------------------+-----------+
+ 2 rows in set
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;切换二进制文件&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; flush logs;
+ Query OK, 0 rows affected
+
+ mysql&amp;gt; show binary logs;
+ +------------------+-----------+
+ | Log_name         | File_size |
+ +------------------+-----------+
+ | mysql-log.000001 |       143 |
+ | mysql-log.000002 |       609 |
+ | mysql-log.000003 |       120 |
+ +------------------+-----------+
+ 3 rows in set
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;删除或者初始化二进制文件&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; reset master;
+ Query OK, 0 rows affected
+	
+ mysql&amp;gt; show binary logs;
+ +------------------+-----------+
+ | Log_name         | File_size |
+ +------------------+-----------+
+ | mysql-log.000001 |       120 |
+ +------------------+-----------+
+ 1 row in set
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;指定二进制日志失效期&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show variables like &quot;%expire%&quot;;
+ +--------------------------------+-------+
+ | Variable_name                  | Value |
+ +--------------------------------+-------+
+ | disconnect_on_expired_password | ON    |
+ | expire_logs_days               | 0     |
+ +--------------------------------+-------+
+ 2 rows in set
+
+ mysql&amp;gt; set global  expire_logs_days=5;
+ Query OK, 0 rows affected
+	
+ mysql&amp;gt; show variables like &quot;%expire%&quot;;
+ +--------------------------------+-------+
+ | Variable_name                  | Value |
+ +--------------------------------+-------+
+ | disconnect_on_expired_password | ON    |
+ | expire_logs_days               | 5     |
+ +--------------------------------+-------+
+ 2 rows in set
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;二进制日志的格式的查看和格式介绍,这里仅做了解,有三种&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show variables like &#39;%format%&#39;;
+ +--------------------------+-------------------+
+ | Variable_name            | Value             |
+ +--------------------------+-------------------+
+ | binlog_format            | MIXED             |
+ | date_format              | %Y-%m-%d          |
+ | datetime_format          | %Y-%m-%d %H:%i:%s |
+ | default_week_format      | 0                 |
+ | innodb_file_format       | Antelope          |
+ | innodb_file_format_check | ON                |
+ | innodb_file_format_max   | Antelope          |
+ | time_format              | %H:%i:%s          |
+ +--------------------------+-------------------+
+ 8 rows in set
+
+ Row : 日志中会记录成每一行数据被修改的形式，然后在 slave 端再对相同的数据进行修改
+ Statement ： 每一条会修改数据的 SQL 都会记录到 master 的 bin-log 中。slave 在复制的时候 SQL 进程会解析成和原来 master 端执行过的相同的 SQL 再次执行。
+ Mixed : MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 statement 和 row 之间选择一种,相当于前两种的混合。
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;查看二进制日志文件的内容&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; # mysqlbinlog mysql-log.00000
+
+ SET TIMESTAMP=1474882546/*!*/;
+ insert into t select * from t
+ /*!*/;
+ # at 739
+ #160926  2:35:46 server id 1  end_log_pos 770 CRC32 0x45bf6de6 	Xid = 98
+ COMMIT/*!*/;
+ # at 770
+ #160926  2:35:47 server id 1  end_log_pos 849 CRC32 0xdcad682e 	Query	thread_id=1	exec_time=0	error_code=0
+ SET TIMESTAMP=1474882547/*!*/;
+ BEGIN
+ /*!*/;
+ # at 849
+ #160926  2:35:47 server id 1  end_log_pos 952 CRC32 0x596b7cf9 	Query	thread_id=1	exec_time=0	error_code=0
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;仔细观察会发现，这里记录了数据库的每一次查询和修改过程，就像数据库的变更记录一样，难怪可以用来恢复数据。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 26 Sep 2016 00:00:00 +0800</pubDate>
+        <link>http://colorful.ren/mysql/2016/09/26/mysql-log.html</link>
+        <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/26/mysql-log.html</guid>
+        
+        
+        <category>mysql</category>
+        
+      </item>
+    
+      <item>
+        <title>全栈还是专攻，这是一个问题</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;经常会浏览一下招聘网站，一方面，可以了解现在的市场行情，另一方面，可以了解目前行业使用的技术都有什么，具体有些什么要求，这是我根据我浏览很多信息之后的一点感悟&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;以下是我在某job上截取的一段用人单位的提出的技能要求:&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1、计算机相关专业本科及以上学历，3年以上Java开发工作经验；
+2、熟悉MVC设计模式，熟悉Java领域常用的开源框架，如Spring、Struts、Ibatis、Hibernate等；
+3、熟悉面向对象编程思想和设计模式；
+4、熟悉多线程编程，熟悉socket编程、WebService接口技术；
+5、熟悉MINA、Volley等网络通信应用框架，有MINA开发经验者优先。
+6、熟悉Oracle、MySql等数据库，并有开发经验；
+7、熟悉linux/UNIX等操作系统，了解Shell；
+8、较强的表达和沟通能力，善于团队合作；
+9、互联网金融开发经验者优先，有大容量、高性能、高可用、分布式、架构设计经验者优先；
+10、熟悉hadoop/spark等大数据应用框架优先
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;这是大部分互联网公司开出的技能要求，有的甚至更多。那么问题来了, 业内的人都知道，任何一项技术，要想熟练掌握，是需要沉淀的，有一个广为人知的说法叫一万小时理论也就是说一项技术需要熟练掌握需要至少刻意练习10000小时，也就是3年&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;回到上面的技能要求上，上面的任何一项技能都可以单独拎出来，写成一本书，够研究好几年的，有些技术甚至够研究一辈子了，比如上面提到的：&lt;strong&gt;&lt;em&gt;大容量、高性能、高可用、分布式、hadoop/spark&lt;/em&gt;&lt;/strong&gt;，先不说其他的，单单能同时掌握这些，就已经属于稀有天才了。&lt;/p&gt;
+
+&lt;p&gt;互联网的后端技术都是围绕两个主题展开的&lt;em&gt;大数据量&lt;/em&gt;和&lt;em&gt;高并发&lt;/em&gt;。精通其中一项基本可以在职场纵横天下了。&lt;/p&gt;
+
+&lt;p&gt;既然如此，用人单位为什么要提出如此苛刻的要求呢？我认为原因主要有以下几个方面：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;一线城市人力成本急剧上升，尤其是以信息技术为代表的IT行业&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 一线城市的房价暴涨，想留住人才，薪资往往是最具有吸引力的，所以出现了现在大家知道的一线开发人员动辄月薪数万，因此用人单位希望招到能力强的人，一个人顶几个用，也就是说希望自己的员工是个多面手。
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;技术更新换代快，系统质量和用户体验要求越来越高&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 用户对产品不断提出更高的要求，更好的用户体验。
+ 对这些功能最好的保证就是高水平的开发人员。
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;用人单位需要的是全而专的人&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 认真开用人单位的用人要求，大部分都是要求&quot;熟悉&quot;，并没有要求&quot;精通&quot;。
+ 因此有理由相信用人单位需要的是视野开阔，对多种技术均有涉猎，但又能精通一两种的人
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;经过以上的分析，也知道以后自己的道路该怎么走了，那就是，既要要有知识的广度，也要有专业的深度。我认为，深度比广度重要。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Mon, 26 Sep 2016 00:00:00 +0800</pubDate>
+        <link>http://colorful.ren/fulin/2016/09/26/job.html</link>
+        <guid isPermaLink="true">http://colorful.ren/fulin/2016/09/26/job.html</guid>
+        
+        
+        <category>fulin</category>
+        
+      </item>
     
       <item>
         <title>mysql中使用explain来分析Sql语句的性能</title>
@@ -529,7 +785,15 @@
  show variables like &quot;%datadir%&quot;;
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;快速建立一张一模一样的表，并插入数据&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; create table t as select * from information_schema.tables；
+ mysql&amp;gt; insert into t select *  from t;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
+
 </description>
         <pubDate>Wed, 21 Sep 2016 00:00:00 +0800</pubDate>
         <link>http://colorful.ren/mysql/2016/09/21/mysql.html</link>
@@ -718,108 +982,6 @@ LinkedList
         <pubDate>Thu, 25 Feb 2016 13:07:11 +0800</pubDate>
         <link>http://colorful.ren/fulin/2016/02/25/grow.html</link>
         <guid isPermaLink="true">http://colorful.ren/fulin/2016/02/25/grow.html</guid>
-        
-        
-        <category>fulin</category>
-        
-      </item>
-    
-      <item>
-        <title>asList的使用及异常问题</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;问题&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;分析过程&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;em&gt;最近遇到一个问题，以前也遇到过，当时没有深入研究就没有记录下来，时间长了，忘记了，今天又再次遇到，这个问题表面上看很简单，其实不简单，今天记录在案，防止以后再次发生…&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;问题&lt;/h3&gt;
-
-&lt;p&gt;问题是这样的，将数组转成List，通常我们习惯这样写成:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;List&amp;lt;String&amp;gt; list = Arrays.asList(&quot;1&quot;,&quot;2&quot;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;于是我们这样就得到了一个&lt;strong&gt;list&lt;/strong&gt;,但是这个List的实现类是&lt;strong&gt;java.util.Arrays.ArrayList&lt;/strong&gt;(而不是java.util.ArrayList)。&lt;/p&gt;
-
-&lt;p&gt;这里需要注意这两个同名但是不同包的类：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;java.util.Arrays.ArrayList
-java.util.ArrayList
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;分析过程&lt;/h3&gt;
-
-&lt;p&gt;剖析JDK源代码可以发现:java.util.Arrays.ArrayList继承了java.util.AbstractList这个类，再来看看java.util.AbstractList类是啥样子的？可以发现：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public E set(int index, E element)
-public E set(int index, E element)
-public E remove(int index)
-public void add(int index, E element)  | public boolean add(E e)调用add(int index, E element)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以上方法的实现全部是抛出UnsupportedOperationException异常。因此有Arrays.asList转换出来的List他其实是一个AbstractList他可以像List一样访问，但是不可其做任何修改操作。&lt;/p&gt;
-
-&lt;p&gt;这也说明了，为什么Arrays.asList出来的List，对其做add、remove操作为抛出UnsupportedOperationException异常。&lt;/p&gt;
-
-&lt;p&gt;换句话说，其实java.util.Arrays.ArrayList其实只是对数组做了一个装饰，可以看到里面的实现，E get(int index)、E set(int index, E element)等方法都是对数组的操作，他的目的只是提供了可以像访问List那样来访问数组而已。&lt;strong&gt;本质上其实还是一个数组。&lt;/strong&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sat, 20 Feb 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/fulin/2016/02/20/aslist.html</link>
-        <guid isPermaLink="true">http://colorful.ren/fulin/2016/02/20/aslist.html</guid>
-        
-        
-        <category>fulin</category>
-        
-      </item>
-    
-      <item>
-        <title>如何当好项目小组长</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;问题&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;解决办法&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;启示&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;从今年开始，我开始带团队了，在公司的项目管理平台上，我的角色是“研发经理”。和其他3个兄弟并肩作战，负责维护和开发公司的一个有5年历史的老系统，在工作的过程中遇到了很多的问题。让我很困扰,这里记录一下遇到的问题，和自己的解决方法。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;问题&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;1,团队成员对系统的业务逻辑不是很清晰
-2,需求很急，产品部经常一次提出很多需求
-3,由于工作强度大，团队成员抱怨很多。
-4,自己以前是搞Java的，但是这个系统是用php写的，自己也不熟悉
-5,需求经常变更
-6,自己要与多个部门的人沟通，一天下来，经常是累的不行
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;解决办法&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;1,当接手一个新的项目，尤其是一个老系统。这时候，需要尽快，尽可能的理清楚系统的业务逻辑，能理多少是多少。
-2，对此，我总结出的一个方法是：从用户入手，分析主要用户的主要业务逻辑。
-3，形成一个流程图，用自己最擅长的方式来做，跟别人沟通的时候，用这个图说事，来的更快。
-4，从一个熟悉的技术，转向不熟悉的技术，没有别的捷径，需要自己利用下班时间来学习，以解决实际问题为前提。
-5，合理规划需求实现的周期，不能全盘向产品妥协。
-6，对待需求变更，这个是考验自己需求管理能力了，有时候，一个excel表比自己的记忆要好很多。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;启示&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;1,管理是一门艺术，这一点以前是没有体会到的，只有自己亲自去做才深有体会
-2,沟通很重要，尤其是真诚的沟通
-3,说话的方式，方法，时机要把握好，语言可以让人才围绕你，也可以让人才远离你
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;以前自己专心的写代码，现在突然让我来带团队，多少还是有点不习惯，首先是思维方式变了，以前自己专注于自己的逻辑和技术，现在需要自己具备更广的视野和知识储备。对自己的沟通能力也是一个很大的考验。我需要不断的总结和摸索。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 01 Dec 2015 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/fulin/2015/12/01/leader.html</link>
-        <guid isPermaLink="true">http://colorful.ren/fulin/2015/12/01/leader.html</guid>
         
         
         <category>fulin</category>

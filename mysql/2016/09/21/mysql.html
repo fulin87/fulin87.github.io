@@ -293,7 +293,15 @@
  show variables like "%datadir%";
 </code></pre>
   </li>
+  <li>
+    <p>快速建立一张一模一样的表，并插入数据</p>
+
+    <pre><code> mysql&gt; create table t as select * from information_schema.tables；
+ mysql&gt; insert into t select *  from t;
+</code></pre>
+  </li>
 </ul>
+
 
   </div>
 
