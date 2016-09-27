@@ -5,9 +5,69 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 26 Sep 2016 18:41:32 +0800</pubDate>
-    <lastBuildDate>Mon, 26 Sep 2016 18:41:32 +0800</lastBuildDate>
+    <pubDate>Tue, 27 Sep 2016 18:39:51 +0800</pubDate>
+    <lastBuildDate>Tue, 27 Sep 2016 18:39:51 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>mysql中sql优化的常识总结</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;mysql的性能优化牵扯的范围很广，大致可以分为：
+索引优化，查询优化，查询缓存，服务器设置优化，操作系统和硬件优化，应用层面优化（web服务器，缓存）等等。这里仅仅总结一下编写sql语句时应该注意的细节。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;sql&quot;&gt;编写高质量的sql语句的基本原则&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;尽量避免全表扫描&lt;/li&gt;
+  &lt;li&gt;查询尽量使用索引&lt;/li&gt;
+  &lt;li&gt;尽量避免排序&lt;/li&gt;
+  &lt;li&gt;DML语句尽量在一个数据库事务中完成&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;具体的优化技巧如下&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;1,禁止使用　select * from table ;尽量查询特定的字段.
+  select * 会增加数据库开销
+
+2,尽量不使用游标.
+  游标比常规的sql语句需要更大的开销
+
+3,尽量不要在索引字段上进行运算.
+  在索引字段上进行运算会使索引失效
+
+4,避免使用!=或＜＞、IS NULL或IS NOT NULL、IN ，NOT IN等这样的操作符.
+  这会使系统无法使用索引,而只能直接搜索表中的数据，有些还是全表扫描
+
+5,尽量使用数字型字段.
+  如果字段是字符串类型，数据库引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了
+
+6,合理使用EXISTS,NOT EXISTS子句
+  如果需要判断记录是否存在，直接合理使用EXISTS,NOT EXISTS子句比count的效率要高，也比in的性能要高
+
+7,能够用BETWEEN的就不要用IN
+
+8,能够用DISTINCT的就不用GROUP BY
+
+9,尽量不要用SELECT INTO语句。SELECT INTO 语句会导致表锁定，阻止其他用户访问该表
+
+10,必要时强制查询优化器使用某个索引
+
+11,能用UNION ALL就不要用UNION
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这些可以说是sql语句优化的基本常识了，必须会使用，熟练使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Tue, 27 Sep 2016 00:00:00 +0800</pubDate>
+        <link>http://colorful.ren/mysql/2016/09/27/mysql-right.html</link>
+        <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/27/mysql-right.html</guid>
+        
+        
+        <category>mysql</category>
+        
+      </item>
     
       <item>
         <title>mysql的数据备份和恢复</title>
@@ -956,35 +1016,6 @@ LinkedList
         
         
         <category>linux</category>
-        
-      </item>
-    
-      <item>
-        <title>成熟</title>
-        <description>&lt;h3 id=&quot;section&quot;&gt;什么是成熟&lt;/h3&gt;
-
-&lt;blockquote&gt;
-
-  &lt;p&gt;一种明亮而不刺眼的光辉&lt;br /&gt;
-一种圆润而不腻耳的音响&lt;br /&gt;
-一种不需要对别人察言观色的从容&lt;br /&gt;
-一种终于停止向周围申诉求告的大气&lt;br /&gt;
-一种不理会哄闹的微笑&lt;br /&gt;
-一种洗刷了偏激的淡漠&lt;br /&gt;
-一种无须伸张的厚实&lt;br /&gt;
-一种并不陡峭的高度&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;这是我在公司的一次培训的教材上看到的文字，后来经过多方查找发现这段文字出自著名作家&lt;em&gt;余秋雨&lt;/em&gt;。&lt;/p&gt;
-
-&lt;p&gt;当时看到这段话，有一种豁然开朗，恍然大悟的感觉。是啊，真正的成熟就是作者描述的这样：平和，温润，但又充满力量。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 25 Feb 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/fulin/2016/02/25/grow.html</link>
-        <guid isPermaLink="true">http://colorful.ren/fulin/2016/02/25/grow.html</guid>
-        
-        
-        <category>fulin</category>
         
       </item>
     

@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>2B程序员的笔记</title>
-  <meta name="description" content="">
+  <title>mysql中sql优化的常识总结</title>
+  <meta name="description" content="  mysql的性能优化牵扯的范围很广，大致可以分为：索引优化，查询优化，查询缓存，服务器设置优化，操作系统和硬件优化，应用层面优化（web服务器，缓存）等等。这里仅仅总结一下编写sql语句时应该注意的细节。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/">
+  <link rel="canonical" href="http://colorful.ren/mysql/2016/09/27/mysql-right.html">
   <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
@@ -57,168 +57,66 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
- <!-- <h1 class="page-heading">Posts</h1>-->
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Sep 27, 2016</span>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">mysql中sql优化的常识总结</h1>
+    <p class="post-meta"><time datetime="2016-09-27T00:00:00+08:00" itemprop="datePublished">Sep 27, 2016</time></p>
+  </header>
 
-        <h2>
-          <a class="post-link" href="/mysql/2016/09/27/mysql-right.html">mysql中sql优化的常识总结</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Sep 26, 2016</span>
+  <div class="post-content" itemprop="articleBody">
+    <blockquote>
+  <p>mysql的性能优化牵扯的范围很广，大致可以分为：
+索引优化，查询优化，查询缓存，服务器设置优化，操作系统和硬件优化，应用层面优化（web服务器，缓存）等等。这里仅仅总结一下编写sql语句时应该注意的细节。</p>
+</blockquote>
 
-        <h2>
-          <a class="post-link" href="/mysql/2016/09/26/mysql-log.html">mysql的数据备份和恢复</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Sep 26, 2016</span>
+<h3 id="sql">编写高质量的sql语句的基本原则</h3>
 
-        <h2>
-          <a class="post-link" href="/fulin/2016/09/26/job.html">全栈还是专攻，这是一个问题</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Sep 23, 2016</span>
+<ul>
+  <li>尽量避免全表扫描</li>
+  <li>查询尽量使用索引</li>
+  <li>尽量避免排序</li>
+  <li>DML语句尽量在一个数据库事务中完成</li>
+</ul>
 
-        <h2>
-          <a class="post-link" href="/mysql/2016/09/23/mysql-explain.html">mysql中使用explain来分析Sql语句的性能</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Sep 22, 2016</span>
+<h3 id="section">具体的优化技巧如下</h3>
 
-        <h2>
-          <a class="post-link" href="/mysql/2016/09/22/mysql-update.html">mysql中sql优化的思路和原则</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Sep 21, 2016</span>
+<pre><code>1,禁止使用　select * from table ;尽量查询特定的字段.
+  select * 会增加数据库开销
 
-        <h2>
-          <a class="post-link" href="/mysql/2016/09/21/mysql.html">mysql 基础知识</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Sep 20, 2016</span>
+2,尽量不使用游标.
+  游标比常规的sql语句需要更大的开销
 
-        <h2>
-          <a class="post-link" href="/java/2016/09/20/plantuml.html">plantUML的使用</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Sep 6, 2016</span>
+3,尽量不要在索引字段上进行运算.
+  在索引字段上进行运算会使索引失效
 
-        <h2>
-          <a class="post-link" href="/java/2016/09/06/java-equals-hashcode.html">Object的equals和hashCode和clone方法</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Aug 24, 2016</span>
+4,避免使用!=或＜＞、IS NULL或IS NOT NULL、IN ，NOT IN等这样的操作符.
+  这会使系统无法使用索引,而只能直接搜索表中的数据，有些还是全表扫描
 
-        <h2>
-          <a class="post-link" href="/java/2016/08/24/javacollection.html">java集合备忘录</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Aug 10, 2016</span>
+5,尽量使用数字型字段.
+  如果字段是字符串类型，数据库引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了
 
-        <h2>
-          <a class="post-link" href="/linux/2016/08/10/ssh.html">SSH的点点滴滴</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Feb 25, 2016</span>
+6,合理使用EXISTS,NOT EXISTS子句
+  如果需要判断记录是否存在，直接合理使用EXISTS,NOT EXISTS子句比count的效率要高，也比in的性能要高
 
-        <h2>
-          <a class="post-link" href="/fulin/2016/02/25/grow.html">成熟</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Feb 20, 2016</span>
+7,能够用BETWEEN的就不要用IN
 
-        <h2>
-          <a class="post-link" href="/fulin/2016/02/20/aslist.html">asList的使用及异常问题</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Dec 1, 2015</span>
+8,能够用DISTINCT的就不用GROUP BY
 
-        <h2>
-          <a class="post-link" href="/fulin/2015/12/01/leader.html">如何当好项目小组长</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 20, 2015</span>
+9,尽量不要用SELECT INTO语句。SELECT INTO 语句会导致表锁定，阻止其他用户访问该表
 
-        <h2>
-          <a class="post-link" href="/ruby/2015/11/20/ruby.html">与ruby有关的笔记</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 19, 2015</span>
+10,必要时强制查询优化器使用某个索引
 
-        <h2>
-          <a class="post-link" href="/fulin/2015/11/19/vim.html">vi的基本配置和常用命令</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 13, 2015</span>
+11,能用UNION ALL就不要用UNION
+</code></pre>
 
-        <h2>
-          <a class="post-link" href="/fulin/2015/11/13/build-my-python-tool.html">打造自己的python开发环境</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 27, 2015</span>
+<blockquote>
+  <p>这些可以说是sql语句优化的基本常识了，必须会使用，熟练使用。</p>
+</blockquote>
 
-        <h2>
-          <a class="post-link" href="/life/2015/05/27/good-life.html">好的生活习惯</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 20, 2015</span>
+  </div>
 
-        <h2>
-          <a class="post-link" href="/fulin/2015/05/20/eclipse.html">eclipse中svn插件的问题及解决</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 20, 2015</span>
-
-        <h2>
-          <a class="post-link" href="/life/2015/05/20/change.html">改变</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </div>
