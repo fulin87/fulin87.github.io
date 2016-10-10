@@ -5,9 +5,70 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 08 Oct 2016 15:57:10 +0800</pubDate>
-    <lastBuildDate>Sat, 08 Oct 2016 15:57:10 +0800</lastBuildDate>
+    <pubDate>Mon, 10 Oct 2016 19:18:34 +0800</pubDate>
+    <lastBuildDate>Mon, 10 Oct 2016 19:18:34 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>忒修斯之船 &amp; 数据库</title>
+        <description>&lt;p&gt;&lt;code&gt;这是一个古老的哲学问题&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;忒修斯的船在海上航行了几百年,它被不间断地维修和替换部件。只要一块木板腐烂了，它就会被替换掉，以此类推，直到所有的功能部件都不是最开始的那些了。
+问题是，最终产生的这艘船是否还是原来的那艘特修斯之船，还是一艘完全不同的船？如果不是原来的船，那么在什么时候它不再是原来的船了？
+哲学家托马斯·霍布斯后来对此进来了延伸，如果用特修斯之船上取下来的老部件来重新建造一艘新的船，那么两艘船中哪艘才是真正的特修斯之船？&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;几百年来，人们在这个问题上争论不休，谁也不能彻底说服对方，但是这个看似不能解决的问题却能带给我们一定的启发，那就是可以解释生活中的现象&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一群能力超群的软件工程师在一家软件公司工作，做了一个伟大的产品，经过几年的迭代，产品从UI到逻辑，甚至数据库结构都发生了翻天覆地的变化，以至于这个产品最初的创造者也看不懂它的源代码了，越来越多的人开始吐槽……&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;问题来了，这个产品还是原来的那个伟大的产品吗？&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;渐变&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;数据库中有一条SKU的数据记录，本来SKU编码可以用来识别这条数据的唯一性。
+可惜，一开始的时候为了图方便没有定好编码生成规则，后来需要改。
+这一改麻烦了，唯一性只好由SKU的ID来负责，这也带来了一连串的问题因为
+SKU的编码原本不仅有唯一性的约束功能，还有很多识别功能，而ID显然是没有。
+因为变更，也带来的新的问题：怎样监控变更的历史。
+于是诸如这样新的字段被不断加入
+
+&quot;update_time ; insert_time ; update_user ; last_status&quot;
+
+这些新增的信息让我们能尽可能多的追溯到当时的场景，可是这样好吗？
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;悲哀的是，现实中大部分的软件系统，都无法逃脱冗余和混乱的宿命，这也再次印证了物理中“熵”的概念：任何事物都是朝混乱度大的方向发展。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;质变&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;如果不是原来的船，那么在什么时候它不再是原来的船了?&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;当唯一识别标示失效的时候，它就不再是原来的船了。可是，什么是唯一识别标示？
+身份证可以伪装，DNA都有可能相同，茫茫人海，是有可能存在两个你无法区分的人的。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;世界上不存在绝对的唯一性，所谓的唯一只存在于我们的想象中&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;启示&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;“任何系统熵都是逐渐变大的，自然状态下无法逆转，若想改变，必须做功。”
+这一物理学的规律同样适用于现实生活。虽然我们无法做的绝对，但是可以尽量精确。
+流程和标准就是行之有效的方法，甚至是唯一可行的方法。
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Mon, 10 Oct 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/life/2016/10/10/tui-xiu-shi-db.html</link>
+        <guid isPermaLink="true">http://colorful.ren/life/2016/10/10/tui-xiu-shi-db.html</guid>
+        
+        
+        <category>life</category>
+        
+      </item>
     
       <item>
         <title>杨德昌的那些经典电影</title>
@@ -1025,50 +1086,6 @@ hashCode()具有如下约定：&lt;/p&gt;
         <pubDate>Tue, 06 Sep 2016 13:07:11 +0800</pubDate>
         <link>http://colorful.ren/java/2016/09/06/java-equals-hashcode.html</link>
         <guid isPermaLink="true">http://colorful.ren/java/2016/09/06/java-equals-hashcode.html</guid>
-        
-        
-        <category>java</category>
-        
-      </item>
-    
-      <item>
-        <title>java集合备忘录</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#java&quot; id=&quot;markdown-toc-java&quot;&gt;java集合的总体框架&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;java集合的运用和认识的深入程度是一个java程序员水平的重要体现，但是要想把这一部分的内容理解透彻，深刻掌握是需要整理和总结的。以前总结过，但是没有形成文字，时间长了难免会忘记，现在记录在此。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;java&quot;&gt;java集合的总体框架&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/j6gYadi.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;java集合类框架有两个顶层接口,有多个子接口和抽象类，若干实现类。这些接口和类可以抽象的分成2类：一类是”序列”,一类是”键值对”。其实就是下面这两类：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;java.util.Collection
-java.util.Map
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这里我们不讨论抽象类，直接说实现类。  &lt;br /&gt;
-Collection的具体实现分成两部分：List相关的和Set相关的。List和Set都是接口。两者最大的区别就是元素是否唯一。List是不唯一的，Set是唯一的。  &lt;br /&gt;
-List的具体实现有下面几种:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ArrayList
-LinkedList
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;ArrayList是一个数组队列，相当于动态数组。它是由数组实现的，随机访问效率高，随机插入，删除效率低&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;LinkedList是一个双向链表。它可以被当做堆栈，队列或者双向队列进行操作。随机访问效率低，但是插入、删除效率高&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;ArryList和LinkedList都不是线程安全的，想要线程安全，可以使用Collections.synchronizedList(List list)进行处理&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;List当然还有其他的实现类，比如：Vector，Stack。这些因为比较&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Wed, 24 Aug 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/java/2016/08/24/javacollection.html</link>
-        <guid isPermaLink="true">http://colorful.ren/java/2016/08/24/javacollection.html</guid>
         
         
         <category>java</category>
