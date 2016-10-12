@@ -5,8 +5,8 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 12 Oct 2016 11:16:23 +0800</pubDate>
-    <lastBuildDate>Wed, 12 Oct 2016 11:16:23 +0800</lastBuildDate>
+    <pubDate>Wed, 12 Oct 2016 11:19:56 +0800</pubDate>
+    <lastBuildDate>Wed, 12 Oct 2016 11:19:56 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
@@ -59,7 +59,7 @@
 
 &lt;h3 id=&quot;section-1&quot;&gt;源码解析&lt;/h3&gt;
 
- 	&lt;img src=&quot;/image/fastJson.png&quot; alt=&quot;test&quot; /&gt;
+ 	&lt;img src=&quot;/image/fastJson.PNG&quot; alt=&quot;test&quot; /&gt;
 
 &lt;p&gt;已经有前辈总结了一套 &lt;strong&gt;&lt;a href=&quot;http://www.csdn.net/article/2014-09-25/2821866&quot;&gt;FastJson的源码研究&lt;/a&gt;&lt;/strong&gt; 心得,可以先理解透彻再自己去看源代码。
  记录在此，以后来完善。&lt;/p&gt;
