@@ -5,9 +5,74 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 10 Oct 2016 19:54:19 +0800</pubDate>
-    <lastBuildDate>Mon, 10 Oct 2016 19:54:19 +0800</lastBuildDate>
+    <pubDate>Wed, 12 Oct 2016 11:16:23 +0800</pubDate>
+    <lastBuildDate>Wed, 12 Oct 2016 11:16:23 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>FastJson的使用与源码解读</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/alibaba/fastjson/wiki&quot;&gt;FastJSON&lt;/a&gt;&lt;/strong&gt;是一个处理&lt;strong&gt;&lt;a href=&quot;http://json.org&quot;&gt;JSON&lt;/a&gt;&lt;/strong&gt;的 java 工具包， json （反序列化）和对象转 json （序列化）两部分的功能。是由阿里使用Apache License 2.0协议开源，易用，无依赖，性能优越，唯一不足的是文档不完善，用户需要自己根据源码来摸索。这里记录一下自己的学习历程，作为我膜拜大师杰作，虚心偷技的成果，也方便来者学习。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;主要功能&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;FastJson的最主要的使用入口是 com.alibaba.fastjson.JSON 的一系列静态方法&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; // 把JSON文本parse为JSONObject或者JSONArray 
+ public static final Object parse(String text); 
+ // 把JSON文本parse成JSONObject
+ public static final JSONObject parseObject(String text)； 
+ // 把JSON文本parse为JavaBean
+ public static final  T parseObject(String text, Class clazz); 
+ // 把JSON文本parse成JSONArray
+ public static final JSONArray parseArray(String text); 
+ // 把JSON文本parse成JavaBean集合
+ public static final  List parseArray(String text, Class clazz); 
+ // 将JavaBean序列化为JSON文本
+ public static final String toJSONString(Object object); 
+ // 将JavaBean序列化为带格式的JSON文本 
+ public static final String toJSONString(Object object, boolean prettyFormat); 
+ // 将JavaBean转换为JSONObject或者JSONArray。
+ public static final Object toJSON(Object javaObject); 
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;FastJson 的相关类的说明&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; SerializeWriter：	相当于StringBuffer
+ JSONArray：			相当于List&amp;lt;Object&amp;gt;
+ JSONObject：			相当于Map&amp;lt;String, Object&amp;gt;
+ JSON反序列化没有真正的数组，本质类型都是List&amp;lt;Object&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;FastJson 的高级特性&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 支持注解、支持全类型序列化，这些都是很好的特性，功能强大
+ 比如有一个注解：@JSONField;就可以实现序列号和反序列化的时候bean的属性名的灵活配置，非常实用。
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;源码解析&lt;/h3&gt;
+
+ 	&lt;img src=&quot;/image/fastJson.png&quot; alt=&quot;test&quot; /&gt;
+
+&lt;p&gt;已经有前辈总结了一套 &lt;strong&gt;&lt;a href=&quot;http://www.csdn.net/article/2014-09-25/2821866&quot;&gt;FastJson的源码研究&lt;/a&gt;&lt;/strong&gt; 心得,可以先理解透彻再自己去看源代码。
+ 记录在此，以后来完善。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 10 Oct 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/java/2016/10/10/fastjson.html</link>
+        <guid isPermaLink="true">http://colorful.ren/java/2016/10/10/fastjson.html</guid>
+        
+        
+        <category>java</category>
+        
+      </item>
     
       <item>
         <title>忒修斯之船 &amp; 数据库</title>
@@ -1026,66 +1091,6 @@ SKU的编码原本不仅有唯一性的约束功能，还有很多识别功能�
         <pubDate>Tue, 20 Sep 2016 13:07:11 +0800</pubDate>
         <link>http://colorful.ren/java/2016/09/20/plantuml.html</link>
         <guid isPermaLink="true">http://colorful.ren/java/2016/09/20/plantuml.html</guid>
-        
-        
-        <category>java</category>
-        
-      </item>
-    
-      <item>
-        <title>Object的equals和hashCode和clone方法</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#equals&quot; id=&quot;markdown-toc-equals&quot;&gt;equals方法&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#hashcode&quot; id=&quot;markdown-toc-hashcode&quot;&gt;hashCode方法&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#clone&quot; id=&quot;markdown-toc-clone&quot;&gt;clone方法&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Object类是Java中其他所有类的祖先，没有Object类Java面向对象无从谈起。作为其他所有类的基类，Object具有哪些属性和行为，是Java语言设计背后的思维体现。
-Object类位于java.lang包中，java.lang包包含着Java最基础和核心的类，在编译时会自动导入。Object类没有定义属性，一共有13个方法,这里我重点记录3个方法：equals,hashCode,clone，&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;equals&quot;&gt;equals方法&lt;/h3&gt;
-&lt;p&gt;==与equals在Java中经常被使用，大家也都知道==与equals的区别：  &lt;br /&gt;
-==表示的是变量值完成相同（对于基础类型，地址中存储的是值，引用类型则存储指向实际对象的地址）；  &lt;br /&gt;
-equlas()方法的正确理解应该是：判断两个对象是否相等。那么判断对象相等的标尺又是什么？在object类中，此标尺即为==。当然，这个标尺不是固定的，其他类中可以按照实际的需要对此标尺含义进行重定义。如String类中则是依据字符串内容是否相等来重定义了此标尺含义。如此可以增加类的功能型和实际编码的灵活性。当然了，如果自定义的类没有重写equals()方法来重新定义此标尺，那么默认的将是其父类的equals()，直到object基类。&lt;/p&gt;
-
-&lt;p&gt;需要注意如果equals重写了，hashCode方法也应该重写，而且当equals为真，hashCode值应该一致，这是最佳实践，也是通用协定。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/Aktf9sH.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;以上是节选自JDK文档中的描述。&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;hashcode&quot;&gt;hashCode方法&lt;/h3&gt;
-&lt;p&gt;hashCode()方法返回一个整形数值，表示该对象的哈希码值。
-hashCode()具有如下约定：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在Java应用程序程序执行期间，对于同一对象多次调用hashCode()方法时，其返回的哈希码是相同的，前提是将对象进行equals比较时所用的标尺信息未做修改。在Java应用程序的一次执行到另外一次执行，同一对象的hashCode()返回的哈希码无须保持一致。&lt;/li&gt;
-  &lt;li&gt;如果两个对象相等（依据：调用equals()方法），那么这两个对象调用hashCode()返回的哈希码也必须相等。&lt;/li&gt;
-  &lt;li&gt;反之，两个对象调用hasCode()返回的哈希码相等，这两个对象不一定相等。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;可能有人在此产生疑问：既然比较两个对象是否相等的唯一条件（也是冲要条件）是equals，那么为什么还要弄出一个hashCode()，并且进行如此约定，弄得这么麻烦？&lt;/li&gt;
-    &lt;li&gt;其实，这主要体现在hashCode()方法的作用上，其主要用于增强哈希表的性能。
-以集合类中，以Set为例，当新加一个对象时，需要判断现有集合中是否已经存在与此对象相等的对象，如果没有hashCode()方法，需要将Set进行一次遍历，并逐一用equals()方法判断两个对象是否相等，此种算法时间复杂度为o(n)。通过借助于hasCode方法，先计算出即将新加入对象的哈希码，然后根据哈希算法计算出此对象的位置，直接判断此位置上是否已有对象即可。（注：Set的底层用的是Map的原理实现）&lt;/li&gt;
-    &lt;li&gt;在此需要纠正一个理解上的误区：对象的hashCode()返回的不是对象所在的物理内存地址。甚至也不一定是对象的逻辑地址，hashCode()相同的两个对象，不一定相等，换言之，不相等的两个对象，hashCode()返回的哈希码可能相同。&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;clone&quot;&gt;clone方法&lt;/h3&gt;
-&lt;p&gt;clone方法虽然使用的不多，但是如果需要重复创建多个相同对象的时候，可以使用这个方法，使用方法也很简单：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;return super.clone();//这里返回的是一个Object类型的，需要依据实际情况进行转型
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使用clone方法，需要注意的一点是：clone的对象，如果有有引用类型的属性，是需要深度克隆的，否则，clone的对象和原对象是的属性引用指向的是相同的实例。&lt;/p&gt;
-</description>
-        <pubDate>Tue, 06 Sep 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/java/2016/09/06/java-equals-hashcode.html</link>
-        <guid isPermaLink="true">http://colorful.ren/java/2016/09/06/java-equals-hashcode.html</guid>
         
         
         <category>java</category>
