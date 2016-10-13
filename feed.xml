@@ -5,8 +5,8 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 12 Oct 2016 11:29:54 +0800</pubDate>
-    <lastBuildDate>Wed, 12 Oct 2016 11:29:54 +0800</lastBuildDate>
+    <pubDate>Thu, 13 Oct 2016 14:00:23 +0800</pubDate>
+    <lastBuildDate>Thu, 13 Oct 2016 14:00:23 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
@@ -51,9 +51,16 @@
   &lt;li&gt;
     &lt;p&gt;FastJson 的高级特性&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; 支持注解、支持全类型序列化，这些都是很好的特性，功能强大
- 比如有一个注解：@JSONField;就可以实现序列号和反序列化的时候bean的属性名的灵活配置，非常实用。
+    &lt;p&gt;&lt;em&gt;支持注解、支持全类型序列化，这些都是很好的特性，功能强大&lt;/em&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;序列化形式可以自定义和灵活选择&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code&gt;  比如有一个注解：@JSONField;就可以实现序列号和反序列化的时候bean的属性名的灵活配置，非常实用。
 &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -61,9 +68,14 @@
 
  	&lt;img src=&quot;/image/fastJson.PNG&quot; alt=&quot;test&quot; /&gt;
 
-&lt;p&gt;已经有前辈总结了一套 &lt;strong&gt;&lt;a href=&quot;http://www.csdn.net/article/2014-09-25/2821866&quot;&gt;FastJson的源码研究&lt;/a&gt;&lt;/strong&gt; 心得,可以先理解透彻再自己去看源代码。
+&lt;p&gt;已经有前辈总结了心得,可以先理解透彻再自己去看源代码。
  记录在此，以后来完善。&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.csdn.net/article/2014-09-25/2821866&quot;&gt;FastJson的源码研究&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.iteye.com/topic/1113183&quot;&gt;FastJson为什么这么快&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://blog.csdn.net/u010246789/article/details/52539576&quot;&gt;FastJson SerializerFeature的使用&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 10 Oct 2016 13:07:11 +0800</pubDate>
         <link>http://colorful.ren/java/2016/10/10/fastjson.html</link>
