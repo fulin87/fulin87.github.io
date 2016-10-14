@@ -5,9 +5,43 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 13 Oct 2016 14:00:23 +0800</pubDate>
-    <lastBuildDate>Thu, 13 Oct 2016 14:00:23 +0800</lastBuildDate>
+    <pubDate>Fri, 14 Oct 2016 16:37:39 +0800</pubDate>
+    <lastBuildDate>Fri, 14 Oct 2016 16:37:39 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>系统学习Junit4</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;减少程序中的bug的一个有效的方法是编写程序逻辑的同时编写测试用例，尽早发现问题。同时Junit作为开源类库， &lt;strong&gt;&lt;a href=&quot;http://www.oschina.net/news/73667/2016-top-100-java-library&quot;&gt;受欢迎程度&lt;/a&gt;&lt;/strong&gt; 是非常高的，已经成为java单元测试事实上的标准，有必要做深入的学习。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;junit&quot;&gt;Junit的官方信息&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;http://junit.org/junit4/&quot;&gt;Junit官网&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/junit-team/junit4&quot;&gt;github地址&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;学习笔记&lt;/h2&gt;
+
+&lt;p&gt;这里先留着，以后来完善&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;网友的精彩博客&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://my.oschina.net/pangyangyang/blog/144495&quot;&gt;Junit学习系列一&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://my.oschina.net/pangyangyang/blog/146015&quot;&gt;Junit学习系列二&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://my.oschina.net/pangyangyang/blog/153320&quot;&gt;Junit学习系列三&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 14 Oct 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/java/2016/10/14/junit.html</link>
+        <guid isPermaLink="true">http://colorful.ren/java/2016/10/14/junit.html</guid>
+        
+        
+        <category>java</category>
+        
+      </item>
     
       <item>
         <title>FastJson的使用与源码解读</title>
@@ -1076,36 +1110,6 @@ SKU的编码原本不仅有唯一性的约束功能，还有很多识别功能�
         
         
         <category>mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>plantUML的使用</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;问题&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#graphviz&quot; id=&quot;markdown-toc-graphviz&quot;&gt;Graphviz的使用&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;经常需要画一些图，比如类图，时序图，用例图等，最近接触到一款有趣的工具，是eclipse的一个插件:plantUML。这里只记录最基础的地方，以后再来完善&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;安装&lt;/h3&gt;
-&lt;p&gt;直接访问 &lt;strong&gt;&lt;a href=&quot;http://plantuml.com/&quot;&gt;plantUML官网&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;问题&lt;/h3&gt;
-&lt;p&gt;安装好插件之后，此时只能使用plantUML画一些时序图，并不能从类文件直接生成类图，这时候还需要安装和配置一个十分牛*的画图工具： &lt;strong&gt;&lt;a href=&quot;http://www.graphviz.org/&quot;&gt;Graphviz&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;graphviz&quot;&gt;Graphviz的使用&lt;/h3&gt;
-&lt;p&gt;仅仅使用Graphviz就已经可以画图了，直接使用Graphedit.exe程序就可以画图了，具体参照官网。&lt;/p&gt;
-</description>
-        <pubDate>Tue, 20 Sep 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/java/2016/09/20/plantuml.html</link>
-        <guid isPermaLink="true">http://colorful.ren/java/2016/09/20/plantuml.html</guid>
-        
-        
-        <category>java</category>
         
       </item>
     
