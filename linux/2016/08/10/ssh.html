@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Linux相关知识点</title>
-  <meta name="description" content="  以前看电影，黑客们在一个黑乎乎的界面上噼里啪啦一顿狂敲，然后某栋楼就停电了，那个黑乎乎的界面上看上去是那么高端和神秘，这其实就是Linux的世界……">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://colorful.ren/linux/2016/08/10/ssh.html">
@@ -65,7 +65,18 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <blockquote>
+    <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">文件系统</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">重要目录</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">重要的配置文件</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">基本常识</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">常用的重要命令，这些都是我经常使用的命令</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">网友的优质博客</a></li>
+</ul>
+
+<blockquote>
 
   <p>以前看电影，黑客们在一个黑乎乎的界面上噼里啪啦一顿狂敲，然后某栋楼就停电了，那个黑乎乎的界面上看上去是那么高端和神秘，这其实就是Linux的世界……</p>
 </blockquote>
@@ -78,61 +89,92 @@
 
 <p>这里还是做一些重要目录的总结吧，细节参考上面的文档。</p>
 
-<ul>
-  <li>
-    <p>重要目录</p>
+<h3 id="section-1">重要目录</h3>
 
-    <pre><code> /dev/
-     Device files      
-     设备目录
- /etc/
-     Host-Specific system configuration
-     配置文件以及服务启动的目录
- /proc
-     显示内核及进程信息的虚拟文件系统
- /tmp
-     Temporary files
-     临时文件目录
- /home
-     普通用户目录
- /var
-     Variable data
-     变化的目录，一般是日志文件的目录	   
- /usr
-     Secondary hierarchy
-     用户程序,数据，帮助文件等的目录
- /bin和/sbin和/usr/sbin 
-     系统的和用户的命令目录
- /mnt
-     Mount point for mounting a filesystem
-     挂载点目录
- /opt 
-     Add-on application sofeware packages
-     第三方软件目录
+<pre><code>/dev/
+	Device files      
+	设备目录
+/etc/
+	Host-Specific system configuration
+	配置文件以及服务启动的目录
+/proc
+	显示内核及进程信息的虚拟文件系统
+/tmp
+	Temporary files
+	临时文件目录
+/home
+	普通用户目录
+/var
+	Variable data
+	变化的目录，一般是日志文件的目录	   
+/usr
+	Secondary hierarchy
+	用户程序,数据，帮助文件等的目录
+/bin 
+	二进制命令的目录
+/sbin和/usr/sbin
+	管理员的二进制命令的目录
+/mnt
+	Mount point for mounting a filesystem
+	挂载点目录
+/opt 
+	Add-on application sofeware packages
+	第三方软件目录
+/usr/local/sbin
+	系统全局环境目录，可放一些不需要加路径执行的脚本
+/usr/share
+	系统共用的东西存放地，比如帮助文档
+/usr/src
+	内核源码存放目录
+/usr/bin
+	使用者可执行的binary file的目录
+/var/spool/
+	系统定时任务的相关目录
+/proc
+	虚拟目录，是内存的映射，内核和进程的虚拟文件系统目录
 </code></pre>
-  </li>
-  <li>
-    <p>重要的配置文件</p>
 
-    <pre><code> 网卡的配置文件
-     /etc/sysconfig/network-scripts/ifcfg-eno16777736		
- 重启网卡
-     /etc/init.d/network restart
- 本地DNS配置文件
-     /etc/resolv.conf
- 记录开机要mount的文件系统的一个文件
-     /etc/fstab
- 存放开机自启动程序命令的文件
-     /etc/rc.local
- 设置系统启动时init进程将把系统设置成什么样的runlevel及加载相关的启动文件
-     /etc/inittab
- 系统全局环境变量的文件
-     /etc/profile
+<h3 id="section-2">重要的配置文件</h3>
+
+<pre><code>网卡的配置文件
+	/etc/sysconfig/network-scripts/ifcfg-eno16777736		
+重启网卡
+	/etc/init.d/network restart
+本地DNS配置文件
+	/etc/resolv.conf
+记录开机要mount的文件系统的一个文件
+	/etc/fstab
+存放开机自启动程序命令的文件
+	/etc/rc.local
+设置系统启动时init进程将把系统设置成什么样的runlevel及加载相关的启动文件
+	/etc/inittab
+系统全局环境变量的文件
+	/etc/profile
+登录之后的提醒文件,登录后提示的信息保存在此文件中
+	/etc/motd
+操作系统的版本信息
+	/etc/redhat-release
+用户的组信息
+	/etc/group    
+用户账号信息
+	/etc/passwd    显示的格式是 "用户:密码:用户ID:组ID"
+密码信息文件
+	/etc/shadow
+可以执行sudo命令的配置文件(权限提升)		
+	/etc/sudoers
+系统日志配置文件
+	/etc/rsyslog.conf
+系统的默认日志文件
+	/var/log/messages
 </code></pre>
-  </li>
-</ul>
 
-<h2 id="section-1">常用的重要命令，这些都是我经常使用的命令</h2>
+<h3 id="section-3">基本常识</h3>
+
+<pre><code>	1，添加用户如果不指定组，就会创建一个和用户同名的组。
+	2，/etc/sudoers文件不能让普通用户修改，否则会有验证的权限安全问题		
+</code></pre>
+
+<h2 id="section-4">常用的重要命令，这些都是我经常使用的命令</h2>
 
 <pre><code>halt 			
 	关机
@@ -160,7 +202,11 @@ useradd
 passwd
 	修改密码的命令后面不跟用户名是修改当前用户的密码
 	passwd oldboy 是修改oldboy的密码
-	echo 123456|passwd --stdin oldboy  不用交互来修改oldboy的密码				
+	echo 123456|passwd --stdin oldboy  不用交互来修改oldboy的密码	
+last
+	显示在线的用户登录的信息
+lastlog
+	显示用户曾经登录的历史			
 history 
 	查看执行命令的历史记录
 	-d 10 删除第10行的历史记录
@@ -267,7 +313,7 @@ lsof
 	把标准错误重定向到标准输出
 </code></pre>
 
-<h2 id="section-2">网友的优质博客</h2>
+<h2 id="section-5">网友的优质博客</h2>
 
 <p><strong><a href="http://yangrong.blog.51cto.com/6945369/1288072">Linux文件系统详解</a></strong></p>
 
