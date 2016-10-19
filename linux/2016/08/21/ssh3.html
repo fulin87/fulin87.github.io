@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Linux基础知识点三</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://colorful.ren/linux/2016/08/21/ssh3.html">
+  <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">2B程序员的笔记</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+		<!--
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+		-->
+		<img src="/image/fulin.JPG"/>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Linux基础知识点三</h1>
+    <p class="post-meta"><time datetime="2016-08-21T13:07:11+08:00" itemprop="datePublished">Aug 21, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <ul id="markdown-toc">
+  <li><a href="#linux" id="markdown-toc-linux">Linux中查阅硬件信息</a>    <ul>
+      <li><a href="#cpu" id="markdown-toc-cpu">CPU</a></li>
+      <li><a href="#section" id="markdown-toc-section">内存</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">磁盘</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">网卡</a></li>
+      <li><a href="#bois" id="markdown-toc-bois">BOIS</a></li>
+    </ul>
+  </li>
+  <li><a href="#linux-1" id="markdown-toc-linux-1">Linux中的磁盘分区和目录</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">网友的精彩总结</a></li>
+</ul>
+
+<blockquote>
+  <p>Linux不像windows那么直观，或者是我自己使用windows时间很长了，在windows下，对磁盘，分区，硬件信息都能很好的查看和理解，但是自从接触Linux后，长期以来，对Linux下的硬件；分区和目录的关系一直比较模糊，所以，特意花了一些时间来整理。</p>
+</blockquote>
+
+<h2 id="linux">Linux中查阅硬件信息</h2>
+
+<h3 id="cpu">CPU</h3>
+
+<p>命令：<code>lscpu</code> 可以显示CPU的统计信息</p>
+
+<pre><code>Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Core(s) per socket:    1
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 44
+Stepping:              2
+CPU MHz:               2660.000
+BogoMIPS:              5320.00
+Hypervisor vendor:     VMware
+Virtualization type:   full
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              12288K
+NUMA node0 CPU(s):     0
+</code></pre>
+
+<p>命令 <code>cat /proc/cpuinfo</code> 可以知道每个cpu信息，如每个CPU的型号，主频等</p>
+
+<pre><code>processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz
+stepping	: 2
+microcode	: 21
+cpu MHz		: 2660.000
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 1
+core id		: 0
+cpu cores	: 1
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts mmx fxsr sse sse2 ss syscall nx rdtscp lm constant_tsc up arch_perfmon pebs bts xtopology tsc_reliable nonstop_tsc aperfmperf unfair_spinlock pni pclmulqdq ssse3 cx16 sse4_1 sse4_2 x2apic popcnt aes hypervisor lahf_lm ida arat dts
+bogomips	: 5320.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+</code></pre>
+
+<h3 id="section">内存</h3>
+
+<p>命令 <code>free -m</code> 查看内存的统计信息</p>
+
+<pre><code>             total       used       free     shared    buffers     cached
+Mem:          1878       1026        852         31        173        394
+-/+ buffers/cache:        458       1419
+Swap:         5119         49       5070
+</code></pre>
+
+<p>命令 <code>cat /proc/meminfo</code> 查看内存的详细使用情况</p>
+
+<pre><code>MemTotal:        1923396 kB
+MemFree:          873108 kB
+Buffers:          177256 kB
+Cached:           403736 kB
+SwapCached:         1788 kB
+Active:           461804 kB
+Inactive:         340180 kB
+Active(anon):     126352 kB
+Inactive(anon):   130748 kB
+Active(file):     335452 kB
+Inactive(file):   209432 kB
+Unevictable:        4276 kB
+Mlocked:            4276 kB
+SwapTotal:       5242876 kB
+SwapFree:        5191972 kB
+Dirty:               152 kB
+Writeback:             4 kB
+AnonPages:        224024 kB
+Mapped:            39184 kB
+Shmem:             32668 kB
+Slab:             184136 kB
+SReclaimable:     156816 kB
+SUnreclaim:        27320 kB
+KernelStack:        1408 kB
+PageTables:        25368 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6204572 kB
+Committed_AS:     896844 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      143552 kB
+VmallocChunk:   34359590536 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:     69632 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:        8192 kB
+DirectMap2M:     2088960 kB
+</code></pre>
+
+<p>命令 <code>dmidecode -t memory</code> 查看内存硬件信息,这里不做过多介绍</p>
+
+<pre><code># dmidecode 2.12
+SMBIOS 2.4 present.
+
+Handle 0x0044, DMI type 5, 46 bytes
+Memory Controller Information
+        Error Detecting Method: None
+        Error Correcting Capabilities:
+                None
+        Supported Interleave: One-way Interleave
+        Current Interleave: One-way Interleave
+        Maximum Memory Module Size: 32768 MB
+        Maximum Total Memory Size: 491520 MB
+        Supported Speeds:
+                70 ns
+                60 ns
+        Supported Memory Types:
+                FPM
+                EDO
+                DIMM
+                SDRAM
+        Memory Module Voltage: 3.3 V
+        Associated Memory Slots: 15
+                0x0045
+                0x0046
+                0x0047
+                0x0048
+                0x0049
+                0x004A
+                0x004B
+                0x004C
+                0x004D
+                0x004E
+                0x004F
+                0x0050
+                0x0051
+                0x0052
+                0x0053
+        Enabled Error Correcting Capabilities:
+                None
+
+Handle 0x0045, DMI type 6, 12 bytes
+Memory Module Information
+		Socket Designation: RAM socket #0
+		Bank Connections: None
+		Current Speed: Unknown
+		Type: EDO DIMM
+		Installed Size: 2048 MB (Single-bank Connection)
+		Enabled Size: 2048 MB (Single-bank Connection)
+		Error Status: OK
+</code></pre>
+
+<h3 id="section-1">磁盘</h3>
+
+<p>命令 <code>lsblk</code> 查看磁盘分区分布</p>
+
+<pre><code>NAME                         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                            8:0    0   30G  0 disk 
+├─sda1                         8:1    0  200M  0 part /boot
+└─sda2                         8:2    0 29.8G  0 part 
+  ├─VolGroup00-LVswap (dm-0) 253:0    0    5G  0 lvm  [SWAP]
+  └─VolGroup00-LVroot (dm-1) 253:1    0 54.8G  0 lvm  /
+sdb                            8:16   0   30G  0 disk 
+└─VolGroup00-LVroot (dm-1)   253:1    0 54.8G  0 lvm  /
+sr0                           11:0    1 1024M  0 rom 
+</code></pre>
+
+<p>命令 <code>fdisk -l</code> 查看磁盘和分区的详细信息</p>
+
+<pre><code>Disk /dev/sda: 32.2 GB, 32212254720 bytes
+64 heads, 32 sectors/track, 30720 cylinders
+Units = cylinders of 2048 * 512 = 1048576 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x0003bbac
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           2         201      204800   83  Linux
+Partition 1 does not end on cylinder boundary.
+/dev/sda2             202       30720    31251456   8e  Linux LVM
+Partition 2 does not end on cylinder boundary.
+
+Disk /dev/sdb: 32.2 GB, 32212254720 bytes
+64 heads, 32 sectors/track, 30720 cylinders
+Units = cylinders of 2048 * 512 = 1048576 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000	
+
+Disk /dev/mapper/VolGroup00-LVswap: 5368 MB, 5368709120 bytes
+255 heads, 63 sectors/track, 652 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000	
+
+Disk /dev/mapper/VolGroup00-LVroot: 58.8 GB, 58787364864 bytes
+255 heads, 63 sectors/track, 7147 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+</code></pre>
+
+<h3 id="section-2">网卡</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>命令 ` lspci</td>
+      <td>grep -i ‘eth’` 查看网卡信息</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code>0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
+</code></pre>
+
+<h3 id="bois">BOIS</h3>
+
+<p>命令 <code>dmidecode -t bios</code> 查看当前的BOIS信息</p>
+
+<pre><code># dmidecode 2.12
+SMBIOS 2.4 present.
+
+Handle 0x0000, DMI type 0, 24 bytes
+BIOS Information
+	Vendor: Phoenix Technologies LTD
+	Version: 6.00
+	Release Date: 04/14/2014
+	Address: 0xEA050
+	Runtime Size: 90032 bytes
+	ROM Size: 64 kB
+	Characteristics:
+		ISA is supported
+		PCI is supported
+		PC Card (PCMCIA) is supported
+		PNP is supported
+		APM is supported
+		BIOS is upgradeable
+		BIOS shadowing is allowed
+		ESCD support is available
+		Boot from CD is supported
+		Selectable boot is supported
+		EDD is supported
+		Print screen service is supported (int 5h)
+		8042 keyboard services are supported (int 9h)
+		Serial services are supported (int 14h)
+		Printer services are supported (int 17h)
+		CGA/mono video services are supported (int 10h)
+		ACPI is supported
+		Smart battery is supported
+		BIOS boot specification is supported
+		Function key-initiated network boot is supported
+		Targeted content distribution is supported
+	BIOS Revision: 4.6
+	Firmware Revision: 0.0
+</code></pre>
+
+<h2 id="linux-1">Linux中的磁盘分区和目录</h2>
+
+<p>常见的硬盘一般分为三类。IDE硬盘，SCSI硬盘和SATA硬盘。通常我们电脑上的硬盘都是IDE和SATA，而服务器一般用SCSI硬盘。SCSI的硬盘接口设备叫sd，第一块硬盘就是sda，第二块硬盘是sdb…以此类推。Linux规定，一块硬盘上最多存在四个主分区。命名方式分别是sda1，sda2，sda3，sda4。而逻辑分区从sd5开始，没有数量限制，命名方式为sd5，sd6…sd无穷大。主分区可以简单的理解为windows下的C盘，也就是系统分区，是引导操作系统必要的分区。而逻辑分区可以简单的理解为windows下的CDE盘等等。</p>
+
+<p>Linux磁盘分区不像windows把分区用盘符区分。在Linux中是先建立一个以根目录<code>/</code>为根节点的目录树,然后将磁盘分区挂载到相应的目录上，对于Linux文件系统的约定大致如下：</p>
+
+<pre><code>/bin        ##存放系统的核心最常用的命令
+/boot       ##内核与启动文件
+/dev        ##各种设备文件
+/etc        ##系统软件的配置文件
+/home       ##用户的主目录，用来记录和保存的一些操作和内容
+/lib        ## C编译器的库
+/root       ##超级用户root的目录
+/proc       ##进程的映像 
+/tmp        ##临时文件存放点
+/usr        ##非系统的程序和命令
+/var        ##数据目录，一般数据库文件也存放在此目录下
+</code></pre>
+
+<p>至于不同目录上挂载的分区大小分配，要根据linux文件系统的规则和作用来。</p>
+
+<p><code>/boot</code> 需挂载主分区，因为是内核和启动文件，不需要太大 500M 就足够用了。单独挂载boot是为了保证系统启动的稳定性，防止其他的硬盘分区坏了影响启动</p>
+
+<p><code>/var</code> 是数据目录，可以挂载容量大一点的分区,比如分配20G。其他依次类推</p>
+
+<p><code>/</code> 我的理解是一定需要给根目录挂载分区</p>
+
+<p>理论上来说我们可以为所有的目录都划分一个分区。没划分的文件和目录以及空余的硬盘一般都自动存放挂载到/根目录。因此如果你分区分的足够细，根目录所需的空间就很小。</p>
+
+<p>得一提的还有两点。第一点一般我们分区的时候都会单独划分一个swap分区，用于交换空间(也就是虚拟内存技术)，当内存满了的时候，系统会自动挑出一部分暂时不用的东西写到交换空间中用以释放内存，一般交换空间的大小不超过2G。设置的时候当内存小于2G时，swap可以设置为2G或真实内存的一半，真实大于2G就设置2G。第二点就是我们在硬盘分区的时候通常会让选择文件系统，因为Linux是以文件驱动的，用文件管理硬件，每一个硬件都映射到一个文件上进行管理，通常来说文件系统我们选择默认的ext4fs就可以了</p>
+
+<p><em>需要深刻的理解Linux的文件系统和系统分区，这里和 windows 是有很大区别的，如果不理解透彻，会带来很多的疑问</em></p>
+
+<h2 id="section-3">网友的精彩总结</h2>
+
+<p><strong><a href="https://www.zhihu.com/question/22484307">知乎的总结</a></strong></p>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+  
+    <div class="footer-col-wrapper">
+
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+		
+          <li>2B程序员的笔记</li>
+          <li><a href="mailto:fulin87@sina.com">fulin87@sina.com</a></li>
+        </ul>
+      </div>
+
+	  
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/fulin87"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">fulin87</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/fulin87"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">fulin87</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+		 <ul class="social-media-list">
+			<li>唯天下之至诚，胜天下之至伪</li>
+			<li>唯天下之至拙，胜天下之至巧</li>
+		 </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
