@@ -5,13 +5,67 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 19 Oct 2016 18:35:42 +0800</pubDate>
-    <lastBuildDate>Wed, 19 Oct 2016 18:35:42 +0800</lastBuildDate>
+    <pubDate>Thu, 20 Oct 2016 18:31:57 +0800</pubDate>
+    <lastBuildDate>Thu, 20 Oct 2016 18:31:57 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
-        <title>系统学习Junit4</title>
+        <title>正则表达式知识点</title>
         <description>&lt;blockquote&gt;
+  &lt;p&gt;这里作为自己常用的正则表达式的一个汇总，也作为复习使用&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;^dog&lt;/code&gt; 以dog开头&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ls -l /home | grep ^d  #过滤出/home目录下的子目录
+ grep -v ^# /home/config.conf #过滤掉config.conf中的注释内容
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;[^dog]&lt;/code&gt; 不包含dog&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;dog$&lt;/code&gt; 以dog结尾&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; ls -Fl /home | grep /$ #过滤出/home目录下的子目录
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;^$&lt;/code&gt; 表示空行&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 20 Oct 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/linux/2016/10/20/regular.html</link>
+        <guid isPermaLink="true">http://colorful.ren/linux/2016/10/20/regular.html</guid>
+        
+        
+        <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>系统学习Junit4</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#junit&quot; id=&quot;markdown-toc-junit&quot;&gt;Junit的官方信息&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;学习笔记&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;准备测试类&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;测试方法一&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;测试方法二&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;测试过程和结果解读&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#junit4&quot; id=&quot;markdown-toc-junit4&quot;&gt;Junit4的生命周期&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#junit-1&quot; id=&quot;markdown-toc-junit-1&quot;&gt;Junit注解解释&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#junit-2&quot; id=&quot;markdown-toc-junit-2&quot;&gt;Junit源码解析&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;网友的精彩博客&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
   &lt;p&gt;减少程序中的bug的一个有效的方法是编写程序逻辑的同时编写测试用例，尽早发现问题。同时Junit作为开源类库， &lt;strong&gt;&lt;a href=&quot;http://www.oschina.net/news/73667/2016-top-100-java-library&quot;&gt;受欢迎程度&lt;/a&gt;&lt;/strong&gt; 是非常高的，已经成为java单元测试事实上的标准，有必要做深入的学习。&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -24,9 +78,145 @@
 
 &lt;h2 id=&quot;section&quot;&gt;学习笔记&lt;/h2&gt;
 
-&lt;p&gt;这里先留着，以后来完善&lt;/p&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;准备测试类&lt;/h3&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;网友的精彩博客&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;TestCast1&lt;/code&gt;,&lt;code&gt;TestCast2&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.fulin.test.testJunt;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class TestCast1{
+	
+	public TestCast1(){
+		System.out.println(&quot;Constrctor...&quot;);
+	}
+	
+	@Before
+	public void before(){
+		System.out.println(&quot;before&quot;);
+	}
+	
+	@BeforeClass
+	public static void beforeClass(){
+		System.out.println(&quot;beforeClass&quot;);
+	}
+	
+	@After
+	public void after(){
+		System.out.println(&quot;after&quot;);
+	}
+	
+	@AfterClass
+	public static void afterClass(){
+		System.out.println(&quot;afterClass&quot;);
+	}
+	
+	@Test
+	public void test1(){
+		System.out.println(&quot;test1&quot;);
+	}
+	
+	@Test
+	public void test2(){
+		System.out.println(&quot;test2&quot;);
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.fulin.test.testJunt;
+
+import org.junit.Test;
+
+public class TestCast2 {
+	@Test
+	public void test3(){
+		System.out.println(&quot;test3&quot;);
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;编写好测试类之后，就可以使用Junit4来运行测试类了。运行测试类的方法有两种：&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;测试方法一&lt;/h3&gt;
+
+&lt;p&gt;使用Junit原生的JUnitCore.runClasses(Class…class)方法,如下所示&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.fulin.test.testJunt;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+public class JunnerTest {
+
+	public static void main(String[] args) {
+		Result result = JUnitCore.runClasses(TestCast1.class,TestCast2.class);
+		for (Failure fail : result.getFailures()) {
+			System.out.println(fail.toString());
+		}
+		
+		if(result.wasSuccessful()){
+			System.out.println(&quot;All tests finished successfully...&quot;);
+		}
+	}
+	
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;beforeClass
+Constrctor...
+before
+test1
+after
+Constrctor...
+before
+test2
+after
+afterClass
+test3
+All tests finished successfully...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;测试方法二&lt;/h3&gt;
+
+&lt;p&gt;使用eclipse这个IDE自带的测试工具，在测试类中 &lt;code&gt;右键-&amp;gt; run as -&amp;gt; Junit Test&lt;/code&gt; 也可以得到相同的结果&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;测试过程和结果解读&lt;/h3&gt;
+
+&lt;h4 id=&quot;junit4&quot;&gt;Junit4的生命周期&lt;/h4&gt;
+
+&lt;p&gt;Junit4提供了一系列的注解，给编写测试测试类提供了极大的便利，也减少了侵入性。在不同的方法和字段上使用不同的注解，会有不同的效果。但是正真的测试核心方法还是 &lt;code&gt;@Test&lt;/code&gt; 标注的方法，其他都是围绕这个核心展开的，相当于其生命周期的一部分。&lt;/p&gt;
+
+&lt;p&gt;同时，我们发现，不过是用那种测试方法，最终的结果都一样，我们有理由相信，Junit4的测试入口就是JunitCore.runClasses。这也是接下来分析源码的入口。&lt;/p&gt;
+
+&lt;h4 id=&quot;junit-1&quot;&gt;Junit注解解释&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;1. @Test :   测试方法，测试程序会运行的方法
+             后边可以跟参数代表不同的测试如
+             (expected=XXException.class) 异常测试
+             (timeout=xxx)超时测试
+2. @Ignore : 被忽略的测试方法
+3. @Before : 每一个测试方法之前运行
+4. @After :  每一个测试方法之后运行
+5. @BeforeClass: 所有测试开始之前运行
+6. @AfterClass:  所有测试结束之后运行
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;junit-2&quot;&gt;Junit源码解析&lt;/h3&gt;
+
+&lt;p&gt;这是根据Junit源码画出的时序图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/image/Junit-time.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;网友的精彩博客&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://my.oschina.net/pangyangyang/blog/144495&quot;&gt;Junit学习系列一&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
@@ -858,255 +1048,6 @@ SKU的编码原本不仅有唯一性的约束功能，还有很多识别功能�
         <pubDate>Thu, 22 Sep 2016 00:00:00 +0800</pubDate>
         <link>http://colorful.ren/mysql/2016/09/22/mysql-update.html</link>
         <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/22/mysql-update.html</guid>
-        
-        
-        <category>mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>mysql 基础知识</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql&quot; id=&quot;markdown-toc-mysql&quot;&gt;mysql的安装&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql-1&quot; id=&quot;markdown-toc-mysql-1&quot;&gt;mysql基础信息（[]表示可选）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;大道至简，世间的道理都是相似的……   &lt;br /&gt;
-  就比如学东西吧，以前总是东学一点，西学一点。到头来发现什么都会，什么都不精，所以，到头来才明白：少才是多，less is more。数据库，以后就选择mysql了。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;mysql&quot;&gt;mysql的安装&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;因为仅做学习使用，这里只讲centos下的 mysql 安装过程，其他环境下的不做过多解释。而且，这里介绍的也是最方便的安装过程，不一定是最好的方式&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;操作系统信息&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; Description:		CentOS Linux release 7.2.1511 (Core) 
- Release:		7.2.1511
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;首先查看本系统有没有安装 mariadb&lt;/p&gt;
-
-   	$ rpm -qa |　grep -i mariadb    //这里的-i是忽略大小写
-
-    &lt;pre&gt;&lt;code&gt;   mariadb-libs-5.5.44-2.el7.centos.x86_64
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果有安装，则需要卸载(–nodeps意思是如果有依赖关系，则同时卸载掉)&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; $ rpm -e --nodeps mariadb-libs-5.5.44-2.el7.centos.x86_64 
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;下载mysql的安装包&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-server-5.6.21-1.rhel5.x86_64.rpm
- $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-devel-5.6.21-1.rhel5.x86_64.rpm
- $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-client-5.6.21-1.rhel5.x86_64.rpm
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装rpm软件包&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; $ rpm -ivh MySQL-****.rpm 	
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装MySQL-server会报一个错，因为缺少依赖，使用yum安装即可&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; $ yum install -y libaio
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;初始化MySQL及设置密码&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; $ /usr/bin/mysql_install_db
- $ service mysql start
- $ cat /root/.mysql_secret  #查看root账号密码
- $ mysql -uroot -pAsTsb42   #AsTsb42是看到的密码
- mysql&amp;gt; SET PASSWORD = PASSWORD(&#39;123456&#39;);    #设置密码为123456
- mysql&amp;gt; exit
- $ mysql -uroot -p123456
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;远程登陆用户设置&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; use mysql;
- mysql&amp;gt; select host,user,password from user;
- mysql&amp;gt; update user set password=password(&#39;123456&#39;) where user=&#39;root&#39;;
- mysql&amp;gt; update user set host=&#39;%&#39; where user=&#39;root&#39; and host=&#39;localhost&#39;;
- mysql&amp;gt; flush privileges;
- mysql&amp;gt; exit
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;修改mysql的配置文件&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; $ vi /etc/my.cnf.d/my-default.cnf
-&lt;/code&gt;&lt;/pre&gt;
-
-    &lt;p&gt;&lt;strong&gt;&lt;em&gt;加入如下内容：&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; [client]
- password=123456
- port=3306
- default-character-set=utf8
-	
- [mysqld]
- port=3306
- character_set_server=utf8
- character_set_client=utf8
- collation_server=utf8_general_ci
- collation_database=utf8_general_ci
- lower_case_table_names=1
- max_connections=1000
-	
- [mysql]
- default-character-set=utf8
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;mysql的默认安装位置&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; /var/lib/mysql/               #数据库目录
- /usr/share/mysql              #配置文件目录
- /usr/bin                      #相关命令目录
- /etc/init.d/mysql             #启动脚本
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;mysql的启动和停止&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; $ service mysql stop
- $ service mysql start
- $ service mysql restart
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;设置开机自启动&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; $ chkconfig mysql on
- $ chkconfig --list | grep mysql
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;mysql-1&quot;&gt;mysql基础信息（[]表示可选）&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;DBA和运维同学常用&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; -- 查看mysql版本信息
- select version(); 
-		
- -- 查看字符集
- show variables like &#39;%collation%&#39;;
- show variables like &#39;%char%&#39;;	
-	
- -- 查看是否打开二进制日志文件的功能	
- show variables like &#39;%log_bin%&#39;;
-
- -- 查看有哪些数据库	
- show databases;	
-
- -- 查看数据库中有哪些表			
- show tables from db_name;		
-
- -- 查看表的字段信息
- show COLUMNS from db_name.table_name
-
- -- 查看表的信息	
- show table status from db_name;		
-	
- -- 查看MySQL本次启动后的运行时间(单位：秒)
- show status like &#39;uptime&#39;;
-	
- -- 查看select语句的执行数
- show [global] status like &#39;com_select&#39;;
-	
- -- 查看insert语句的执行数
- show [global] status like &#39;com_insert&#39;;
-	
- -- 查看update语句的执行数
- show [global] status like &#39;com_update&#39;;
-	
- -- 查看delete语句的执行数
- show [global] status like &#39;com_delete&#39;;
-	
- -- 查看试图连接到MySQL(不管是否连接成功)的连接数
- show status like &#39;connections&#39;;
-	
- -- 查看线程缓存内的线程的数量。
- show status like &#39;threads_cached&#39;;
-	
- -- 查看当前打开的连接的数量。
- show status like &#39;threads_connected&#39;;
-	
- -- 查看当前打开的连接的数量。
- show status like &#39;threads_connected&#39;;
-	
- -- 查看创建用来处理连接的线程数。
- -- 如果Threads_created较大，你可能要增加thread_cache_size值。
- show status like &#39;threads_created&#39;;
-	
- -- 查看激活的(非睡眠状态)线程数。
- show status like &#39;threads_running&#39;;
-	
- -- 查看立即获得的表的锁的次数。
- show status like &#39;table_locks_immediate&#39;;
-	
- -- 查看不能立即获得的表的锁的次数。
- -- 如果该值较高，并且有性能问题，你应首先优化查询，然后拆分表或使用复制。
- show status like &#39;table_locks_waited&#39;;
-	
- --查看创建时间超过slow_launch_time秒的线程数。
- show status like &#39;slow_launch_threads&#39;;
-	
- --查看查询时间超过long_query_time秒的查询的个数。
- show status like &#39;slow_queries&#39;;
-	
- -- 查看慢查询日志功能是否开启
- show variables like &#39;%slow%&#39;;
-
- -- 多长时间才是慢查询
- show variables like &#39;%long%&#39;;
-
- -- 设置查询超过1秒就是慢查询
- set session long_query_time=1;
-
- -- 查看日志信息是输出到数据库还是系统文件(FILE为系统文件)
- show variables like &#39;log_output&#39;;
-
- -- 查看发生了多少次慢查询
- show global status like &#39;Slow_queries&#39;;
-
- -- 将所有没有使用到索引的sql语句都记录到慢查询日志中
- set global log_queries_not_using_indexes = true;
-
- -- 查看数据库文件的路径
- show variables like &quot;%datadir%&quot;;
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;快速建立一张一模一样的表，并插入数据&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; create table t as select * from information_schema.tables；
- mysql&amp;gt; insert into t select *  from t;
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Wed, 21 Sep 2016 00:00:00 +0800</pubDate>
-        <link>http://colorful.ren/mysql/2016/09/21/mysql.html</link>
-        <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/21/mysql.html</guid>
         
         
         <category>mysql</category>

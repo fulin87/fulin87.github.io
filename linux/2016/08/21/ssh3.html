@@ -359,6 +359,10 @@ BIOS Information
 
 <h2 id="linux-1">Linux中的磁盘分区和目录</h2>
 
+<p>首先先看看磁盘的逻辑物理结构图</p>
+
+<p><img src="/image/disk.PNG" alt="" /></p>
+
 <p>常见的硬盘一般分为三类。IDE硬盘，SCSI硬盘和SATA硬盘。通常我们电脑上的硬盘都是IDE和SATA，而服务器一般用SCSI硬盘。SCSI的硬盘接口设备叫sd，第一块硬盘就是sda，第二块硬盘是sdb…以此类推。Linux规定，一块硬盘上最多存在四个主分区。命名方式分别是sda1，sda2，sda3，sda4。而逻辑分区从sd5开始，没有数量限制，命名方式为sd5，sd6…sd无穷大。主分区可以简单的理解为windows下的C盘，也就是系统分区，是引导操作系统必要的分区。而逻辑分区可以简单的理解为windows下的CDE盘等等。</p>
 
 <p>Linux磁盘分区不像windows把分区用盘符区分。在Linux中是先建立一个以根目录<code>/</code>为根节点的目录树,然后将磁盘分区挂载到相应的目录上，对于Linux文件系统的约定大致如下：</p>
@@ -393,6 +397,10 @@ BIOS Information
 <h2 id="section-3">网友的精彩总结</h2>
 
 <p><strong><a href="https://www.zhihu.com/question/22484307">知乎的总结</a></strong></p>
+
+<p><strong><a href="http://blog.csdn.net/tianxueer/article/details/2689117">磁盘的物理结构</a></strong></p>
+
+<p><strong><a href="http://baike.baidu.com/link?url=fdduBeLwvNeGlVfEYj-jT7QIe5FNgLKAfJKgdha6HkIMIQxIsaAYxWSTc_zbHfGudbiCOlEnHVGNHUXR2GIdt2OP3t90ByA4DLXZymMaqFdeturBjey9DW9jLULzJqjMMRNZn-PAahrdvPMvIvQRfa">Linux中磁盘分区</a></strong></p>
 
   </div>
 

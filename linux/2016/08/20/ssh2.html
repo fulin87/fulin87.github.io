@@ -189,14 +189,23 @@ stat 文件名
   <li>
     <p><strong>inode总结</strong></p>
 
-    <p>一个文件至少要占用一个Inode和Block，一般Inode的数量会大于Block的数量。</p>
+    <p>1,一个文件至少要占用一个Inode和Block，一般Inode的数量会大于Block的数量。</p>
 
-    <p>ext3/ext4 文件系统block大小一般有1K,2k,4k。其中引导分区等为1K，其他普通分区为4K</p>
+    <p>2,多个文件可以占有同一个inode，这就叫硬链接</p>
 
-    <p>查看Inode和block的信息 <code>dumpe2fs /dev/sda3 | grep -i "Inode size"</code></p>
+    <p>3,ext3/ext4 文件系统block大小一般有1K,2k,4k。其中引导分区等为1K，其他普通分区为4K</p>
+
+    <p>4,查看Inode和block的信息 <code>dumpe2fs /dev/sda3 | grep -i "Inode size"</code></p>
+
+    <p>5,访问文件流程是这样的：<code>文件名 -&gt; inode -&gt; block</code></p>
+
+    <p>6,一个block只能由一个文件使用，如果文件很小block很大，剩余空间浪费无法被其他文件使用。</p>
+
+    <p>7,block不是越大越好，要根据业务类型选择，默认是4K。</p>
+
+    <p>8,一般分区的情况，Block的数量要大于Inode的数量。但是磁盘耗尽是Block先耗完的。</p>
   </li>
 </ul>
-
 
   </div>
 

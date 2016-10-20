@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>plantUML的使用</title>
-  <meta name="description" content="">
+  <title>正则表达式知识点</title>
+  <meta name="description" content="  这里作为自己常用的正则表达式的一个汇总，也作为复习使用">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/java/2016/09/20/plantuml.html">
+  <link rel="canonical" href="http://colorful.ren/linux/2016/10/20/regular.html">
   <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
@@ -60,53 +60,36 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">plantUML的使用</h1>
-    <p class="post-meta"><time datetime="2016-09-20T13:07:11+08:00" itemprop="datePublished">Sep 20, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">正则表达式知识点</h1>
+    <p class="post-meta"><time datetime="2016-10-20T13:07:11+08:00" itemprop="datePublished">Oct 20, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">安装</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">问题</a></li>
-  <li><a href="#plantuml" id="markdown-toc-plantuml">plantUml的使用</a></li>
-  <li><a href="#graphviz" id="markdown-toc-graphviz">Graphviz的使用</a></li>
-</ul>
-
-<blockquote>
-  <p>经常需要画一些图，比如类图，时序图，用例图等，最近接触到一款有趣的工具，是eclipse的一个插件:plantUML。这里只记录最基础的地方，以后再来完善</p>
+    <blockquote>
+  <p>这里作为自己常用的正则表达式的一个汇总，也作为复习使用</p>
 </blockquote>
 
-<h2 id="section">安装</h2>
-<p>直接访问 <strong><a href="http://plantuml.com/">plantUML官网</a></strong></p>
+<ul>
+  <li>
+    <p><code>^dog</code> 以dog开头</p>
 
-<h2 id="section-1">问题</h2>
-<p>安装好插件之后，此时只能使用plantUML画一些时序图，并不能从类文件直接生成类图，这时候还需要安装和配置一个十分牛*的画图工具： <strong><a href="http://www.graphviz.org/">Graphviz</a></strong></p>
-
-<h2 id="plantuml">plantUml的使用</h2>
-
-<p>这是使用plantUml画的一个Junit运行的时序图</p>
-
-<pre><code>@startuml
-	actor user #blue 
-	user -&gt; Client : 1,开始
-	Client -&gt; JunitCode : 2,调runClasses
-	JunitCode -&gt; JunitCode : 3,建RunNotifier
-	JunitCode -&gt; Request : 4,调class方法
-	Request -&gt; ClassesRequest : 5,建ClassesRequest
-	Request -&gt; Request : 6,调getRunner
-	JunitCode -&gt; JunitCode : 7,调run
-	JunitCode -&gt; Client : 8,返回result
-	Client -&gt; user : 结束
-	'user -&gt; JunitCode : 调用JunitCode.runClass(Class...class)方法
-@enduml
+    <pre><code> ls -l /home | grep ^d  #过滤出/home目录下的子目录
+ grep -v ^# /home/config.conf #过滤掉config.conf中的注释内容
 </code></pre>
+  </li>
+  <li>
+    <p><code>[^dog]</code> 不包含dog</p>
+  </li>
+  <li>
+    <p><code>dog$</code> 以dog结尾</p>
 
-<p>结果如下</p>
-
-<p><img src="/image/Junit-time.png" alt="" /></p>
-
-<h2 id="graphviz">Graphviz的使用</h2>
-<p>仅仅使用Graphviz就已经可以画图了，直接使用Graphedit.exe程序就可以画图了，具体参照官网。</p>
+    <pre><code> ls -Fl /home | grep /$ #过滤出/home目录下的子目录
+</code></pre>
+  </li>
+  <li>
+    <p><code>^$</code> 表示空行</p>
+  </li>
+</ul>
 
   </div>
 
