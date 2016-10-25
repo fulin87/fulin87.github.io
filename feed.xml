@@ -5,15 +5,19 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 20 Oct 2016 18:31:57 +0800</pubDate>
-    <lastBuildDate>Thu, 20 Oct 2016 18:31:57 +0800</lastBuildDate>
+    <pubDate>Tue, 25 Oct 2016 17:28:40 +0800</pubDate>
+    <lastBuildDate>Tue, 25 Oct 2016 17:28:40 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
         <title>正则表达式知识点</title>
         <description>&lt;blockquote&gt;
+  &lt;p&gt;正则表达式就是一套处理字符串的规则和方法，基本上是以行为单位对字符串进行处理，通过特殊符号的辅助，我们可以快速的过滤替换字符串。&lt;/p&gt;
+
   &lt;p&gt;这里作为自己常用的正则表达式的一个汇总，也作为复习使用&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;基本正则表达式&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -23,19 +27,61 @@
  grep -v ^# /home/config.conf #过滤掉config.conf中的注释内容
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;[^dog]&lt;/code&gt; 不包含dog&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;[^dog]&lt;/code&gt; 不包含dog&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;code&gt;dog$&lt;/code&gt; 以dog结尾&lt;/p&gt;
 
     &lt;pre&gt;&lt;code&gt; ls -Fl /home | grep /$ #过滤出/home目录下的子目录
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;^$&lt;/code&gt; 表示空行&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;^$&lt;/code&gt; 表示空行&lt;/p&gt;
+    &lt;p&gt;&lt;code&gt;.&lt;/code&gt; 表示且只能表示一个任意字符&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; grep &quot;\.&quot; /home/config.conf #过滤出config.conf中包含.的行
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;*&lt;/code&gt; 重复0个或多个前面的一个字符&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;.*&lt;/code&gt; 匹配所有字符&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;[]&lt;/code&gt; 配置包含有其中的字符的内容&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; grep &quot;[abc]&quot; /home/config.conf #匹配出不包含a,b,c字符的行
+ grep &quot;[0-9]&quot; /home/config.conf #匹配出包含有数字的行
+ grep &quot;[a-Z]&quot; /home/config.conf #匹配出包含有因为字符的行
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;[^]&lt;/code&gt; 作用和 &lt;code&gt;[]&lt;/code&gt; 刚好相反&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; grep &quot;[^0-9]&quot; /home/config.conf #匹配出含有数字之外字符的行
+ grep &quot;[^a-Z]&quot; /home/config.conf #匹配出含有字母之外字符的行
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;{n,m}&lt;/code&gt; 重复前一个字符n到m次&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;扩展正则表达式&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;+&lt;/code&gt; 重复前面的字符一次或多次&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; egrep &quot;s+&quot; /home/config.conf #匹配包含有s的行
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;?&lt;/code&gt; 重复0个或一个前面的字符&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; egrep &quot;s?&quot; /home/config.conf #匹配没有s或没有连续s的行
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;|&lt;/code&gt; 用或的方式查找多个符合条件的字符串
+     egrep “ss|ff” /home/config.conf #匹配含有ss或ff的行&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
 </description>
         <pubDate>Thu, 20 Oct 2016 13:07:11 +0800</pubDate>
         <link>http://colorful.ren/linux/2016/10/20/regular.html</link>
