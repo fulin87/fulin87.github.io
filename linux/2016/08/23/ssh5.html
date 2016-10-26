@@ -70,7 +70,7 @@
   <li><a href="#linux-1" id="markdown-toc-linux-1">Linux权限管理</a>    <ul>
       <li><a href="#chmod-" id="markdown-toc-chmod-">chmod 管理权限</a></li>
       <li><a href="#chown-" id="markdown-toc-chown-">chown 管理文件所属的主或组</a></li>
-      <li><a href="#section" id="markdown-toc-section">默认的权限</a></li>
+      <li><a href="#section" id="markdown-toc-section">系统文件权限管理</a></li>
     </ul>
   </li>
   <li><a href="#section-1" id="markdown-toc-section-1">用户管理</a></li>
@@ -134,6 +134,34 @@
      对目录而言，表示具有进入目录的权限
 </code></pre>
   </li>
+  <li>
+    <p>创建目录和文件的默认权限问题</p>
+
+    <pre><code> 创建的目录默认权限是 755
+ 创建的文件默认权限是 644
+ 这是一个相对安全的权限，是linux中权限的一个分水岭	
+</code></pre>
+  </li>
+  <li>
+    <p>改变文件和目录的默认权限</p>
+
+    <pre><code> umask 044
+</code></pre>
+  </li>
+  <li>
+    <p>如何计算新umask下，文件及目录的默认权限</p>
+
+    <pre><code> 文件： 
+     umask 的每个位都是偶数的情况，666-umask
+     umask 的数字中有奇数的情况,666-umask,然后将umask对应的奇数位加1
+</code></pre>
+  </li>
+  <li>
+    <p>setuid &amp; setgid &amp; setfacl &amp; sbit的权限控制</p>
+
+    <pre><code> 这里不做总结了，因为用的比较少。 
+</code></pre>
+  </li>
 </ul>
 
 <p>同样一表胜千言</p>
@@ -170,15 +198,28 @@ chmod u=rwx,g=r--,o=r-- /config.conf
 <p>将文件的属主改为fulin，属组改为root
 	chown fulin.root /config/config.conf</p>
 
-<h3 id="section">默认的权限</h3>
+<h3 id="section">系统文件权限管理</h3>
 
-<p>创建目录和文件的默认权限问题</p>
+<p><code>chmod</code> 只能用来控制文件或目录的读写执行权限，更底层的权限控制，需要Linux内核的支持。这里有两个相关的命令:<code>chattr</code>,<code>lsattr</code></p>
 
-<pre><code>创建的目录默认权限是 755
-创建的文件默认权限是 644
+<ul>
+  <li>
+    <p>chattr</p>
+
+    <pre><code> 用chattr命令防止系统中某个关键文件被修改
+ chattr +i /etc/fstab
+
+ 让某个文件只能往里面追加内容，不能删除，一些日志文件适用于这种操作
+ chattr +a /data1/user_act.log
 </code></pre>
+  </li>
+  <li>
+    <p>isattr</p>
 
-<p>这是一个相对安全的权限，是linux中权限的一个分水岭</p>
+    <pre><code> 这个命令比较简单，只是用来显示文件系统属性
+</code></pre>
+  </li>
+</ul>
 
 <h2 id="section-1">用户管理</h2>
 
@@ -188,8 +229,15 @@ chmod u=rwx,g=r--,o=r-- /config.conf
 
 useradd oldboy -g incohome  删除用户oldboy的同时，删除其家目录
 
-userdel -r oldboy
+userdel -r oldboy  更改当前用户的密码
+
+passwd
+提示输入当前用户的当前密码  root用户可以改别人的密码
+
+passwd oldboy
+直接输入新密码
 </code></pre>
+
 
   </div>
 

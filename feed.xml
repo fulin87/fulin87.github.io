@@ -5,13 +5,18 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 25 Oct 2016 17:28:40 +0800</pubDate>
-    <lastBuildDate>Tue, 25 Oct 2016 17:28:40 +0800</lastBuildDate>
+    <pubDate>Wed, 26 Oct 2016 18:50:27 +0800</pubDate>
+    <lastBuildDate>Wed, 26 Oct 2016 18:50:27 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
         <title>正则表达式知识点</title>
-        <description>&lt;blockquote&gt;
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;基本正则表达式&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;扩展正则表达式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
   &lt;p&gt;正则表达式就是一套处理字符串的规则和方法，基本上是以行为单位对字符串进行处理，通过特殊符号的辅助，我们可以快速的过滤替换字符串。&lt;/p&gt;
 
   &lt;p&gt;这里作为自己常用的正则表达式的一个汇总，也作为复习使用&lt;/p&gt;
