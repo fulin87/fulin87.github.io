@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>正则表达式知识点</title>
+  <title>Linux中的文件大小和磁盘占有空间的关系</title>
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2016/10/20/regular.html">
+  <link rel="canonical" href="http://colorful.ren/linux/2016/10/27/fildanddisk.html">
   <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
@@ -60,88 +60,89 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">正则表达式知识点</h1>
-    <p class="post-meta"><time datetime="2016-10-20T13:07:11+08:00" itemprop="datePublished">Oct 20, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">Linux中的文件大小和磁盘占有空间的关系</h1>
+    <p class="post-meta"><time datetime="2016-10-27T13:07:11+08:00" itemprop="datePublished">Oct 27, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">基本正则表达式</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">扩展正则表达式</a></li>
+  <li><a href="#crontab-" id="markdown-toc-crontab-">crontab 定时任务产生的问题</a></li>
+  <li><a href="#section" id="markdown-toc-section">解决办法</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">启示</a></li>
 </ul>
 
 <blockquote>
-  <p>正则表达式就是一套处理字符串的规则和方法，基本上是以行为单位对字符串进行处理，通过特殊符号的辅助，我们可以快速的过滤替换字符串，<code>这里的正则表达式不是linux中所有命令都能用的，大部分是三剑客（sed,grep,awk）用的，和开发语言使用的正则表达式有区别</code>。</p>
-
-  <p>这里作为自己常用的正则表达式的一个汇总，也作为复习使用</p>
+  <p>文件的真实大小和文件占有的磁盘空间不是一回事，根本的原因是由于系统和磁盘的存储机制决定的。最具有代表性的是crontab定时任务执行之后由sendmail产生的文件。下面详细分析一下整个过程。</p>
 </blockquote>
 
-<h2 id="section">基本正则表达式</h2>
+<h2 id="crontab-">crontab 定时任务产生的问题</h2>
 
-<ul>
-  <li>
-    <p><code>^dog</code> 以dog开头</p>
+<p>现在有一台服务器A</p>
 
-    <pre><code> ls -l /home | grep ^d  #过滤出/home目录下的子目录
- grep -v ^# /home/config.conf #过滤掉config.conf中的注释内容
+<pre><code># cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 5.4 (Tikanga)
+
+# rpm -qa|grep sendmail
+sendmail-8.13.8-2.el5
 </code></pre>
-  </li>
-  <li><code>[^dog]</code> 不包含dog</li>
-  <li>
-    <p><code>dog$</code> 以dog结尾</p>
 
-    <pre><code> ls -Fl /home | grep /$ #过滤出/home目录下的子目录
+<p>是centos 5.4这个版本，而且已经安装了sendmail软件。</p>
+
+<p>有几个crontab定时任务</p>
+
+<pre><code>0 * * * * /data/jobscripts/run_status60.sh
+0 * * * * /data/jobscripts/run_statusin.sh
+*/5 7-23 * * * /data/jobscripts/run_sendsms.sh
+*/5 * * * * /data/jobscripts/adjustment_product_store.sh
+0 3 * * * /data/jobscripts/collate_product_store.sh
 </code></pre>
-  </li>
-  <li><code>^$</code> 表示空行</li>
-  <li>
-    <p><code>.</code> 表示且只能表示一个任意字符</p>
 
-    <pre><code> grep "\." /home/config.conf #过滤出config.conf中包含.的行
+<blockquote>
+  <p><strong>注意这里这里的定时任务都没有对标准输出和标准错误输出进行重定向到/dev/null文件，那么这样做有什么隐患呢？</strong></p>
+</blockquote>
+
+<p>定时任务启动之后，发现 <code>/var/spool/clientmqueue/</code> 目录下的文件开始不断增加，这是一年之后我无意中发现的情况：</p>
+
+<pre><code># ls -lihd /var/spool/clientmqueue/
+2080777 drwxrwx--- 2 smmsp smmsp 12M Oct 28 11:36 /var/spool/clientmqueue/
+
+# du -h /var/spool/clientmqueue/
+1.4G    /var/spool/clientmqueue/
 </code></pre>
-  </li>
-  <li><code>*</code> 重复0个或多个前面的一个字符</li>
-  <li><code>.*</code> 匹配所有字符</li>
-  <li>
-    <p><code>[]</code> 配置包含有其中的字符的内容</p>
 
-    <pre><code> grep "[abc]" /home/config.conf #匹配出不包含a,b,c字符的行
- grep "[0-9]" /home/config.conf #匹配出包含有数字的行
- grep "[a-Z]" /home/config.conf #匹配出包含有因为字符的行
+<p>发现没有，目录 <code>/var/spool/clientmqueue/</code> 实际的大小只有12M，但是占有的磁盘空间确达到了1.4G，是不是非常奇怪？继续排查。</p>
+
+<pre><code># ls -lih /var/spool/clientmqueue/ | wc -l
+345047
+
+# ls -lih /var/spool/clientmqueue/ | head -5
+total 1.4G
+2080837 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEf1nJ007902
+2080823 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEK15v025165
+2080839 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEp1UL009526
+2080836 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEV2M6006278
 </code></pre>
-  </li>
-  <li>
-    <p><code>[^]</code> 作用和 <code>[]</code> 刚好相反</p>
 
-    <pre><code> grep "[^0-9]" /home/config.conf #匹配出含有数字之外字符的行
- grep "[^a-Z]" /home/config.conf #匹配出含有字母之外字符的行
- grep "^[^t]"  /home/config.conf #匹配出不是t开头的行
+<p>看到这里，才恍然大悟，原来 <code>/var/spool/clientmqueue/</code> 这个目录中的文件有345047个之多，但是每个文件却只有880 byte 大。这就造成了磁盘Block的大量浪费，所以才会有目录磁盘占用量远大于目录本身大小的情况。</p>
+
+<p>那么这些小文件是怎么来的呢？其实是crontab定时任务在执行之后，就会通过sendmail给任务所有者发送一个邮件，就产生了一个880 byte的小文件。每次执行都产生一个，日积月累，数量非常庞大，给系统的安全还造成了一个隐患。</p>
+
+<h2 id="section">解决办法</h2>
+
+<p>其实解决办法非常简单，将定时任务的标准输出和标准错误输出重定向到 <code>/dev/null</code> 即可，将定时任务改造如下：</p>
+
+<pre><code>0 * * * * /data/jobscripts/run_status60.sh &gt;/dev/null 2&gt;&amp;1
+0 * * * * /data/jobscripts/run_statusin.sh &gt;/dev/null 2&gt;&amp;1
+*/5 7-23 * * * /data/jobscripts/run_sendsms.sh &gt;/dev/null 2&gt;&amp;1
+*/5 * * * * /data/jobscripts/adjustment_product_store.sh &gt;/dev/null 2&gt;&amp;1
+0 3 * * * /data/jobscripts/collate_product_store.sh &gt;/dev/null 2&gt;&amp;1
 </code></pre>
-  </li>
-  <li><code>{n,m}</code> 重复前一个字符n到m次</li>
-</ul>
 
-<h2 id="section-1">扩展正则表达式</h2>
+<h2 id="section-1">启示</h2>
 
-<ul>
-  <li>
-    <p><code>+</code> 重复前面的字符一次或多次</p>
+<p>通过这个案例，知道了crontab定时任务有一个小小的风险，但是可以通过重定向到 <code>/dev/null</code> 来解决。</p>
 
-    <pre><code> egrep "s+" /home/config.conf #匹配包含有s的行
-</code></pre>
-  </li>
-  <li>
-    <p><code>?</code> 重复0个或一个前面的字符</p>
-
-    <pre><code> egrep "s?" /home/config.conf #匹配没有s或没有连续s的行
-</code></pre>
-  </li>
-  <li>
-    <p><code>|</code> 用或的方式查找多个符合条件的字符串
-     egrep “ss|ff” /home/config.conf #匹配含有ss或ff的行</p>
-  </li>
-</ul>
-
+<p>同时，对这个问题的深入剖析，可以帮助我们更加深刻的理解 Inode;Block 和文件存储的机制。</p>
 
   </div>
 

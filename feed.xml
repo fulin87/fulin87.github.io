@@ -5,9 +5,99 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Oct 2016 18:50:27 +0800</pubDate>
-    <lastBuildDate>Wed, 26 Oct 2016 18:50:27 +0800</lastBuildDate>
+    <pubDate>Fri, 28 Oct 2016 13:18:22 +0800</pubDate>
+    <lastBuildDate>Fri, 28 Oct 2016 13:18:22 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>Linux中的文件大小和磁盘占有空间的关系</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#crontab-&quot; id=&quot;markdown-toc-crontab-&quot;&gt;crontab 定时任务产生的问题&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;解决办法&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;启示&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;文件的真实大小和文件占有的磁盘空间不是一回事，根本的原因是由于系统和磁盘的存储机制决定的。最具有代表性的是crontab定时任务执行之后由sendmail产生的文件。下面详细分析一下整个过程。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;crontab-&quot;&gt;crontab 定时任务产生的问题&lt;/h2&gt;
+
+&lt;p&gt;现在有一台服务器A&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 5.4 (Tikanga)
+
+# rpm -qa|grep sendmail
+sendmail-8.13.8-2.el5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;是centos 5.4这个版本，而且已经安装了sendmail软件。&lt;/p&gt;
+
+&lt;p&gt;有几个crontab定时任务&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0 * * * * /data/jobscripts/run_status60.sh
+0 * * * * /data/jobscripts/run_statusin.sh
+*/5 7-23 * * * /data/jobscripts/run_sendsms.sh
+*/5 * * * * /data/jobscripts/adjustment_product_store.sh
+0 3 * * * /data/jobscripts/collate_product_store.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;注意这里这里的定时任务都没有对标准输出和标准错误输出进行重定向到/dev/null文件，那么这样做有什么隐患呢？&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;定时任务启动之后，发现 &lt;code&gt;/var/spool/clientmqueue/&lt;/code&gt; 目录下的文件开始不断增加，这是一年之后我无意中发现的情况：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# ls -lihd /var/spool/clientmqueue/
+2080777 drwxrwx--- 2 smmsp smmsp 12M Oct 28 11:36 /var/spool/clientmqueue/
+
+# du -h /var/spool/clientmqueue/
+1.4G    /var/spool/clientmqueue/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;发现没有，目录 &lt;code&gt;/var/spool/clientmqueue/&lt;/code&gt; 实际的大小只有12M，但是占有的磁盘空间确达到了1.4G，是不是非常奇怪？继续排查。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# ls -lih /var/spool/clientmqueue/ | wc -l
+345047
+
+# ls -lih /var/spool/clientmqueue/ | head -5
+total 1.4G
+2080837 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEf1nJ007902
+2080823 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEK15v025165
+2080839 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEp1UL009526
+2080836 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEV2M6006278
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看到这里，才恍然大悟，原来 &lt;code&gt;/var/spool/clientmqueue/&lt;/code&gt; 这个目录中的文件有345047个之多，但是每个文件却只有880 byte 大。这就造成了磁盘Block的大量浪费，所以才会有目录磁盘占用量远大于目录本身大小的情况。&lt;/p&gt;
+
+&lt;p&gt;那么这些小文件是怎么来的呢？其实是crontab定时任务在执行之后，就会通过sendmail给任务所有者发送一个邮件，就产生了一个880 byte的小文件。每次执行都产生一个，日积月累，数量非常庞大，给系统的安全还造成了一个隐患。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;解决办法&lt;/h2&gt;
+
+&lt;p&gt;其实解决办法非常简单，将定时任务的标准输出和标准错误输出重定向到 &lt;code&gt;/dev/null&lt;/code&gt; 即可，将定时任务改造如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0 * * * * /data/jobscripts/run_status60.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+0 * * * * /data/jobscripts/run_statusin.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+*/5 7-23 * * * /data/jobscripts/run_sendsms.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+*/5 * * * * /data/jobscripts/adjustment_product_store.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+0 3 * * * /data/jobscripts/collate_product_store.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;启示&lt;/h2&gt;
+
+&lt;p&gt;通过这个案例，知道了crontab定时任务有一个小小的风险，但是可以通过重定向到 &lt;code&gt;/dev/null&lt;/code&gt; 来解决。&lt;/p&gt;
+
+&lt;p&gt;同时，对这个问题的深入剖析，可以帮助我们更加深刻的理解 Inode;Block 和文件存储的机制。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 27 Oct 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/linux/2016/10/27/fildanddisk.html</link>
+        <guid isPermaLink="true">http://colorful.ren/linux/2016/10/27/fildanddisk.html</guid>
+        
+        
+        <category>linux</category>
+        
+      </item>
     
       <item>
         <title>正则表达式知识点</title>
@@ -17,7 +107,7 @@
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;正则表达式就是一套处理字符串的规则和方法，基本上是以行为单位对字符串进行处理，通过特殊符号的辅助，我们可以快速的过滤替换字符串。&lt;/p&gt;
+  &lt;p&gt;正则表达式就是一套处理字符串的规则和方法，基本上是以行为单位对字符串进行处理，通过特殊符号的辅助，我们可以快速的过滤替换字符串，&lt;code&gt;这里的正则表达式不是linux中所有命令都能用的，大部分是三剑客（sed,grep,awk）用的，和开发语言使用的正则表达式有区别&lt;/code&gt;。&lt;/p&gt;
 
   &lt;p&gt;这里作为自己常用的正则表达式的一个汇总，也作为复习使用&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -61,6 +151,7 @@
 
     &lt;pre&gt;&lt;code&gt; grep &quot;[^0-9]&quot; /home/config.conf #匹配出含有数字之外字符的行
  grep &quot;[^a-Z]&quot; /home/config.conf #匹配出含有字母之外字符的行
+ grep &quot;^[^t]&quot;  /home/config.conf #匹配出不是t开头的行
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;code&gt;{n,m}&lt;/code&gt; 重复前一个字符n到m次&lt;/li&gt;
@@ -943,162 +1034,6 @@ SKU的编码原本不仅有唯一性的约束功能，还有很多识别功能�
         <pubDate>Fri, 23 Sep 2016 00:00:00 +0800</pubDate>
         <link>http://colorful.ren/mysql/2016/09/23/mysql-explain.html</link>
         <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/23/mysql-explain.html</guid>
-        
-        
-        <category>mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>mysql中sql优化的思路和原则</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;入乎其内；出乎其外&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#sql&quot; id=&quot;markdown-toc-sql&quot;&gt;SQL优化的思路&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#sql-1&quot; id=&quot;markdown-toc-sql-1&quot;&gt;SQL优化的基本原则&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;索引相关的总结&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;大部分系统的性能瓶颈都是IO操作，数据库的IO消耗是其中的重要组成部分，SQL语句性能的优化是很有必要的，如果一开始不注意，后期的改动成本是比较大的,下面是根据我自己的经验总结的一套sql优化的思路和方法，不一定是最好的，但是却真实的产生过效果。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;入乎其内；出乎其外&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;为什么人类到今天为止对宇宙的认识都很有限？因为我们自己就在宇宙之中；为什么人类到今天为止对海洋的认识都很少？因为人类从来没有正真的进入过海洋！&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;一样的道理，认识一个事物，最有效的方式就是：先站在事物的外面观察观察它，然后进入事物的内部再研究它，这样才是最全面的。&lt;/p&gt;
-
-&lt;p&gt;对于SQL来说，平时使用sql，编写sql语句就相当于站在sql的外面观察它，但是sql的内部机制和执行过程是怎样的呢？一个sql语句的执行过程，大致是这样的：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;8	SELECT  DISTINCT &amp;lt;select_list&amp;gt;
-1	FROM &amp;lt;left_table&amp;gt;
-3	&amp;lt;join_type&amp;gt;JOIN&amp;lt;right_table&amp;gt;
-2		ON&amp;lt;join_condition&amp;gt;
-4	WHERE &amp;lt;where_condition&amp;gt;
-5	GROUP BY&amp;lt;group_by_list&amp;gt;
-6	WITH{CUBE|ROLLUP}
-7	HAVING&amp;lt;having_condition&amp;gt;
-10	ORDER BY&amp;lt;order_by_list&amp;gt;
-11	LIMIT&amp;lt;limit_number&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下面是详细的执行过程&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1,FROM : 	对FROM的左边表和右边的表计算笛卡尔积，产生虚拟表VT1。
-2,ON : 		对虚拟表VT1进行ON筛选，只有那些符合&amp;lt;join_condition&amp;gt;的行才会被记录在虚拟表VT2中。
-3,JOIN : 	如果指定了OUTER JOIN (比如left join,right join),那么保留表中未匹配的行就会作为外部行添加到虚拟表VT2中，产生虚拟表VT3,from 字句中包含两个以上的表的话，就会对上一个join连接产生的结果VT3和下一个表重复执行步骤1-3这三个步骤，一直到处理完所有的表为止。
-4,WHERE : 	对虚拟表VT3进行WHERE条件过滤。只要符合&amp;lt;where-condition&amp;gt;的记录才会被插入到虚拟表VT4中。
-5,GROUP BY : 	根据group by字句中的列，对VT4中的记录进行分组操作，产生VT5。
-6,CUBE | ROLLUP: 对表VT5进行cube或者rollup操作，产生表VT6。
-7,HAVING：	对虚拟表VT6应用having过滤，只有符合&amp;lt;having-condition&amp;gt;的记录才会被 插入到虚拟表VT7中。
-8,SELECT： 	执行select操作，选择指定的列，插入到虚拟表VT8中。
-9,DISTINCT： 	对VT8中的记录进行去重。产生虚拟表VT9。
-10,ORDER BY: 	将虚拟表VT9中的记录按照&amp;lt;order_by_list&amp;gt;进行排序操作，产生虚拟表VT10。
-11,LIMIT：	取出指定行的记录，产生虚拟表VT11, 并将结果返回。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;sql&quot;&gt;SQL优化的思路&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;1.优化更需要优化的sql；&lt;/li&gt;
-  &lt;li&gt;2.定位优化对象的性能瓶颈：优化前需了解查询的瓶颈是IO还是CPU可通过PROFILING很容易定位查询的瓶颈。&lt;/li&gt;
-  &lt;li&gt;3.明确优化目标；&lt;/li&gt;
-  &lt;li&gt;4.从Explain入手；&lt;/li&gt;
-  &lt;li&gt;5.多使用profile；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;sql-1&quot;&gt;SQL优化的基本原则&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;永远用小结果集驱动大结果集&lt;/p&gt;
-
-    &lt;p&gt;&lt;code&gt;From子句中sql解析顺序为从右向左，执行时会以最左边的表为基础表循环与右边表数据做笛卡尔积，所以以小结果集驱动能减少循环次数，从而减少对被驱动结果集的访问，从而减少被驱动表的锁定。&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;尽可能在索引中完成排序&lt;/p&gt;
-
-    &lt;p&gt;&lt;code&gt;排序算法有两种：a.查出排序字段和行指针，排序，再通过行指针获得行数据所需列，返回结果集；b.取出所有排序列数据，在排序缓冲区中排完序直接返回结果集。索引排序是利用索引的有序性对数据排序的。&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;只取出子集需要的colums&lt;/li&gt;
-  &lt;li&gt;仅仅使用最有效的过滤条件&lt;/li&gt;
-  &lt;li&gt;尽可能避免复杂的Join和子查询&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;索引相关的总结&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;什么是索引，可以把索引想象成数据库的目录，查找某一样东西之前，先在目录中确定好位置，直奔位置而去，这就是提高查询效率的原因。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;索引的好处&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 提高数据检索效率，降低数据库的IO成本
- 降低数据排序成本：要求排序字段和索引键字段一致
- 降低数据分组成本：因为分组之前会先排序，同意如果分组字段与索引字段一致，会降低分组消耗的成本。
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;索引的弊端&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 索引是独立于基础数据的数据库对象，因此它会占用存储空间
- 数据新增、更新会导致索引的同步更新，所以会增加数据新增、更新所消耗的成本
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;否需要创建索引&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 较为频繁的作为查询条件的字段需要创建索引
- 唯一性太差的字段不适合单独创建索引，即使频繁作为查询条件
- 更新非常频繁的字段不适合创建索引
- 不会出现在where子句中的字段不要创建索引
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;索引语法&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;唯一索引&lt;/p&gt;
-
-        &lt;pre&gt;&lt;code&gt;  ALTER TABLE tableName ADD UNIQUE indexName (column);
-  CREATE UNIQUE INDEX indexName ON tableName (column);
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;普通索引&lt;/p&gt;
-
-        &lt;pre&gt;&lt;code&gt;  ALTER TABLE tableName ADD INDEX indexName(column);
-  CREATE INDEX indexName ON tableName(column);
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;主键索引&lt;/p&gt;
-
-        &lt;pre&gt;&lt;code&gt;  ALTER TABLE tableName ADD PRIMARY KEY (column);
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;全文索引&lt;/p&gt;
-
-        &lt;pre&gt;&lt;code&gt;  ALTER TABLE tableName ADD FULLTEXT (column);
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;组合索引&lt;/p&gt;
-
-        &lt;pre&gt;&lt;code&gt;  ALTER TABLE tableName ADD INDEX indexName(col1,col2,...);
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 22 Sep 2016 00:00:00 +0800</pubDate>
-        <link>http://colorful.ren/mysql/2016/09/22/mysql-update.html</link>
-        <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/22/mysql-update.html</guid>
         
         
         <category>mysql</category>
