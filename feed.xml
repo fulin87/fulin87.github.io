@@ -5,8 +5,8 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Nov 2016 15:31:25 +0800</pubDate>
-    <lastBuildDate>Wed, 02 Nov 2016 15:31:25 +0800</lastBuildDate>
+    <pubDate>Wed, 02 Nov 2016 19:56:37 +0800</pubDate>
+    <lastBuildDate>Wed, 02 Nov 2016 19:56:37 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
@@ -19,7 +19,7 @@
 
 &lt;p&gt;对excel的VBA工程进行加密，是一种非常必要的手段，可以防止代码被人篡改。但是有时会出现密码遗忘的问题，怎么找回原来的密码或者重新设置密码呢？&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/image/VBA1.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/vba1.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;解决办法&lt;/h3&gt;
 
