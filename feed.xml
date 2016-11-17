@@ -5,8 +5,8 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Nov 2016 19:56:37 +0800</pubDate>
-    <lastBuildDate>Wed, 02 Nov 2016 19:56:37 +0800</lastBuildDate>
+    <pubDate>Thu, 17 Nov 2016 17:12:40 +0800</pubDate>
+    <lastBuildDate>Thu, 17 Nov 2016 17:12:40 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
@@ -35,6 +35,10 @@
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/image/VBA3.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;操作之前一定要对原始数据进行备份，否则数据丢失，这是血的教训，切记，切记！！！&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;内部机理&lt;/h3&gt;
 

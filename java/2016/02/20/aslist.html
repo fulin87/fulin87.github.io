@@ -66,6 +66,7 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
+  <li><a href="#javanan" id="markdown-toc-javanan">java中的NaN;无穷大;异常</a></li>
   <li><a href="#javautilarraysarraylistjavautilarraylist" id="markdown-toc-javautilarraysarraylistjavautilarraylist">java.util.Arrays.ArrayList与java.util.ArrayList的有关问题</a></li>
   <li><a href="#java--" id="markdown-toc-java--">java中的 &amp;&amp;;&amp;;||;|;^ 这些运算符的区别</a></li>
 </ul>
@@ -74,7 +75,32 @@
   <p><em>把工作中遇到的一些容易出错的知识点记录整理下来，时间长了就是一笔宝贵的财富，这就是经验…</em></p>
 </blockquote>
 
-<h3 id="javautilarraysarraylistjavautilarraylist">java.util.Arrays.ArrayList与java.util.ArrayList的有关问题</h3>
+<h2 id="javanan">java中的NaN;无穷大;异常</h2>
+
+<ul>
+  <li>java中整数除以0将会产生一个异常</li>
+  <li>浮点数除以0将会产生一个无穷大</li>
+  <li>负数的平方根就是一个NaN</li>
+</ul>
+
+<p>代码示例</p>
+
+<pre><code>public static void main(String[] args){
+	System.out.println(2.1d/0);
+	System.out.println(Math.sqrt(-2));
+	System.out.println(1/0);
+}
+</code></pre>
+
+<p>将输出：</p>
+
+<pre><code>Infinity
+NaN
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at com.fulin.test.test_local.Test4.main(Test4.java:8)
+</code></pre>
+
+<h2 id="javautilarraysarraylistjavautilarraylist">java.util.Arrays.ArrayList与java.util.ArrayList的有关问题</h2>
 
 <p>问题是这样的，将数组转成List，通常我们习惯这样写成:</p>
 
@@ -103,52 +129,18 @@ public void add(int index, E element)  | public boolean add(E e)调用add(int in
 
 <p>换句话说，其实java.util.Arrays.ArrayList其实只是对数组做了一个装饰，可以看到里面的实现，E get(int index)、E set(int index, E element)等方法都是对数组的操作，他的目的只是提供了可以像访问List那样来访问数组而已。<strong>本质上其实还是一个数组。</strong></p>
 
-<h3 id="java--">java中的 &amp;&amp;;&amp;;||;|;^ 这些运算符的区别</h3>
+<h2 id="java--">java中的 &amp;&amp;;&amp;;||;|;^ 这些运算符的区别</h2>
 
-<table>
-  <tbody>
-    <tr>
-      <td>如果阅读开源项目的源码,比如FastJson的源码，会发现，大量的使用了 &amp; 和</td>
-      <td>运算符。但是这些运算符一般在我们自己的项目中是很少用的，时间一长就忘记了它的含义。这里总结一下。</td>
-    </tr>
-  </tbody>
-</table>
+<p>如果阅读开源项目的源码,比如FastJson的源码，会发现，大量的使用了 <code>&amp;</code> 和 <code>|</code> 运算符。但是这些运算符一般在我们自己的项目中是很少用的，时间一长就忘记了它的含义。这里总结一下。</p>
 
 <ul>
-  <li>&amp;&amp; 的含义就是逻辑与运算，操作数必须是boolean类型的。</li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td> </td>
-          <td>的含义就是逻辑或运算，操作数必须是boolean类型的。</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>&amp;  的含义就是按位与运算，操作数要么都是boolean类型，要么是char或int或long。</li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>的含义就是按位或运算，操作数要么都是boolean类型，要么是char或int或long。</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>^  的含义就是按位异或运算，按位进行相同为0，不同为1，操作数要么都是boolean类型，要么是char或int或long。</li>
+  <li><code>&amp;&amp;</code> 的含义就是逻辑与运算，操作数必须是boolean类型的。</li>
+  <li><code>||</code> 的含义就是逻辑或运算，操作数必须是boolean类型的。</li>
+  <li><code>&amp;</code>  的含义就是按位与运算，操作数要么都是boolean类型，要么是char或int或long。</li>
+  <li><code>|</code>  的含义就是按位或运算，操作数要么都是boolean类型，要么是char或int或long。</li>
+  <li><code>^</code>  的含义就是按位异或运算，按位进行相同为0，不同为1，操作数要么都是boolean类型，要么是char或int或long。</li>
+  <li><code>&amp;&amp;</code> 运算符和 <code>||</code> 运算符都是短路运算符。但是 <code>&amp;</code> 运算符 和 <code>|</code> 运算符不是短路运算符，这一点需要注意*</li>
 </ul>
-
-<table>
-  <tbody>
-    <tr>
-      <td>*&amp;&amp; 运算符和</td>
-      <td> </td>
-      <td>运算符都是短路运算符。但是 &amp; 运算符 和</td>
-      <td>运算符不是短路运算符，这一点需要注意*</td>
-    </tr>
-  </tbody>
-</table>
 
 <p>举例如下：</p>
 
