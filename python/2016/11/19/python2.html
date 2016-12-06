@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Linux基础知识点四之常用技巧和运行级别</title>
+  <title>python基础知识点之易错语法</title>
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2016/08/22/ssh4.html">
+  <link rel="canonical" href="http://colorful.ren/python/2016/11/19/python2.html">
   <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
@@ -60,159 +60,154 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Linux基础知识点四之常用技巧和运行级别</h1>
-    <p class="post-meta"><time datetime="2016-08-22T13:07:11+08:00" itemprop="datePublished">Aug 22, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">python基础知识点之易错语法</h1>
+    <p class="post-meta"><time datetime="2016-11-19T13:07:11+08:00" itemprop="datePublished">Nov 19, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#linux" id="markdown-toc-linux">linux使用小技巧</a></li>
-  <li><a href="#linux-1" id="markdown-toc-linux-1">linux运行级别</a></li>
+  <li><a href="#python-" id="markdown-toc-python-">python 语法基本原则</a></li>
+  <li><a href="#section" id="markdown-toc-section">条件语句</a>    <ul>
+      <li><a href="#if" id="markdown-toc-if">if语句</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">条件表达式</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-2" id="markdown-toc-section-2">循环语句</a>    <ul>
+      <li><a href="#while" id="markdown-toc-while">while语句</a></li>
+      <li><a href="#for" id="markdown-toc-for">for语句</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">迭代器和生成器</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">函数要注意的地方</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">变量的作用域</a></li>
 </ul>
 
 <blockquote>
-  <p>在使用 linux 的过程中有很多技巧和零散的知识点，对这些知识点进行整理和记录，是一个不错的习惯，因为人难免会遗忘，记录在这里，以后如果忘记了，来这里查询，很快就能记起来</p>
+  <p>python的语法结构非常的简单，尤其是对于熟悉其他原因的人来说，但是还是会有一些细节需要注意的，这里仅仅记录一下重要的细节</p>
 </blockquote>
 
-<h2 id="linux">linux使用小技巧</h2>
+<h2 id="python-">python 语法基本原则</h2>
+
 <ul>
   <li>
-    <p>快速的回到上一次的目录</p>
-
-    <pre><code> OLDPWD 这个环境变量存放的是上一次的目录
- env | grep -i old # 查看OLDPWD这个环境变量的值 
- cd - # 快速的回到上一次的目录
-</code></pre>
+    <p>python语法和vb的语法有很大的相似性，都要求严格的缩进，用缩进来保证语法格式。而且冒号<code>:</code>在python语法中有特殊的含义。</p>
   </li>
   <li>
-    <p>快速的使用之前使用过的命令</p>
-
-    <pre><code> history 命令之后使用 `!行号` 可以直接调用对应的命令
-</code></pre>
+    <p>python中没有自增自减运算</p>
   </li>
   <li>
-    <p>快速回到家目录</p>
-
-    <pre><code> cd ~ 回到家目录
-</code></pre>
+    <p>python中没有switch语句</p>
   </li>
   <li>
-    <p>查看最近更新的文件</p>
-
-    <pre><code> ls -lrt #r是逆序；t是按修改时间;结果是最后更新的在最下面
-</code></pre>
+    <p>python中没有foreach语句</p>
   </li>
   <li>
-    <p>使 grep 过滤的字符串有颜色</p>
-
-    <pre><code> grep 'www' --color=auto /tmp/test
-</code></pre>
+    <p>python中的else和其他语言不同，可以用在循环语句中，表示循环完成后执行</p>
   </li>
-  <li>
-    <p>增加一个别名</p>
+</ul>
 
-    <pre><code> vi /etc/profile
- alias grep='grep --color=auto' #这里的=两边不能有空格
+<h2 id="section">条件语句</h2>
+
+<h3 id="if">if语句</h3>
+
+<pre><code>if expression:
+	expr_true_suite
+elif expression:
+	expr_true_suite
+else:
+	expr_false_suite
 </code></pre>
-  </li>
-  <li>
-    <p>查看压缩包中的内容</p>
 
-    <pre><code> gar tf test.tar.gz
+<h3 id="section-1">条件表达式</h3>
+
+<pre><code>X if C else Y
+
+a = x if x&lt;y else y
 </code></pre>
-  </li>
-  <li>
-    <p>压缩的时候排除文件</p>
 
-    <ul>
-      <li>
-        <p>方法一</p>
+<h2 id="section-2">循环语句</h2>
 
-        <pre><code>  tar zcvf test.tar.gz --exclude ./test/fulin1.test ./test
+<h3 id="while">while语句</h3>
+
+<pre><code>while expression:
+	suite_to_repeat
 </code></pre>
-      </li>
-      <li>
-        <p>方法二</p>
 
-        <pre><code>  先把不需要打包的文件的文件名放入一个文件a.txt
-  tar zcvfX test.tar.gz a.txt ./test/
+<h3 id="for">for语句</h3>
+
+<pre><code>for iter_var in iterable:
+	suite_to_repeat
+for语句经常和range()内建函数联合使用.
+range()内建函数的语法：
+range(start, end, step =1)  ;包前不包后
+
+range(2,9,2)
 </code></pre>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p>将查找的结果打包</p>
 
-    <pre><code> tar zcvf test.tar.gz `find . -type d -name fulin`
+<h3 id="section-3">迭代器和生成器</h3>
+
+<p>迭代器和生成器是python中的神器。后面会进行详细的总结。</p>
+
+<pre><code>列表解析:
+[expr for iter_var in iterable if cond_expr]
+生成器表达式:
+(expr for iter_var in iterable if cond_expr)
 </code></pre>
-  </li>
-  <li>
-    <p>查询文件的行号</p>
 
-    <pre><code> wc -l /etc/service
- cat -n /etc/service | tail -1
-</code></pre>
-  </li>
-  <li>
-    <p>echo 不换行输出</p>
+<h2 id="section-4">函数要注意的地方</h2>
 
-    <pre><code> echo -n "124"
-</code></pre>
-  </li>
+<ul>
+  <li>函数定义的第一行的字符串是文档字符串。写文档字符串是一个好习惯</li>
   <li>
-    <p>查找具有suid的命令</p>
+    <p>函数的形参有很多种定义方法</p>
 
-    <pre><code> find /usr/bin/ -type f -perm 4755 -exec ls -l {} \;
-</code></pre>
-  </li>
-  <li>
-    <p>查看开机自启动服务</p>
+    <pre><code> 1,直接定义
+     def fun(x=1,y=2):
+         print x,y
+     fun(1,2)
+     1,2
 
-    <pre><code> chkconfig --list | grep 3:on
-</code></pre>
-  </li>
-  <li>
-    <p>查看系统是否安装了sendmail软件</p>
+ 2,形参前一个*代表传递的是元组
+     def fun(*param):
+         print param
+     fun(1,2)
+     (1,2)
+	
+ 3,形参前两个*代表传递的是字典
+     def fun(**param):
+         print param
+     fun(x=1,y=2)
+     {'x'=1,'y'=2}
+	
+ 4,传递参数时候的反转，将元组或字典拆开传递给函数
+     def fun(x,y)
+         return x+y
+     params = (1,2)
+     fun(*params)
+     3
+		
+     def fun(job = 'x',name = 'y'):
+         print 'name :'+name+" job : '+job
 
-    <pre><code> rpm -qa|grep sendmail
-</code></pre>
-  </li>
-  <li>
-    <p>检查软件安装是否正常，也就是上一条命令的退出状态,如果是0就正常</p>
-
-    <pre><code> echo $?
-</code></pre>
-  </li>
-  <li>
-    <p>检查某个端口是否开启</p>
-
-    <pre><code> lsof -i :80
+     params = {'name':'fulin','job':'it'}
+     fun(**params)
+     'name :fulin job : it'
 </code></pre>
   </li>
 </ul>
 
-<h2 id="linux-1">linux运行级别</h2>
+<h2 id="section-5">变量的作用域</h2>
 
-<p>先看看linux的启动流程图</p>
+<p>作用域其实就是命名空间，在哪里声明的变量，命名空间就是那里。这里有一个原则：LEGB原则。</p>
 
-<p><img src="/image/start.PNG" alt="" /></p>
-
-<p>在目录 <code>/etc/rc.d/init.d</code> 下有很多服务器脚本程序，一般称为服务。</p>
-
-<p>在 <code>/etc/rc.d</code> 下有7个名为rcN.d的目录，对应系统的7个运行级别。</p>
-
-<p>在rcN.d目录下都是一些符合连接(软连接)文件，这些文件都指向 <code>/etc/init.d</code> 目录下的service脚本文件，命名规则是 <code>K+nn+服务名</code> 或者 <code>S+nn+服务名</code> ，其中nn是两位阿拉伯数字</p>
-
-<p>系统启动时，会根据指定的运行级别进入对应的 <code>rcN.d</code> 目录,并按照文件名顺序检索目录下的连接文件，对于以K开头的文件，系统将终止对应的服务，对于以S开头的文件，系统将启动对于的服务。</p>
-
-<pre><code>0 : halt (Do NOT set initdefault to this) 关机模式，需要慎重使用。
-1 : Single user mode 单用户模式,特定场景使用，如重置root密码。
-2 : Multiuser,without NFS 无NFS的多用户模式
-3 : Full multiuser mode 文本模式
-4 : unserd 无用
-5 : X11 图形化
-6 : redboot (Do NOT set initdefault to this) 重启模式	，需要慎重使用
+<pre><code>L:本地作用域，函数内的名字空间，包括局部变量和形参
+E:嵌套作用域，外部嵌套函数的名字空间（闭包中常见）
+G:全局作用域，全局变量，函数定义所在模块的名字空间
+B:内置作用域，内置模块的名字空间
 </code></pre>
+
+<p>python的变量作用域和其他语言有比较大的区别，是一个难点，需要特别留意</p>
+
 
   </div>
 

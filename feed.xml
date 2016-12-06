@@ -5,9 +5,695 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 Nov 2016 17:12:40 +0800</pubDate>
-    <lastBuildDate>Thu, 17 Nov 2016 17:12:40 +0800</lastBuildDate>
+    <pubDate>Tue, 06 Dec 2016 16:44:31 +0800</pubDate>
+    <lastBuildDate>Tue, 06 Dec 2016 16:44:31 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>python基础知识点OOP总结</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;面向对象的思想虽然好理解，但是不同的语言的实现方式是有区别的，python的面向对象机制非常的灵活，也很优雅…..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;pythonoop&quot;&gt;python的OOP的实质&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;python的面向对象其实就是在已连接的命名空间对象上搜索属性
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里再次出现了命名空间，命名空间在python中的重要性再怎么强调也不为过。python中的命名空间本来是孤立的，但是因为OOP而将不同的命名空间联系了起来，从而我们可以形成一个命名空间组成的 “树状结构”，python的OOP机制就是在这个树状结构上的搜索机制，这就是python的OOP的本质所在。&lt;/p&gt;
+
+&lt;h2 id=&quot;python&quot;&gt;python的类和继承&lt;/h2&gt;
+
+&lt;p&gt;因为学习过java。感觉python的oop机制的实现还是比较粗糙的。当然也是比较灵活的，有动态语言的特定。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class A:
+	pass
+
+class B(A):
+	pass
+
+class C:
+	pass
+
+class D(A,C):
+	pass
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里B继承了A；D继承了A和C。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class A:
+	def fun(self):
+		self.action()
+
+class B(A):
+	def action(self):
+		pass
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;这里A作为基类，定义了方法fun，隐含了子类需要实现action方法。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;python的继承搜索会现在实例对象中寻找属性，然后才是创建实例的类，之后是所有超类，当首次找到时，搜索就会停止。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;类和实例对象都是命名空间，两者的主要区别是，类是建立实例的工厂，类也支持运算符重载方法，由实例继承。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;类总是位于模块中，类是模块对象的属性，类和模块都是命名空间。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;类是通过运行class语句创建的；实例是像函数那样调用类来创建的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;类属性的创建是通过把属性赋值给类对象实现的，类属性是由class语句中的顶层赋值语句产生的。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;实例属性是通过对实例对象赋值属性来创建的，实例属性一般是在class语句中的类方法函数中对self参数赋值属性而创建的。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;self 通常是给类方法函数中的第一个参数的名称&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 22 Nov 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/python/2016/11/22/python5.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/22/python5.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>python基础知识点模块和包</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;初次接触python对它的模块和包的概念感觉非常的绕，和java中的包的概念有很大的出入，总是迷迷糊糊的。这里记录一下自己的理解。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;模块&lt;/h2&gt;
+
+&lt;p&gt;模块其实就是Python代码组成的文本文件，其实也就是一个命名空间。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在一个模块文件的顶层定义的所有变量都会成为被导入模块的属性&lt;/li&gt;
+  &lt;li&gt;导入给予了对模块的全局作用域中的变量名的读取权也就是在模块导入后，模块文件的全局作用域变成了模块对象的命名空间&lt;/li&gt;
+  &lt;li&gt;模块其实就是变量名的软件包&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;import和from语句都是可执行的赋值语句&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; a.py
+ b.py
+ 两个文件
+ 在模块a.py中执行
+
+ import b
+ 效果是先执行b.py中的代码，然后在a.py中定义了一个变量b，引用了b.py的命名空间
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;import 和 from … import …&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; from module import name1,name2
+
+ 等价于下面的语句
+
+ import module
+ name1 = module.name1
+ name2 = module.name2
+ del module
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;如果属性名前面有&lt;code&gt;_&lt;/code&gt;,就不会被&lt;code&gt;from c import *&lt;/code&gt;导入&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;模块的作用&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;代码重用&lt;/li&gt;
+  &lt;li&gt;系统命名空间划分&lt;/li&gt;
+  &lt;li&gt;实现数据和服务的共享&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;包&lt;/h2&gt;
+
+&lt;p&gt;python代码以及其所在的目录就是包。包的容器目录（顶层目录）需要能在搜索列表中存在，包其实也是一种命名空间&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;只有&lt;code&gt;__init__.py&lt;/code&gt;文件的目录才能称之为包&lt;/li&gt;
+  &lt;li&gt;包导入就是把计算机上的目录变成一个Python命名空间，而这个命名空间的属性则是对应目录中的子目录和模块文件&lt;/li&gt;
+  &lt;li&gt;包导入之后，包就和模块没什么区别了&lt;/li&gt;
+  &lt;li&gt;包第一次导入时，会自动执行&lt;code&gt;__init__.py&lt;/code&gt;文件中的代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;分发与安装&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;注意关注 &lt;code&gt;distutils&lt;/code&gt; 这个工具的使用&lt;/li&gt;
+  &lt;li&gt;注意关注 &lt;code&gt;eggs&lt;/code&gt; 这个开源系统的使用&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 21 Nov 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/python/2016/11/21/python4.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/21/python4.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>python基础知识点之文件输入和输出</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#openfile&quot; id=&quot;markdown-toc-openfile&quot;&gt;open()，file()功能相同&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;文件对象的方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;文件内建属性&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;内建函数 open() [以及 file()]提供了初始化输入/输出(I/O)操作的通用接口,是打开文件之门的”钥匙”…..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;openfile&quot;&gt;open()，file()功能相同&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;file_object = open(file_name, access_mode=&#39;r&#39;, buffering=-1)
+
+file_name:是包含要打开文件名的字符串
+access_mode:是一个字符串，代表文件打开的模式，模式后面会详解
+buffering:指示访问文件所采用的缓冲方式,一般使用系统默认机制即可
+
+文件模式 	操作
+r 		以读方式打开
+rU或Ua 	   	以读方式打开, 同时提供通用换行符支持 (PEP 278)
+w 		以写方式打开 (必要时清空)
+a 		以追加模式打开 (从 EOF 开始, 必要时创建新文件)
+r+		以读写模式打开
+w+ 		以读写模式打开 (参见 w )
+a+ 		以读写模式打开 (参见 a )
+rb 		以二进制读模式打开
+wb 		以二进制写模式打开 (参见 w )
+ab 		以二进制追加模式打开 (参见 a )
+rb+ 		以二进制读写模式打开 (参见 r+ )
+wb+ 		以二进制读写模式打开 (参见 w+ )
+ab+ 		以二进制读写模式打开 (参见 a+ )
+
+
+fp = open(&#39;/etc/motd&#39;) 		# 以读方式打开
+fp = open(&#39;test&#39;, &#39;w&#39;) 		# 以写方式打开
+fp = open(&#39;data&#39;, &#39;r+&#39;) 	# 以读写方式打开
+fp = open(&#39;c:\io.sys&#39;, &#39;rb&#39;) 	# 以二进制读模式打开
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;文件对象的方法&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;file.close()			#关闭文件
+file.flush()			#刷新文件的内部缓冲区
+file.readline(size=-1)		#从文件中读取并返回一行(包括行结束符), 或返回最大 size个字符
+file.readlines(sizhint=0)	#读取文件的所有行并作为一个列表返回(包含所有的行结束符); 如果给定 sizhint 且大于 0 , 那么将返回总和大约为sizhint 字节的行(大小由缓冲器容量的下一个值决定）（ 比如说缓冲器的大小只能为4K 的倍数，如果sizhint 为15k，则最后返回的可能是16k———译者按)
+file.xreadlines()		#用于迭代, 可以替换 readlines() 的一个更高效的方法
+file.tell()			#返回当前在文件中的位置
+file.seek(off, whence=0)	#在文件中移动文件指针, 从 whence ( 0 代表文件其始, 1 代表当前位置, 2 代表文件末尾)偏移 off 字节
+file.write(str)			#向文件写入字符串
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;文件内建属性&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;file.name		#文件名
+file.closed		#True 表示文件已经被关闭, 否则为 False
+file.encoding		#文件所使用的编码 - 当 Unicode 字符串被写入数据时, 它们将自动使用 file.encoding 转换为字节字符串; 若file.encoding 为 None 时使用系统默认编码
+file.mode		#文件打开时使用的访问模式
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Sun, 20 Nov 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/python/2016/11/20/python3.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/20/python3.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>python基础知识点之易错语法</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#python-&quot; id=&quot;markdown-toc-python-&quot;&gt;python 语法基本原则&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;条件语句&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#if&quot; id=&quot;markdown-toc-if&quot;&gt;if语句&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;条件表达式&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;循环语句&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#while&quot; id=&quot;markdown-toc-while&quot;&gt;while语句&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#for&quot; id=&quot;markdown-toc-for&quot;&gt;for语句&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;迭代器和生成器&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;函数要注意的地方&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;变量的作用域&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;python的语法结构非常的简单，尤其是对于熟悉其他原因的人来说，但是还是会有一些细节需要注意的，这里仅仅记录一下重要的细节&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;python-&quot;&gt;python 语法基本原则&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;python语法和vb的语法有很大的相似性，都要求严格的缩进，用缩进来保证语法格式。而且冒号&lt;code&gt;:&lt;/code&gt;在python语法中有特殊的含义。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;python中没有自增自减运算&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;python中没有switch语句&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;python中没有foreach语句&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;python中的else和其他语言不同，可以用在循环语句中，表示循环完成后执行&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;条件语句&lt;/h2&gt;
+
+&lt;h3 id=&quot;if&quot;&gt;if语句&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;if expression:
+	expr_true_suite
+elif expression:
+	expr_true_suite
+else:
+	expr_false_suite
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;条件表达式&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;X if C else Y
+
+a = x if x&amp;lt;y else y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;循环语句&lt;/h2&gt;
+
+&lt;h3 id=&quot;while&quot;&gt;while语句&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;while expression:
+	suite_to_repeat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;for&quot;&gt;for语句&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;for iter_var in iterable:
+	suite_to_repeat
+for语句经常和range()内建函数联合使用.
+range()内建函数的语法：
+range(start, end, step =1)  ;包前不包后
+
+range(2,9,2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;迭代器和生成器&lt;/h3&gt;
+
+&lt;p&gt;迭代器和生成器是python中的神器。后面会进行详细的总结。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;列表解析:
+[expr for iter_var in iterable if cond_expr]
+生成器表达式:
+(expr for iter_var in iterable if cond_expr)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;函数要注意的地方&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;函数定义的第一行的字符串是文档字符串。写文档字符串是一个好习惯&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;函数的形参有很多种定义方法&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 1,直接定义
+     def fun(x=1,y=2):
+         print x,y
+     fun(1,2)
+     1,2
+
+ 2,形参前一个*代表传递的是元组
+     def fun(*param):
+         print param
+     fun(1,2)
+     (1,2)
+	
+ 3,形参前两个*代表传递的是字典
+     def fun(**param):
+         print param
+     fun(x=1,y=2)
+     {&#39;x&#39;=1,&#39;y&#39;=2}
+	
+ 4,传递参数时候的反转，将元组或字典拆开传递给函数
+     def fun(x,y)
+         return x+y
+     params = (1,2)
+     fun(*params)
+     3
+		
+     def fun(job = &#39;x&#39;,name = &#39;y&#39;):
+         print &#39;name :&#39;+name+&quot; job : &#39;+job
+
+     params = {&#39;name&#39;:&#39;fulin&#39;,&#39;job&#39;:&#39;it&#39;}
+     fun(**params)
+     &#39;name :fulin job : it&#39;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;变量的作用域&lt;/h2&gt;
+
+&lt;p&gt;作用域其实就是命名空间，在哪里声明的变量，命名空间就是那里。这里有一个原则：LEGB原则。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;L:本地作用域，函数内的名字空间，包括局部变量和形参
+E:嵌套作用域，外部嵌套函数的名字空间（闭包中常见）
+G:全局作用域，全局变量，函数定义所在模块的名字空间
+B:内置作用域，内置模块的名字空间
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;python的变量作用域和其他语言有比较大的区别，是一个难点，需要特别留意&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 19 Nov 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/python/2016/11/19/python2.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/19/python2.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>python基础知识点之数据结构</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序列&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;字符串&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;列表&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;元组&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;集合&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;字典&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;python中的数据结构大致可以分为三类：序列，映射，集合。这里详细的总结一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序列&lt;/h2&gt;
+
+&lt;p&gt;序列的成员有序排列的，并且可以通过下标偏移量访问到它的一个或者几个成员,有序是序列的灵魂。序列有一些通用的方法：连接，重复，切片。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;连接（+）&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; sq1 = [12,3]
+ sq2 = [5,6]
+ sq1 + sq2
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重复（*）&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; sq1 = [12,3]
+ sq1 * 2
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;切片（[], [:], [::]）&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+ 	&lt;img src=&quot;/image/python_list.PNG&quot; alt=&quot;&quot; /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;字符串&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建字符串&lt;/p&gt;
+
+    &lt;p&gt;python中创建字符串没有单引号和双引号之分。&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  str1 = &quot;fulin&quot;
+  str2 = &#39;fulin&#39;
+  str3 = str(&#39;fulin&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;字符串的方法&lt;/p&gt;
+
+    &lt;p&gt;字符串的方法太多，这里不做过多的总结了。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;列表&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建列表&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  list1 = [1,2,3]
+  list2 = [1,2,[2,3]]
+  list3 = list()
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;列表的方法&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  list.append(obj)		#向列表中添加一个对象obj
+  list.count(obj)		#返回一个对象obj 在列表中出现的次数
+  list.extend(seq)		#把序列seq 的内容添加到列表中
+  list.remove(obj)		#从列表中删除对象obj
+  list.reverse()		#原地翻转列表
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;元组&lt;/h3&gt;
+
+&lt;p&gt;元组这里没有什么好说的，但要记住一点：元组是不可变序列，在python中有三种数据类型是不可变的：数字，字符串，元组。  &lt;br /&gt;
+ 虽然元组不可变，但是元组的元素如果是引用类型，其值是可变的。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;集合&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建集合&lt;/p&gt;
+
+    &lt;p&gt;这里的集合和数学中的集合概念差不多，就是容纳不同元素的容器，不过python中的集合分两类：&lt;code&gt;可变集合&lt;/code&gt; 和 &lt;code&gt;不可变集合&lt;/code&gt;&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  s = set([1,2,3]) //set()方法产生一个可变集合
+  s1= frozenset([1,2,4]) //frozenset()方法产生一个不可变集合
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;集合的运算&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  set1 = set([1,2,3])	
+      //创建集合
+  set2 = set([1,2,4])	
+      //创建集合
+  set1 | set2 		
+      //两集合的并集，输出：{1，2，3，4}
+  set1 &amp;amp; set2 		
+      //两集合的交集，输出：{1,2}
+  set1 - set2		
+      //两集合的差集相对差集，set1去掉set2中有的元素,输出:{3}
+  set1 ^ set2 		
+      //两集合的对称差集,set1有且set2无或set2有且set1无，输出：{3,4}
+  set1 == set2 		
+      //判断两集合的元素是否相同
+  set1 != set2 		
+      //判断两集合的元素是否是不相同
+  set1 &amp;lt; set2 		
+      //判断set1是否是set2的真子集
+  set1 &amp;lt;= set2		
+      //判断set1是否是set2的子集
+  set1 &amp;gt; set2		
+      //判断set2是否是set1的真子集
+  set1 &amp;gt;=set2		
+      //判断set2是否是set1的子集
+  1 in set1		
+      //判断1是否是set1的成员
+  1 not in set1		
+      //判断1是否不是set1的成员
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;集合的操作(方法)&lt;/p&gt;
+
+    &lt;p&gt;集合的方法应该分两类，一类是可变集合的，一类是不可变集合的，但是在使用的时候，根据方法的功能，应该是很好区分的，这里不做区分。&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  set1.add(5)		
+      //向set1中添加元素
+  set1.update([1,2,3])	
+      //向set1中一次添加多个元素
+  set1.remove(1)		
+      //删除set1中的元素1，如果set1中不存在1则引发异常
+
+  s.issubset(t)		
+      //如果s 是t 的子集，则返回True,否则返回False
+  s.issuperset(t) 	
+      //如果s 是t 的超集，则返回True,否则返回False
+  s.union(t) 			
+      //返回一个新集合，该集合是s 和t 的并集
+  s.intersection(t)	
+      //返回一个新集合，该集合是s 和t 的交集
+  s.difference(t)		
+      //返回一个新集合，该集合是s 的成员，但不是t 的成员
+  s.symmetric_difference(t)	
+      //返回一个新集合，该集合是s或t的成员，但不是s 和t 共有的成员
+  s.copy()		
+      //返回一个新集合，它是集合s 的浅复制
+  s.pop() 		
+      //移除并返回s 中的任意一个元素
+  s.clear() 		
+      //清除操作: 移除s 中的所有元素
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;集合的运算，如果运算符两边的集合类型一个是可变集合，一个是不可变集合，则运算的结果的类型以运算符左边的类型为准&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;字典&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建字典&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; dic1 = {}	//创建一个空字典
+ dic2 = {&#39;name&#39;:&#39;fulin&#39;,&#39;age&#39;:27}    //创建一个有两个元素的字段
+ dic3 = dict()		//用dict()内建函数创建一个空字典
+ dic4 = dict(([&#39;x&#39;,1],[&#39;y&#39;,2])) 
+ dic5 = {}.fromkeys((&#39;x&#39;,&#39;y&#39;,&#39;z&#39;),-1)
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;操作字典&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; del dict2[&#39;name&#39;] 		#删除键为“name”的条目
+ dict2.clear()			#删除dict2 中所有的条目
+ del dict2				#删除整个dict2 字典
+ dict2.pop(&#39;name&#39;)		#删除并返回键为“name”的条目
+ &#39;fu&#39; in dict2			#检查dict2中是否有键&#39;fu&#39;
+ &#39;fu&#39; not in dict2		#检查dict2中是否没有键&#39;fu&#39;
+
+ dict.copy() 			#返回字典(浅复制)的一个副本
+ dict.get(key,
+ default=None)			#对字典dict 中的键key,返回它对应的值value，如果字典中不存在此键，则返回default 的值(注意，参数default 的默认值为None)
+ dict.items() 			#返回一个包含字典中(键, 值)对元组的列表
+ dict.keys() 			#返回一个包含字典中键的列表
+ dict.popc(key[, default]) #和方法get()相似，如果字典中key 键存在，删除并返回dict[key]，如果key 键不存在，且没有给出default 的值，引发KeyError 异常。
+ dict.update(dict2)		#将字典dict2 的键-值对添加到字典dict
+ dict.values() 			#返回一个包含字典中所有值的列表
+ dict.setdefault(key,default=None) #和方法set()相似，如果字典中不存在key 键，由dict[key]=default 为它赋值。
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 18 Nov 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/python/2016/11/18/python1.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/18/python1.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>python基础知识点之环境</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#pythonpip&quot; id=&quot;markdown-toc-pythonpip&quot;&gt;python的包管理工具pip&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pip&quot; id=&quot;markdown-toc-pip&quot;&gt;pip工具的使用&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pythonipython&quot; id=&quot;markdown-toc-pythonipython&quot;&gt;python的命令行开发工具ipython&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;学习java的时候，都知道java有很多优秀的第三方jar包，但是管理这些jar包真是一件麻烦事，虽然有像maven这样的依赖管理工具，但是学习成本还是蛮高的。
+python 的包管理工具pip使用起来非常的舒服，一条命令就可以搞定下载安装，再用不用为包的管理而烦恼了，让人想起那句著名的话：&lt;strong&gt;less is more&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;pythonpip&quot;&gt;python的包管理工具pip&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;访问：&lt;a href=&quot;https://bootstrap.pypa.io/get-pip.py&quot;&gt;get-pip.py&lt;/a&gt; 访问需要的python文件。&lt;/li&gt;
+  &lt;li&gt;将源代码copy到一个文本文件，将文本文件重命名的get-pip.py。&lt;/li&gt;
+  &lt;li&gt;通过命令行进入上述文本文件的所在位置，运行一下命令： &lt;code&gt;python get-pip.py&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pip&quot;&gt;pip工具的使用&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;pip list              //查看已经安装的python包
+pip show package      //查看packageName的详细情况
+pip install package   //安装包package
+pip uninstall package //卸载包package
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;pythonipython&quot;&gt;python的命令行开发工具ipython&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install ipython  //安装ipython
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;很多时候，配置一个开发环境不容易，这是一个学习的过程，也是一个过坑的过程，把这些过程记录下来，战胜自己的遗忘&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 17 Nov 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/python/2016/11/17/python0.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/17/python0.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>windows软件图标异常的恢复方法</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;作为一个有轻微强迫症的用户，遇到一点不协调的东西，都会有点不舒服，一周以前，我电脑中的outlook图标出现了异常，变成了很难看的样子，一直想把这个图标恢复，没有找到什么好的办法，咨询了很多人，也没有解决，这个事一直耿耿于怀，直到今天，才解决，这里记录一下解决办法……&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;异常之后的图标&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/image/out_look_err.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;解决办法&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;1,切换至用户家目录中的本地数据目录，比如我的目录是：C：\User\870850\AppData\Local
+2,找到文件：iconcache.db
+3,将iconcache.db文件删除
+4,重启系统
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;原理&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;C：\User\870850\AppData\Local\iconcache.db&lt;/code&gt; 文件是一个缓存的数据文件，存储着系统中应用程序的图标等信息。将其删除后，系统重启时在explorer.exe程序启动时，会重建这个文件，也就会解决图标异常的问题了。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;解决之后&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/image/out_look_right.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这下看着舒服多了，哈哈哈！！！！&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 29 Oct 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/life/2016/10/29/outlookerr.html</link>
+        <guid isPermaLink="true">http://colorful.ren/life/2016/10/29/outlookerr.html</guid>
+        
+        
+        <category>life</category>
+        
+      </item>
     
       <item>
         <title>Excel VBA工程密码破解的方法</title>
@@ -254,687 +940,6 @@ total 1.4G
         
         
         <category>linux</category>
-        
-      </item>
-    
-      <item>
-        <title>系统学习Junit4</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#junit&quot; id=&quot;markdown-toc-junit&quot;&gt;Junit的官方信息&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;学习笔记&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;准备测试类&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;测试方法一&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;测试方法二&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;测试过程和结果解读&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#junit4&quot; id=&quot;markdown-toc-junit4&quot;&gt;Junit4的生命周期&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#junit-1&quot; id=&quot;markdown-toc-junit-1&quot;&gt;Junit注解解释&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#junit-2&quot; id=&quot;markdown-toc-junit-2&quot;&gt;Junit源码解析&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;网友的精彩博客&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;减少程序中的bug的一个有效的方法是编写程序逻辑的同时编写测试用例，尽早发现问题。同时Junit作为开源类库， &lt;strong&gt;&lt;a href=&quot;http://www.oschina.net/news/73667/2016-top-100-java-library&quot;&gt;受欢迎程度&lt;/a&gt;&lt;/strong&gt; 是非常高的，已经成为java单元测试事实上的标准，有必要做深入的学习。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;junit&quot;&gt;Junit的官方信息&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;http://junit.org/junit4/&quot;&gt;Junit官网&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/junit-team/junit4&quot;&gt;github地址&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;学习笔记&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;准备测试类&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;TestCast1&lt;/code&gt;,&lt;code&gt;TestCast2&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package com.fulin.test.testJunt;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-public class TestCast1{
-	
-	public TestCast1(){
-		System.out.println(&quot;Constrctor...&quot;);
-	}
-	
-	@Before
-	public void before(){
-		System.out.println(&quot;before&quot;);
-	}
-	
-	@BeforeClass
-	public static void beforeClass(){
-		System.out.println(&quot;beforeClass&quot;);
-	}
-	
-	@After
-	public void after(){
-		System.out.println(&quot;after&quot;);
-	}
-	
-	@AfterClass
-	public static void afterClass(){
-		System.out.println(&quot;afterClass&quot;);
-	}
-	
-	@Test
-	public void test1(){
-		System.out.println(&quot;test1&quot;);
-	}
-	
-	@Test
-	public void test2(){
-		System.out.println(&quot;test2&quot;);
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;pre&gt;&lt;code&gt;package com.fulin.test.testJunt;
-
-import org.junit.Test;
-
-public class TestCast2 {
-	@Test
-	public void test3(){
-		System.out.println(&quot;test3&quot;);
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;编写好测试类之后，就可以使用Junit4来运行测试类了。运行测试类的方法有两种：&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;测试方法一&lt;/h3&gt;
-
-&lt;p&gt;使用Junit原生的JUnitCore.runClasses(Class…class)方法,如下所示&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package com.fulin.test.testJunt;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
-
-public class JunnerTest {
-
-	public static void main(String[] args) {
-		Result result = JUnitCore.runClasses(TestCast1.class,TestCast2.class);
-		for (Failure fail : result.getFailures()) {
-			System.out.println(fail.toString());
-		}
-		
-		if(result.wasSuccessful()){
-			System.out.println(&quot;All tests finished successfully...&quot;);
-		}
-	}
-	
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输出如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;beforeClass
-Constrctor...
-before
-test1
-after
-Constrctor...
-before
-test2
-after
-afterClass
-test3
-All tests finished successfully...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;测试方法二&lt;/h3&gt;
-
-&lt;p&gt;使用eclipse这个IDE自带的测试工具，在测试类中 &lt;code&gt;右键-&amp;gt; run as -&amp;gt; Junit Test&lt;/code&gt; 也可以得到相同的结果&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;测试过程和结果解读&lt;/h3&gt;
-
-&lt;h4 id=&quot;junit4&quot;&gt;Junit4的生命周期&lt;/h4&gt;
-
-&lt;p&gt;Junit4提供了一系列的注解，给编写测试测试类提供了极大的便利，也减少了侵入性。在不同的方法和字段上使用不同的注解，会有不同的效果。但是正真的测试核心方法还是 &lt;code&gt;@Test&lt;/code&gt; 标注的方法，其他都是围绕这个核心展开的，相当于其生命周期的一部分。&lt;/p&gt;
-
-&lt;p&gt;同时，我们发现，不过是用那种测试方法，最终的结果都一样，我们有理由相信，Junit4的测试入口就是JunitCore.runClasses。这也是接下来分析源码的入口。&lt;/p&gt;
-
-&lt;h4 id=&quot;junit-1&quot;&gt;Junit注解解释&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;1. @Test :   测试方法，测试程序会运行的方法
-             后边可以跟参数代表不同的测试如
-             (expected=XXException.class) 异常测试
-             (timeout=xxx)超时测试
-2. @Ignore : 被忽略的测试方法
-3. @Before : 每一个测试方法之前运行
-4. @After :  每一个测试方法之后运行
-5. @BeforeClass: 所有测试开始之前运行
-6. @AfterClass:  所有测试结束之后运行
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;junit-2&quot;&gt;Junit源码解析&lt;/h3&gt;
-
-&lt;p&gt;这是根据Junit源码画出的时序图&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/image/Junit-time.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;网友的精彩博客&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://my.oschina.net/pangyangyang/blog/144495&quot;&gt;Junit学习系列一&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://my.oschina.net/pangyangyang/blog/146015&quot;&gt;Junit学习系列二&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://my.oschina.net/pangyangyang/blog/153320&quot;&gt;Junit学习系列三&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 14 Oct 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/java/2016/10/14/junit.html</link>
-        <guid isPermaLink="true">http://colorful.ren/java/2016/10/14/junit.html</guid>
-        
-        
-        <category>java</category>
-        
-      </item>
-    
-      <item>
-        <title>FastJson的使用与源码解读</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/alibaba/fastjson/wiki&quot;&gt;FastJSON&lt;/a&gt;&lt;/strong&gt;是一个处理&lt;strong&gt;&lt;a href=&quot;http://json.org&quot;&gt;JSON&lt;/a&gt;&lt;/strong&gt;的 java 工具包， json （反序列化）和对象转 json （序列化）两部分的功能。是由阿里使用Apache License 2.0协议开源，易用，无依赖，性能优越，唯一不足的是文档不完善，用户需要自己根据源码来摸索。这里记录一下自己的学习历程，作为我膜拜大师杰作，虚心偷技的成果，也方便来者学习。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;主要功能&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;FastJson的最主要的使用入口是 com.alibaba.fastjson.JSON 的一系列静态方法&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; // 把JSON文本parse为JSONObject或者JSONArray 
- public static final Object parse(String text); 
- // 把JSON文本parse成JSONObject
- public static final JSONObject parseObject(String text)； 
- // 把JSON文本parse为JavaBean
- public static final  T parseObject(String text, Class clazz); 
- // 把JSON文本parse成JSONArray
- public static final JSONArray parseArray(String text); 
- // 把JSON文本parse成JavaBean集合
- public static final  List parseArray(String text, Class clazz); 
- // 将JavaBean序列化为JSON文本
- public static final String toJSONString(Object object); 
- // 将JavaBean序列化为带格式的JSON文本 
- public static final String toJSONString(Object object, boolean prettyFormat); 
- // 将JavaBean转换为JSONObject或者JSONArray。
- public static final Object toJSON(Object javaObject); 
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;FastJson 的相关类的说明&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; SerializeWriter：	相当于StringBuffer
- JSONArray：			相当于List&amp;lt;Object&amp;gt;
- JSONObject：			相当于Map&amp;lt;String, Object&amp;gt;
- JSON反序列化没有真正的数组，本质类型都是List&amp;lt;Object&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;FastJson 的高级特性&lt;/p&gt;
-
-    &lt;p&gt;&lt;em&gt;支持注解、支持全类型序列化，这些都是很好的特性，功能强大&lt;/em&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;序列化形式可以自定义和灵活选择&lt;/p&gt;
-
-        &lt;pre&gt;&lt;code&gt;  比如有一个注解：@JSONField;就可以实现序列号和反序列化的时候bean的属性名的灵活配置，非常实用。
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;源码解析&lt;/h3&gt;
-
- 	&lt;img src=&quot;/image/fastJson.PNG&quot; alt=&quot;test&quot; /&gt;
-
-&lt;p&gt;已经有前辈总结了心得,可以先理解透彻再自己去看源代码。
- 记录在此，以后来完善。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.csdn.net/article/2014-09-25/2821866&quot;&gt;FastJson的源码研究&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.iteye.com/topic/1113183&quot;&gt;FastJson为什么这么快&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://blog.csdn.net/u010246789/article/details/52539576&quot;&gt;FastJson SerializerFeature的使用&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 10 Oct 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/java/2016/10/10/fastjson.html</link>
-        <guid isPermaLink="true">http://colorful.ren/java/2016/10/10/fastjson.html</guid>
-        
-        
-        <category>java</category>
-        
-      </item>
-    
-      <item>
-        <title>忒修斯之船 &amp; 数据库</title>
-        <description>&lt;p&gt;&lt;code&gt;这是一个古老的哲学问题&lt;/code&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;忒修斯的船在海上航行了几百年,它被不间断地维修和替换部件。只要一块木板腐烂了，它就会被替换掉，以此类推，直到所有的功能部件都不是最开始的那些了。
-问题是，最终产生的这艘船是否还是原来的那艘特修斯之船，还是一艘完全不同的船？如果不是原来的船，那么在什么时候它不再是原来的船了？
-哲学家托马斯·霍布斯后来对此进来了延伸，如果用特修斯之船上取下来的老部件来重新建造一艘新的船，那么两艘船中哪艘才是真正的特修斯之船？&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;code&gt;几百年来，人们在这个问题上争论不休，谁也不能彻底说服对方，但是这个看似不能解决的问题却能带给我们一定的启发，那就是可以解释生活中的现象&lt;/code&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;一群能力超群的软件工程师在一家软件公司工作，做了一个伟大的产品，经过几年的迭代，产品从UI到逻辑，甚至数据库结构都发生了翻天覆地的变化，以至于这个产品最初的创造者也看不懂它的源代码了，越来越多的人开始吐槽……&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;code&gt;问题来了，这个产品还是原来的那个伟大的产品吗？&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;渐变&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;数据库中有一条SKU的数据记录，本来SKU编码可以用来识别这条数据的唯一性。
-可惜，一开始的时候为了图方便没有定好编码生成规则，后来需要改。
-这一改麻烦了，唯一性只好由SKU的ID来负责，这也带来了一连串的问题因为
-SKU的编码原本不仅有唯一性的约束功能，还有很多识别功能，而ID显然是没有。
-因为变更，也带来的新的问题：怎样监控变更的历史。
-于是诸如这样新的字段被不断加入
-
-&quot;update_time ; insert_time ; update_user ; last_status&quot;
-
-这些新增的信息让我们能尽可能多的追溯到当时的场景，可是这样好吗？
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;悲哀的是，现实中大部分的软件系统，都无法逃脱冗余和混乱的宿命，这也再次印证了物理中“熵”的概念：任何事物都是朝混乱度大的方向发展。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;质变&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;如果不是原来的船，那么在什么时候它不再是原来的船了?&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;当唯一识别标示失效的时候，它就不再是原来的船了。可是，什么是唯一识别标示？
-身份证可以伪装，DNA都有可能相同，茫茫人海，是有可能存在两个你无法区分的人的。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;世界上不存在绝对的唯一性，所谓的唯一只存在于我们的想象中&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;启示&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;“任何系统熵都是逐渐变大的，自然状态下无法逆转，若想改变，必须做功。”
-这一物理学的规律同样适用于现实生活。虽然我们无法做的绝对，但是可以尽量精确。
-流程和标准就是行之有效的方法，甚至是唯一可行的方法。
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Mon, 10 Oct 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/life/2016/10/10/tui-xiu-shi-db.html</link>
-        <guid isPermaLink="true">http://colorful.ren/life/2016/10/10/tui-xiu-shi-db.html</guid>
-        
-        
-        <category>life</category>
-        
-      </item>
-    
-      <item>
-        <title>杨德昌的那些经典电影</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;在今年的十一国庆，老婆带着孩子回老家了，我一个人在家，这是少有的属于自己的时间，从一个安静的上午一直持续到晚上，我默默的看完了杨德昌的《一 一》;《枯岭街少年杀人事件》;《恐怖分子》这三部电影，这是迄今为止，我看过的最好看的几部华语电影，没有之一，看完之后，我感觉我的世界观都变了……&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;慢的力量&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;看似缓慢舒缓的叙事背后，却隐藏着巨大的力量，这是看这几部电影最大的感受。
-让我从此喜欢上了一切&quot;慢&quot;的事物，突然发现周围的一切都协调了。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;改变了又能怎么样&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;这是《一 一》里面的一句台词，“多年之后，和当年的初恋再次相遇，虽然都依然爱着对方，又能怎么样？
-我现在至少还有家人。” 这场景本身慢慢体会，就已经很有意思了。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;真正的恐怖分子就在日常生活之中&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;《恐怖分子》中，男主人公长期受到生活的压抑，面对老婆的离去和朋友的小看，依然隐忍。
-在工作中他心胸狭窄，为了升迁不惜出卖朋友，为了生活他很少和朋友联系。
-在得知自己没有升迁，老婆背叛之后，梦到自己的复仇，可惜这一切都是幻想，最终只能自我了断。
-看完这部电影，让人有一种说不出的苍凉感和无力感还有恐惧感，男主人为何会有这个结局。
-我想导演已经通过台词说了：&quot;我很少看书，也不看小说&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;看杨导的电影，需要极大的耐心，他的电影都很长，有的一部就有4个小时。白水煮豆腐似得叙事风格，温暖的音乐元素，鲜明的时代感和深刻的哲思，让人身临其境，看完意犹未尽发人深省，我想这可能就是大师吧。&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sat, 08 Oct 2016 00:00:00 +0800</pubDate>
-        <link>http://colorful.ren/life/2016/10/08/move-yangdecang.html</link>
-        <guid isPermaLink="true">http://colorful.ren/life/2016/10/08/move-yangdecang.html</guid>
-        
-        
-        <category>life</category>
-        
-      </item>
-    
-      <item>
-        <title>mysql中sql优化的常识总结</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;mysql的性能优化牵扯的范围很广，大致可以分为：
-索引优化，查询优化，查询缓存，服务器设置优化，操作系统和硬件优化，应用层面优化（web服务器，缓存）等等。这里仅仅总结一下编写sql语句时应该注意的细节。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;sql&quot;&gt;编写高质量的sql语句的基本原则&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;尽量避免全表扫描&lt;/li&gt;
-  &lt;li&gt;查询尽量使用索引&lt;/li&gt;
-  &lt;li&gt;尽量避免排序&lt;/li&gt;
-  &lt;li&gt;DML语句尽量在一个数据库事务中完成&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;具体的优化技巧如下&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;1,禁止使用　select * from table ;尽量查询特定的字段.
-  select * 会增加数据库开销
-
-2,尽量不使用游标.
-  游标比常规的sql语句需要更大的开销
-
-3,尽量不要在索引字段上进行运算.
-  在索引字段上进行运算会使索引失效
-
-4,避免使用!=或＜＞、IS NULL或IS NOT NULL、IN ，NOT IN等这样的操作符.
-  这会使系统无法使用索引,而只能直接搜索表中的数据，有些还是全表扫描
-
-5,尽量使用数字型字段.
-  如果字段是字符串类型，数据库引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了
-
-6,合理使用EXISTS,NOT EXISTS子句
-  如果需要判断记录是否存在，直接合理使用EXISTS,NOT EXISTS子句比count的效率要高，也比in的性能要高
-
-7,能够用BETWEEN的就不要用IN
-
-8,能够用DISTINCT的就不用GROUP BY
-
-9,尽量不要用SELECT INTO语句。SELECT INTO 语句会导致表锁定，阻止其他用户访问该表
-
-10,必要时强制查询优化器使用某个索引
-
-11,能用UNION ALL就不要用UNION
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;这些可以说是sql语句优化的基本常识了，必须会使用，熟练使用。&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 27 Sep 2016 00:00:00 +0800</pubDate>
-        <link>http://colorful.ren/mysql/2016/09/27/mysql-right.html</link>
-        <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/27/mysql-right.html</guid>
-        
-        
-        <category>mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>mysql的数据备份和恢复</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql&quot; id=&quot;markdown-toc-mysql&quot;&gt;mysql的二进制日志&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;数据库的备份和恢复是每个DBA必须掌握的技能。作为开发人员来说，适当的了解，也是有必要的。曾经我就遇到过一个面试官问过我：是否会进行数据库备份和恢复，什么是热备份，什么是冷备份。当然，我不能说这是DBA的工作，只能怪自己学的不够广。当学会了数据库的备份和恢复，再次使用数据库的时候，视野就更开阔了。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;mysql&quot;&gt;mysql的二进制日志&lt;/h3&gt;
-
-&lt;p&gt;说起mysql的备份和恢复，就必须说mysql的二进制日志，它记录的是所有mysql数据库发生变更的信息，因此对数据库非常重要&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;主要作用有以下几个方面&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;可以用于数据库基于时间点的还原&lt;/li&gt;
-      &lt;li&gt;可以用来分析数据库发生变更的情况，比如程序程序bug导致数据库数据更改等。&lt;/li&gt;
-      &lt;li&gt;二进制日志还可以用来重建数据库&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;二进制日志功能配置&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;开启bin_log日志功能,在my.cnf中修改，在[mysqld]下增加:&lt;/p&gt;
-
-        &lt;pre&gt;&lt;code&gt; log-bin=/tmp/mysql-log
- binlog_format=mixed
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看二进制日志功能是否开启&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show variables like &#39;%log_bin%&#39;;
- +---------------------------------+----------------------+
- | Variable_name                   | Value                |
- +---------------------------------+----------------------+
- | log_bin                         | ON                   |
- | log_bin_basename                | /tmp/mysql-log       |
- | log_bin_index                   | /tmp/mysql-log.index |
- | log_bin_trust_function_creators | OFF                  |
- | log_bin_use_v1_row_events       | OFF                  |
- | sql_log_bin                     | ON                   |
- +---------------------------------+----------------------+
- 6 rows in set
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看二进制文件的情况&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show master logs;
- +------------------+-----------+
- | Log_name         | File_size |
- +------------------+-----------+
- | mysql-log.000001 |       143 |
- | mysql-log.000002 |       562 |
- +------------------+-----------+
- 2 rows in set
-&lt;/code&gt;&lt;/pre&gt;
-
-    &lt;p&gt;或者&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show binary logs;
- +------------------+-----------+
- | Log_name         | File_size |
- +------------------+-----------+
- | mysql-log.000001 |       143 |
- | mysql-log.000002 |       562 |
- +------------------+-----------+
- 2 rows in set
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;切换二进制文件&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; flush logs;
- Query OK, 0 rows affected
-
- mysql&amp;gt; show binary logs;
- +------------------+-----------+
- | Log_name         | File_size |
- +------------------+-----------+
- | mysql-log.000001 |       143 |
- | mysql-log.000002 |       609 |
- | mysql-log.000003 |       120 |
- +------------------+-----------+
- 3 rows in set
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;删除或者初始化二进制文件&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; reset master;
- Query OK, 0 rows affected
-	
- mysql&amp;gt; show binary logs;
- +------------------+-----------+
- | Log_name         | File_size |
- +------------------+-----------+
- | mysql-log.000001 |       120 |
- +------------------+-----------+
- 1 row in set
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;指定二进制日志失效期&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show variables like &quot;%expire%&quot;;
- +--------------------------------+-------+
- | Variable_name                  | Value |
- +--------------------------------+-------+
- | disconnect_on_expired_password | ON    |
- | expire_logs_days               | 0     |
- +--------------------------------+-------+
- 2 rows in set
-
- mysql&amp;gt; set global  expire_logs_days=5;
- Query OK, 0 rows affected
-	
- mysql&amp;gt; show variables like &quot;%expire%&quot;;
- +--------------------------------+-------+
- | Variable_name                  | Value |
- +--------------------------------+-------+
- | disconnect_on_expired_password | ON    |
- | expire_logs_days               | 5     |
- +--------------------------------+-------+
- 2 rows in set
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;二进制日志的格式的查看和格式介绍,这里仅做了解,有三种&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; mysql&amp;gt; show variables like &#39;%format%&#39;;
- +--------------------------+-------------------+
- | Variable_name            | Value             |
- +--------------------------+-------------------+
- | binlog_format            | MIXED             |
- | date_format              | %Y-%m-%d          |
- | datetime_format          | %Y-%m-%d %H:%i:%s |
- | default_week_format      | 0                 |
- | innodb_file_format       | Antelope          |
- | innodb_file_format_check | ON                |
- | innodb_file_format_max   | Antelope          |
- | time_format              | %H:%i:%s          |
- +--------------------------+-------------------+
- 8 rows in set
-
- Row : 日志中会记录成每一行数据被修改的形式，然后在 slave 端再对相同的数据进行修改
- Statement ： 每一条会修改数据的 SQL 都会记录到 master 的 bin-log 中。slave 在复制的时候 SQL 进程会解析成和原来 master 端执行过的相同的 SQL 再次执行。
- Mixed : MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 statement 和 row 之间选择一种,相当于前两种的混合。
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看二进制日志文件的内容&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; # mysqlbinlog mysql-log.00000
-
- SET TIMESTAMP=1474882546/*!*/;
- insert into t select * from t
- /*!*/;
- # at 739
- #160926  2:35:46 server id 1  end_log_pos 770 CRC32 0x45bf6de6 	Xid = 98
- COMMIT/*!*/;
- # at 770
- #160926  2:35:47 server id 1  end_log_pos 849 CRC32 0xdcad682e 	Query	thread_id=1	exec_time=0	error_code=0
- SET TIMESTAMP=1474882547/*!*/;
- BEGIN
- /*!*/;
- # at 849
- #160926  2:35:47 server id 1  end_log_pos 952 CRC32 0x596b7cf9 	Query	thread_id=1	exec_time=0	error_code=0
-&lt;/code&gt;&lt;/pre&gt;
-
-    &lt;p&gt;仔细观察会发现，这里记录了数据库的每一次查询和修改过程，就像数据库的变更记录一样，难怪可以用来恢复数据。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 26 Sep 2016 00:00:00 +0800</pubDate>
-        <link>http://colorful.ren/mysql/2016/09/26/mysql-log.html</link>
-        <guid isPermaLink="true">http://colorful.ren/mysql/2016/09/26/mysql-log.html</guid>
-        
-        
-        <category>mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>全栈还是专攻，这是一个问题</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;经常会浏览一下招聘网站，一方面，可以了解现在的市场行情，另一方面，可以了解目前行业使用的技术都有什么，具体有些什么要求，这是我根据我浏览很多信息之后的一点感悟&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;以下是我在某job上截取的一段用人单位的提出的技能要求:&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1、计算机相关专业本科及以上学历，3年以上Java开发工作经验；
-2、熟悉MVC设计模式，熟悉Java领域常用的开源框架，如Spring、Struts、Ibatis、Hibernate等；
-3、熟悉面向对象编程思想和设计模式；
-4、熟悉多线程编程，熟悉socket编程、WebService接口技术；
-5、熟悉MINA、Volley等网络通信应用框架，有MINA开发经验者优先。
-6、熟悉Oracle、MySql等数据库，并有开发经验；
-7、熟悉linux/UNIX等操作系统，了解Shell；
-8、较强的表达和沟通能力，善于团队合作；
-9、互联网金融开发经验者优先，有大容量、高性能、高可用、分布式、架构设计经验者优先；
-10、熟悉hadoop/spark等大数据应用框架优先
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;这是大部分互联网公司开出的技能要求，有的甚至更多。那么问题来了, 业内的人都知道，任何一项技术，要想熟练掌握，是需要沉淀的，有一个广为人知的说法叫一万小时理论也就是说一项技术需要熟练掌握需要至少刻意练习10000小时，也就是3年&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;回到上面的技能要求上，上面的任何一项技能都可以单独拎出来，写成一本书，够研究好几年的，有些技术甚至够研究一辈子了，比如上面提到的：&lt;strong&gt;&lt;em&gt;大容量、高性能、高可用、分布式、hadoop/spark&lt;/em&gt;&lt;/strong&gt;，先不说其他的，单单能同时掌握这些，就已经属于稀有天才了。&lt;/p&gt;
-
-&lt;p&gt;互联网的后端技术都是围绕两个主题展开的&lt;em&gt;大数据量&lt;/em&gt;和&lt;em&gt;高并发&lt;/em&gt;。精通其中一项基本可以在职场纵横天下了。&lt;/p&gt;
-
-&lt;p&gt;既然如此，用人单位为什么要提出如此苛刻的要求呢？我认为原因主要有以下几个方面：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;一线城市人力成本急剧上升，尤其是以信息技术为代表的IT行业&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 一线城市的房价暴涨，想留住人才，薪资往往是最具有吸引力的，所以出现了现在大家知道的一线开发人员动辄月薪数万，因此用人单位希望招到能力强的人，一个人顶几个用，也就是说希望自己的员工是个多面手。
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;技术更新换代快，系统质量和用户体验要求越来越高&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 用户对产品不断提出更高的要求，更好的用户体验。
- 对这些功能最好的保证就是高水平的开发人员。
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;用人单位需要的是全而专的人&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 认真开用人单位的用人要求，大部分都是要求&quot;熟悉&quot;，并没有要求&quot;精通&quot;。
- 因此有理由相信用人单位需要的是视野开阔，对多种技术均有涉猎，但又能精通一两种的人
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;经过以上的分析，也知道以后自己的道路该怎么走了，那就是，既要要有知识的广度，也要有专业的深度。我认为，深度比广度重要。&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Mon, 26 Sep 2016 00:00:00 +0800</pubDate>
-        <link>http://colorful.ren/fulin/2016/09/26/job.html</link>
-        <guid isPermaLink="true">http://colorful.ren/fulin/2016/09/26/job.html</guid>
-        
-        
-        <category>fulin</category>
         
       </item>
     

@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Linux基础知识点八请求的过程</title>
-  <meta name="description" content="">
+  <title>windows软件图标异常的恢复方法</title>
+  <meta name="description" content="  作为一个有轻微强迫症的用户，遇到一点不协调的东西，都会有点不舒服，一周以前，我电脑中的outlook图标出现了异常，变成了很难看的样子，一直想把这个图标恢复，没有找到什么好的办法，咨询了很多人，也没有解决，这个事一直耿耿于怀，直到今天，才解决，这里记录一下解决办法……">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2016/08/26/ssh8.html">
+  <link rel="canonical" href="http://colorful.ren/life/2016/10/29/outlookerr.html">
   <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
@@ -60,50 +60,37 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Linux基础知识点八请求的过程</h1>
-    <p class="post-meta"><time datetime="2016-08-26T13:07:11+08:00" itemprop="datePublished">Aug 26, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">windows软件图标异常的恢复方法</h1>
+    <p class="post-meta"><time datetime="2016-10-29T13:07:11+08:00" itemprop="datePublished">Oct 29, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">用户访问网站的流程</a></li>
-  <li><a href="#dns" id="markdown-toc-dns">DNS解析的过程</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">与网络相关的常用功能</a></li>
-</ul>
-
-<blockquote>
-  <p>linux的网络基础知识，整理一下，用的时候可以来看看</p>
+    <blockquote>
+  <p>作为一个有轻微强迫症的用户，遇到一点不协调的东西，都会有点不舒服，一周以前，我电脑中的outlook图标出现了异常，变成了很难看的样子，一直想把这个图标恢复，没有找到什么好的办法，咨询了很多人，也没有解决，这个事一直耿耿于怀，直到今天，才解决，这里记录一下解决办法……</p>
 </blockquote>
 
-<h2 id="section">用户访问网站的流程</h2>
+<h2 id="section">异常之后的图标</h2>
 
-<p><img src="/image/linuxNet.PNG" alt="" /></p>
+<p><img src="/image/out_look_err.PNG" alt="" /></p>
 
-<h2 id="dns">DNS解析的过程</h2>
+<h2 id="section-1">解决办法</h2>
 
-<p><img src="/image/linuxDNS.PNG" alt="" /></p>
-
-<h2 id="section-1">与网络相关的常用功能</h2>
-
-<ul>
-  <li>
-    <p>修改主机名</p>
-
-    <pre><code> # hostname fulin_pc
- 临时修改主机名为 fulin_pc
-	
- # vi /etc/sysconfig/network
- HOSTNAME=fulin_pc
- 永久修改主机名为 fulin_pc
-
- # vi /etc/hosts
- 将主机名修改为新的主机名
+<pre><code>1,切换至用户家目录中的本地数据目录，比如我的目录是：C：\User\870850\AppData\Local
+2,找到文件：iconcache.db
+3,将iconcache.db文件删除
+4,重启系统
 </code></pre>
-  </li>
-</ul>
+
+<h2 id="section-2">原理</h2>
+
+<p><code>C：\User\870850\AppData\Local\iconcache.db</code> 文件是一个缓存的数据文件，存储着系统中应用程序的图标等信息。将其删除后，系统重启时在explorer.exe程序启动时，会重建这个文件，也就会解决图标异常的问题了。</p>
+
+<h2 id="section-3">解决之后</h2>
+
+<p><img src="/image/out_look_right.PNG" alt="" /></p>
 
 <blockquote>
-  <p>经过上面三步才算完成主机名的修改，第三步不能少，否则会导致服务启动很慢，而且服务容易报错。</p>
+  <p>这下看着舒服多了，哈哈哈！！！！</p>
 </blockquote>
 
   </div>
