@@ -5,9 +5,488 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 06 Dec 2016 16:44:31 +0800</pubDate>
-    <lastBuildDate>Tue, 06 Dec 2016 16:44:31 +0800</lastBuildDate>
+    <pubDate>Tue, 20 Dec 2016 11:52:07 +0800</pubDate>
+    <lastBuildDate>Tue, 20 Dec 2016 11:52:07 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>python基础知识点之常用数据库API</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#db-api&quot; id=&quot;markdown-toc-db-api&quot;&gt;DB-API简介&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#db-api-1&quot; id=&quot;markdown-toc-db-api-1&quot;&gt;DB-API详解&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;模块接口&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#connection&quot; id=&quot;markdown-toc-connection&quot;&gt;数据库连接对象(connection)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#cursor&quot; id=&quot;markdown-toc-cursor&quot;&gt;游标对象（cursor）&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#sqlite3&quot; id=&quot;markdown-toc-sqlite3&quot;&gt;sqlite3连接实例&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysql&quot; id=&quot;markdown-toc-mysql&quot;&gt;mysql连接实例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;记录一下学习python的过程中与数据库有关的知识点&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;db-api&quot;&gt;DB-API简介&lt;/h2&gt;
+
+&lt;p&gt;一个处理 Python 数据库事务的特殊兴趣小组（SIG，special interest group）为了统一python访问数据库的接口，制定了一个规范&lt;code&gt;DB-API&lt;/code&gt;,这套规范定义了一系列必须的对象和数据库存取方式, 以便为各种各样的底层数据库系统和多种多样的数据库接口程序提供一致的访问接口&lt;/p&gt;
+
+&lt;p&gt;通过DB-API规范访问数据库的流程如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/image/python7.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;db-api-1&quot;&gt;DB-API详解&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;DB-API对以下几个方面做了规范&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;模块接口&lt;/li&gt;
+  &lt;li&gt;数据库连接对象&lt;/li&gt;
+  &lt;li&gt;游标对象&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;模块接口&lt;/h3&gt;
+
+&lt;p&gt;数据库的访问是通过连接对象（connection objects）来实现的。程序模块中必须提供以下形式的连接对象构造函数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;connect(parameters...)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;数据库连接对象的构造函数，返回值为Connection对象实例。 由于目的数据库不同，函数接收数量不等的一些参数。&lt;/p&gt;
+
+&lt;p&gt;模块中必须定义下面这些模块级的属性：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apilevel
+	字符串常量，表明支持的DB API版本。
+	目前只允许取值&#39;1.0&#39;和&#39;2.0&#39;。
+	如果没有定义本常量，默认为DB-API 1.0DB-API
+
+threadsafety	
+	整数常量，表明模块支持的线程安全级别，可能的值为：
+
+	0     线程不安全，线程不能共享模块。
+	1     线程可以共享模块，但是不能共享连接对象（connections）。
+	2     线程可以共享模块和连接对象。
+	3     线程安全，线程间可以共享模块、连接对象以及游标对象
+	
+	上文中共享的意思是两个线程在没有使用互斥信号
+	（mutex semaphore）锁的情况下， 同时使用一个资源。
+
+	要注意的是，你并不总能使用互斥信号来确保一个外部资源线程安全，
+	这是因为外部资源很有可能依赖于一个全局变量或是其他的外部资源，
+	然而这些是你不能控制的
+
+paramstyle		
+	字符串常量声明模块使用的SQL语句中的参数引出方式。可能的取值如下
+
+	&#39;qmark&#39;         问号方式，例如：&#39;...WHERE name=?&#39;
+	&#39;numeric&#39;       序数方式，例如：&#39;...WHERE name=:1&#39;
+	&#39;named&#39;         命名方式，例如：&#39;...WHERE name=:name&#39;
+	&#39;format&#39;        通用方式例如：&#39;...WHERE name=%s&#39;
+	&#39;pyformat&#39;      python扩展方式例如：&#39;...WHERE name=%(name)s&#39;
+
+Warning 
+	当有严重警告时触发，例如插入数据是被截断等等。
+	必须是Python StandardError的子类（定义于exceptions模块中）。
+
+Error
+	这应该是警告以外所有其他错误类的基类。你可以使用这个类在单一
+	的‘except’语句中捕捉所有的错误。警告（Warnings）不应认为是错误，
+	因此不应该以此类作为基类，而只应该以Python StandardError作为基类。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;connection&quot;&gt;数据库连接对象(connection)&lt;/h3&gt;
+
+&lt;p&gt;连接对象应该具有下面的方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;close()
+	马上关闭数据连接（而不是当__del__方法被调用的时候）。
+
+	连接应该此后变得不可用，再次访问本连接对象应该触发
+	一个错误（Error或其子类），同样所有使用本连接对象的游标（cursor）
+	对象，也会导致例外发生。
+
+	需要注意的是，在关闭连接对象之前，没有首先提交对数据库的改变
+	将会导致一个隐含的回滚动作（rollback），这将丢弃之前的数据改变操作
+
+commit()
+	提交任何挂起的事务到数据库中。
+
+	需要注意的是，如果数据库支持自动提交（auto-commit），必须
+	在初始化时关闭。一般会有一个接口函数关闭此特性。
+
+	不支持事务的数据库也应该实现此方法，只需什么都不做。
+
+rollback()
+	由于并非所有数据库都支持事务，此方法是可选的.
+
+	对于支持事务的数据库，调用此方法将导致数据库回滚到事务
+	开始时的状态。关闭数据库连接之前没有明确调用commit()提交
+	数据更新，将隐含导致rollback()被执行。
+
+cursor()
+	方法返回给定连接上建立的游标对象（Cursor Object）。如果数据库
+	没有提供对应的游标对象，那么将由程序来模拟实现游标功能
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;cursor&quot;&gt;游标对象（cursor）&lt;/h3&gt;
+
+&lt;p&gt;游标对象表示数据库游标，游标用来管理获取结果操作的上下文对象。同一个连接对象创建的游标对象不是彼此隔离的，也就是说一个游标对象对数据库造成的变化将会对于其他游标对象立即可见。而不同的连接对象创建的游标，则可能是隔离的也可能是非隔离的，这取决于数据库对事务的支持的实现（参见连接对象的.rollback()和.commit()方法）。&lt;/p&gt;
+
+&lt;p&gt;游标对象应具有以下的方法和属性：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;description 
+	这是一个只读属性，是7个项目组成的tulip的序列。
+	每个tulip包含描述一个结果集中的列的信息描述：
+
+	(
+		name, 
+		type_code, 
+		display_size,
+		internal_size, 
+		precision, 
+		scale, 
+		null_ok
+	)
+	
+	其中，前两个项目(name and type_code)时必须的，其他的五项是可选的。
+	如果没有意义可以设置为None。
+
+	对于没有返回结果集的操作或者游标对象还没有执行过任何.execute*()的操作
+	本属性可以为空（None）。
+
+	type_code的含义可以比对下面Type对象的描述。
+
+rowcount 
+	这是一个只读属性
+	
+	描述的是最后一次数据库操作影响的数据行数
+	（执行.execute系列方法）。 可以是数据查询语句（DQL），
+	比如&#39;select&#39;等返回的数据行，也可以是数据操纵语句（DML ）
+	比如&#39;update&#39; 和&#39;insert&#39;语句等所影响的数据行。
+
+	如果还没有执行过任何语句，或者操作本身影响的函数由于数据访问接口的原因不能检测到。则本属性的值为-1
+	
+	注：将来的版本有可能重新定义后一种情况，使其取值为空（None）而不是-1。
+        
+callproc(procname[,parameters])
+	(由于并非每种数据库都支持存储过程，此方法是可选的)
+
+	调用数据库存储过程时，首先必须给出存储过程的名字，
+	其次，对于存储过程需要的每一个参数都必须依次给出。
+
+	调用结果按照调用时的次序，输入型参数（Input parameters）
+	原样不动，输出型和输入输出二合一型参数可能会被新的内容代替。
+	存储过程也很可能以数据结果集作为返回结果，
+
+	此时就要用标准的fech系列方法来获取结果了（.fetch*() methods）。
+
+close()
+	立即关闭游标（不论 __del__方法是否已调用）。
+
+	从此刻开始游标对象就变得不可用了。
+	任何试图访问此游标对象的方法或属性的动作都将导致一个错误Error或其子类被抛出。
+
+execute(operation[,parameters]) 
+	准备和执行数据库操作（查询或其他命令）。
+	所提供参数将会被绑定到语句中的变量。变量的定义和数据库模块有关。
+	（请参见模块的paramstyle属性的描述）。
+	
+	游标对象将会保留这个操作的引用，如果一个后续的相同的操作被调用，
+	游标对象将会以此来进行优化。当有相同的操作调用（不同的参数变量被传递）
+	时，这是最为有效的优化。
+	
+	一项数据库操作，为了获得最大的执行效率，最好先期使用方法.setinputsizes() 来
+	指定参数的类型和大小。执行时实际给出的参数和预定义的不同也是合法的，模块的实现
+	需要容忍这个问题，即使以效率的损失为代价。
+	
+	参数可以以tuples的tuple或list的形式提供，例如当在一次调用中插入多行数据。但是
+	这种调用应被认为是抛弃的不建议使用，应该使用专用的方法.executemany() 。
+	
+	没有对返回值进行明确界定。
+
+executemany(operation,seq_of_parameters) 
+	准备数据库操作（查询或其他命令），然后以序列的序列形式的函数
+	来执行该操作。
+	
+	模块开发这可以自由选择是转化为一系列的.execute() 方法调用，还是以
+	数组操作的形式，以便使数据库把这个序列的操作作为一个整体。
+	
+	使用此方法，可能产生一个或多个由未知的行为构成的结果集。
+	建议模块作者（而不是要求）当检测到一次调用已经产生结果集时抛出例外。
+	
+	对于.execute()方法的描述同样可适于此方法。
+	
+	返回值未定义。
+
+fetchone()
+	从一查询结果集中获取下一行数据，返回值为一个值的序列，如果没有更多数据
+	了则返回None。
+	
+	如果上次的.execute系列方法的调用没有生成任何结果集()或还没有进行任何数据
+	库操作的调用，则调用此方法将抛出例外（Error或其子类）。
+
+.fetchmany([size=cursor.arraysize])
+      
+	Fetch the next set of rows of a query result, returning a
+	sequence of sequences (e.g. a list of tuples). An empty
+	sequence is returned when no more rows are available.
+	
+	The number of rows to fetch per call is specified by the
+	parameter.  If it is not given, the cursor&#39;s arraysize
+	determines the number of rows to be fetched. The method
+	should try to fetch as many rows as indicated by the size
+	parameter. If this is not possible due to the specified
+	number of rows not being available, fewer rows may be
+	returned.
+	
+	An Error (or subclass) exception is raised if the previous
+	call to .execute*() did not produce any result set or no
+	call was issued yet.
+	
+	Note there are performance considerations involved with
+	the size parameter.  For optimal performance, it is
+	usually best to use the arraysize attribute.  If the size
+	parameter is used, then it is best for it to retain the
+	same value from one .fetchmany() call to the next.
+        
+fetchall() 
+
+	Fetch all (remaining) rows of a query result, returning
+	them as a sequence of sequences (e.g. a list of tuples).
+	Note that the cursor&#39;s arraysize attribute can affect the
+	performance of this operation.
+	
+	An Error (or subclass) exception is raised if the previous
+	call to .execute*() did not produce any result set or no
+	call was issued yet.
+        
+nextset() 
+      
+	(This method is optional since not all databases support
+	multiple result sets. [3])
+	
+	This method will make the cursor skip to the next
+	available set, discarding any remaining rows from the
+	current set.
+	
+	If there are no more sets, the method returns
+	None. Otherwise, it returns a true value and subsequent
+	calls to the fetch methods will return rows from the next
+	result set.
+	
+	An Error (or subclass) exception is raised if the previous
+	call to .execute*() did not produce any result set or no
+	call was issued yet.
+
+arraysize
+      
+	This read/write attribute specifies the number of rows to
+	fetch at a time with .fetchmany(). It defaults to 1
+	meaning to fetch a single row at a time.
+	
+	Implementations must observe this value with respect to
+	the .fetchmany() method, but are free to interact with the
+	database a single row at a time. It may also be used in
+	the implementation of .executemany().
+        
+setinputsizes(sizes)
+      
+	This can be used before a call to .execute*() to
+	predefine memory areas for the operation&#39;s parameters.
+	
+	sizes is specified as a sequence -- one item for each
+	input parameter.  The item should be a Type Object that
+	corresponds to the input that will be used, or it should
+	be an integer specifying the maximum length of a string
+	parameter.  If the item is None, then no predefined memory
+	area will be reserved for that column (this is useful to
+	avoid predefined areas for large inputs).
+	
+	This method would be used before the .execute*() method
+	is invoked.
+	
+	Implementations are free to have this method do nothing
+	and users are free to not use it.
+        
+setoutputsize(size[,column])
+      
+	Set a column buffer size for fetches of large columns
+	(e.g. LONGs, BLOBs, etc.).  The column is specified as an
+	index into the result sequence.  Not specifying the column
+	will set the default size for all large columns in the
+	cursor.
+	
+	This method would be used before the .execute*() method
+	is invoked.
+	
+	Implementations are free to have this method do nothing
+	and users are free to not use it.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;sqlite3&quot;&gt;sqlite3连接实例&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sqlite3
+&amp;gt;&amp;gt;&amp;gt; conn = sqlite3.connect(r&#39;D:\test.db&#39;)
+&amp;gt;&amp;gt;&amp;gt; cursor = conn.cursor()
+&amp;gt;&amp;gt;&amp;gt; cursor.execute(&#39;create table user (id varchar(20) primary key,name varchar(20))&#39;)
+&amp;lt;sqlite3.Cursor object at 0x03119BE0&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; cursor.execute(&#39;insert into user (id,name) values(\&#39;1\&#39;,\&#39;Michael\&#39;)&#39;)
+&amp;lt;sqlite3.Cursor object at 0x03119BE0&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; cursor.rowcount
+1
+&amp;gt;&amp;gt;&amp;gt; cursor.close()
+&amp;gt;&amp;gt;&amp;gt; conn.commit()
+&amp;gt;&amp;gt;&amp;gt; conn.close()
+
+&amp;gt;&amp;gt;&amp;gt; conn = sqlite3.connect(r&#39;D:\test.db&#39;)
+&amp;gt;&amp;gt;&amp;gt; curo = conn.cursor()
+&amp;gt;&amp;gt;&amp;gt; curo.execute(&#39;select * from user&#39;)
+&amp;lt;sqlite3.Cursor object at 0x03119C20&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; info = curo.fetchall()
+&amp;gt;&amp;gt;&amp;gt; info
+[(u&#39;1&#39;, u&#39;Michael&#39;)]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;mysql&quot;&gt;mysql连接实例&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import MySQLdb
+&amp;gt;&amp;gt;&amp;gt; conn = MySQLdb.connect(host = &#39;xx.xxx.xx.xx&#39;,\
+                   port = 3306,\
+                   user = &#39;xxx&#39;,\
+                   passwd = &#39;xxxx&#39;,\
+                   db = &#39;xxx&#39;)
+&amp;gt;&amp;gt;&amp;gt; cur = conn.cursor()
+&amp;gt;&amp;gt;&amp;gt; cur.execute(&#39;select * from vc_admin limit 10&#39;)
+&amp;gt;&amp;gt;&amp;gt; info = cur.fetchall()
+&amp;gt;&amp;gt;&amp;gt; for i in info:
+		print i[0],i[1]
+
+1 admin
+8271 255137
+8273 YH001
+8275 YH004
+8277 YH002
+8279 YH003
+8281 255130
+8283 255138
+8285 255139
+8287 255140
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Thu, 24 Nov 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/python/2016/11/24/python7.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/24/python7.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>python基础知识点之常用标准模块</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#random-&quot; id=&quot;markdown-toc-random-&quot;&gt;random 模块（随机数模块）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#shelve-&quot; id=&quot;markdown-toc-shelve-&quot;&gt;shelve 模块&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#re-&quot; id=&quot;markdown-toc-re-&quot;&gt;re 模块&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;python中的标准模块有很多实用的功能，将常用的操作进行了封装，掌握了常用的标准模块的功能可以大幅度的提高工作效率&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;random-&quot;&gt;random 模块（随机数模块）&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;import random
+random.random()		
+	#返回0到1之间的小数
+random.getrandbits(16)
+	#返回16位的整数，这里的位是二进制的位。
+random.uniform(1.2,5.7)
+	#返回1.2到5.7之间的随机实数
+random.randrange(1,8,2)
+	#返回1到8之间步长为2的随机数
+random.choice([1,2,3,4,5])
+	#随机的返回序列中的一个元素
+random.shuffles(s)
+	#将列表s的元素随机的混乱处理，处理之后，s中的元素位置就变了
+random.sample(s,n)
+	#随机的返回序列s中的n个元素，返回类型是列表
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;shelve-&quot;&gt;shelve 模块&lt;/h2&gt;
+
+&lt;p&gt;shelve 模块使用数据库驱动实现了字典对象的持久保存. shelve 对象使用字符串作为键, 但值可以是任意类型,我们简单的理解为shelve对象就是一个字典。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import shelve
+db = shelve.open(&#39;D://dbdata.db&#39;)
+db[&#39;person&#39;]=range(100)
+db.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用shelve比较简单，但是要注意，最后一定要调用其close()方法。&lt;/p&gt;
+
+&lt;h2 id=&quot;re-&quot;&gt;re 模块&lt;/h2&gt;
+
+&lt;p&gt;re 模块提供了一系列功能强大的正则表达式工具, 它允许你快速检查给定字符串是否与给定的模式匹配 (使用 match 函数), 或者包含这个模式 (使用 search 函数)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;compile(): 创建模式对象
+search():  从字符串中根据模式搜索匹配
+
+match():   根据模式匹配字符串，返回Match object对象
+	&amp;gt;&amp;gt;&amp;gt; m = re.match(r&#39;www\.(.*)\..{3}&#39;,&#39;www.python.org&#39;)
+	&amp;gt;&amp;gt;&amp;gt; m.group(1)
+	&#39;python&#39;
+	&amp;gt;&amp;gt;&amp;gt; m.group(0)
+	&#39;www.python.org&#39;
+	&amp;gt;&amp;gt;&amp;gt; m.start(1)
+	4
+	&amp;gt;&amp;gt;&amp;gt; m.end(1)
+	10
+	&amp;gt;&amp;gt;&amp;gt; m.span(1)
+	(4, 10)
+	&amp;gt;&amp;gt;&amp;gt; 
+split():   根据模式的匹配项来分割字符串
+	&amp;gt;&amp;gt;&amp;gt; import re
+	&amp;gt;&amp;gt;&amp;gt; some_text = &#39;alpha,beta,,,,gamma delta&#39;
+	&amp;gt;&amp;gt;&amp;gt; re.split(&#39;[, ]+&#39;,some_text)
+	[&#39;alpha&#39;, &#39;beta&#39;, &#39;gamma&#39;, &#39;delta&#39;]
+	&amp;gt;&amp;gt;&amp;gt; re.split(&#39;[, ]+&#39;,some_text,maxsplit=2)
+	[&#39;alpha&#39;, &#39;beta&#39;, &#39;gamma delta&#39;]
+	&amp;gt;&amp;gt;&amp;gt; re.split(&#39;[, ]+&#39;,some_text,maxsplit=1)
+	[&#39;alpha&#39;, &#39;beta,,,,gamma delta&#39;]
+
+findall(): 列出字符串中符合模式的所有匹配项
+	&amp;gt;&amp;gt;&amp;gt; pat = &#39;[a-zA-Z]+&#39;
+	&amp;gt;&amp;gt;&amp;gt; text = &#39;&quot;Hm...Err -- are you sure?&quot; he said, sounding insecure.&#39;
+	&amp;gt;&amp;gt;&amp;gt; re.findall(pat,text)
+	[&#39;Hm&#39;, &#39;Err&#39;, &#39;are&#39;, &#39;you&#39;, &#39;sure&#39;, &#39;he&#39;, &#39;said&#39;, &#39;sounding&#39;, &#39;insecure&#39;]
+	&amp;gt;&amp;gt;&amp;gt; pat2 = r&#39;[.?\-&quot;,]+&#39;
+	&amp;gt;&amp;gt;&amp;gt; re.findall(pat2,text)
+	[&#39;&quot;&#39;, &#39;...&#39;, &#39;--&#39;, &#39;?&quot;&#39;, &#39;,&#39;, &#39;.&#39;]
+
+sub():     利用表达式的匹配项替换指定的字符串
+	&amp;gt;&amp;gt;&amp;gt; pat = &#39;{name}&#39;
+	&amp;gt;&amp;gt;&amp;gt; text = &#39;Dear {name}&#39;
+	&amp;gt;&amp;gt;&amp;gt; re.sub(pat,&#39;Mr,Gumby&#39;,text)
+	&#39;Dear Mr,Gumby&#39;
+
+escape():  转义正则表达式中所用的特殊字符
+	&amp;gt;&amp;gt;&amp;gt; re.escape(&#39;www.python.org&#39;)
+	&#39;www\\.python\\.org&#39;
+	&amp;gt;&amp;gt;&amp;gt; re.escape(&#39;But where is the ambiguity?&#39;)
+	&#39;But\\ where\\ is\\ the\\ ambiguity\\?&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Wed, 23 Nov 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/python/2016/11/23/python6.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/23/python6.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
     
       <item>
         <title>python基础知识点OOP总结</title>
@@ -617,6 +1096,7 @@ B:内置作用域，内置模块的名字空间
   &lt;li&gt;&lt;a href=&quot;#pythonpip&quot; id=&quot;markdown-toc-pythonpip&quot;&gt;python的包管理工具pip&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#pip&quot; id=&quot;markdown-toc-pip&quot;&gt;pip工具的使用&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#pythonipython&quot; id=&quot;markdown-toc-pythonipython&quot;&gt;python的命令行开发工具ipython&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysqldb-python&quot; id=&quot;markdown-toc-mysqldb-python&quot;&gt;安装MySQLdb-python遇到的问题&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
@@ -644,6 +1124,87 @@ pip uninstall package //卸载包package
 
 &lt;pre&gt;&lt;code&gt;pip install ipython  //安装ipython
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;mysqldb-python&quot;&gt;安装MySQLdb-python遇到的问题&lt;/h2&gt;
+
+&lt;p&gt;学习python对数据库的支持的时候，因为手边有现成的mysql数据库，可以直接使用，就选择先学习python连接mysql。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;首先是发现系统没有MySQLdb这个模块&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; import MySQLdb
+
+ Traceback (most recent call last):
+ File &quot;test.py&quot;, line 3, in &amp;lt;module&amp;gt;
+ import MySQLdb
+ ImportError: No module named MySQLdb
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用pip进行安装&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; pip install MySQLdb-python
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;然后给了我一个提示&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; You are using pip version 8.1.2, however version 9.0.1 is available.
+ You should consider upgrading via the &#39;python -m pip install --upgrade pip&#39; command.
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;按照提示对pip进行升级&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; python -m pip install --upgrade pip
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;升级完成之后，再次安装&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; pip install MySQLdb-python
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;这次报一个新的错误&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from http://aka.ms/vcpython27
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;安装提示安装  Microsoft Visual C++ 9.0&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;然后再次安装MySQLdb&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; pip install MySQLdb-python
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;这次又报了一个新的错误&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; error: command &#39;C:\\Users\\870850\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0\\VC\\Bin\\cl.exe&#39; failed with exit status 2
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;上网搜索，发现这个问题很多人都遇到了，根据网友的提示，尝试手动安装，这这里找&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; http://www.lfd.uci.edu/~gohlke/pythonlibs
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;下载 &lt;code&gt;MySQL_python‑1.2.5‑cp27‑none‑win32.whl&lt;/code&gt; 这个wheel安装包&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; pip install D:\MySQL_python‑1.2.5‑cp27‑none‑win32.whl
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;终于安装好了，试试&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; import MySQLdb
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;没有异常，OK了&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;很多时候，配置一个开发环境不容易，这是一个学习的过程，也是一个过坑的过程，把这些过程记录下来，战胜自己的遗忘&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </description>
@@ -736,210 +1297,6 @@ pip uninstall package //卸载包package
         
         
         <category>Excel</category>
-        
-      </item>
-    
-      <item>
-        <title>Linux中的文件大小和磁盘占有空间的关系</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#crontab-&quot; id=&quot;markdown-toc-crontab-&quot;&gt;crontab 定时任务产生的问题&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;解决办法&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;启示&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;文件的真实大小和文件占有的磁盘空间不是一回事，根本的原因是由于系统和磁盘的存储机制决定的。最具有代表性的是crontab定时任务执行之后由sendmail产生的文件。下面详细分析一下整个过程。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;crontab-&quot;&gt;crontab 定时任务产生的问题&lt;/h2&gt;
-
-&lt;p&gt;现在有一台服务器A&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# cat /etc/redhat-release
-Red Hat Enterprise Linux Server release 5.4 (Tikanga)
-
-# rpm -qa|grep sendmail
-sendmail-8.13.8-2.el5
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;是centos 5.4这个版本，而且已经安装了sendmail软件。&lt;/p&gt;
-
-&lt;p&gt;有几个crontab定时任务
-	# crontab -l&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;0 * * * * /data/jobscripts/run_status60.sh
-0 * * * * /data/jobscripts/run_statusin.sh
-*/5 7-23 * * * /data/jobscripts/run_sendsms.sh
-*/5 * * * * /data/jobscripts/adjustment_product_store.sh
-0 3 * * * /data/jobscripts/collate_product_store.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;注意这里这里的定时任务都没有对标准输出和标准错误输出进行重定向到/dev/null文件，那么这样做有什么隐患呢？&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;定时任务启动之后，发现 &lt;code&gt;/var/spool/clientmqueue/&lt;/code&gt; 目录下的文件开始不断增加，这是一年之后我无意中发现的情况：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# ls -lihd /var/spool/clientmqueue/
-2080777 drwxrwx--- 2 smmsp smmsp 12M Oct 28 11:36 /var/spool/clientmqueue/
-
-# du -h /var/spool/clientmqueue/
-1.4G    /var/spool/clientmqueue/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;发现没有，目录 &lt;code&gt;/var/spool/clientmqueue/&lt;/code&gt; 实际的大小只有12M，但是占有的磁盘空间确达到了1.4G，是不是非常奇怪？继续排查。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# ls -lih /var/spool/clientmqueue/ | wc -l
-345047
-
-# ls -lih /var/spool/clientmqueue/ | head -5
-total 1.4G
-2080837 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEf1nJ007902
-2080823 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEK15v025165
-2080839 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEp1UL009526
-2080836 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEV2M6006278
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;看到这里，才恍然大悟，原来 &lt;code&gt;/var/spool/clientmqueue/&lt;/code&gt; 这个目录中的文件有345047个之多，但是每个文件却只有880 byte 大。这就造成了磁盘Block的大量浪费，所以才会有目录磁盘占用量远大于目录本身大小的情况。&lt;/p&gt;
-
-&lt;p&gt;那么这些小文件是怎么来的呢？其实是crontab定时任务在执行之后，就会尝试通过sendmail给任务所有者发送一个邮件，如果发现sendmail服务没有启动，就产生了一个880 byte的小文件，临时放在&lt;code&gt;/var/spool/clientmqueue/&lt;/code&gt;目录下，知道sendmail服务启动后才会清除。每次执行都产生一个，日积月累，数量非常庞大，给系统的安全还造成了一个隐患。&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;解决办法&lt;/h2&gt;
-
-&lt;p&gt;其实解决办法非常简单，将定时任务的标准输出和标准错误输出重定向到 &lt;code&gt;/dev/null&lt;/code&gt; 即可，将定时任务改造如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;0 * * * * /data/jobscripts/run_status60.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
-0 * * * * /data/jobscripts/run_statusin.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
-*/5 7-23 * * * /data/jobscripts/run_sendsms.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
-*/5 * * * * /data/jobscripts/adjustment_product_store.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
-0 3 * * * /data/jobscripts/collate_product_store.sh &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这里还有一个需要注意的地方，&lt;code&gt;/var/spool/clientmqueue/&lt;/code&gt; 这个目录下面有太多的文件，如果需要删除,使用 &lt;code&gt;rm -rf /var/spool/clientmqueue/*&lt;/code&gt;会发现删不了，因为文件太多，怎么办了，是有方法的。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;方法一&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; ls /var/spool/clientmqueue/|xargs rm -f
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;方法二&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; find /var/spool/clientmqueue/ -type f|xargs rm -f
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;方法三&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 直接将目录   `/var/spool/clientmqueue/`	删除
- 然后重建目录及给目录赋权限和属主和属组
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;启示&lt;/h2&gt;
-
-&lt;p&gt;通过这个案例，知道了crontab定时任务有一个小小的风险，但是可以通过重定向到 &lt;code&gt;/dev/null&lt;/code&gt; 来解决。&lt;/p&gt;
-
-&lt;p&gt;同时，对这个问题的深入剖析，可以帮助我们更加深刻的理解 Inode;Block 和文件存储的机制。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 27 Oct 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/linux/2016/10/27/fildanddisk.html</link>
-        <guid isPermaLink="true">http://colorful.ren/linux/2016/10/27/fildanddisk.html</guid>
-        
-        
-        <category>linux</category>
-        
-      </item>
-    
-      <item>
-        <title>正则表达式知识点</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;基本正则表达式&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;扩展正则表达式&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;正则表达式就是一套处理字符串的规则和方法，基本上是以行为单位对字符串进行处理，通过特殊符号的辅助，我们可以快速的过滤替换字符串，&lt;code&gt;这里的正则表达式不是linux中所有命令都能用的，大部分是三剑客（sed,grep,awk）用的，和开发语言使用的正则表达式有区别&lt;/code&gt;。&lt;/p&gt;
-
-  &lt;p&gt;这里作为自己常用的正则表达式的一个汇总，也作为复习使用&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;基本正则表达式&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;^dog&lt;/code&gt; 以dog开头&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; ls -l /home | grep ^d  #过滤出/home目录下的子目录
- grep -v ^# /home/config.conf #过滤掉config.conf中的注释内容
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;[^dog]&lt;/code&gt; 不包含dog&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;dog$&lt;/code&gt; 以dog结尾&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; ls -Fl /home | grep /$ #过滤出/home目录下的子目录
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;^$&lt;/code&gt; 表示空行&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;.&lt;/code&gt; 表示且只能表示一个任意字符&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; grep &quot;\.&quot; /home/config.conf #过滤出config.conf中包含.的行
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;*&lt;/code&gt; 重复0个或多个前面的一个字符&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;.*&lt;/code&gt; 匹配所有字符&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;[]&lt;/code&gt; 配置包含有其中的字符的内容&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; grep &quot;[abc]&quot; /home/config.conf #匹配出不包含a,b,c字符的行
- grep &quot;[0-9]&quot; /home/config.conf #匹配出包含有数字的行
- grep &quot;[a-Z]&quot; /home/config.conf #匹配出包含有因为字符的行
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;[^]&lt;/code&gt; 作用和 &lt;code&gt;[]&lt;/code&gt; 刚好相反&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; grep &quot;[^0-9]&quot; /home/config.conf #匹配出含有数字之外字符的行
- grep &quot;[^a-Z]&quot; /home/config.conf #匹配出含有字母之外字符的行
- grep &quot;^[^t]&quot;  /home/config.conf #匹配出不是t开头的行
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;{n,m}&lt;/code&gt; 重复前一个字符n到m次&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;扩展正则表达式&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;+&lt;/code&gt; 重复前面的字符一次或多次&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; egrep &quot;s+&quot; /home/config.conf #匹配包含有s的行
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;?&lt;/code&gt; 重复0个或一个前面的字符&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; egrep &quot;s?&quot; /home/config.conf #匹配没有s或没有连续s的行
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;|&lt;/code&gt; 用或的方式查找多个符合条件的字符串
-     egrep “ss|ff” /home/config.conf #匹配含有ss或ff的行&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Thu, 20 Oct 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/linux/2016/10/20/regular.html</link>
-        <guid isPermaLink="true">http://colorful.ren/linux/2016/10/20/regular.html</guid>
-        
-        
-        <category>linux</category>
         
       </item>
     

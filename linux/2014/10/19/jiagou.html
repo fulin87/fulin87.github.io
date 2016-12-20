@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>python基础知识点之环境</title>
+  <title>技术选型和经验总结</title>
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/python/2016/11/17/python0.html">
+  <link rel="canonical" href="http://colorful.ren/linux/2014/10/19/jiagou.html">
   <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
@@ -60,126 +60,38 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">python基础知识点之环境</h1>
-    <p class="post-meta"><time datetime="2016-11-17T13:07:11+08:00" itemprop="datePublished">Nov 17, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">技术选型和经验总结</h1>
+    <p class="post-meta"><time datetime="2014-10-19T13:07:11+08:00" itemprop="datePublished">Oct 19, 2014</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#pythonpip" id="markdown-toc-pythonpip">python的包管理工具pip</a></li>
-  <li><a href="#pip" id="markdown-toc-pip">pip工具的使用</a></li>
-  <li><a href="#pythonipython" id="markdown-toc-pythonipython">python的命令行开发工具ipython</a></li>
-  <li><a href="#mysqldb-python" id="markdown-toc-mysqldb-python">安装MySQLdb-python遇到的问题</a></li>
+  <li><a href="#section" id="markdown-toc-section">技术选型的原则</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">性能真的最重要吗</a></li>
 </ul>
 
 <blockquote>
-  <p>学习java的时候，都知道java有很多优秀的第三方jar包，但是管理这些jar包真是一件麻烦事，虽然有像maven这样的依赖管理工具，但是学习成本还是蛮高的。
-python 的包管理工具pip使用起来非常的舒服，一条命令就可以搞定下载安装，再用不用为包的管理而烦恼了，让人想起那句著名的话：<strong>less is more</strong></p>
+  <p>什么是经验？我认为经验就是：知道什么不能做，同时知道怎么做才好…..</p>
 </blockquote>
 
-<h2 id="pythonpip">python的包管理工具pip</h2>
+<h2 id="section">技术选型的原则</h2>
 
-<ul>
-  <li>访问：<a href="https://bootstrap.pypa.io/get-pip.py">get-pip.py</a> 访问需要的python文件。</li>
-  <li>将源代码copy到一个文本文件，将文本文件重命名的get-pip.py。</li>
-  <li>通过命令行进入上述文本文件的所在位置，运行一下命令： <code>python get-pip.py</code></li>
-</ul>
-
-<h2 id="pip">pip工具的使用</h2>
-
-<pre><code>pip list              //查看已经安装的python包
-pip show package      //查看packageName的详细情况
-pip install package   //安装包package
-pip uninstall package //卸载包package
+<pre><code>文档或WEB站点的质量如何? 
+是否有活跃的用户或开发社区? 
+接口程序的质量和稳定性如何?
+性能如何? 
+普及程度如何？
 </code></pre>
 
-<h2 id="pythonipython">python的命令行开发工具ipython</h2>
+<p>遇到问题能马上找到解决的方案，这是技术选型的首要原则，其次，在满足现有项目要求的情况下，选择尽量简单的解决方案，就像 <code>奥卡姆剃刀原理</code> ：<strong>如无必要，勿增实体</strong></p>
 
-<pre><code>pip install ipython  //安装ipython
+<h2 id="section-1">性能真的最重要吗</h2>
+
+<pre><code>可维护性比性能重要
 </code></pre>
 
-<h2 id="mysqldb-python">安装MySQLdb-python遇到的问题</h2>
-
-<p>学习python对数据库的支持的时候，因为手边有现成的mysql数据库，可以直接使用，就选择先学习python连接mysql。</p>
-
-<ul>
-  <li>
-    <p>首先是发现系统没有MySQLdb这个模块</p>
-
-    <pre><code> import MySQLdb
-
- Traceback (most recent call last):
- File "test.py", line 3, in &lt;module&gt;
- import MySQLdb
- ImportError: No module named MySQLdb
-</code></pre>
-  </li>
-  <li>
-    <p>使用pip进行安装</p>
-
-    <pre><code> pip install MySQLdb-python
-</code></pre>
-  </li>
-  <li>
-    <p>然后给了我一个提示</p>
-
-    <pre><code> You are using pip version 8.1.2, however version 9.0.1 is available.
- You should consider upgrading via the 'python -m pip install --upgrade pip' command.
-</code></pre>
-  </li>
-  <li>
-    <p>按照提示对pip进行升级</p>
-
-    <pre><code> python -m pip install --upgrade pip
-</code></pre>
-  </li>
-  <li>
-    <p>升级完成之后，再次安装</p>
-
-    <pre><code> pip install MySQLdb-python
-</code></pre>
-  </li>
-  <li>
-    <p>这次报一个新的错误</p>
-
-    <pre><code> error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from http://aka.ms/vcpython27
-</code></pre>
-  </li>
-  <li>安装提示安装  Microsoft Visual C++ 9.0</li>
-  <li>
-    <p>然后再次安装MySQLdb</p>
-
-    <pre><code> pip install MySQLdb-python
-</code></pre>
-  </li>
-  <li>
-    <p>这次又报了一个新的错误</p>
-
-    <pre><code> error: command 'C:\\Users\\870850\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0\\VC\\Bin\\cl.exe' failed with exit status 2
-</code></pre>
-  </li>
-  <li>
-    <p>上网搜索，发现这个问题很多人都遇到了，根据网友的提示，尝试手动安装，这这里找</p>
-
-    <pre><code> http://www.lfd.uci.edu/~gohlke/pythonlibs
-</code></pre>
-  </li>
-  <li>
-    <p>下载 <code>MySQL_python‑1.2.5‑cp27‑none‑win32.whl</code> 这个wheel安装包</p>
-
-    <pre><code> pip install D:\MySQL_python‑1.2.5‑cp27‑none‑win32.whl
-</code></pre>
-  </li>
-  <li>
-    <p>终于安装好了，试试</p>
-
-    <pre><code> import MySQLdb
-</code></pre>
-  </li>
-  <li>没有异常，OK了</li>
-</ul>
-
-<p><strong><em>很多时候，配置一个开发环境不容易，这是一个学习的过程，也是一个过坑的过程，把这些过程记录下来，战胜自己的遗忘</em></strong></p>
+<p>网上到处充斥着关于各种语言性能的讨论，各种框架性能的讨论，但是性能真的很重要吗？
+ 对于一个复杂的大型项目，我认为可用性和可维护性的重要性要远远大于性能。</p>
 
   </div>
 

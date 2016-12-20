@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>python基础知识点之环境</title>
+  <title>python基础知识点之常用标准模块</title>
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/python/2016/11/17/python0.html">
+  <link rel="canonical" href="http://colorful.ren/python/2016/11/23/python6.html">
   <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
@@ -60,126 +60,104 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">python基础知识点之环境</h1>
-    <p class="post-meta"><time datetime="2016-11-17T13:07:11+08:00" itemprop="datePublished">Nov 17, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">python基础知识点之常用标准模块</h1>
+    <p class="post-meta"><time datetime="2016-11-23T13:07:11+08:00" itemprop="datePublished">Nov 23, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#pythonpip" id="markdown-toc-pythonpip">python的包管理工具pip</a></li>
-  <li><a href="#pip" id="markdown-toc-pip">pip工具的使用</a></li>
-  <li><a href="#pythonipython" id="markdown-toc-pythonipython">python的命令行开发工具ipython</a></li>
-  <li><a href="#mysqldb-python" id="markdown-toc-mysqldb-python">安装MySQLdb-python遇到的问题</a></li>
+  <li><a href="#random-" id="markdown-toc-random-">random 模块（随机数模块）</a></li>
+  <li><a href="#shelve-" id="markdown-toc-shelve-">shelve 模块</a></li>
+  <li><a href="#re-" id="markdown-toc-re-">re 模块</a></li>
 </ul>
 
 <blockquote>
-  <p>学习java的时候，都知道java有很多优秀的第三方jar包，但是管理这些jar包真是一件麻烦事，虽然有像maven这样的依赖管理工具，但是学习成本还是蛮高的。
-python 的包管理工具pip使用起来非常的舒服，一条命令就可以搞定下载安装，再用不用为包的管理而烦恼了，让人想起那句著名的话：<strong>less is more</strong></p>
+  <p>python中的标准模块有很多实用的功能，将常用的操作进行了封装，掌握了常用的标准模块的功能可以大幅度的提高工作效率</p>
 </blockquote>
 
-<h2 id="pythonpip">python的包管理工具pip</h2>
+<h2 id="random-">random 模块（随机数模块）</h2>
 
-<ul>
-  <li>访问：<a href="https://bootstrap.pypa.io/get-pip.py">get-pip.py</a> 访问需要的python文件。</li>
-  <li>将源代码copy到一个文本文件，将文本文件重命名的get-pip.py。</li>
-  <li>通过命令行进入上述文本文件的所在位置，运行一下命令： <code>python get-pip.py</code></li>
-</ul>
-
-<h2 id="pip">pip工具的使用</h2>
-
-<pre><code>pip list              //查看已经安装的python包
-pip show package      //查看packageName的详细情况
-pip install package   //安装包package
-pip uninstall package //卸载包package
+<pre><code>import random
+random.random()		
+	#返回0到1之间的小数
+random.getrandbits(16)
+	#返回16位的整数，这里的位是二进制的位。
+random.uniform(1.2,5.7)
+	#返回1.2到5.7之间的随机实数
+random.randrange(1,8,2)
+	#返回1到8之间步长为2的随机数
+random.choice([1,2,3,4,5])
+	#随机的返回序列中的一个元素
+random.shuffles(s)
+	#将列表s的元素随机的混乱处理，处理之后，s中的元素位置就变了
+random.sample(s,n)
+	#随机的返回序列s中的n个元素，返回类型是列表
 </code></pre>
 
-<h2 id="pythonipython">python的命令行开发工具ipython</h2>
+<h2 id="shelve-">shelve 模块</h2>
 
-<pre><code>pip install ipython  //安装ipython
+<p>shelve 模块使用数据库驱动实现了字典对象的持久保存. shelve 对象使用字符串作为键, 但值可以是任意类型,我们简单的理解为shelve对象就是一个字典。</p>
+
+<pre><code>import shelve
+db = shelve.open('D://dbdata.db')
+db['person']=range(100)
+db.close()
 </code></pre>
 
-<h2 id="mysqldb-python">安装MySQLdb-python遇到的问题</h2>
+<p>使用shelve比较简单，但是要注意，最后一定要调用其close()方法。</p>
 
-<p>学习python对数据库的支持的时候，因为手边有现成的mysql数据库，可以直接使用，就选择先学习python连接mysql。</p>
+<h2 id="re-">re 模块</h2>
 
-<ul>
-  <li>
-    <p>首先是发现系统没有MySQLdb这个模块</p>
+<p>re 模块提供了一系列功能强大的正则表达式工具, 它允许你快速检查给定字符串是否与给定的模式匹配 (使用 match 函数), 或者包含这个模式 (使用 search 函数)</p>
 
-    <pre><code> import MySQLdb
+<pre><code>compile(): 创建模式对象
+search():  从字符串中根据模式搜索匹配
 
- Traceback (most recent call last):
- File "test.py", line 3, in &lt;module&gt;
- import MySQLdb
- ImportError: No module named MySQLdb
+match():   根据模式匹配字符串，返回Match object对象
+	&gt;&gt;&gt; m = re.match(r'www\.(.*)\..{3}','www.python.org')
+	&gt;&gt;&gt; m.group(1)
+	'python'
+	&gt;&gt;&gt; m.group(0)
+	'www.python.org'
+	&gt;&gt;&gt; m.start(1)
+	4
+	&gt;&gt;&gt; m.end(1)
+	10
+	&gt;&gt;&gt; m.span(1)
+	(4, 10)
+	&gt;&gt;&gt; 
+split():   根据模式的匹配项来分割字符串
+	&gt;&gt;&gt; import re
+	&gt;&gt;&gt; some_text = 'alpha,beta,,,,gamma delta'
+	&gt;&gt;&gt; re.split('[, ]+',some_text)
+	['alpha', 'beta', 'gamma', 'delta']
+	&gt;&gt;&gt; re.split('[, ]+',some_text,maxsplit=2)
+	['alpha', 'beta', 'gamma delta']
+	&gt;&gt;&gt; re.split('[, ]+',some_text,maxsplit=1)
+	['alpha', 'beta,,,,gamma delta']
+
+findall(): 列出字符串中符合模式的所有匹配项
+	&gt;&gt;&gt; pat = '[a-zA-Z]+'
+	&gt;&gt;&gt; text = '"Hm...Err -- are you sure?" he said, sounding insecure.'
+	&gt;&gt;&gt; re.findall(pat,text)
+	['Hm', 'Err', 'are', 'you', 'sure', 'he', 'said', 'sounding', 'insecure']
+	&gt;&gt;&gt; pat2 = r'[.?\-",]+'
+	&gt;&gt;&gt; re.findall(pat2,text)
+	['"', '...', '--', '?"', ',', '.']
+
+sub():     利用表达式的匹配项替换指定的字符串
+	&gt;&gt;&gt; pat = '{name}'
+	&gt;&gt;&gt; text = 'Dear {name}'
+	&gt;&gt;&gt; re.sub(pat,'Mr,Gumby',text)
+	'Dear Mr,Gumby'
+
+escape():  转义正则表达式中所用的特殊字符
+	&gt;&gt;&gt; re.escape('www.python.org')
+	'www\\.python\\.org'
+	&gt;&gt;&gt; re.escape('But where is the ambiguity?')
+	'But\\ where\\ is\\ the\\ ambiguity\\?'
 </code></pre>
-  </li>
-  <li>
-    <p>使用pip进行安装</p>
 
-    <pre><code> pip install MySQLdb-python
-</code></pre>
-  </li>
-  <li>
-    <p>然后给了我一个提示</p>
-
-    <pre><code> You are using pip version 8.1.2, however version 9.0.1 is available.
- You should consider upgrading via the 'python -m pip install --upgrade pip' command.
-</code></pre>
-  </li>
-  <li>
-    <p>按照提示对pip进行升级</p>
-
-    <pre><code> python -m pip install --upgrade pip
-</code></pre>
-  </li>
-  <li>
-    <p>升级完成之后，再次安装</p>
-
-    <pre><code> pip install MySQLdb-python
-</code></pre>
-  </li>
-  <li>
-    <p>这次报一个新的错误</p>
-
-    <pre><code> error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from http://aka.ms/vcpython27
-</code></pre>
-  </li>
-  <li>安装提示安装  Microsoft Visual C++ 9.0</li>
-  <li>
-    <p>然后再次安装MySQLdb</p>
-
-    <pre><code> pip install MySQLdb-python
-</code></pre>
-  </li>
-  <li>
-    <p>这次又报了一个新的错误</p>
-
-    <pre><code> error: command 'C:\\Users\\870850\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0\\VC\\Bin\\cl.exe' failed with exit status 2
-</code></pre>
-  </li>
-  <li>
-    <p>上网搜索，发现这个问题很多人都遇到了，根据网友的提示，尝试手动安装，这这里找</p>
-
-    <pre><code> http://www.lfd.uci.edu/~gohlke/pythonlibs
-</code></pre>
-  </li>
-  <li>
-    <p>下载 <code>MySQL_python‑1.2.5‑cp27‑none‑win32.whl</code> 这个wheel安装包</p>
-
-    <pre><code> pip install D:\MySQL_python‑1.2.5‑cp27‑none‑win32.whl
-</code></pre>
-  </li>
-  <li>
-    <p>终于安装好了，试试</p>
-
-    <pre><code> import MySQLdb
-</code></pre>
-  </li>
-  <li>没有异常，OK了</li>
-</ul>
-
-<p><strong><em>很多时候，配置一个开发环境不容易，这是一个学习的过程，也是一个过坑的过程，把这些过程记录下来，战胜自己的遗忘</em></strong></p>
 
   </div>
 
