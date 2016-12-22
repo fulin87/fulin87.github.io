@@ -5,9 +5,26 @@
     <description></description>
     <link>http://colorful.ren/</link>
     <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 20 Dec 2016 17:00:51 +0800</pubDate>
-    <lastBuildDate>Tue, 20 Dec 2016 17:00:51 +0800</lastBuildDate>
+    <pubDate>Thu, 22 Dec 2016 15:35:50 +0800</pubDate>
+    <lastBuildDate>Thu, 22 Dec 2016 15:35:50 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>Excel到底有多厉害之用Excel画系统架构图</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;对Excel一直非常感兴趣，excel到底有多厉害，请看我用excel画的一个系统架构图，关键敏感信息已经进行了模糊处理&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/image/excelJia.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 22 Dec 2016 13:07:11 +0800</pubDate>
+        <link>http://colorful.ren/java/2016/12/22/exceljia.html</link>
+        <guid isPermaLink="true">http://colorful.ren/java/2016/12/22/exceljia.html</guid>
+        
+        
+        <category>java</category>
+        
+      </item>
     
       <item>
         <title>python基础知识点之常用数据库API</title>
@@ -1253,50 +1270,6 @@ pip uninstall package //卸载包package
         
         
         <category>life</category>
-        
-      </item>
-    
-      <item>
-        <title>Excel VBA工程密码破解的方法</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;今天无意中发现一个破解Excel VBA工程密码的方法，经测试在2003,2007,2010这三个版本上都可以正常使用，今记录在此。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;vba&quot;&gt;vba工程加密之后&lt;/h3&gt;
-
-&lt;p&gt;对excel的VBA工程进行加密，是一种非常必要的手段，可以防止代码被人篡改。但是有时会出现密码遗忘的问题，怎么找回原来的密码或者重新设置密码呢？&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/image/vba1.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;解决办法&lt;/h3&gt;
-
-&lt;p&gt;偶然间发现一个很好的解决方法，使用HXD软件直接修改。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/image/VBA2.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;用HXD打开excel。&lt;/li&gt;
-  &lt;li&gt;搜索“DPB=”，并替换成“DPx=”，保存文件。&lt;/li&gt;
-  &lt;li&gt;打开文件了，对VBA工程进行修改密码，这一步非常重要不然还是看不了源代码。&lt;/li&gt;
-  &lt;li&gt;再次打开exlel,用新的密码打开VBA工程，搞定！&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/image/VBA3.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;操作之前一定要对原始数据进行备份，否则数据丢失，这是血的教训，切记，切记！！！&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;内部机理&lt;/h3&gt;
-
-&lt;p&gt;说实话，我还没有搞清楚内部的实现原理，先记录在这里，等搞明白了，在补充。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 27 Oct 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/excel/2016/10/27/vbamima.html</link>
-        <guid isPermaLink="true">http://colorful.ren/excel/2016/10/27/vbamima.html</guid>
-        
-        
-        <category>Excel</category>
         
       </item>
     
