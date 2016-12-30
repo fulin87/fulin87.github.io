@@ -189,6 +189,12 @@
     <pre><code> lsof -i :80
 </code></pre>
   </li>
+  <li>
+    <p>一次性删除某个程序所有的线程,这里删除uwsgi的所有线程</p>
+
+    <pre><code> ps -ef|grep uwsgi|grep -v grep|cut -c 9-15|xargs kill -9
+</code></pre>
+  </li>
 </ul>
 
 <h2 id="linux-1">linux运行级别</h2>

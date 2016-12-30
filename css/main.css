@@ -10,7 +10,7 @@ dl, dd, ol, ul, figure {
 p, h1, h2, h3, h4, h5, h6, ol, ul {
   color: #ffffff; }
 
-p > code, li > pre, li > code {
+p > code, li > pre, li > code, em > code {
   color: #000033; }
 
 /**
@@ -79,7 +79,8 @@ a {
   a:visited {
     color: #1756a9; }
   a:hover {
-    color: #111;
+    #color: #111;
+    color: #ffcc22;
     text-decoration: underline; }
 
 /**
@@ -103,7 +104,8 @@ code {
   font-size: 15px;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
-  background-color: #eef; }
+  #background-color: #eef;
+  background-color: #fffFCC; }
 
 code {
   padding: 1px 5px; }
@@ -322,6 +324,11 @@ pre {
     @media screen and (max-width: 800px) {
       .post-content h4 {
         font-size: 18px; } }
+
+h2 > code {
+  font-size: 32px;
+  font-weight: 400;
+  color: #080808; }
 
 /**
  * Syntax highlighting styles

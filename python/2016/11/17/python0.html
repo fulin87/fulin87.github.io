@@ -69,7 +69,8 @@
   <li><a href="#pythonpip" id="markdown-toc-pythonpip">python的包管理工具pip</a></li>
   <li><a href="#pip" id="markdown-toc-pip">pip工具的使用</a></li>
   <li><a href="#pythonipython" id="markdown-toc-pythonipython">python的命令行开发工具ipython</a></li>
-  <li><a href="#mysqldb-python" id="markdown-toc-mysqldb-python">安装MySQLdb-python遇到的问题</a></li>
+  <li><a href="#windowsmysqldb-python" id="markdown-toc-windowsmysqldb-python">windows安装MySQLdb-python遇到的问题</a></li>
+  <li><a href="#linuxmysqldb-python" id="markdown-toc-linuxmysqldb-python">linux安装MySQLdb-python遇到的问题的解决方案</a></li>
 </ul>
 
 <blockquote>
@@ -98,7 +99,7 @@ pip uninstall package //卸载包package
 <pre><code>pip install ipython  //安装ipython
 </code></pre>
 
-<h2 id="mysqldb-python">安装MySQLdb-python遇到的问题</h2>
+<h2 id="windowsmysqldb-python">windows安装MySQLdb-python遇到的问题</h2>
 
 <p>学习python对数据库的支持的时候，因为手边有现成的mysql数据库，可以直接使用，就选择先学习python连接mysql。</p>
 
@@ -179,7 +180,59 @@ pip uninstall package //卸载包package
   <li>没有异常，OK了</li>
 </ul>
 
-<p><strong><em>很多时候，配置一个开发环境不容易，这是一个学习的过程，也是一个过坑的过程，把这些过程记录下来，战胜自己的遗忘</em></strong></p>
+<h2 id="linuxmysqldb-python">linux安装MySQLdb-python遇到的问题的解决方案</h2>
+
+<ul>
+  <li>
+    <p>使用pip进行安装</p>
+
+    <pre><code> pip install MySQL-python
+</code></pre>
+  </li>
+  <li>
+    <p>报以下异常</p>
+
+    <pre><code> Complete output from command python setup.py egg_info:
+ sh: mysql_config: command not found
+ Traceback (most recent call last):
+   File "&lt;string&gt;", line 1, in &lt;module&gt;
+   File "/tmp/pip-build-qy_rtM/MySQL-python/setup.py", line 17, in &lt;module&gt;
+     metadata, options = get_config()
+   File "setup_posix.py", line 43, in get_config
+     libs = mysql_config("libs_r")
+   File "setup_posix.py", line 25, in mysql_config
+     raise EnvironmentError("%s not found" % (mysql_config.path,))
+ EnvironmentError: mysql_config not found
+    
+ ----------------------------------------
+ Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-qy_rtM/MySQL-python/
+</code></pre>
+  </li>
+  <li>
+    <p>安装 mysql-dev</p>
+
+    <pre><code> yum install mysql-devel
+</code></pre>
+  </li>
+  <li>
+    <p>这时又报一个新的错</p>
+
+    <pre><code> error: command 'gcc' failed with exit status 1
+</code></pre>
+  </li>
+  <li>
+    <p>安装<code>gcc</code>和<code>python-devel</code></p>
+
+    <pre><code> yum install gcc -y
+ yum install python-devel -y
+</code></pre>
+  </li>
+  <li>
+    <p>总算OK了</p>
+  </li>
+</ul>
+
+<p><strong><em>配置开发环境是最锻炼人的，因为这里面牵扯的东西非常多，把搭建环境的过程中遇到的问题记录下来，以后遇到了有据可循</em></strong></p>
 
   </div>
 

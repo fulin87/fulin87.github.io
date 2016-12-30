@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Excel到底有多厉害之用Excel画系统架构图</title>
+  <meta name="description" content="PEP: 333Title: Python Web Server Gateway Interface v1.0Author: Phillip J. Eby &#112;&#106;&#101;&#064;&#116;&#101;&#108;&#101;&#099;&#111;&#109;&#109;&#117;&...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://colorful.ren/java/2016/12/22/wsgi.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">水货程序员的笔记</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+		<!--
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+		-->
+		<img src="/image/fulin.JPG"/>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Excel到底有多厉害之用Excel画系统架构图</h1>
+    <p class="post-meta"><time datetime="2016-12-22T13:07:11+08:00" itemprop="datePublished">Dec 22, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>PEP: 333
+Title: Python Web Server Gateway Interface v1.0
+Author: Phillip J. Eby <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#112;&#106;&#101;&#064;&#116;&#101;&#108;&#101;&#099;&#111;&#109;&#109;&#117;&#110;&#105;&#116;&#121;&#046;&#099;&#111;&#109;">&#112;&#106;&#101;&#064;&#116;&#101;&#108;&#101;&#099;&#111;&#109;&#109;&#117;&#110;&#105;&#116;&#121;&#046;&#099;&#111;&#109;</a>
+Discussions-To: Python Web-SIG <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#119;&#101;&#098;&#045;&#115;&#105;&#103;&#064;&#112;&#121;&#116;&#104;&#111;&#110;&#046;&#111;&#114;&#103;">&#119;&#101;&#098;&#045;&#115;&#105;&#103;&#064;&#112;&#121;&#116;&#104;&#111;&#110;&#046;&#111;&#114;&#103;</a>
+Status: Final
+Type: Informational
+Content-Type: text/x-rst
+Created: 07-Dec-2003
+Post-History: 07-Dec-2003, 08-Aug-2004, 20-Aug-2004, 27-Aug-2004, 27-Sep-2010
+Superseded-By: 3333</p>
+
+<h1 id="preface">Preface</h1>
+
+<p>Note: For an updated version of this spec that supports Python 3.x and
+includes community errata, addenda, and clarifications, please
+see PEP 3333 instead.</p>
+
+<h1 id="abstract">Abstract</h1>
+
+<p>This document specifies a proposed standard interface between web
+servers and Python web applications or frameworks, to promote web
+application portability across a variety of web servers.</p>
+
+<h1 id="rationale-and-goals">Rationale and Goals</h1>
+
+<p>Python currently boasts a wide variety of web application frameworks,
+such as Zope, Quixote, Webware, SkunkWeb, PSO, and Twisted Web – to
+name just a few [1]_.  This wide variety of choices can be a problem
+for new Python users, because generally speaking, their choice of web
+framework will limit their choice of usable web servers, and vice
+versa.</p>
+
+<p>By contrast, although Java has just as many web application frameworks
+available, Java’s “servlet” API makes it possible for applications
+written with any Java web application framework to run in any web
+server that supports the servlet API.</p>
+
+<p>The availability and widespread use of such an API in web servers for
+Python – whether those servers are written in Python (e.g. Medusa),
+embed Python (e.g. mod_python), or invoke Python via a gateway
+protocol (e.g. CGI, FastCGI, etc.) – would separate choice of
+framework from choice of web server, freeing users to choose a pairing
+that suits them, while freeing framework and server developers to
+focus on their preferred area of specialization.</p>
+
+<p>This PEP, therefore, proposes a simple and universal interface between
+web servers and web applications or frameworks: the Python Web Server
+Gateway Interface (WSGI).</p>
+
+<p>But the mere existence of a WSGI spec does nothing to address the
+existing state of servers and frameworks for Python web applications.
+Server and framework authors and maintainers must actually implement
+WSGI for there to be any effect.</p>
+
+<p>However, since no existing servers or frameworks support WSGI, there
+is little immediate reward for an author who implements WSGI support.
+Thus, WSGI <strong>must</strong> be easy to implement, so that an author’s initial
+investment in the interface can be reasonably low.</p>
+
+<p>Thus, simplicity of implementation on <em>both</em> the server and framework
+sides of the interface is absolutely critical to the utility of the
+WSGI interface, and is therefore the principal criterion for any
+design decisions.</p>
+
+<p>Note, however, that simplicity of implementation for a framework
+author is not the same thing as ease of use for a web application
+author.  WSGI presents an absolutely “no frills” interface to the
+framework author, because bells and whistles like response objects and
+cookie handling would just get in the way of existing frameworks’
+handling of these issues.  Again, the goal of WSGI is to facilitate
+easy interconnection of existing servers and applications or
+frameworks, not to create a new web framework.</p>
+
+<p>Note also that this goal precludes WSGI from requiring anything that
+is not already available in deployed versions of Python.  Therefore,
+new standard library modules are not proposed or required by this
+specification, and nothing in WSGI requires a Python version greater
+than 2.2.2.  (It would be a good idea, however, for future versions
+of Python to include support for this interface in web servers
+provided by the standard library.)</p>
+
+<p>In addition to ease of implementation for existing and future
+frameworks and servers, it should also be easy to create request
+preprocessors, response postprocessors, and other WSGI-based
+“middleware” components that look like an application to their
+containing server, while acting as a server for their contained
+applications.</p>
+
+<p>If middleware can be both simple and robust, and WSGI is widely
+available in servers and frameworks, it allows for the possibility
+of an entirely new kind of Python web application framework: one
+consisting of loosely-coupled WSGI middleware components.  Indeed,
+existing framework authors may even choose to refactor their
+frameworks’ existing services to be provided in this way, becoming
+more like libraries used with WSGI, and less like monolithic
+frameworks.  This would then allow application developers to choose
+“best-of-breed” components for specific functionality, rather than
+having to commit to all the pros and cons of a single framework.</p>
+
+<p>Of course, as of this writing, that day is doubtless quite far off.
+In the meantime, it is a sufficient short-term goal for WSGI to
+enable the use of any framework with any server.</p>
+
+<p>Finally, it should be mentioned that the current version of WSGI
+does not prescribe any particular mechanism for “deploying” an
+application for use with a web server or server gateway.  At the
+present time, this is necessarily implementation-defined by the
+server or gateway.  After a sufficient number of servers and
+frameworks have implemented WSGI to provide field experience with
+varying deployment requirements, it may make sense to create
+another PEP, describing a deployment standard for WSGI servers and
+application frameworks.</p>
+
+<h1 id="specification-overview">Specification Overview</h1>
+
+<p>The WSGI interface has two sides: the “server” or “gateway” side, and
+the “application” or “framework” side.  The server side invokes a
+callable object that is provided by the application side.  The
+specifics of how that object is provided are up to the server or
+gateway.  It is assumed that some servers or gateways will require an
+application’s deployer to write a short script to create an instance
+of the server or gateway, and supply it with the application object.
+Other servers and gateways may use configuration files or other
+mechanisms to specify where an application object should be
+imported from, or otherwise obtained.</p>
+
+<p>In addition to “pure” servers/gateways and applications/frameworks,
+it is also possible to create “middleware” components that implement
+both sides of this specification.  Such components act as an
+application to their containing server, and as a server to a
+contained application, and can be used to provide extended APIs,
+content transformation, navigation, and other useful functions.</p>
+
+<p>Throughout this specification, we will use the term “a callable” to
+mean “a function, method, class, or an instance with a <code>__call__</code>
+method”.  It is up to the server, gateway, or application implementing
+the callable to choose the appropriate implementation technique for
+their needs.  Conversely, a server, gateway, or application that is
+invoking a callable <strong>must not</strong> have any dependency on what kind of
+callable was provided to it.  Callables are only to be called, not
+introspected upon.</p>
+
+<h2 id="the-applicationframework-side">The Application/Framework Side</h2>
+
+<p>The application object is simply a callable object that accepts
+two arguments.  The term “object” should not be misconstrued as
+requiring an actual object instance: a function, method, class,
+or instance with a <code>__call__</code> method are all acceptable for
+use as an application object.  Application objects must be able
+to be invoked more than once, as virtually all servers/gateways
+(other than CGI) will make such repeated requests.</p>
+
+<p>(Note: although we refer to it as an “application” object, this
+should not be construed to mean that application developers will use
+WSGI as a web programming API!  It is assumed that application
+developers will continue to use existing, high-level framework
+services to develop their applications.  WSGI is a tool for
+framework and server developers, and is not intended to directly
+support application developers.)</p>
+
+<p>Here are two example application objects; one is a function, and the
+other is a class::</p>
+
+<pre><code>def simple_app(environ, start_response):
+    """Simplest possible application object"""
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/plain')]
+    start_response(status, response_headers)
+    return ['Hello world!\n']
+
+
+class AppClass:
+    """Produce the same output, but using a class
+
+    (Note: 'AppClass' is the "application" here, so calling it
+    returns an instance of 'AppClass', which is then the iterable
+    return value of the "application callable" as required by
+    the spec.
+
+    If we wanted to use *instances* of 'AppClass' as application
+    objects instead, we would have to implement a '__call__'
+    method, which would be invoked to execute the application,
+    and we would need to create an instance for use by the
+    server or gateway.
+    """
+
+    def __init__(self, environ, start_response):
+        self.environ = environ
+        self.start = start_response
+
+    def __iter__(self):
+        status = '200 OK'
+        response_headers = [('Content-type', 'text/plain')]
+        self.start(status, response_headers)
+        yield "Hello world!\n"
+</code></pre>
+
+<h2 id="the-servergateway-side">The Server/Gateway Side</h2>
+
+<p>The server or gateway invokes the application callable once for each
+request it receives from an HTTP client, that is directed at the
+application.  To illustrate, here is a simple CGI gateway, implemented
+as a function taking an application object.  Note that this simple
+example has limited error handling, because by default an uncaught
+exception will be dumped to <code>sys.stderr</code> and logged by the web
+server.</p>
+
+<p>::</p>
+
+<pre><code>import os, sys
+
+def run_with_cgi(application):
+
+    environ = dict(os.environ.items())
+    environ['wsgi.input']        = sys.stdin
+    environ['wsgi.errors']       = sys.stderr
+    environ['wsgi.version']      = (1, 0)
+    environ['wsgi.multithread']  = False
+    environ['wsgi.multiprocess'] = True
+    environ['wsgi.run_once']     = True
+
+    if environ.get('HTTPS', 'off') in ('on', '1'):
+        environ['wsgi.url_scheme'] = 'https'
+    else:
+        environ['wsgi.url_scheme'] = 'http'
+
+    headers_set = []
+    headers_sent = []
+
+    def write(data):
+        if not headers_set:
+             raise AssertionError("write() before start_response()")
+
+        elif not headers_sent:
+             # Before the first output, send the stored headers
+             status, response_headers = headers_sent[:] = headers_set
+             sys.stdout.write('Status: %s\r\n' % status)
+             for header in response_headers:
+                 sys.stdout.write('%s: %s\r\n' % header)
+             sys.stdout.write('\r\n')
+
+        sys.stdout.write(data)
+        sys.stdout.flush()
+
+    def start_response(status, response_headers, exc_info=None):
+        if exc_info:
+            try:
+                if headers_sent:
+                    # Re-raise original exception if headers sent
+                    raise exc_info[0], exc_info[1], exc_info[2]
+            finally:
+                exc_info = None     # avoid dangling circular ref
+        elif headers_set:
+            raise AssertionError("Headers already set!")
+
+        headers_set[:] = [status, response_headers]
+        return write
+
+    result = application(environ, start_response)
+    try:
+        for data in result:
+            if data:    # don't send headers until body appears
+                write(data)
+        if not headers_sent:
+            write('')   # send headers now if body was empty
+    finally:
+        if hasattr(result, 'close'):
+            result.close()
+</code></pre>
+
+<h2 id="middleware-components-that-play-both-sides">Middleware: Components that Play Both Sides</h2>
+
+<p>Note that a single object may play the role of a server with respect
+to some application(s), while also acting as an application with
+respect to some server(s).  Such “middleware” components can perform
+such functions as:</p>
+
+<ul>
+  <li>
+    <p>Routing a request to different application objects based on the
+target URL, after rewriting the <code>environ</code> accordingly.</p>
+  </li>
+  <li>
+    <p>Allowing multiple applications or frameworks to run side-by-side
+in the same process</p>
+  </li>
+  <li>
+    <p>Load balancing and remote processing, by forwarding requests and
+responses over a network</p>
+  </li>
+  <li>
+    <p>Perform content postprocessing, such as applying XSL stylesheets</p>
+  </li>
+</ul>
+
+<p>The presence of middleware in general is transparent to both the
+“server/gateway” and the “application/framework” sides of the
+interface, and should require no special support.  A user who
+desires to incorporate middleware into an application simply
+provides the middleware component to the server, as if it were
+an application, and configures the middleware component to
+invoke the application, as if the middleware component were a
+server.  Of course, the “application” that the middleware wraps
+may in fact be another middleware component wrapping another
+application, and so on, creating what is referred to as a
+“middleware stack”.</p>
+
+<p>For the most part, middleware must conform to the restrictions
+and requirements of both the server and application sides of
+WSGI.  In some cases, however, requirements for middleware
+are more stringent than for a “pure” server or application,
+and these points will be noted in the specification.</p>
+
+<p>Here is a (tongue-in-cheek) example of a middleware component that
+converts <code>text/plain</code> responses to pig Latin, using Joe Strout’s
+<code>piglatin.py</code>.  (Note: a “real” middleware component would
+probably use a more robust way of checking the content type, and
+should also check for a content encoding.  Also, this simple
+example ignores the possibility that a word might be split across
+a block boundary.)</p>
+
+<p>::</p>
+
+<pre><code>from piglatin import piglatin
+
+class LatinIter:
+
+    """Transform iterated output to piglatin, if it's okay to do so
+
+    Note that the "okayness" can change until the application yields
+    its first non-empty string, so 'transform_ok' has to be a mutable
+    truth value.
+    """
+
+    def __init__(self, result, transform_ok):
+        if hasattr(result, 'close'):
+            self.close = result.close
+        self._next = iter(result).next
+        self.transform_ok = transform_ok
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if self.transform_ok:
+            return piglatin(self._next())
+        else:
+            return self._next()
+
+class Latinator:
+
+    # by default, don't transform output
+    transform = False
+
+    def __init__(self, application):
+        self.application = application
+
+    def __call__(self, environ, start_response):
+
+        transform_ok = []
+
+        def start_latin(status, response_headers, exc_info=None):
+
+            # Reset ok flag, in case this is a repeat call
+            del transform_ok[:]
+
+            for name, value in response_headers:
+                if name.lower() == 'content-type' and value == 'text/plain':
+                    transform_ok.append(True)
+                    # Strip content-length if present, else it'll be wrong
+                    response_headers = [(name, value)
+                        for name, value in response_headers
+                            if name.lower() != 'content-length'
+                    ]
+                    break
+
+            write = start_response(status, response_headers, exc_info)
+
+            if transform_ok:
+                def write_latin(data):
+                    write(piglatin(data))
+                return write_latin
+            else:
+                return write
+
+        return LatinIter(self.application(environ, start_latin), transform_ok)
+
+
+# Run foo_app under a Latinator's control, using the example CGI gateway
+from foo_app import foo_app
+run_with_cgi(Latinator(foo_app))
+</code></pre>
+
+<h1 id="specification-details">Specification Details</h1>
+
+<p>The application object must accept two positional arguments.  For
+the sake of illustration, we have named them <code>environ</code> and
+<code>start_response</code>, but they are not required to have these names.
+A server or gateway <strong>must</strong> invoke the application object using
+positional (not keyword) arguments.  (E.g. by calling
+<code>result = application(environ, start_response)</code> as shown above.)</p>
+
+<p>The <code>environ</code> parameter is a dictionary object, containing CGI-style
+environment variables.  This object <strong>must</strong> be a builtin Python
+dictionary (<em>not</em> a subclass, <code>UserDict</code> or other dictionary
+emulation), and the application is allowed to modify the dictionary
+in any way it desires.  The dictionary must also include certain
+WSGI-required variables (described in a later section), and may
+also include server-specific extension variables, named according
+to a convention that will be described below.</p>
+
+<p>The <code>start_response</code> parameter is a callable accepting two
+required positional arguments, and one optional argument.  For the sake
+of illustration, we have named these arguments <code>status</code>,
+<code>response_headers</code>, and <code>exc_info</code>, but they are not required to
+have these names, and the application <strong>must</strong> invoke the
+<code>start_response</code> callable using positional arguments (e.g.
+<code>start_response(status, response_headers)</code>).</p>
+
+<p>The <code>status</code> parameter is a status string of the form
+<code>"999 Message here"</code>, and <code>response_headers</code> is a list of
+<code>(header_name, header_value)</code> tuples describing the HTTP response
+header.  The optional <code>exc_info</code> parameter is described below in the
+sections on <code>The start_response() Callable</code>_ and <code>Error Handling</code>_.
+It is used only when the application has trapped an error and is
+attempting to display an error message to the browser.</p>
+
+<p>The <code>start_response</code> callable must return a <code>write(body_data)</code>
+callable that takes one positional parameter: a string to be written
+as part of the HTTP response body.  (Note: the <code>write()</code> callable is
+provided only to support certain existing frameworks’ imperative output
+APIs; it should not be used by new applications or frameworks if it
+can be avoided.  See the <code>Buffering and Streaming</code>_ section for more
+details.)</p>
+
+<p>When called by the server, the application object must return an
+iterable yielding zero or more strings.  This can be accomplished in a
+variety of ways, such as by returning a list of strings, or by the
+application being a generator function that yields strings, or
+by the application being a class whose instances are iterable.
+Regardless of how it is accomplished, the application object must
+always return an iterable yielding zero or more strings.</p>
+
+<p>The server or gateway must transmit the yielded strings to the client
+in an unbuffered fashion, completing the transmission of each string
+before requesting another one.  (In other words, applications
+<strong>should</strong> perform their own buffering.  See the <code>Buffering and
+Streaming</code>_ section below for more on how application output must be
+handled.)</p>
+
+<p>The server or gateway should treat the yielded strings as binary byte
+sequences: in particular, it should ensure that line endings are
+not altered.  The application is responsible for ensuring that the
+string(s) to be written are in a format suitable for the client.  (The
+server or gateway <strong>may</strong> apply HTTP transfer encodings, or perform
+other transformations for the purpose of implementing HTTP features
+such as byte-range transmission.  See <code>Other HTTP Features</code>_, below,
+for more details.)</p>
+
+<p>If a call to <code>len(iterable)</code> succeeds, the server must be able
+to rely on the result being accurate.  That is, if the iterable
+returned by the application provides a working <code>__len__()</code>
+method, it <strong>must</strong> return an accurate result.  (See
+the <code>Handling the Content-Length Header</code>_ section for information
+on how this would normally be used.)</p>
+
+<p>If the iterable returned by the application has a <code>close()</code> method,
+the server or gateway <strong>must</strong> call that method upon completion of the
+current request, whether the request was completed normally, or
+terminated early due to an error.  (This is to support resource release
+by the application.  This protocol is intended to complement PEP 325’s
+generator support, and other common iterables with <code>close()</code> methods.</p>
+
+<p>(Note: the application <strong>must</strong> invoke the <code>start_response()</code>
+callable before the iterable yields its first body string, so that the
+server can send the headers before any body content.  However, this
+invocation <strong>may</strong> be performed by the iterable’s first iteration, so
+servers <strong>must not</strong> assume that <code>start_response()</code> has been called
+before they begin iterating over the iterable.)</p>
+
+<p>Finally, servers and gateways <strong>must not</strong> directly use any other
+attributes of the iterable returned by the application, unless it is an
+instance of a type specific to that server or gateway, such as a “file
+wrapper” returned by <code>wsgi.file_wrapper</code> (see <code>Optional
+Platform-Specific File Handling</code>_).  In the general case, only
+attributes specified here, or accessed via e.g. the PEP 234 iteration
+APIs are acceptable.</p>
+
+<h2 id="environ-variables"><code>environ</code> Variables</h2>
+
+<p>The <code>environ</code> dictionary is required to contain these CGI
+environment variables, as defined by the Common Gateway Interface
+specification [2]_.  The following variables <strong>must</strong> be present,
+unless their value would be an empty string, in which case they
+<strong>may</strong> be omitted, except as otherwise noted below.</p>
+
+<p><code>REQUEST_METHOD</code>
+  The HTTP request method, such as <code>"GET"</code> or <code>"POST"</code>.  This
+  cannot ever be an empty string, and so is always required.</p>
+
+<p><code>SCRIPT_NAME</code>
+  The initial portion of the request URL’s “path” that corresponds to
+  the application object, so that the application knows its virtual
+  “location”.  This <strong>may</strong> be an empty string, if the application
+  corresponds to the “root” of the server.</p>
+
+<p><code>PATH_INFO</code>
+  The remainder of the request URL’s “path”, designating the virtual
+  “location” of the request’s target within the application.  This
+  <strong>may</strong> be an empty string, if the request URL targets the
+  application root and does not have a trailing slash.</p>
+
+<p><code>QUERY_STRING</code>
+  The portion of the request URL that follows the <code>"?"</code>, if any.
+  May be empty or absent.</p>
+
+<p><code>CONTENT_TYPE</code>
+  The contents of any <code>Content-Type</code> fields in the HTTP request.
+  May be empty or absent.</p>
+
+<p><code>CONTENT_LENGTH</code>
+  The contents of any <code>Content-Length</code> fields in the HTTP request.
+  May be empty or absent.</p>
+
+<p><code>SERVER_NAME</code>, <code>SERVER_PORT</code>
+  When combined with <code>SCRIPT_NAME</code> and <code>PATH_INFO</code>, these variables
+  can be used to complete the URL.  Note, however, that <code>HTTP_HOST</code>,
+  if present, should be used in   preference to <code>SERVER_NAME</code> for
+  reconstructing the request URL.  See the <code>URL Reconstruction</code>_
+  section below for more detail.   <code>SERVER_NAME</code> and <code>SERVER_PORT</code>
+  can never be empty strings, and so are always required.</p>
+
+<p><code>SERVER_PROTOCOL</code>
+  The version of the protocol the client used to send the request.
+  Typically this will be something like <code>"HTTP/1.0"</code> or <code>"HTTP/1.1"</code>
+  and may be used by the application to determine how to treat any
+  HTTP request headers.  (This variable should probably be called
+  <code>REQUEST_PROTOCOL</code>, since it denotes the protocol used in the
+  request, and is not necessarily the protocol that will be used in the
+  server’s response.  However, for compatibility with CGI we have to
+  keep the existing name.)</p>
+
+<p><code>HTTP_</code> Variables
+  Variables corresponding to the client-supplied HTTP request headers
+  (i.e., variables whose names begin with <code>"HTTP_"</code>).  The presence or
+  absence of these variables should correspond with the presence or
+  absence of the appropriate HTTP header in the request.</p>
+
+<p>A server or gateway <strong>should</strong> attempt to provide as many other CGI
+variables as are applicable.  In addition, if SSL is in use, the server
+or gateway <strong>should</strong> also provide as many of the Apache SSL environment
+variables [5]_ as are applicable, such as <code>HTTPS=on</code> and
+<code>SSL_PROTOCOL</code>.  Note, however, that an application that uses any CGI
+variables other than the ones listed above are necessarily non-portable
+to web servers that do not support the relevant extensions.  (For
+example, web servers that do not publish files will not be able to
+provide a meaningful <code>DOCUMENT_ROOT</code> or <code>PATH_TRANSLATED</code>.)</p>
+
+<p>A WSGI-compliant server or gateway <strong>should</strong> document what variables
+it provides, along with their definitions as appropriate.  Applications
+<strong>should</strong> check for the presence of any variables they require, and
+have a fallback plan in the event such a variable is absent.</p>
+
+<p>Note: missing variables (such as <code>REMOTE_USER</code> when no
+authentication has occurred) should be left out of the <code>environ</code>
+dictionary.  Also note that CGI-defined variables must be strings,
+if they are present at all.  It is a violation of this specification
+for a CGI variable’s value to be of any type other than <code>str</code>.</p>
+
+<p>In addition to the CGI-defined variables, the <code>environ</code> dictionary
+<strong>may</strong> also contain arbitrary operating-system “environment variables”,
+and <strong>must</strong> contain the following WSGI-defined variables:</p>
+
+<p>=====================  ===============================================
+Variable               Value
+=====================  ===============================================
+<code>wsgi.version</code>       The tuple <code>(1, 0)</code>, representing WSGI
+                       version 1.0.</p>
+
+<p><code>wsgi.url_scheme</code>    A string representing the “scheme” portion of
+                       the URL at which the application is being
+                       invoked.  Normally, this will have the value
+                       <code>"http"</code> or <code>"https"</code>, as appropriate.</p>
+
+<p><code>wsgi.input</code>         An input stream (file-like object) from which
+                       the HTTP request body can be read.  (The server
+                       or gateway may perform reads on-demand as
+                       requested by the application, or it may pre-
+                       read the client’s request body and buffer it
+                       in-memory or on disk, or use any other
+                       technique for providing such an input stream,
+                       according to its preference.)</p>
+
+<p><code>wsgi.errors</code>        An output stream (file-like object) to which
+                       error output can be written, for the purpose of
+                       recording program or other errors in a
+                       standardized and possibly centralized location.
+                       This should be a “text mode” stream; i.e.,
+                       applications should use <code>"\n"</code> as a line
+                       ending, and assume that it will be converted to
+                       the correct line ending by the server/gateway.</p>
+
+<pre><code>                   For many servers, ``wsgi.errors`` will be the
+                   server's main error log. Alternatively, this
+                   may be ``sys.stderr``, or a log file of some
+                   sort.  The server's documentation should
+                   include an explanation of how to configure this
+                   or where to find the recorded output.  A server
+                   or gateway may supply different error streams
+                   to different applications, if this is desired.
+</code></pre>
+
+<p><code>wsgi.multithread</code>   This value should evaluate true if the
+                       application object may be simultaneously
+                       invoked by another thread in the same process,
+                       and should evaluate false otherwise.</p>
+
+<p><code>wsgi.multiprocess</code>  This value should evaluate true if an
+                       equivalent application object may be
+                       simultaneously invoked by another process,
+                       and should evaluate false otherwise.</p>
+
+<p><code>wsgi.run_once</code>      This value should evaluate true if the server
+                       or gateway expects (but does not guarantee!)
+                       that the application will only be invoked this
+                       one time during the life of its containing
+                       process.  Normally, this will only be true for
+                       a gateway based on CGI (or something similar).
+=====================  ===============================================</p>
+
+<p>Finally, the <code>environ</code> dictionary may also contain server-defined
+variables.  These variables should be named using only lower-case
+letters, numbers, dots, and underscores, and should be prefixed with
+a name that is unique to the defining server or gateway.  For
+example, <code>mod_python</code> might define variables with names like
+<code>mod_python.some_variable</code>.</p>
+
+<p>Input and Error Streams
+~~~~~~~~~~~~~~~~~~~~~~~</p>
+
+<p>The input and error streams provided by the server must support
+the following methods:</p>
+
+<p>===================  ==========  ========
+Method               Stream      Notes
+===================  ==========  ========
+<code>read(size)</code>       <code>input</code>   1
+<code>readline()</code>       <code>input</code>   1, 2
+<code>readlines(hint)</code>  <code>input</code>   1, 3
+<code>__iter__()</code>       <code>input</code>
+<code>flush()</code>          <code>errors</code>  4
+<code>write(str)</code>       <code>errors</code>
+<code>writelines(seq)</code>  <code>errors</code>
+===================  ==========  ========</p>
+
+<p>The semantics of each method are as documented in the Python Library
+Reference, except for these notes as listed in the table above:</p>
+
+<ol>
+  <li>
+    <p>The server is not required to read past the client’s specified
+<code>Content-Length</code>, and is allowed to simulate an end-of-file
+condition if the application attempts to read past that point.
+The application <strong>should not</strong> attempt to read more data than is
+specified by the <code>CONTENT_LENGTH</code> variable.</p>
+  </li>
+  <li>
+    <p>The optional “size” argument to <code>readline()</code> is not supported,
+as it may be complex for server authors to implement, and is not
+often used in practice.</p>
+  </li>
+  <li>
+    <p>Note that the <code>hint</code> argument to <code>readlines()</code> is optional for
+both caller and implementer.  The application is free not to
+supply it, and the server or gateway is free to ignore it.</p>
+  </li>
+  <li>
+    <p>Since the <code>errors</code> stream may not be rewound, servers and gateways
+are free to forward write operations immediately, without buffering.
+In this case, the <code>flush()</code> method may be a no-op.  Portable
+applications, however, cannot assume that output is unbuffered
+or that <code>flush()</code> is a no-op.  They must call <code>flush()</code> if
+they need to ensure that output has in fact been written.  (For
+example, to minimize intermingling of data from multiple processes
+writing to the same error log.)</p>
+  </li>
+</ol>
+
+<p>The methods listed in the table above <strong>must</strong> be supported by all
+servers conforming to this specification.  Applications conforming
+to this specification <strong>must not</strong> use any other methods or attributes
+of the <code>input</code> or <code>errors</code> objects.  In particular, applications
+<strong>must not</strong> attempt to close these streams, even if they possess
+<code>close()</code> methods.</p>
+
+<h2 id="the-startresponse-callable">The <code>start_response()</code> Callable</h2>
+
+<p>The second parameter passed to the application object is a callable
+of the form <code>start_response(status, response_headers, exc_info=None)</code>.
+(As with all WSGI callables, the arguments must be supplied
+positionally, not by keyword.)  The <code>start_response</code> callable is
+used to begin the HTTP response, and it must return a
+<code>write(body_data)</code> callable (see the <code>Buffering and Streaming</code>_
+section, below).</p>
+
+<p>The <code>status</code> argument is an HTTP “status” string like <code>"200 OK"</code>
+or <code>"404 Not Found"</code>.  That is, it is a string consisting of a
+Status-Code and a Reason-Phrase, in that order and separated by a
+single space, with no surrounding whitespace or other characters.
+(See RFC 2616, Section 6.1.1 for more information.)  The string
+<strong>must not</strong> contain control characters, and must not be terminated
+with a carriage return, linefeed, or combination thereof.</p>
+
+<p>The <code>response_headers</code> argument is a list of <code>(header_name,
+header_value)</code> tuples.  It must be a Python list; i.e.
+<code>type(response_headers) is ListType</code>, and the server <strong>may</strong> change
+its contents in any way it desires.  Each <code>header_name</code> must be a
+valid HTTP header field-name (as defined by RFC 2616, Section 4.2),
+without a trailing colon or other punctuation.</p>
+
+<p>Each <code>header_value</code> <strong>must not</strong> include <em>any</em> control characters,
+including carriage returns or linefeeds, either embedded or at the end.
+(These requirements are to minimize the complexity of any parsing that
+must be performed by servers, gateways, and intermediate response
+processors that need to inspect or modify response headers.)</p>
+
+<p>In general, the server or gateway is responsible for ensuring that
+correct headers are sent to the client: if the application omits
+a header required by HTTP (or other relevant specifications that are in
+effect), the server or gateway <strong>must</strong> add it.  For example, the HTTP
+<code>Date:</code> and <code>Server:</code> headers would normally be supplied by the
+server or gateway.</p>
+
+<p>(A reminder for server/gateway authors: HTTP header names are
+case-insensitive, so be sure to take that into consideration when
+examining application-supplied headers!)</p>
+
+<p>Applications and middleware are forbidden from using HTTP/1.1
+“hop-by-hop” features or headers, any equivalent features in HTTP/1.0,
+or any headers that would affect the persistence of the client’s
+connection to the web server.  These features are the
+exclusive province of the actual web server, and a server or gateway
+<strong>should</strong> consider it a fatal error for an application to attempt
+sending them, and raise an error if they are supplied to
+<code>start_response()</code>.  (For more specifics on “hop-by-hop” features and
+headers, please see the <code>Other HTTP Features</code>_ section below.)</p>
+
+<p>The <code>start_response</code> callable <strong>must not</strong> actually transmit the
+response headers.  Instead, it must store them for the server or
+gateway to transmit <strong>only</strong> after the first iteration of the
+application return value that yields a non-empty string, or upon
+the application’s first invocation of the <code>write()</code> callable.  In
+other words, response headers must not be sent until there is actual
+body data available, or until the application’s returned iterable is
+exhausted.  (The only possible exception to this rule is if the
+response headers explicitly include a <code>Content-Length</code> of zero.)</p>
+
+<p>This delaying of response header transmission is to ensure that buffered
+and asynchronous applications can replace their originally intended
+output with error output, up until the last possible moment.  For
+example, the application may need to change the response status from
+“200 OK” to “500 Internal Error”, if an error occurs while the body is
+being generated within an application buffer.</p>
+
+<p>The <code>exc_info</code> argument, if supplied, must be a Python
+<code>sys.exc_info()</code> tuple.  This argument should be supplied by the
+application only if <code>start_response</code> is being called by an error
+handler.  If <code>exc_info</code> is supplied, and no HTTP headers have been
+output yet, <code>start_response</code> should replace the currently-stored
+HTTP response headers with the newly-supplied ones, thus allowing the
+application to “change its mind” about the output when an error has
+occurred.</p>
+
+<p>However, if <code>exc_info</code> is provided, and the HTTP headers have already
+been sent, <code>start_response</code> <strong>must</strong> raise an error, and <strong>should</strong>
+raise the <code>exc_info</code> tuple.  That is::</p>
+
+<pre><code>raise exc_info[0], exc_info[1], exc_info[2]
+</code></pre>
+
+<p>This will re-raise the exception trapped by the application, and in
+principle should abort the application.  (It is not safe for the
+application to attempt error output to the browser once the HTTP
+headers have already been sent.)  The application <strong>must not</strong> trap
+any exceptions raised by <code>start_response</code>, if it called
+<code>start_response</code> with <code>exc_info</code>.  Instead, it should allow
+such exceptions to propagate back to the server or gateway.  See
+<code>Error Handling</code>_ below, for more details.</p>
+
+<p>The application <strong>may</strong> call <code>start_response</code> more than once, if and
+only if the <code>exc_info</code> argument is provided.  More precisely, it is
+a fatal error to call <code>start_response</code> without the <code>exc_info</code>
+argument if <code>start_response</code> has already been called within the
+current invocation of the application.  (See the example CGI
+gateway above for an illustration of the correct logic.)</p>
+
+<p>Note: servers, gateways, or middleware implementing <code>start_response</code>
+<strong>should</strong> ensure that no reference is held to the <code>exc_info</code>
+parameter beyond the duration of the function’s execution, to avoid
+creating a circular reference through the traceback and frames
+involved.  The simplest way to do this is something like::</p>
+
+<pre><code>def start_response(status, response_headers, exc_info=None):
+    if exc_info:
+         try:
+             # do stuff w/exc_info here
+         finally:
+             exc_info = None    # Avoid circular ref.
+</code></pre>
+
+<p>The example CGI gateway provides another illustration of this
+technique.</p>
+
+<p>Handling the <code>Content-Length</code> Header
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+
+<p>If the application does not supply a <code>Content-Length</code> header, a
+server or gateway may choose one of several approaches to handling
+it.  The simplest of these is to close the client connection when
+the response is completed.</p>
+
+<p>Under some circumstances, however, the server or gateway may be
+able to either generate a <code>Content-Length</code> header, or at least
+avoid the need to close the client connection.  If the application
+does <em>not</em> call the <code>write()</code> callable, and returns an iterable
+whose <code>len()</code> is 1, then the server can automatically determine
+<code>Content-Length</code> by taking the length of the first string yielded
+by the iterable.</p>
+
+<p>And, if the server and client both support HTTP/1.1 “chunked
+encoding” [3]_, then the server <strong>may</strong> use chunked encoding to send
+a chunk for each <code>write()</code> call or string yielded by the iterable,
+thus generating a <code>Content-Length</code> header for each chunk.  This
+allows the server to keep the client connection alive, if it wishes
+to do so.  Note that the server <strong>must</strong> comply fully with RFC 2616
+when doing this, or else fall back to one of the other strategies for
+dealing with the absence of <code>Content-Length</code>.</p>
+
+<p>(Note: applications and middleware <strong>must not</strong> apply any kind of
+<code>Transfer-Encoding</code> to their output, such as chunking or gzipping;
+as “hop-by-hop” operations, these encodings are the province of the
+actual web server/gateway.  See <code>Other HTTP Features</code>_ below, for
+more details.)</p>
+
+<h2 id="buffering-and-streaming">Buffering and Streaming</h2>
+
+<p>Generally speaking, applications will achieve the best throughput
+by buffering their (modestly-sized) output and sending it all at
+once.  This is a common approach in existing frameworks such as
+Zope: the output is buffered in a StringIO or similar object, then
+transmitted all at once, along with the response headers.</p>
+
+<p>The corresponding approach in WSGI is for the application to simply
+return a single-element iterable (such as a list) containing the
+response body as a single string.  This is the recommended approach
+for the vast majority of application functions, that render
+HTML pages whose text easily fits in memory.</p>
+
+<p>For large files, however, or for specialized uses of HTTP streaming
+(such as multipart “server push”), an application may need to provide
+output in smaller blocks (e.g. to avoid loading a large file into
+memory).  It’s also sometimes the case that part of a response may
+be time-consuming to produce, but it would be useful to send ahead the
+portion of the response that precedes it.</p>
+
+<p>In these cases, applications will usually return an iterator (often
+a generator-iterator) that produces the output in a block-by-block
+fashion.  These blocks may be broken to coincide with mulitpart
+boundaries (for “server push”), or just before time-consuming
+tasks (such as reading another block of an on-disk file).</p>
+
+<p>WSGI servers, gateways, and middleware <strong>must not</strong> delay the
+transmission of any block; they <strong>must</strong> either fully transmit
+the block to the client, or guarantee that they will continue
+transmission even while the application is producing its next block.
+A server/gateway or middleware may provide this guarantee in one of
+three ways:</p>
+
+<ol>
+  <li>
+    <p>Send the entire block to the operating system (and request
+that any O/S buffers be flushed) before returning control
+to the application, OR</p>
+  </li>
+  <li>
+    <p>Use a different thread to ensure that the block continues
+to be transmitted while the application produces the next
+block.</p>
+  </li>
+  <li>
+    <p>(Middleware only) send the entire block to its parent
+gateway/server</p>
+  </li>
+</ol>
+
+<p>By providing this guarantee, WSGI allows applications to ensure
+that transmission will not become stalled at an arbitrary point
+in their output data.  This is critical for proper functioning
+of e.g. multipart “server push” streaming, where data between
+multipart boundaries should be transmitted in full to the client.</p>
+
+<p>Middleware Handling of Block Boundaries
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+
+<p>In order to better support asynchronous applications and servers,
+middleware components <strong>must not</strong> block iteration waiting for
+multiple values from an application iterable.  If the middleware
+needs to accumulate more data from the application before it can
+produce any output, it <strong>must</strong> yield an empty string.</p>
+
+<p>To put this requirement another way, a middleware component <strong>must
+yield at least one value</strong> each time its underlying application
+yields a value.  If the middleware cannot yield any other value,
+it must yield an empty string.</p>
+
+<p>This requirement ensures that asynchronous applications and servers
+can conspire to reduce the number of threads that are required
+to run a given number of application instances simultaneously.</p>
+
+<p>Note also that this requirement means that middleware <strong>must</strong>
+return an iterable as soon as its underlying application returns
+an iterable.  It is also forbidden for middleware to use the
+<code>write()</code> callable to transmit data that is yielded by an
+underlying application.  Middleware may only use their parent
+server’s <code>write()</code> callable to transmit data that the
+underlying application sent using a middleware-provided <code>write()</code>
+callable.</p>
+
+<p>The <code>write()</code> Callable
+~~~~~~~~~~~~~~~~~~~~~~~~</p>
+
+<p>Some existing application framework APIs support unbuffered
+output in a different manner than WSGI.  Specifically, they
+provide a “write” function or method of some kind to write
+an unbuffered block of data, or else they provide a buffered
+“write” function and a “flush” mechanism to flush the buffer.</p>
+
+<p>Unfortunately, such APIs cannot be implemented in terms of
+WSGI’s “iterable” application return value, unless threads
+or other special mechanisms are used.</p>
+
+<p>Therefore, to allow these frameworks to continue using an
+imperative API, WSGI includes a special <code>write()</code> callable,
+returned by the <code>start_response</code> callable.</p>
+
+<p>New WSGI applications and frameworks <strong>should not</strong> use the
+<code>write()</code> callable if it is possible to avoid doing so.  The
+<code>write()</code> callable is strictly a hack to support imperative
+streaming APIs.  In general, applications should produce their
+output via their returned iterable, as this makes it possible
+for web servers to interleave other tasks in the same Python thread,
+potentially providing better throughput for the server as a whole.</p>
+
+<p>The <code>write()</code> callable is returned by the <code>start_response()</code>
+callable, and it accepts a single parameter:  a string to be
+written as part of the HTTP response body, that is treated exactly
+as though it had been yielded by the output iterable.  In other
+words, before <code>write()</code> returns, it must guarantee that the
+passed-in string was either completely sent to the client, or
+that it is buffered for transmission while the application
+proceeds onward.</p>
+
+<p>An application <strong>must</strong> return an iterable object, even if it
+uses <code>write()</code> to produce all or part of its response body.
+The returned iterable <strong>may</strong> be empty (i.e. yield no non-empty
+strings), but if it <em>does</em> yield non-empty strings, that output
+must be treated normally by the server or gateway (i.e., it must be
+sent or queued immediately).  Applications <strong>must not</strong> invoke
+<code>write()</code> from within their return iterable, and therefore any
+strings yielded by the iterable are transmitted after all strings
+passed to <code>write()</code> have been sent to the client.</p>
+
+<h2 id="unicode-issues">Unicode Issues</h2>
+
+<p>HTTP does not directly support Unicode, and neither does this
+interface.  All encoding/decoding must be handled by the application;
+all strings passed to or from the server must be standard Python byte
+strings, not Unicode objects.  The result of using a Unicode object
+where a string object is required, is undefined.</p>
+
+<p>Note also that strings passed to <code>start_response()</code> as a status or
+as response headers <strong>must</strong> follow RFC 2616 with respect to encoding.
+That is, they must either be ISO-8859-1 characters, or use RFC 2047
+MIME encoding.</p>
+
+<p>On Python platforms where the <code>str</code> or <code>StringType</code> type is in
+fact Unicode-based (e.g. Jython, IronPython, Python 3000, etc.), all
+“strings” referred to in this specification must contain only
+code points representable in ISO-8859-1 encoding (<code>\u0000</code> through
+<code>\u00FF</code>, inclusive).  It is a fatal error for an application to
+supply strings containing any other Unicode character or code point.
+Similarly, servers and gateways <strong>must not</strong> supply
+strings to an application containing any other Unicode characters.</p>
+
+<p>Again, all strings referred to in this specification <strong>must</strong> be
+of type <code>str</code> or <code>StringType</code>, and <strong>must not</strong> be of type
+<code>unicode</code> or <code>UnicodeType</code>.  And, even if a given platform allows
+for more than 8 bits per character in <code>str</code>/<code>StringType</code> objects,
+only the lower 8 bits may be used, for any value referred to in
+this specification as a “string”.</p>
+
+<h2 id="error-handling">Error Handling</h2>
+
+<p>In general, applications <strong>should</strong> try to trap their own, internal
+errors, and display a helpful message in the browser.  (It is up
+to the application to decide what “helpful” means in this context.)</p>
+
+<p>However, to display such a message, the application must not have
+actually sent any data to the browser yet, or else it risks corrupting
+the response.  WSGI therefore provides a mechanism to either allow the
+application to send its error message, or be automatically aborted:
+the <code>exc_info</code> argument to <code>start_response</code>.  Here is an example
+of its use::</p>
+
+<pre><code>try:
+    # regular application code here
+    status = "200 Froody"
+    response_headers = [("content-type", "text/plain")]
+    start_response(status, response_headers)
+    return ["normal body goes here"]
+except:
+    # XXX should trap runtime issues like MemoryError, KeyboardInterrupt
+    #     in a separate handler before this bare 'except:'...
+    status = "500 Oops"
+    response_headers = [("content-type", "text/plain")]
+    start_response(status, response_headers, sys.exc_info())
+    return ["error body goes here"]
+</code></pre>
+
+<p>If no output has been written when an exception occurs, the call to
+<code>start_response</code> will return normally, and the application will
+return an error body to be sent to the browser.  However, if any output
+has already been sent to the browser, <code>start_response</code> will reraise
+the provided exception.  This exception <strong>should not</strong> be trapped by
+the application, and so the application will abort.  The server or
+gateway can then trap this (fatal) exception and abort the response.</p>
+
+<p>Servers <strong>should</strong> trap and log any exception that aborts an
+application or the iteration of its return value.  If a partial
+response has already been written to the browser when an application
+error occurs, the server or gateway <strong>may</strong> attempt to add an error
+message to the output, if the already-sent headers indicate a
+<code>text/*</code> content type that the server knows how to modify cleanly.</p>
+
+<p>Some middleware may wish to provide additional exception handling
+services, or intercept and replace application error messages.  In
+such cases, middleware may choose to <strong>not</strong> re-raise the <code>exc_info</code>
+supplied to <code>start_response</code>, but instead raise a middleware-specific
+exception, or simply return without an exception after storing the
+supplied arguments.  This will then cause the application to return
+its error body iterable (or invoke <code>write()</code>), allowing the middleware
+to capture and modify the error output.  These techniques will work as
+long as application authors:</p>
+
+<ol>
+  <li>
+    <p>Always provide <code>exc_info</code> when beginning an error response</p>
+  </li>
+  <li>
+    <p>Never trap errors raised by <code>start_response</code> when <code>exc_info</code> is
+being provided</p>
+  </li>
+</ol>
+
+<h2 id="http-11-expectcontinue">HTTP 1.1 Expect/Continue</h2>
+
+<p>Servers and gateways that implement HTTP 1.1 <strong>must</strong> provide
+transparent support for HTTP 1.1’s “expect/continue” mechanism.  This
+may be done in any of several ways:</p>
+
+<ol>
+  <li>
+    <p>Respond to requests containing an <code>Expect: 100-continue</code> request
+with an immediate “100 Continue” response, and proceed normally.</p>
+  </li>
+  <li>
+    <p>Proceed with the request normally, but provide the application
+with a <code>wsgi.input</code> stream that will send the “100 Continue”
+response if/when the application first attempts to read from the
+input stream.  The read request must then remain blocked until the
+client responds.</p>
+  </li>
+  <li>
+    <p>Wait until the client decides that the server does not support
+expect/continue, and sends the request body on its own.  (This
+is suboptimal, and is not recommended.)</p>
+  </li>
+</ol>
+
+<p>Note that these behavior restrictions do not apply for HTTP 1.0
+requests, or for requests that are not directed to an application
+object.  For more information on HTTP 1.1 Expect/Continue, see RFC
+2616, sections 8.2.3 and 10.1.1.</p>
+
+<h2 id="other-http-features">Other HTTP Features</h2>
+
+<p>In general, servers and gateways should “play dumb” and allow the
+application complete control over its output.  They should only make
+changes that do not alter the effective semantics of the application’s
+response.  It is always possible for the application developer to add
+middleware components to supply additional features, so server/gateway
+developers should be conservative in their implementation.  In a sense,
+a server should consider itself to be like an HTTP “gateway server”,
+with the application being an HTTP “origin server”.  (See RFC 2616,
+section 1.3, for the definition of these terms.)</p>
+
+<p>However, because WSGI servers and applications do not communicate via
+HTTP, what RFC 2616 calls “hop-by-hop” headers do not apply to WSGI
+internal communications.  WSGI applications <strong>must not</strong> generate any
+“hop-by-hop” headers [4]_, attempt to use HTTP features that would
+require them to generate such headers, or rely on the content of
+any incoming “hop-by-hop” headers in the <code>environ</code> dictionary.
+WSGI servers <strong>must</strong> handle any supported inbound “hop-by-hop” headers
+on their own, such as by decoding any inbound <code>Transfer-Encoding</code>,
+including chunked encoding if applicable.</p>
+
+<p>Applying these principles to a variety of HTTP features, it should be
+clear that a server <strong>may</strong> handle cache validation via the
+<code>If-None-Match</code> and <code>If-Modified-Since</code> request headers and the
+<code>Last-Modified</code> and <code>ETag</code> response headers.  However, it is
+not required to do this, and the application <strong>should</strong> perform its
+own cache validation if it wants to support that feature, since
+the server/gateway is not required to do such validation.</p>
+
+<p>Similarly, a server <strong>may</strong> re-encode or transport-encode an
+application’s response, but the application <strong>should</strong> use a
+suitable content encoding on its own, and <strong>must not</strong> apply a
+transport encoding.  A server <strong>may</strong> transmit byte ranges of the
+application’s response if requested by the client, and the
+application doesn’t natively support byte ranges.  Again, however,
+the application <strong>should</strong> perform this function on its own if desired.</p>
+
+<p>Note that these restrictions on applications do not necessarily mean
+that every application must reimplement every HTTP feature; many HTTP
+features can be partially or fully implemented by middleware
+components, thus freeing both server and application authors from
+implementing the same features over and over again.</p>
+
+<h2 id="thread-support">Thread Support</h2>
+
+<p>Thread support, or lack thereof, is also server-dependent.
+Servers that can run multiple requests in parallel, <strong>should</strong> also
+provide the option of running an application in a single-threaded
+fashion, so that applications or frameworks that are not thread-safe
+may still be used with that server.</p>
+
+<h1 id="implementationapplication-notes">Implementation/Application Notes</h1>
+
+<h2 id="server-extension-apis">Server Extension APIs</h2>
+
+<p>Some server authors may wish to expose more advanced APIs, that
+application or framework authors can use for specialized purposes.
+For example, a gateway based on <code>mod_python</code> might wish to expose
+part of the Apache API as a WSGI extension.</p>
+
+<p>In the simplest case, this requires nothing more than defining an
+<code>environ</code> variable, such as <code>mod_python.some_api</code>.  But, in many
+cases, the possible presence of middleware can make this difficult.
+For example, an API that offers access to the same HTTP headers that
+are found in <code>environ</code> variables, might return different data if
+<code>environ</code> has been modified by middleware.</p>
+
+<p>In general, any extension API that duplicates, supplants, or bypasses
+some portion of WSGI functionality runs the risk of being incompatible
+with middleware components.  Server/gateway developers should <em>not</em>
+assume that nobody will use middleware, because some framework
+developers specifically intend to organize or reorganize their
+frameworks to function almost entirely as middleware of various kinds.</p>
+
+<p>So, to provide maximum compatibility, servers and gateways that
+provide extension APIs that replace some WSGI functionality, <strong>must</strong>
+design those APIs so that they are invoked using the portion of the
+API that they replace.  For example, an extension API to access HTTP
+request headers must require the application to pass in its current
+<code>environ</code>, so that the server/gateway may verify that HTTP headers
+accessible via the API have not been altered by middleware.  If the
+extension API cannot guarantee that it will always agree with
+<code>environ</code> about the contents of HTTP headers, it must refuse service
+to the application, e.g. by raising an error, returning <code>None</code>
+instead of a header collection, or whatever is appropriate to the API.</p>
+
+<p>Similarly, if an extension API provides an alternate means of writing
+response data or headers, it should require the <code>start_response</code>
+callable to be passed in, before the application can obtain the
+extended service.  If the object passed in is not the same one that
+the server/gateway originally supplied to the application, it cannot
+guarantee correct operation and must refuse to provide the extended
+service to the application.</p>
+
+<p>These guidelines also apply to middleware that adds information such
+as parsed cookies, form variables, sessions, and the like to
+<code>environ</code>.  Specifically, such middleware should provide these
+features as functions which operate on <code>environ</code>, rather than simply
+stuffing values into <code>environ</code>.  This helps ensure that information
+is calculated from <code>environ</code> <em>after</em> any middleware has done any URL
+rewrites or other <code>environ</code> modifications.</p>
+
+<p>It is very important that these “safe extension” rules be followed by
+both server/gateway and middleware developers, in order to avoid a
+future in which middleware developers are forced to delete any and all
+extension APIs from <code>environ</code> to ensure that their mediation isn’t
+being bypassed by applications using those extensions!</p>
+
+<h2 id="application-configuration">Application Configuration</h2>
+
+<p>This specification does not define how a server selects or obtains an
+application to invoke.  These and other configuration options are
+highly server-specific matters.  It is expected that server/gateway
+authors will document how to configure the server to execute a
+particular application object, and with what options (such as
+threading options).</p>
+
+<p>Framework authors, on the other hand, should document how to create an
+application object that wraps their framework’s functionality.  The
+user, who has chosen both the server and the application framework,
+must connect the two together.  However, since both the framework and
+the server now have a common interface, this should be merely a
+mechanical matter, rather than a significant engineering effort for
+each new server/framework pair.</p>
+
+<p>Finally, some applications, frameworks, and middleware may wish to
+use the <code>environ</code> dictionary to receive simple string configuration
+options.  Servers and gateways <strong>should</strong> support this by allowing
+an application’s deployer to specify name-value pairs to be placed in
+<code>environ</code>.  In the simplest case, this support can consist merely of
+copying all operating system-supplied environment variables from
+<code>os.environ</code> into the <code>environ</code> dictionary, since the deployer in
+principle can configure these externally to the server, or in the
+CGI case they may be able to be set via the server’s configuration
+files.</p>
+
+<p>Applications <strong>should</strong> try to keep such required variables to a
+minimum, since not all servers will support easy configuration of
+them.  Of course, even in the worst case, persons deploying an
+application can create a script to supply the necessary configuration
+values::</p>
+
+<p>from the_app import application</p>
+
+<p>def new_app(environ, start_response):
+       environ[‘the_app.configval1’] = ‘something’
+       return application(environ, start_response)</p>
+
+<p>But, most existing applications and frameworks will probably only need
+a single configuration value from <code>environ</code>, to indicate the location
+of their application or framework-specific configuration file(s).  (Of
+course, applications should cache such configuration, to avoid having
+to re-read it upon each invocation.)</p>
+
+<h2 id="url-reconstruction">URL Reconstruction</h2>
+
+<p>If an application wishes to reconstruct a request’s complete URL, it
+may do so using the following algorithm, contributed by Ian Bicking::</p>
+
+<pre><code>from urllib import quote
+url = environ['wsgi.url_scheme']+'://'
+
+if environ.get('HTTP_HOST'):
+    url += environ['HTTP_HOST']
+else:
+    url += environ['SERVER_NAME']
+
+    if environ['wsgi.url_scheme'] == 'https':
+        if environ['SERVER_PORT'] != '443':
+           url += ':' + environ['SERVER_PORT']
+    else:
+        if environ['SERVER_PORT'] != '80':
+           url += ':' + environ['SERVER_PORT']
+
+url += quote(environ.get('SCRIPT_NAME', ''))
+url += quote(environ.get('PATH_INFO', ''))
+if environ.get('QUERY_STRING'):
+    url += '?' + environ['QUERY_STRING']
+</code></pre>
+
+<p>Note that such a reconstructed URL may not be precisely the same URI
+as requested by the client.  Server rewrite rules, for example, may
+have modified the client’s originally requested URL to place it in a
+canonical form.</p>
+
+<h2 id="supporting-older-22-versions-of-python">Supporting Older (&lt;2.2) Versions of Python</h2>
+
+<p>Some servers, gateways, or applications may wish to support older
+(&lt;2.2) versions of Python.  This is especially important if Jython
+is a target platform, since as of this writing a production-ready
+version of Jython 2.2 is not yet available.</p>
+
+<p>For servers and gateways, this is relatively straightforward:
+servers and gateways targeting pre-2.2 versions of Python must
+simply restrict themselves to using only a standard “for” loop to
+iterate over any iterable returned by an application.  This is the
+only way to ensure source-level compatibility with both the pre-2.2
+iterator protocol (discussed further below) and “today’s” iterator
+protocol (see PEP 234).</p>
+
+<p>(Note that this technique necessarily applies only to servers,
+gateways, or middleware that are written in Python.  Discussion of
+how to use iterator protocol(s) correctly from other languages is
+outside the scope of this PEP.)</p>
+
+<p>For applications, supporting pre-2.2 versions of Python is slightly
+more complex:</p>
+
+<ul>
+  <li>
+    <p>You may not return a file object and expect it to work as an iterable,
+since before Python 2.2, files were not iterable.  (In general, you
+shouldn’t do this anyway, because it will perform quite poorly most
+of the time!)  Use <code>wsgi.file_wrapper</code> or an application-specific
+file wrapper class.  (See <code>Optional Platform-Specific File Handling</code>_
+for more on <code>wsgi.file_wrapper</code>, and an example class you can use
+to wrap a file as an iterable.)</p>
+  </li>
+  <li>
+    <p>If you return a custom iterable, it <strong>must</strong> implement the pre-2.2
+iterator protocol.  That is, provide a <code>__getitem__</code> method that
+accepts an integer key, and raises <code>IndexError</code> when exhausted.
+(Note that built-in sequence types are also acceptable, since they
+also implement this protocol.)</p>
+  </li>
+</ul>
+
+<p>Finally, middleware that wishes to support pre-2.2 versions of Python,
+and iterates over application return values or itself returns an
+iterable (or both), must follow the appropriate recommendations above.</p>
+
+<p>(Note: It should go without saying that to support pre-2.2 versions
+of Python, any server, gateway, application, or middleware must also
+use only language features available in the target version, use
+1 and 0 instead of <code>True</code> and <code>False</code>, etc.)</p>
+
+<h2 id="optional-platform-specific-file-handling">Optional Platform-Specific File Handling</h2>
+
+<p>Some operating environments provide special high-performance file-
+transmission facilities, such as the Unix <code>sendfile()</code> call.
+Servers and gateways <strong>may</strong> expose this functionality via an optional
+<code>wsgi.file_wrapper</code> key in the <code>environ</code>.  An application
+<strong>may</strong> use this “file wrapper” to convert a file or file-like object
+into an iterable that it then returns, e.g.::</p>
+
+<pre><code>if 'wsgi.file_wrapper' in environ:
+    return environ['wsgi.file_wrapper'](filelike, block_size)
+else:
+    return iter(lambda: filelike.read(block_size), '')
+</code></pre>
+
+<p>If the server or gateway supplies <code>wsgi.file_wrapper</code>, it must be
+a callable that accepts one required positional parameter, and one
+optional positional parameter.  The first parameter is the file-like
+object to be sent, and the second parameter is an optional block
+size “suggestion” (which the server/gateway need not use).  The
+callable <strong>must</strong> return an iterable object, and <strong>must not</strong> perform
+any data transmission until and unless the server/gateway actually
+receives the iterable as a return value from the application.
+(To do otherwise would prevent middleware from being able to interpret
+or override the response data.)</p>
+
+<p>To be considered “file-like”, the object supplied by the application
+must have a <code>read()</code> method that takes an optional size argument.
+It <strong>may</strong> have a <code>close()</code> method, and if so, the iterable returned
+by <code>wsgi.file_wrapper</code> <strong>must</strong> have a <code>close()</code> method that
+invokes the original file-like object’s <code>close()</code> method.  If the
+“file-like” object has any other methods or attributes with names
+matching those of Python built-in file objects (e.g. <code>fileno()</code>),
+the <code>wsgi.file_wrapper</code> <strong>may</strong> assume that these methods or
+attributes have the same semantics as those of a built-in file object.</p>
+
+<p>The actual implementation of any platform-specific file handling
+must occur <strong>after</strong> the application returns, and the server or
+gateway checks to see if a wrapper object was returned.  (Again,
+because of the presence of middleware, error handlers, and the like,
+it is not guaranteed that any wrapper created will actually be used.)</p>
+
+<p>Apart from the handling of <code>close()</code>, the semantics of returning a
+file wrapper from the application should be the same as if the
+application had returned <code>iter(filelike.read, '')</code>.  In other words,
+transmission should begin at the current position within the “file”
+at the time that transmission begins, and continue until the end is
+reached.</p>
+
+<p>Of course, platform-specific file transmission APIs don’t usually
+accept arbitrary “file-like” objects.  Therefore, a
+<code>wsgi.file_wrapper</code> has to introspect the supplied object for
+things such as a <code>fileno()</code> (Unix-like OSes) or a
+<code>java.nio.FileChannel</code> (under Jython) in order to determine if
+the file-like object is suitable for use with the platform-specific
+API it supports.</p>
+
+<p>Note that even if the object is <em>not</em> suitable for the platform API,
+the <code>wsgi.file_wrapper</code> <strong>must</strong> still return an iterable that wraps
+<code>read()</code> and <code>close()</code>, so that applications using file wrappers
+are portable across platforms.  Here’s a simple platform-agnostic
+file wrapper class, suitable for old (pre 2.2) and new Pythons alike::</p>
+
+<pre><code>class FileWrapper:
+
+    def __init__(self, filelike, blksize=8192):
+        self.filelike = filelike
+        self.blksize = blksize
+        if hasattr(filelike, 'close'):
+            self.close = filelike.close
+
+    def __getitem__(self, key):
+        data = self.filelike.read(self.blksize)
+        if data:
+            return data
+        raise IndexError
+</code></pre>
+
+<p>and here is a snippet from a server/gateway that uses it to provide
+access to a platform-specific API::</p>
+
+<pre><code>environ['wsgi.file_wrapper'] = FileWrapper
+result = application(environ, start_response)
+
+try:
+    if isinstance(result, FileWrapper):
+        # check if result.filelike is usable w/platform-specific
+        # API, and if so, use that API to transmit the result.
+        # If not, fall through to normal iterable handling
+        # loop below.
+
+    for data in result:
+        # etc.
+
+finally:
+    if hasattr(result, 'close'):
+        result.close()
+</code></pre>
+
+<h1 id="questions-and-answers">Questions and Answers</h1>
+
+<ol>
+  <li>
+    <p>Why must <code>environ</code> be a dictionary?  What’s wrong with using a
+subclass?</p>
+
+    <p>The rationale for requiring a dictionary is to maximize portability
+between servers.  The alternative would be to define some subset of
+a dictionary’s methods as being the standard and portable
+interface.  In practice, however, most servers will probably find a
+dictionary adequate to their needs, and thus framework authors will
+come to expect the full set of dictionary features to be available,
+since they will be there more often than not.  But, if some server
+chooses <em>not</em> to use a dictionary, then there will be
+interoperability problems despite that server’s “conformance” to
+spec.  Therefore, making a dictionary mandatory simplifies the
+specification and guarantees interoperability.</p>
+
+    <p>Note that this does not prevent server or framework developers from
+offering specialized services as custom variables <em>inside</em> the
+<code>environ</code> dictionary.  This is the recommended approach for
+offering any such value-added services.</p>
+  </li>
+  <li>
+    <p>Why can you call <code>write()</code> <em>and</em> yield strings/return an
+iterable?  Shouldn’t we pick just one way?</p>
+
+    <p>If we supported only the iteration approach, then current
+frameworks that assume the availability of “push” suffer.  But, if
+we only support pushing via <code>write()</code>, then server performance
+suffers for transmission of e.g. large files (if a worker thread
+can’t begin work on a new request until all of the output has been
+sent).  Thus, this compromise allows an application framework to
+support both approaches, as appropriate, but with only a little
+more burden to the server implementor than a push-only approach
+would require.</p>
+  </li>
+  <li>
+    <p>What’s the <code>close()</code> for?</p>
+
+    <p>When writes are done during the execution of an application
+object, the application can ensure that resources are released
+using a try/finally block.  But, if the application returns an
+iterable, any resources used will not be released until the
+iterable is garbage collected.  The <code>close()</code> idiom allows an
+application to release critical resources at the end of a request,
+and it’s forward-compatible with the support for try/finally in
+generators that’s proposed by PEP 325.</p>
+  </li>
+  <li>
+    <p>Why is this interface so low-level?  I want feature X!  (e.g.
+cookies, sessions, persistence, …)</p>
+
+    <p>This isn’t Yet Another Python Web Framework.  It’s just a way for
+frameworks to talk to web servers, and vice versa.  If you want
+these features, you need to pick a web framework that provides the
+features you want.  And if that framework lets you create a WSGI
+application, you should be able to run it in most WSGI-supporting
+servers.  Also, some WSGI servers may offer additional services via
+objects provided in their <code>environ</code> dictionary; see the
+applicable server documentation for details.  (Of course,
+applications that use such extensions will not be portable to other
+WSGI-based servers.)</p>
+  </li>
+  <li>
+    <p>Why use CGI variables instead of good old HTTP headers?  And why
+mix them in with WSGI-defined variables?</p>
+
+    <p>Many existing web frameworks are built heavily upon the CGI spec,
+and existing web servers know how to generate CGI variables.  In
+contrast, alternative ways of representing inbound HTTP information
+are fragmented and lack market share.  Thus, using the CGI
+“standard” seems like a good way to leverage existing
+implementations.  As for mixing them with WSGI variables,
+separating them would just require two dictionary arguments to be
+passed around, while providing no real benefits.</p>
+  </li>
+  <li>
+    <p>What about the status string?  Can’t we just use the number,
+passing in <code>200</code> instead of <code>"200 OK"</code>?</p>
+
+    <p>Doing this would complicate the server or gateway, by requiring
+them to have a table of numeric statuses and corresponding
+messages.  By contrast, it is easy for an application or framework
+author to type the extra text to go with the specific response code
+they are using, and existing frameworks often already have a table
+containing the needed messages.  So, on balance it seems better to
+make the application/framework responsible, rather than the server
+or gateway.</p>
+  </li>
+  <li>
+    <p>Why is <code>wsgi.run_once</code> not guaranteed to run the app only once?</p>
+
+    <p>Because it’s merely a suggestion to the application that it should
+“rig for infrequent running”.  This is intended for application
+frameworks that have multiple modes of operation for caching,
+sessions, and so forth.  In a “multiple run” mode, such frameworks
+may preload caches, and may not write e.g. logs or session data to
+disk after each request.  In “single run” mode, such frameworks
+avoid preloading and flush all necessary writes after each request.</p>
+
+    <p>However, in order to test an application or framework to verify
+correct operation in the latter mode, it may be necessary (or at
+least expedient) to invoke it more than once.  Therefore, an
+application should not assume that it will definitely not be run
+again, just because it is called with <code>wsgi.run_once</code> set to
+<code>True</code>.</p>
+  </li>
+  <li>
+    <p>Feature X (dictionaries, callables, etc.) are ugly for use in
+application code; why don’t we use objects instead?</p>
+
+    <p>All of these implementation choices of WSGI are specifically
+intended to <em>decouple</em> features from one another; recombining these
+features into encapsulated objects makes it somewhat harder to
+write servers or gateways, and an order of magnitude harder to
+write middleware that replaces or modifies only small portions of
+the overall functionality.</p>
+
+    <p>In essence, middleware wants to have a “Chain of Responsibility”
+pattern, whereby it can act as a “handler” for some functions,
+while allowing others to remain unchanged.  This is difficult to do
+with ordinary Python objects, if the interface is to remain
+extensible.  For example, one must use <code>__getattr__</code> or
+<code>__getattribute__</code> overrides, to ensure that extensions (such as
+attributes defined by future WSGI versions) are passed through.</p>
+
+    <p>This type of code is notoriously difficult to get 100% correct, and
+few people will want to write it themselves.  They will therefore
+copy other people’s implementations, but fail to update them when
+the person they copied from corrects yet another corner case.</p>
+
+    <p>Further, this necessary boilerplate would be pure excise, a
+developer tax paid by middleware developers to support a slightly
+prettier API for application framework developers.  But,
+application framework developers will typically only be updating
+<em>one</em> framework to support WSGI, and in a very limited part of
+their framework as a whole.  It will likely be their first (and
+maybe their only) WSGI implementation, and thus they will likely
+implement with this specification ready to hand.  Thus, the effort
+of making the API “prettier” with object attributes and suchlike
+would likely be wasted for this audience.</p>
+
+    <p>We encourage those who want a prettier (or otherwise improved) WSGI
+interface for use in direct web application programming (as opposed
+to web framework development) to develop APIs or frameworks that
+wrap WSGI for convenient use by application developers.  In this
+way, WSGI can remain conveniently low-level for server and
+middleware authors, while not being “ugly” for application
+developers.</p>
+  </li>
+</ol>
+
+<h1 id="proposedunder-discussion">Proposed/Under Discussion</h1>
+
+<p>These items are currently being discussed on the Web-SIG and elsewhere,
+or are on the PEP author’s “to-do” list:</p>
+
+<ul>
+  <li>
+    <p>Should <code>wsgi.input</code> be an iterator instead of a file?  This would
+help for asynchronous applications and chunked-encoding input
+streams.</p>
+  </li>
+  <li>
+    <p>Optional extensions are being discussed for pausing iteration of an
+application’s output until input is available or until a callback
+occurs.</p>
+  </li>
+  <li>
+    <p>Add a section about synchronous vs. asynchronous apps and servers,
+the relevant threading models, and issues/design goals in these
+areas.</p>
+  </li>
+</ul>
+
+<h1 id="acknowledgements">Acknowledgements</h1>
+
+<p>Thanks go to the many folks on the Web-SIG mailing list whose
+thoughtful feedback made this revised draft possible.  Especially:</p>
+
+<ul>
+  <li>
+    <p>Gregory “Grisha” Trubetskoy, author of <code>mod_python</code>, who beat up
+on the first draft as not offering any advantages over “plain old
+CGI”, thus encouraging me to look for a better approach.</p>
+  </li>
+  <li>
+    <p>Ian Bicking, who helped nag me into properly specifying the
+multithreading and multiprocess options, as well as badgering me to
+provide a mechanism for servers to supply custom extension data to
+an application.</p>
+  </li>
+  <li>
+    <p>Tony Lownds, who came up with the concept of a <code>start_response</code>
+function that took the status and headers, returning a <code>write</code>
+function.  His input also guided the design of the exception handling
+facilities, especially in the area of allowing for middleware that
+overrides application error messages.</p>
+  </li>
+  <li>
+    <p>Alan Kennedy, whose courageous attempts to implement WSGI-on-Jython
+(well before the spec was finalized) helped to shape the “supporting
+older versions of Python” section, as well as the optional
+<code>wsgi.file_wrapper</code> facility.</p>
+  </li>
+  <li>
+    <p>Mark Nottingham, who reviewed the spec extensively for issues with
+HTTP RFC compliance, especially with regard to HTTP/1.1 features that
+I didn’t even know existed until he pointed them out.</p>
+  </li>
+</ul>
+
+<h1 id="references">References</h1>
+
+<p>.. [1] The Python Wiki “Web Programming” topic
+   (http://www.python.org/cgi-bin/moinmoin/WebProgramming)</p>
+
+<p>.. [2] The Common Gateway Interface Specification, v 1.1, 3rd Draft
+   (http://ken.coar.org/cgi/draft-coar-cgi-v11-03.txt)</p>
+
+<p>.. [3] “Chunked Transfer Coding” – HTTP/1.1, section 3.6.1
+   (http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1)</p>
+
+<p>.. [4] “End-to-end and Hop-by-hop Headers” – HTTP/1.1, Section 13.5.1
+   (http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.5.1)</p>
+
+<p>.. [5] mod_ssl Reference, “Environment Variables”
+   (http://www.modssl.org/docs/2.8/ssl_reference.html#ToC25)</p>
+
+<h1 id="copyright">Copyright</h1>
+
+<p>This document has been placed in the public domain.</p>
+
+<p>..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+  
+    <div class="footer-col-wrapper">
+
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+		
+          <li>水货程序员的笔记</li>
+          <li><a href="mailto:fulin87@sina.com">fulin87@sina.com</a></li>
+        </ul>
+      </div>
+
+	  
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/fulin87"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">fulin87</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/fulin87"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">fulin87</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+		 <ul class="social-media-list">
+			<li>唯天下之至诚，胜天下之至伪</li>
+			<li>唯天下之至拙，胜天下之至巧</li>
+		 </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
