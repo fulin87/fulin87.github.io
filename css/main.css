@@ -8,7 +8,8 @@ dl, dd, ol, ul, figure {
   padding: 0; }
 
 p, h1, h2, h3, h4, h5, h6, ol, ul {
-  color: #ffffff; }
+  #color: #ffffff;
+  color: #080808; }
 
 p > code, li > pre, li > code, em > code {
   color: #000033; }
@@ -26,8 +27,8 @@ body {
   -o-font-feature-settings: "kern" 1;
   font-feature-settings: "kern" 1;
   font-kerning: normal;
-  #background-color: #1A1A1A;
-  background-color: #080808; }
+  background-color: #F0F0F0;
+  #background-color: #080808; }
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
