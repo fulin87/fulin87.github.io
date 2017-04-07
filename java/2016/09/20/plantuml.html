@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/java/2016/09/20/plantuml.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/java/2016/09/20/plantUML.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,27 +66,27 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">安装</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">问题</a></li>
-  <li><a href="#plantuml" id="markdown-toc-plantuml">plantUml的使用</a></li>
-  <li><a href="#graphviz" id="markdown-toc-graphviz">Graphviz的使用</a></li>
+  <li><a href="#安装" id="markdown-toc-安装">安装</a></li>
+  <li><a href="#问题" id="markdown-toc-问题">问题</a></li>
+  <li><a href="#plantuml的使用" id="markdown-toc-plantuml的使用">plantUml的使用</a></li>
+  <li><a href="#graphviz的使用" id="markdown-toc-graphviz的使用">Graphviz的使用</a></li>
 </ul>
 
 <blockquote>
   <p>经常需要画一些图，比如类图，时序图，用例图等，最近接触到一款有趣的工具，是eclipse的一个插件:plantUML。这里只记录最基础的地方，以后再来完善</p>
 </blockquote>
 
-<h2 id="section">安装</h2>
+<h2 id="安装">安装</h2>
 <p>直接访问 <strong><a href="http://plantuml.com/">plantUML官网</a></strong></p>
 
-<h2 id="section-1">问题</h2>
+<h2 id="问题">问题</h2>
 <p>安装好插件之后，此时只能使用plantUML画一些时序图，并不能从类文件直接生成类图，这时候还需要安装和配置一个十分牛*的画图工具： <strong><a href="http://www.graphviz.org/">Graphviz</a></strong></p>
 
-<h2 id="plantuml">plantUml的使用</h2>
+<h2 id="plantuml的使用">plantUml的使用</h2>
 
 <p>这是使用plantUml画的一个Junit运行的时序图</p>
 
-<pre><code>@startuml
+<div class="highlighter-rouge"><pre class="highlight"><code>@startuml
 	actor user #blue 
 	user -&gt; Client : 1,开始
 	Client -&gt; JunitCode : 2,调runClasses
@@ -100,12 +100,13 @@
 	'user -&gt; JunitCode : 调用JunitCode.runClass(Class...class)方法
 @enduml
 </code></pre>
+</div>
 
 <p>结果如下</p>
 
 <p><img src="/image/Junit-time.png" alt="" /></p>
 
-<h2 id="graphviz">Graphviz的使用</h2>
+<h2 id="graphviz的使用">Graphviz的使用</h2>
 <p>仅仅使用Graphviz就已经可以画图了，直接使用Graphedit.exe程序就可以画图了，具体参照官网。</p>
 
   </div>

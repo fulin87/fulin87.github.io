@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2016/08/18/ssh1.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/linux/2016/08/18/SSH1.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,11 +66,11 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">文件系统</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">核心目录和配置文件</a></li>
-  <li><a href="#section-2" id="markdown-toc-section-2">基本常识</a></li>
-  <li><a href="#section-3" id="markdown-toc-section-3">命令总结</a></li>
-  <li><a href="#section-4" id="markdown-toc-section-4">网友的优质博客</a></li>
+  <li><a href="#文件系统" id="markdown-toc-文件系统">文件系统</a></li>
+  <li><a href="#核心目录和配置文件" id="markdown-toc-核心目录和配置文件">核心目录和配置文件</a></li>
+  <li><a href="#基本常识" id="markdown-toc-基本常识">基本常识</a></li>
+  <li><a href="#命令总结" id="markdown-toc-命令总结">命令总结</a></li>
+  <li><a href="#网友的优质博客" id="markdown-toc-网友的优质博客">网友的优质博客</a></li>
 </ul>
 
 <blockquote>
@@ -78,7 +78,7 @@
   <p>以前看电影，黑客们在一个黑乎乎的界面上噼里啪啦一顿狂敲，然后某栋楼就停电了，那个黑乎乎的界面上看上去是那么高端和神秘，这其实就是Linux的世界……</p>
 </blockquote>
 
-<h2 id="section">文件系统</h2>
+<h2 id="文件系统">文件系统</h2>
 
 <p>关于Linux的文件系统，可以查看这个官方的文档。</p>
 
@@ -86,13 +86,13 @@
 
 <p>这里还是做一些重要目录的总结吧，细节参考上面的文档。</p>
 
-<h2 id="section-1">核心目录和配置文件</h2>
+<h2 id="核心目录和配置文件">核心目录和配置文件</h2>
 
 <ul>
   <li>
     <p>目录</p>
 
-    <pre><code>  /dev/
+    <div class="highlighter-rouge"><pre class="highlight"><code>  /dev/
       Device files      
       设备目录
   /etc/
@@ -134,11 +134,12 @@
   /proc
       虚拟目录，是内存的映射，内核和进程的虚拟文件系统目录
 </code></pre>
+    </div>
   </li>
   <li>
     <p>非常重要的文件</p>
 
-    <pre><code>  网卡的配置文件
+    <div class="highlighter-rouge"><pre class="highlight"><code>  网卡的配置文件
       /etc/sysconfig/network-scripts/ifcfg-eno16777736		
   重启网卡
       /etc/init.d/network restart
@@ -183,26 +184,28 @@
   系统负载平均值信息
       /proc/loadavg
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<h2 id="section-2">基本常识</h2>
+<h2 id="基本常识">基本常识</h2>
 
-<pre><code>1，添加用户如果不指定组，就会创建一个和用户同名的组。
+<div class="highlighter-rouge"><pre class="highlight"><code>1，添加用户如果不指定组，就会创建一个和用户同名的组。
 2，/etc/sudoers文件不能让普通用户修改，否则会有验证的权限安全问题
 3，windows中是通过扩展名来区分文件类型，Linux中文件类型与扩展名无关
 4，linux的命令中不要在=两边加空格
 5，linux中删除很危险，一定要目标最小化，删除时要使用find | args组合可以最小化
 6，如果服务启动很慢，需要在hosts中配置ip和主机名的映射
 </code></pre>
+</div>
 
-<h2 id="section-3">命令总结</h2>
+<h2 id="命令总结">命令总结</h2>
 
 <ul>
   <li>
     <p>核心命令</p>
 
-    <pre><code>  ls 
+    <div class="highlighter-rouge"><pre class="highlight"><code>  ls 
       列出目录的内容
       -h 人类可读的格式
       -l 长格式显示
@@ -316,11 +319,12 @@
   chkconfig
       查看设置开机自动启动软件的命令		
 </code></pre>
+    </div>
   </li>
   <li>
     <p>一般命令和功能</p>
 
-    <pre><code>  lsof
+    <div class="highlighter-rouge"><pre class="highlight"><code>  lsof
       列表打开的文件，可以查看打开文件的一些状态,专家级别的运维专用的
       -i :port 查看端口	
   diff
@@ -380,10 +384,11 @@
       -r 重启
       -h 关机
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<h2 id="section-4">网友的优质博客</h2>
+<h2 id="网友的优质博客">网友的优质博客</h2>
 
 <p><strong><a href="http://yangrong.blog.51cto.com/6945369/1288072">Linux文件系统详解</a></strong></p>
 

@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/java/2016/09/06/java-equals-hashcode.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/java/2016/09/06/java-equals-hashCode.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -65,19 +65,14 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <ul id="markdown-toc">
-  <li><a href="#equals" id="markdown-toc-equals">equals方法</a></li>
-  <li><a href="#hashcode" id="markdown-toc-hashcode">hashCode方法</a></li>
-  <li><a href="#clone" id="markdown-toc-clone">clone方法</a></li>
-</ul>
-
+    
 <blockquote>
   <p>Object类是Java中其他所有类的祖先，没有Object类Java面向对象无从谈起。作为其他所有类的基类，Object具有哪些属性和行为，是Java语言设计背后的思维体现。
 Object类位于java.lang包中，java.lang包包含着Java最基础和核心的类，在编译时会自动导入。Object类没有定义属性，一共有13个方法,这里我重点记录3个方法：equals,hashCode,clone，</p>
 </blockquote>
 
-<h3 id="equals">equals方法</h3>
-<p>==与equals在Java中经常被使用，大家也都知道==与equals的区别：  <br />
+<p>###equals方法
+==与equals在Java中经常被使用，大家也都知道==与equals的区别：  <br />
 ==表示的是变量值完成相同（对于基础类型，地址中存储的是值，引用类型则存储指向实际对象的地址）；  <br />
 equlas()方法的正确理解应该是：判断两个对象是否相等。那么判断对象相等的标尺又是什么？在object类中，此标尺即为==。当然，这个标尺不是固定的，其他类中可以按照实际的需要对此标尺含义进行重定义。如String类中则是依据字符串内容是否相等来重定义了此标尺含义。如此可以增加类的功能型和实际编码的灵活性。当然了，如果自定义的类没有重写equals()方法来重新定义此标尺，那么默认的将是其父类的equals()，直到object基类。</p>
 
@@ -87,8 +82,8 @@ equlas()方法的正确理解应该是：判断两个对象是否相等。那么
 
 <p><em>以上是节选自JDK文档中的描述。</em></p>
 
-<h3 id="hashcode">hashCode方法</h3>
-<p>hashCode()方法返回一个整形数值，表示该对象的哈希码值。
+<p>###hashCode方法
+hashCode()方法返回一个整形数值，表示该对象的哈希码值。
 hashCode()具有如下约定：</p>
 
 <ul>
@@ -106,11 +101,12 @@ hashCode()具有如下约定：</p>
   </ul>
 </blockquote>
 
-<h3 id="clone">clone方法</h3>
-<p>clone方法虽然使用的不多，但是如果需要重复创建多个相同对象的时候，可以使用这个方法，使用方法也很简单：</p>
+<p>###clone方法
+clone方法虽然使用的不多，但是如果需要重复创建多个相同对象的时候，可以使用这个方法，使用方法也很简单：</p>
 
-<pre><code>return super.clone();//这里返回的是一个Object类型的，需要依据实际情况进行转型
+<div class="highlighter-rouge"><pre class="highlight"><code>return super.clone();//这里返回的是一个Object类型的，需要依据实际情况进行转型
 </code></pre>
+</div>
 
 <p>使用clone方法，需要注意的一点是：clone的对象，如果有有引用类型的属性，是需要深度克隆的，否则，clone的对象和原对象是的属性引用指向的是相同的实例。</p>
 

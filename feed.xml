@@ -3,61 +3,152 @@
   <channel>
     <title>水货程序员的笔记</title>
     <description></description>
-    <link>http://colorful.ren/</link>
-    <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 24 Feb 2017 14:21:15 +0800</pubDate>
-    <lastBuildDate>Fri, 24 Feb 2017 14:21:15 +0800</lastBuildDate>
-    <generator>Jekyll v3.0.0</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 07 Apr 2017 21:05:54 +0800</pubDate>
+    <lastBuildDate>Fri, 07 Apr 2017 21:05:54 +0800</lastBuildDate>
+    <generator>Jekyll v3.4.3</generator>
+    
+      <item>
+        <title>redis 知识点总结</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;redis是一个高性能的键值对数据库，redis是意大利人在2009年开发完成并开源的软件产品。
+redis本身的含义是 &lt;em&gt;remote dictionary server (远程字典服务器)&lt;/em&gt;，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;redis的特点&quot;&gt;redis的特点&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;支持丰富的数据类型&lt;/p&gt;
+
+    &lt;p&gt;字符串类型(string)，散列类型(hash)，列表类型(list)，集合类型(set)，有序集合类型(zset)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;内存存储和持久化&lt;/p&gt;
+
+    &lt;p&gt;redis的数据存储在内存中，读写速度远快于硬盘，可以提供一秒10W+的键值的读写同时还提供了持久化的支持&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;功能丰富&lt;/p&gt;
+
+    &lt;p&gt;redis虽然是作为数据库开发的，但是越来越多的人将其作为缓存，队列系统使用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;简单稳定&lt;/p&gt;
+
+    &lt;p&gt;redis提供了一系列简单的命令来操作redis&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;redis的启动和停止&quot;&gt;redis的启动和停止&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;启动：  ./bin/redis-server ./redis-conf
+停止：  ./bin/redis-cli shutdown
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;基本命令&quot;&gt;基本命令&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;keys *  //获取所有的键
+type key //获取键key的类型
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;redis的事务&quot;&gt;redis的事务&lt;/h3&gt;
+
+&lt;p&gt;redis提供了类似关系型数据库的事务功能，但是没有提供回滚机制,开发者必须在事务执行出错后自己收拾残局。命令：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;MULTI  EXEC 命令&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MULTI
+
+code ...
+
+EXEC
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;同时因为redis不支持回滚功能，所以redis的事务上可以保持简洁和快速&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;WATCH 命令&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;WATCH&lt;/em&gt;命令可以监控一个或多个键，一旦其中有一个键被修改，之后的事务就不会被执行。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WATCH key1 key2 key3 ....
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;UNWATCH 命令&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;UNWATCH&lt;/em&gt;命令可以取消对键的监控&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;UNWATCH key1 key2 key3 ....
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Tue, 04 Apr 2017 13:07:11 +0800</pubDate>
+        <link>http://localhost:4000/redis/2017/04/04/redis.html</link>
+        <guid isPermaLink="true">http://localhost:4000/redis/2017/04/04/redis.html</guid>
+        
+        
+        <category>redis</category>
+        
+      </item>
     
       <item>
         <title>mysql一次性删除千万级别记录引发的问题和思考</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;为什么会出现磁盘被占满的情况&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;一次性删除大量数据产生的危害有哪些&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;删除数据正确的姿势是什么&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;启示&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#为什么会出现磁盘被占满的情况&quot; id=&quot;markdown-toc-为什么会出现磁盘被占满的情况&quot;&gt;为什么会出现磁盘被占满的情况&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#一次性删除大量数据产生的危害有哪些&quot; id=&quot;markdown-toc-一次性删除大量数据产生的危害有哪些&quot;&gt;一次性删除大量数据产生的危害有哪些&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#删除数据正确的姿势是什么&quot; id=&quot;markdown-toc-删除数据正确的姿势是什么&quot;&gt;删除数据正确的姿势是什么&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#启示&quot; id=&quot;markdown-toc-启示&quot;&gt;启示&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;昨天，一位同事在A系统的测试环境的mysql数据库中执行了一条&lt;code&gt;DELETE&lt;/code&gt; 语句，删除了一千多万条数据，导致监控平台告警，数据库服务器磁盘空间被占满,对于这件事，我们是需要思考和总结的。&lt;/p&gt;
+  &lt;p&gt;昨天，一位同事在A系统的测试环境的mysql数据库中执行了一条&lt;code class=&quot;highlighter-rouge&quot;&gt;DELETE&lt;/code&gt; 语句，删除了一千多万条数据，导致监控平台告警，数据库服务器磁盘空间被占满,对于这件事，我们是需要思考和总结的。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;img src=&quot;/image/mysqlDelete.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;为什么会出现磁盘被占满的情况&lt;/h3&gt;
+&lt;h3 id=&quot;为什么会出现磁盘被占满的情况&quot;&gt;为什么会出现磁盘被占满的情况&lt;/h3&gt;
 
-&lt;p&gt;在&lt;code&gt;mysql&lt;/code&gt;数据库中,&lt;code&gt;UPDATE,DELETE,INSERT&lt;/code&gt;操作都会记录到一个二进制日志文件中,也就是大家平时所说的&lt;code&gt;binlog&lt;/code&gt;,这个日志文件的格式与mysql的一个参数设置有关。&lt;/p&gt;
+&lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;mysql&lt;/code&gt;数据库中,&lt;code class=&quot;highlighter-rouge&quot;&gt;UPDATE,DELETE,INSERT&lt;/code&gt;操作都会记录到一个二进制日志文件中,也就是大家平时所说的&lt;code class=&quot;highlighter-rouge&quot;&gt;binlog&lt;/code&gt;,这个日志文件的格式与mysql的一个参数设置有关。&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;binlog&lt;/code&gt;有很多用途：&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;binlog&lt;/code&gt;有很多用途：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;* 根据binlog进行主从同步（常用）
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* 根据binlog进行主从同步（常用）
 * 根据binlog进行数据恢复（不常用）
 * 可以用来查询数据库的操作记录
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;因此，大量的DML语句对参数大量的&lt;code&gt;binlog&lt;/code&gt;,像上面的情况，一次删除千万级别的数据，参数的日志文件就有20多G，直接导致了磁盘被占满。&lt;/p&gt;
+&lt;p&gt;因此，大量的DML语句对参数大量的&lt;code class=&quot;highlighter-rouge&quot;&gt;binlog&lt;/code&gt;,像上面的情况，一次删除千万级别的数据，参数的日志文件就有20多G，直接导致了磁盘被占满。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;一次性删除大量数据产生的危害有哪些&lt;/h3&gt;
+&lt;h3 id=&quot;一次性删除大量数据产生的危害有哪些&quot;&gt;一次性删除大量数据产生的危害有哪些&lt;/h3&gt;
 
-&lt;p&gt;根据上面的分析可知，大量的DML操作参数的直接影响就是导致服务器磁盘被占满，其实还有另外一种更大的危害：&lt;code&gt;破坏数据库主从同步&lt;/code&gt;导致数据库主从不一致，进而影响应用系统的逻辑。&lt;/p&gt;
+&lt;p&gt;根据上面的分析可知，大量的DML操作参数的直接影响就是导致服务器磁盘被占满，其实还有另外一种更大的危害：&lt;code class=&quot;highlighter-rouge&quot;&gt;破坏数据库主从同步&lt;/code&gt;导致数据库主从不一致，进而影响应用系统的逻辑。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;删除数据正确的姿势是什么&lt;/h3&gt;
+&lt;h3 id=&quot;删除数据正确的姿势是什么&quot;&gt;删除数据正确的姿势是什么&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;1，分批删除，观察磁盘占有情况和数据同步情况
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1，分批删除，观察磁盘占有情况和数据同步情况
 2，交给专业DBA执行
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;启示&lt;/h3&gt;
+&lt;h3 id=&quot;启示&quot;&gt;启示&lt;/h3&gt;
 
 &lt;p&gt;事情发生后，那位同事被领导批评了一顿，但是从这件事我们至少可以吸取两个教训：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;1，对数据库的操作，至少是DML操作应该有严格的流程限制，不能随便让人去执行，否则后果很严重
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1，对数据库的操作，至少是DML操作应该有严格的流程限制，不能随便让人去执行，否则后果很严重
 2，作为程序员，数据库的知识要扎实，否则就会引来大麻烦。
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Fri, 24 Feb 2017 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/php/2017/02/24/mysqldeleterecord.html</link>
-        <guid isPermaLink="true">http://colorful.ren/php/2017/02/24/mysqldeleterecord.html</guid>
+        <link>http://localhost:4000/php/2017/02/24/mysqldeleterecord.html</link>
+        <guid isPermaLink="true">http://localhost:4000/php/2017/02/24/mysqldeleterecord.html</guid>
         
         
         <category>php</category>
@@ -67,17 +158,17 @@
       <item>
         <title>php我是怎样从入门到放弃的</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;乱就一个字&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#php&quot; id=&quot;markdown-toc-php&quot;&gt;php的诡异之处&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;有好感的地方&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#乱就一个字&quot; id=&quot;markdown-toc-乱就一个字&quot;&gt;乱就一个字&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#php的诡异之处&quot; id=&quot;markdown-toc-php的诡异之处&quot;&gt;php的诡异之处&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#有好感的地方&quot; id=&quot;markdown-toc-有好感的地方&quot;&gt;有好感的地方&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;接手了一个有5年历史的老系统（A系统），系统最开始是用&lt;code&gt;LAMP&lt;/code&gt;这个经典组合进行开发的。我想刚好可以乘此机会学习一下PHP，但是当我开始学习后，过了2周，我放弃了…….
+  &lt;p&gt;接手了一个有5年历史的老系统（A系统），系统最开始是用&lt;code class=&quot;highlighter-rouge&quot;&gt;LAMP&lt;/code&gt;这个经典组合进行开发的。我想刚好可以乘此机会学习一下PHP，但是当我开始学习后，过了2周，我放弃了…….
 这里总结一下我从入门到放弃的过程，汗…..&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;乱就一个字&lt;/h2&gt;
+&lt;h2 id=&quot;乱就一个字&quot;&gt;乱就一个字&lt;/h2&gt;
 
 &lt;p&gt;虽然说任何系统都会朝混乱度大的方向发展，但是一般情况下，如果有人为干预，一个业务系统至少应该有完善的文档，大致的开发，部署流程和规范，代码规范，发布记录等，可是我接手的这个A系统，除了线上的生产环境和代码之外，什么都没有。&lt;/p&gt;
 
@@ -85,22 +176,22 @@
 
 &lt;p&gt;遇到这样的情况，你该怎么办？&lt;/p&gt;
 
-&lt;h2 id=&quot;php&quot;&gt;php的诡异之处&lt;/h2&gt;
+&lt;h2 id=&quot;php的诡异之处&quot;&gt;php的诡异之处&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;满屏幕的 &lt;code&gt;$&lt;/code&gt; 符号，不明白，为啥php的变量要以 &lt;code&gt;$&lt;/code&gt;开头&lt;/li&gt;
-  &lt;li&gt;方法调用竟然是 &lt;code&gt;&amp;gt;&lt;/code&gt; 符号&lt;/li&gt;
+  &lt;li&gt;满屏幕的 &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; 符号，不明白，为啥php的变量要以 &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;开头&lt;/li&gt;
+  &lt;li&gt;方法调用竟然是 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt; 符号&lt;/li&gt;
   &lt;li&gt;竟然可以像JavaScript一样，代码的结构任意调整&lt;/li&gt;
   &lt;li&gt;一个Array 搞定所有的数据结构&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;以上所说的这些，并不是说php不好，反正我是不喜欢这些特性，就像人一样吧，如果对某个人印象不好，再怎么接触，感觉还是不会太好。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;有好感的地方&lt;/h2&gt;
+&lt;h2 id=&quot;有好感的地方&quot;&gt;有好感的地方&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;和 &lt;code&gt;html&lt;/code&gt; 的完美结合，这个比别的语言做的都要好，简直是为web而生的一样，不得不服&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;LAMP&lt;/code&gt; 的经典组合，&lt;code&gt;php和mysql，linux，Apache(或者Nginx)&lt;/code&gt;，简直就是开源的代名词，创业者的福音，不仅功能强大，而且配置，部署都是非常简单。&lt;/li&gt;
+  &lt;li&gt;和 &lt;code class=&quot;highlighter-rouge&quot;&gt;html&lt;/code&gt; 的完美结合，这个比别的语言做的都要好，简直是为web而生的一样，不得不服&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;LAMP&lt;/code&gt; 的经典组合，&lt;code class=&quot;highlighter-rouge&quot;&gt;php和mysql，linux，Apache(或者Nginx)&lt;/code&gt;，简直就是开源的代名词，创业者的福音，不仅功能强大，而且配置，部署都是非常简单。&lt;/li&gt;
   &lt;li&gt;非常的灵活，能适应快速迭代，可以不中断生产环境进行发布。&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -109,8 +200,8 @@
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 04 Jan 2017 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/php/2017/01/04/php-stop.html</link>
-        <guid isPermaLink="true">http://colorful.ren/php/2017/01/04/php-stop.html</guid>
+        <link>http://localhost:4000/php/2017/01/04/php-stop.html</link>
+        <guid isPermaLink="true">http://localhost:4000/php/2017/01/04/php-stop.html</guid>
         
         
         <category>php</category>
@@ -126,8 +217,8 @@
 &lt;p&gt;&lt;img src=&quot;/image/excelJia.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 22 Dec 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/java/2016/12/22/exceljia.html</link>
-        <guid isPermaLink="true">http://colorful.ren/java/2016/12/22/exceljia.html</guid>
+        <link>http://localhost:4000/java/2016/12/22/exceljia.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2016/12/22/exceljia.html</guid>
         
         
         <category>java</category>
@@ -137,17 +228,17 @@
       <item>
         <title>nginx+uwsgi+python+mysql+flask 实战过程</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#nginxuwsgipython&quot; id=&quot;markdown-toc-nginxuwsgipython&quot;&gt;nginx,uwsgi,python工作的原理&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;参考文档&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;原生环境搭建过程&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#uwsgiflask&quot; id=&quot;markdown-toc-uwsgiflask&quot;&gt;uwsgi和flask进行集成&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#nginxuwsgipython工作的原理&quot; id=&quot;markdown-toc-nginxuwsgipython工作的原理&quot;&gt;nginx,uwsgi,python工作的原理&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#参考文档&quot; id=&quot;markdown-toc-参考文档&quot;&gt;参考文档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#原生环境搭建过程&quot; id=&quot;markdown-toc-原生环境搭建过程&quot;&gt;原生环境搭建过程&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#uwsgi和flask进行集成&quot; id=&quot;markdown-toc-uwsgi和flask进行集成&quot;&gt;uwsgi和flask进行集成&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;使用python进行web开发，环境的搭建并不简单，这里面出现了很多问题。记录一下自己搭建环境的过程，顺便记录一下自己对于用python进行web开发的原理的一点粗浅的理解。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;nginxuwsgipython&quot;&gt;nginx,uwsgi,python工作的原理&lt;/h3&gt;
+&lt;h3 id=&quot;nginxuwsgipython工作的原理&quot;&gt;nginx,uwsgi,python工作的原理&lt;/h3&gt;
 
 &lt;p&gt;如下图所示：&lt;/p&gt;
 
@@ -164,51 +255,55 @@
   &lt;li&gt;执行解释返回结果&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;以上是大体的过程，用词可能不够准确。这个过程中有一个核心概念：&lt;code&gt;uwsgi&lt;/code&gt;，如果要把这个说清楚，会牵扯出一些列的知识：CGI,FAST-CGI,WSGI。这个之前有记录。&lt;/p&gt;
+&lt;p&gt;以上是大体的过程，用词可能不够准确。这个过程中有一个核心概念：&lt;code class=&quot;highlighter-rouge&quot;&gt;uwsgi&lt;/code&gt;，如果要把这个说清楚，会牵扯出一些列的知识：CGI,FAST-CGI,WSGI。这个之前有记录。&lt;/p&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;参考文档&lt;/h3&gt;
+&lt;h3 id=&quot;参考文档&quot;&gt;参考文档&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html&quot;&gt;uwsgi官方文档英文&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/WSGIquickstart.html&quot;&gt;uwsgi官方文档中文&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;原生环境搭建过程&lt;/h3&gt;
+&lt;h3 id=&quot;原生环境搭建过程&quot;&gt;原生环境搭建过程&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;首先不使用任何python框架搭建一个原生的python web环境&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;我这里有一台虚拟机:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;192.168.116.131
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;192.168.116.131
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;我将nginx和uwsgi都安装在131上，这里nginx我之前已经安装过了。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;安装uwsgi，安装到&lt;code&gt;/application/uwsgi-2.0.14&lt;/code&gt;这个目录&lt;/p&gt;
+    &lt;p&gt;安装uwsgi，安装到&lt;code class=&quot;highlighter-rouge&quot;&gt;/application/uwsgi-2.0.14&lt;/code&gt;这个目录&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; wget https://projects.unbit.it/downloads/uwsgi-latest.tar.gz
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; wget https://projects.unbit.it/downloads/uwsgi-latest.tar.gz
  tar zxvf uwsgi-latest.tar.gz -C /application/uwsgi-2.0.14
  cd /application/uwsgi-2.0.14
  make
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;将uwsgi添加进环境变量搜索路径中&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; cp /application/uwsgi-2.0.14/uwsgi /usr/local/sbin/
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cp /application/uwsgi-2.0.14/uwsgi /usr/local/sbin/
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;建立一个软链接,这是一个好习惯&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; ln -s /application/uwsgi-2.0.14 /application/uwsgi
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ln -s /application/uwsgi-2.0.14 /application/uwsgi
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;编写python脚本，这里假设mysql已经部署好了&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; cd /home/fulin/temp/
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /home/fulin/temp/
  vi app.py
 	
  #!/usr/bin/env python
@@ -219,12 +314,12 @@
  import MySQLdb
  def application(environ, start_response):
  &quot;&quot;&quot;Simplest possible application object&quot;&quot;&quot;
- start_response(&#39;200 OK&#39;, [(&#39;Content-Type&#39;,&#39;text/html&#39;)])
- conn = MySQLdb.connect(host = &#39;10.2xx.xx.62&#39;,\
+ start_response('200 OK', [('Content-Type','text/html')])
+ conn = MySQLdb.connect(host = '10.2xx.xx.62',\
                         port = 3306,\
-                        user = &#39;xx&#39;,\
-                        passwd = &#39;xxx&#39;,\
-                        db = &#39;test&#39;)
+                        user = 'xx',\
+                        passwd = 'xxx',\
+                        db = 'test')
  cur = conn.cursor()
 	
  aa =cur.execute(&quot;select * from vc_admin limit 10&quot;)
@@ -235,49 +330,54 @@
  cur.close()
  conn.commit()
  conn.close()
- return &#39;.&#39;.join([str(i) for i in x])
+ return '.'.join([str(i) for i in x])
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;启动uwsgi&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; uwsgi --socket 127.0.0.1:3031 --wsgi-file /home/fulin/temp/app.py --master --processes 4 --threads 2 --stats 127.0.0.1:9191
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; uwsgi --socket 127.0.0.1:3031 --wsgi-file /home/fulin/temp/app.py --master --processes 4 --threads 2 --stats 127.0.0.1:9191
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;配置nginx，因为这里仅仅是学习，所以不必用配置太复杂，先从最简单的开始&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; location / {
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; location / {
     include uwsgi_params;
     uwsgi_pass 192.168.116.132:3031;
  }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;启动nginx&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; cd /application/nginx/sbin
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /application/nginx/sbin
  ./nginx
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;测试&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;  浏览器输入  http://192.168.116.131
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  浏览器输入  http://192.168.116.131
   响应出admin表中的数据，表示OK
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;uwsgiflask&quot;&gt;uwsgi和flask进行集成&lt;/h3&gt;
+&lt;h3 id=&quot;uwsgi和flask进行集成&quot;&gt;uwsgi和flask进行集成&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;这里web服务器和应用服务器选择使用socket通信,不再使用低效的http&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;这里web服务器和应用服务器选择使用socket通信,不再使用低效的http&lt;/code&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;启用&lt;code&gt;ini&lt;/code&gt;配置文件,文件为&lt;code&gt;/home/fulin/temp/web/config.ini&lt;/code&gt;&lt;/p&gt;
+    &lt;p&gt;启用&lt;code class=&quot;highlighter-rouge&quot;&gt;ini&lt;/code&gt;配置文件,文件为&lt;code class=&quot;highlighter-rouge&quot;&gt;/home/fulin/temp/web/config.ini&lt;/code&gt;&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; [uwsgi]
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; [uwsgi]
  socket = /tmp/my.sock     	#和web服务器通信的socket文件
  chmod-socket = 666		  	#更改socket文件的权限为666
  daemonize = /home/fulin/temp/flask2.log  #将uwsgi以守护进程的方式启动，同时制定日志文件
@@ -288,84 +388,90 @@
  processes =1    		#进程数
  threads = 1				#线程数
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;注意这里的ini配置文件出现是有背景的，之前我们启动uwsgi是使用命令行的方式：uwsgi –socket 127.0.0.1:3031 –wsgi-file /home/fulin/temp/app.py –master –processes 4 –threads 2 –stats 127.0.0.1:9191，这种方式非常的不人性，如果能把命令行中的参数写入配置文件就好了。uwsgi是支持的。最标准的方法是使用ini格式的配置文件,我们的配置文件名为config.ini&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;这里要特别提醒一下,config.ini文件的开头的&lt;code&gt;[uwsgi]&lt;/code&gt;这几个字符是不能少的，我就是因为没有这几个字符，启动的时候出现了一个很诡异的异常而浪费了很长时间&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;这里要特别提醒一下,config.ini文件的开头的&lt;code class=&quot;highlighter-rouge&quot;&gt;[uwsgi]&lt;/code&gt;这几个字符是不能少的，我就是因为没有这几个字符，启动的时候出现了一个很诡异的异常而浪费了很长时间&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;准备flask项目文件&lt;code&gt;/home/fulin/temp/web/app.py&lt;/code&gt;&lt;/p&gt;
+    &lt;p&gt;准备flask项目文件&lt;code class=&quot;highlighter-rouge&quot;&gt;/home/fulin/temp/web/app.py&lt;/code&gt;&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; from flask import Flask
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; from flask import Flask
 
  app = Flask(__name__)
 	
- @app.route(&#39;/&#39;)
+ @app.route('/')
  def index():
-     return &#39;&amp;lt;h1&amp;gt;hello world&amp;lt;/h1&amp;gt;&#39;
+     return '&amp;lt;h1&amp;gt;hello world&amp;lt;/h1&amp;gt;'
 	
- @app.route(&#39;/&amp;lt;name&amp;gt;&#39;)
+ @app.route('/&amp;lt;name&amp;gt;')
  def user(name):
-     return &#39;&amp;lt;h1&amp;gt;hello, %s&amp;lt;/h1&amp;gt;&#39; % name
+     return '&amp;lt;h1&amp;gt;hello, %s&amp;lt;/h1&amp;gt;' % name
 	
  #if __name__ == __name__:
  #    app.run(debug=True)
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;这里要注意：&lt;code&gt;__name__==__name__&lt;/code&gt;那两句代码是被注释掉的。因为uwsgi启动的时候会运行app.py，这段代码不注释掉，会启动python自己的 wsgi 服务器，从而产生冲突。也只有和uwsgi配合使用的时候才需要注释，开发的时候，还需要用这个功能才测试。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;这里要注意：&lt;code class=&quot;highlighter-rouge&quot;&gt;__name__==__name__&lt;/code&gt;那两句代码是被注释掉的。因为uwsgi启动的时候会运行app.py，这段代码不注释掉，会启动python自己的 wsgi 服务器，从而产生冲突。也只有和uwsgi配合使用的时候才需要注释，开发的时候，还需要用这个功能才测试。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;uwsgi的启动&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; uwsgi --ini /home/fulin/temp/web/config.ini
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; uwsgi --ini /home/fulin/temp/web/config.ini
  输出：
  [uWSGI] getting INI configuration from /home/fulin/temp/web/config.ini
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;nginx的配置&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; location / {
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; location / {
     include uwsgi_params;
     uwsgi_pass unix:/tmp/my.sock;
  }
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;这里要注意&lt;code&gt;uwsgi_pass unix:/tmp/my.sock;&lt;/code&gt;,/tmp/my.sock这个文件，nginx进程需要有读写和执行权限才行，这个套接字文件是nginx和uwsgi进行通信的纽带&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;这里要注意&lt;code class=&quot;highlighter-rouge&quot;&gt;uwsgi_pass unix:/tmp/my.sock;&lt;/code&gt;,/tmp/my.sock这个文件，nginx进程需要有读写和执行权限才行，这个套接字文件是nginx和uwsgi进行通信的纽带&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;启动nginx&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; cd /application/nginx/sbin
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /application/nginx/sbin
  nginx
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;测试&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; 浏览器输入  http://192.168.116.131
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 浏览器输入  http://192.168.116.131
  响应出hello world，表示OK
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;这两个环境的搭建，虽然逻辑比较简单，但是还是花了我两天的时候，我自己反思了一下，为什么会这么久，主要是有两方面的原因：一方面是之前确实没有接触过&lt;code&gt;uwsgi&lt;/code&gt;,所以需要摸索一下，另一方面出现问题之后，没有认真看官方文档，很多细节，官方文档中都有详细的描述。如果认真阅读会事半功倍的。&lt;/p&gt;
+  &lt;p&gt;这两个环境的搭建，虽然逻辑比较简单，但是还是花了我两天的时候，我自己反思了一下，为什么会这么久，主要是有两方面的原因：一方面是之前确实没有接触过&lt;code class=&quot;highlighter-rouge&quot;&gt;uwsgi&lt;/code&gt;,所以需要摸索一下，另一方面出现问题之后，没有认真看官方文档，很多细节，官方文档中都有详细的描述。如果认真阅读会事半功倍的。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 </description>
         <pubDate>Sat, 26 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/python/2016/11/26/uwsgi-python.html</link>
-        <guid isPermaLink="true">http://colorful.ren/python/2016/11/26/uwsgi-python.html</guid>
+        <link>http://localhost:4000/python/2016/11/26/uwsgi-python.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2016/11/26/uwsgi-python.html</guid>
         
         
         <category>python</category>
@@ -375,30 +481,28 @@
       <item>
         <title>python基础知识点之常用数据库API</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#db-api&quot; id=&quot;markdown-toc-db-api&quot;&gt;DB-API简介&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#db-api-1&quot; id=&quot;markdown-toc-db-api-1&quot;&gt;DB-API详解&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;模块接口&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#connection&quot; id=&quot;markdown-toc-connection&quot;&gt;数据库连接对象(connection)&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#cursor&quot; id=&quot;markdown-toc-cursor&quot;&gt;游标对象（cursor）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#db-api简介&quot; id=&quot;markdown-toc-db-api简介&quot;&gt;DB-API简介&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#db-api详解&quot; id=&quot;markdown-toc-db-api详解&quot;&gt;DB-API详解&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#模块接口&quot; id=&quot;markdown-toc-模块接口&quot;&gt;模块接口&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#数据库连接对象connection&quot; id=&quot;markdown-toc-数据库连接对象connection&quot;&gt;数据库连接对象(connection)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#游标对象cursor&quot; id=&quot;markdown-toc-游标对象cursor&quot;&gt;游标对象（cursor）&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#sqlite3&quot; id=&quot;markdown-toc-sqlite3&quot;&gt;sqlite3连接实例&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql&quot; id=&quot;markdown-toc-mysql&quot;&gt;mysql连接实例&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;记录一下学习python的过程中与数据库有关的知识点&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;db-api&quot;&gt;DB-API简介&lt;/h2&gt;
+&lt;h2 id=&quot;db-api简介&quot;&gt;DB-API简介&lt;/h2&gt;
 
-&lt;p&gt;一个处理 Python 数据库事务的特殊兴趣小组（SIG，special interest group）为了统一python访问数据库的接口，制定了一个规范&lt;code&gt;DB-API&lt;/code&gt;,这套规范定义了一系列必须的对象和数据库存取方式, 以便为各种各样的底层数据库系统和多种多样的数据库接口程序提供一致的访问接口&lt;/p&gt;
+&lt;p&gt;一个处理 Python 数据库事务的特殊兴趣小组（SIG，special interest group）为了统一python访问数据库的接口，制定了一个规范&lt;code class=&quot;highlighter-rouge&quot;&gt;DB-API&lt;/code&gt;,这套规范定义了一系列必须的对象和数据库存取方式, 以便为各种各样的底层数据库系统和多种多样的数据库接口程序提供一致的访问接口&lt;/p&gt;
 
 &lt;p&gt;通过DB-API规范访问数据库的流程如下：&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/image/python7.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;db-api-1&quot;&gt;DB-API详解&lt;/h2&gt;
+&lt;h2 id=&quot;db-api详解&quot;&gt;DB-API详解&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;DB-API对以下几个方面做了规范&lt;/strong&gt;&lt;/p&gt;
 
@@ -408,20 +512,21 @@
   &lt;li&gt;游标对象&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;模块接口&lt;/h3&gt;
+&lt;h3 id=&quot;模块接口&quot;&gt;模块接口&lt;/h3&gt;
 
 &lt;p&gt;数据库的访问是通过连接对象（connection objects）来实现的。程序模块中必须提供以下形式的连接对象构造函数：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;connect(parameters...)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;connect(parameters...)
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;数据库连接对象的构造函数，返回值为Connection对象实例。 由于目的数据库不同，函数接收数量不等的一些参数。&lt;/p&gt;
 
 &lt;p&gt;模块中必须定义下面这些模块级的属性：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;apilevel
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apilevel
 	字符串常量，表明支持的DB API版本。
-	目前只允许取值&#39;1.0&#39;和&#39;2.0&#39;。
+	目前只允许取值'1.0'和'2.0'。
 	如果没有定义本常量，默认为DB-API 1.0DB-API
 
 threadsafety	
@@ -442,11 +547,11 @@ threadsafety
 paramstyle		
 	字符串常量声明模块使用的SQL语句中的参数引出方式。可能的取值如下
 
-	&#39;qmark&#39;         问号方式，例如：&#39;...WHERE name=?&#39;
-	&#39;numeric&#39;       序数方式，例如：&#39;...WHERE name=:1&#39;
-	&#39;named&#39;         命名方式，例如：&#39;...WHERE name=:name&#39;
-	&#39;format&#39;        通用方式例如：&#39;...WHERE name=%s&#39;
-	&#39;pyformat&#39;      python扩展方式例如：&#39;...WHERE name=%(name)s&#39;
+	'qmark'         问号方式，例如：'...WHERE name=?'
+	'numeric'       序数方式，例如：'...WHERE name=:1'
+	'named'         命名方式，例如：'...WHERE name=:name'
+	'format'        通用方式例如：'...WHERE name=%s'
+	'pyformat'      python扩展方式例如：'...WHERE name=%(name)s'
 
 Warning 
 	当有严重警告时触发，例如插入数据是被截断等等。
@@ -457,12 +562,13 @@ Error
 	的‘except’语句中捕捉所有的错误。警告（Warnings）不应认为是错误，
 	因此不应该以此类作为基类，而只应该以Python StandardError作为基类。
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&quot;connection&quot;&gt;数据库连接对象(connection)&lt;/h3&gt;
+&lt;h3 id=&quot;数据库连接对象connection&quot;&gt;数据库连接对象(connection)&lt;/h3&gt;
 
 &lt;p&gt;连接对象应该具有下面的方法：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;close()
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;close()
 	马上关闭数据连接（而不是当__del__方法被调用的时候）。
 
 	连接应该此后变得不可用，再次访问本连接对象应该触发
@@ -491,14 +597,15 @@ cursor()
 	方法返回给定连接上建立的游标对象（Cursor Object）。如果数据库
 	没有提供对应的游标对象，那么将由程序来模拟实现游标功能
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&quot;cursor&quot;&gt;游标对象（cursor）&lt;/h3&gt;
+&lt;h3 id=&quot;游标对象cursor&quot;&gt;游标对象（cursor）&lt;/h3&gt;
 
 &lt;p&gt;游标对象表示数据库游标，游标用来管理获取结果操作的上下文对象。同一个连接对象创建的游标对象不是彼此隔离的，也就是说一个游标对象对数据库造成的变化将会对于其他游标对象立即可见。而不同的连接对象创建的游标，则可能是隔离的也可能是非隔离的，这取决于数据库对事务的支持的实现（参见连接对象的.rollback()和.commit()方法）。&lt;/p&gt;
 
 &lt;p&gt;游标对象应具有以下的方法和属性：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;description 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;description 
 	这是一个只读属性，是7个项目组成的tulip的序列。
 	每个tulip包含描述一个结果集中的列的信息描述：
 
@@ -525,8 +632,8 @@ rowcount
 	
 	描述的是最后一次数据库操作影响的数据行数
 	（执行.execute系列方法）。 可以是数据查询语句（DQL），
-	比如&#39;select&#39;等返回的数据行，也可以是数据操纵语句（DML ）
-	比如&#39;update&#39; 和&#39;insert&#39;语句等所影响的数据行。
+	比如'select'等返回的数据行，也可以是数据操纵语句（DML ）
+	比如'update' 和'insert'语句等所影响的数据行。
 
 	如果还没有执行过任何语句，或者操作本身影响的函数由于数据访问接口的原因不能检测到。则本属性的值为-1
 	
@@ -596,7 +703,7 @@ fetchone()
 	sequence is returned when no more rows are available.
 	
 	The number of rows to fetch per call is specified by the
-	parameter.  If it is not given, the cursor&#39;s arraysize
+	parameter.  If it is not given, the cursor's arraysize
 	determines the number of rows to be fetched. The method
 	should try to fetch as many rows as indicated by the size
 	parameter. If this is not possible due to the specified
@@ -617,7 +724,7 @@ fetchall()
 
 	Fetch all (remaining) rows of a query result, returning
 	them as a sequence of sequences (e.g. a list of tuples).
-	Note that the cursor&#39;s arraysize attribute can affect the
+	Note that the cursor's arraysize attribute can affect the
 	performance of this operation.
 	
 	An Error (or subclass) exception is raised if the previous
@@ -656,7 +763,7 @@ arraysize
 setinputsizes(sizes)
       
 	This can be used before a call to .execute*() to
-	predefine memory areas for the operation&#39;s parameters.
+	predefine memory areas for the operation's parameters.
 	
 	sizes is specified as a sequence -- one item for each
 	input parameter.  The item should be a Type Object that
@@ -686,15 +793,16 @@ setoutputsize(size[,column])
 	Implementations are free to have this method do nothing
 	and users are free to not use it.
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h2 id=&quot;sqlite3&quot;&gt;sqlite3连接实例&lt;/h2&gt;
+&lt;p&gt;##sqlite3连接实例&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sqlite3
-&amp;gt;&amp;gt;&amp;gt; conn = sqlite3.connect(r&#39;D:\test.db&#39;)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sqlite3
+&amp;gt;&amp;gt;&amp;gt; conn = sqlite3.connect(r'D:\test.db')
 &amp;gt;&amp;gt;&amp;gt; cursor = conn.cursor()
-&amp;gt;&amp;gt;&amp;gt; cursor.execute(&#39;create table user (id varchar(20) primary key,name varchar(20))&#39;)
+&amp;gt;&amp;gt;&amp;gt; cursor.execute('create table user (id varchar(20) primary key,name varchar(20))')
 &amp;lt;sqlite3.Cursor object at 0x03119BE0&amp;gt;
-&amp;gt;&amp;gt;&amp;gt; cursor.execute(&#39;insert into user (id,name) values(\&#39;1\&#39;,\&#39;Michael\&#39;)&#39;)
+&amp;gt;&amp;gt;&amp;gt; cursor.execute('insert into user (id,name) values(\'1\',\'Michael\')')
 &amp;lt;sqlite3.Cursor object at 0x03119BE0&amp;gt;
 &amp;gt;&amp;gt;&amp;gt; cursor.rowcount
 1
@@ -702,25 +810,26 @@ setoutputsize(size[,column])
 &amp;gt;&amp;gt;&amp;gt; conn.commit()
 &amp;gt;&amp;gt;&amp;gt; conn.close()
 
-&amp;gt;&amp;gt;&amp;gt; conn = sqlite3.connect(r&#39;D:\test.db&#39;)
+&amp;gt;&amp;gt;&amp;gt; conn = sqlite3.connect(r'D:\test.db')
 &amp;gt;&amp;gt;&amp;gt; curo = conn.cursor()
-&amp;gt;&amp;gt;&amp;gt; curo.execute(&#39;select * from user&#39;)
+&amp;gt;&amp;gt;&amp;gt; curo.execute('select * from user')
 &amp;lt;sqlite3.Cursor object at 0x03119C20&amp;gt;
 &amp;gt;&amp;gt;&amp;gt; info = curo.fetchall()
 &amp;gt;&amp;gt;&amp;gt; info
-[(u&#39;1&#39;, u&#39;Michael&#39;)]
+[(u'1', u'Michael')]
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h2 id=&quot;mysql&quot;&gt;mysql连接实例&lt;/h2&gt;
+&lt;p&gt;##mysql连接实例&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import MySQLdb
-&amp;gt;&amp;gt;&amp;gt; conn = MySQLdb.connect(host = &#39;xx.xxx.xx.xx&#39;,\
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import MySQLdb
+&amp;gt;&amp;gt;&amp;gt; conn = MySQLdb.connect(host = 'xx.xxx.xx.xx',\
                    port = 3306,\
-                   user = &#39;xxx&#39;,\
-                   passwd = &#39;xxxx&#39;,\
-                   db = &#39;xxx&#39;)
+                   user = 'xxx',\
+                   passwd = 'xxxx',\
+                   db = 'xxx')
 &amp;gt;&amp;gt;&amp;gt; cur = conn.cursor()
-&amp;gt;&amp;gt;&amp;gt; cur.execute(&#39;select * from vc_admin limit 10&#39;)
+&amp;gt;&amp;gt;&amp;gt; cur.execute('select * from vc_admin limit 10')
 &amp;gt;&amp;gt;&amp;gt; info = cur.fetchall()
 &amp;gt;&amp;gt;&amp;gt; for i in info:
 		print i[0],i[1]
@@ -736,10 +845,11 @@ setoutputsize(size[,column])
 8285 255139
 8287 255140
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Thu, 24 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/python/2016/11/24/python7.html</link>
-        <guid isPermaLink="true">http://colorful.ren/python/2016/11/24/python7.html</guid>
+        <link>http://localhost:4000/python/2016/11/24/python7.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2016/11/24/python7.html</guid>
         
         
         <category>python</category>
@@ -749,18 +859,18 @@ setoutputsize(size[,column])
       <item>
         <title>python基础知识点之常用标准模块</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#random-&quot; id=&quot;markdown-toc-random-&quot;&gt;random 模块（随机数模块）&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#shelve-&quot; id=&quot;markdown-toc-shelve-&quot;&gt;shelve 模块&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#re-&quot; id=&quot;markdown-toc-re-&quot;&gt;re 模块&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#random-模块随机数模块&quot; id=&quot;markdown-toc-random-模块随机数模块&quot;&gt;random 模块（随机数模块）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#shelve-模块&quot; id=&quot;markdown-toc-shelve-模块&quot;&gt;shelve 模块&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#re-模块&quot; id=&quot;markdown-toc-re-模块&quot;&gt;re 模块&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;python中的标准模块有很多实用的功能，将常用的操作进行了封装，掌握了常用的标准模块的功能可以大幅度的提高工作效率&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;random-&quot;&gt;random 模块（随机数模块）&lt;/h2&gt;
+&lt;h2 id=&quot;random-模块随机数模块&quot;&gt;random 模块（随机数模块）&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;import random
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import random
 random.random()		
 	#返回0到1之间的小数
 random.getrandbits(16)
@@ -776,32 +886,34 @@ random.shuffles(s)
 random.sample(s,n)
 	#随机的返回序列s中的n个元素，返回类型是列表
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h2 id=&quot;shelve-&quot;&gt;shelve 模块&lt;/h2&gt;
+&lt;h2 id=&quot;shelve-模块&quot;&gt;shelve 模块&lt;/h2&gt;
 
 &lt;p&gt;shelve 模块使用数据库驱动实现了字典对象的持久保存. shelve 对象使用字符串作为键, 但值可以是任意类型,我们简单的理解为shelve对象就是一个字典。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;import shelve
-db = shelve.open(&#39;D://dbdata.db&#39;)
-db[&#39;person&#39;]=range(100)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import shelve
+db = shelve.open('D://dbdata.db')
+db['person']=range(100)
 db.close()
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;使用shelve比较简单，但是要注意，最后一定要调用其close()方法。&lt;/p&gt;
 
-&lt;h2 id=&quot;re-&quot;&gt;re 模块&lt;/h2&gt;
+&lt;h2 id=&quot;re-模块&quot;&gt;re 模块&lt;/h2&gt;
 
 &lt;p&gt;re 模块提供了一系列功能强大的正则表达式工具, 它允许你快速检查给定字符串是否与给定的模式匹配 (使用 match 函数), 或者包含这个模式 (使用 search 函数)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;compile(): 创建模式对象
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;compile(): 创建模式对象
 search():  从字符串中根据模式搜索匹配
 
 match():   根据模式匹配字符串，返回Match object对象
-	&amp;gt;&amp;gt;&amp;gt; m = re.match(r&#39;www\.(.*)\..{3}&#39;,&#39;www.python.org&#39;)
+	&amp;gt;&amp;gt;&amp;gt; m = re.match(r'www\.(.*)\..{3}','www.python.org')
 	&amp;gt;&amp;gt;&amp;gt; m.group(1)
-	&#39;python&#39;
+	'python'
 	&amp;gt;&amp;gt;&amp;gt; m.group(0)
-	&#39;www.python.org&#39;
+	'www.python.org'
 	&amp;gt;&amp;gt;&amp;gt; m.start(1)
 	4
 	&amp;gt;&amp;gt;&amp;gt; m.end(1)
@@ -811,40 +923,41 @@ match():   根据模式匹配字符串，返回Match object对象
 	&amp;gt;&amp;gt;&amp;gt; 
 split():   根据模式的匹配项来分割字符串
 	&amp;gt;&amp;gt;&amp;gt; import re
-	&amp;gt;&amp;gt;&amp;gt; some_text = &#39;alpha,beta,,,,gamma delta&#39;
-	&amp;gt;&amp;gt;&amp;gt; re.split(&#39;[, ]+&#39;,some_text)
-	[&#39;alpha&#39;, &#39;beta&#39;, &#39;gamma&#39;, &#39;delta&#39;]
-	&amp;gt;&amp;gt;&amp;gt; re.split(&#39;[, ]+&#39;,some_text,maxsplit=2)
-	[&#39;alpha&#39;, &#39;beta&#39;, &#39;gamma delta&#39;]
-	&amp;gt;&amp;gt;&amp;gt; re.split(&#39;[, ]+&#39;,some_text,maxsplit=1)
-	[&#39;alpha&#39;, &#39;beta,,,,gamma delta&#39;]
+	&amp;gt;&amp;gt;&amp;gt; some_text = 'alpha,beta,,,,gamma delta'
+	&amp;gt;&amp;gt;&amp;gt; re.split('[, ]+',some_text)
+	['alpha', 'beta', 'gamma', 'delta']
+	&amp;gt;&amp;gt;&amp;gt; re.split('[, ]+',some_text,maxsplit=2)
+	['alpha', 'beta', 'gamma delta']
+	&amp;gt;&amp;gt;&amp;gt; re.split('[, ]+',some_text,maxsplit=1)
+	['alpha', 'beta,,,,gamma delta']
 
 findall(): 列出字符串中符合模式的所有匹配项
-	&amp;gt;&amp;gt;&amp;gt; pat = &#39;[a-zA-Z]+&#39;
-	&amp;gt;&amp;gt;&amp;gt; text = &#39;&quot;Hm...Err -- are you sure?&quot; he said, sounding insecure.&#39;
+	&amp;gt;&amp;gt;&amp;gt; pat = '[a-zA-Z]+'
+	&amp;gt;&amp;gt;&amp;gt; text = '&quot;Hm...Err -- are you sure?&quot; he said, sounding insecure.'
 	&amp;gt;&amp;gt;&amp;gt; re.findall(pat,text)
-	[&#39;Hm&#39;, &#39;Err&#39;, &#39;are&#39;, &#39;you&#39;, &#39;sure&#39;, &#39;he&#39;, &#39;said&#39;, &#39;sounding&#39;, &#39;insecure&#39;]
-	&amp;gt;&amp;gt;&amp;gt; pat2 = r&#39;[.?\-&quot;,]+&#39;
+	['Hm', 'Err', 'are', 'you', 'sure', 'he', 'said', 'sounding', 'insecure']
+	&amp;gt;&amp;gt;&amp;gt; pat2 = r'[.?\-&quot;,]+'
 	&amp;gt;&amp;gt;&amp;gt; re.findall(pat2,text)
-	[&#39;&quot;&#39;, &#39;...&#39;, &#39;--&#39;, &#39;?&quot;&#39;, &#39;,&#39;, &#39;.&#39;]
+	['&quot;', '...', '--', '?&quot;', ',', '.']
 
 sub():     利用表达式的匹配项替换指定的字符串
-	&amp;gt;&amp;gt;&amp;gt; pat = &#39;{name}&#39;
-	&amp;gt;&amp;gt;&amp;gt; text = &#39;Dear {name}&#39;
-	&amp;gt;&amp;gt;&amp;gt; re.sub(pat,&#39;Mr,Gumby&#39;,text)
-	&#39;Dear Mr,Gumby&#39;
+	&amp;gt;&amp;gt;&amp;gt; pat = '{name}'
+	&amp;gt;&amp;gt;&amp;gt; text = 'Dear {name}'
+	&amp;gt;&amp;gt;&amp;gt; re.sub(pat,'Mr,Gumby',text)
+	'Dear Mr,Gumby'
 
 escape():  转义正则表达式中所用的特殊字符
-	&amp;gt;&amp;gt;&amp;gt; re.escape(&#39;www.python.org&#39;)
-	&#39;www\\.python\\.org&#39;
-	&amp;gt;&amp;gt;&amp;gt; re.escape(&#39;But where is the ambiguity?&#39;)
-	&#39;But\\ where\\ is\\ the\\ ambiguity\\?&#39;
+	&amp;gt;&amp;gt;&amp;gt; re.escape('www.python.org')
+	'www\\.python\\.org'
+	&amp;gt;&amp;gt;&amp;gt; re.escape('But where is the ambiguity?')
+	'But\\ where\\ is\\ the\\ ambiguity\\?'
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 </description>
         <pubDate>Wed, 23 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/python/2016/11/23/python6.html</link>
-        <guid isPermaLink="true">http://colorful.ren/python/2016/11/23/python6.html</guid>
+        <link>http://localhost:4000/python/2016/11/23/python6.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2016/11/23/python6.html</guid>
         
         
         <category>python</category>
@@ -857,18 +970,19 @@ escape():  转义正则表达式中所用的特殊字符
   &lt;p&gt;面向对象的思想虽然好理解，但是不同的语言的实现方式是有区别的，python的面向对象机制非常的灵活，也很优雅…..&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;pythonoop&quot;&gt;python的OOP的实质&lt;/h2&gt;
+&lt;h2 id=&quot;python的oop的实质&quot;&gt;python的OOP的实质&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;python的面向对象其实就是在已连接的命名空间对象上搜索属性
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python的面向对象其实就是在已连接的命名空间对象上搜索属性
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;这里再次出现了命名空间，命名空间在python中的重要性再怎么强调也不为过。python中的命名空间本来是孤立的，但是因为OOP而将不同的命名空间联系了起来，从而我们可以形成一个命名空间组成的 “树状结构”，python的OOP机制就是在这个树状结构上的搜索机制，这就是python的OOP的本质所在。&lt;/p&gt;
 
-&lt;h2 id=&quot;python&quot;&gt;python的类和继承&lt;/h2&gt;
+&lt;h2 id=&quot;python的类和继承&quot;&gt;python的类和继承&lt;/h2&gt;
 
 &lt;p&gt;因为学习过java。感觉python的oop机制的实现还是比较粗糙的。当然也是比较灵活的，有动态语言的特定。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;class A:
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class A:
 	pass
 
 class B(A):
@@ -880,10 +994,11 @@ class C:
 class D(A,C):
 	pass
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;这里B继承了A；D继承了A和C。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;class A:
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class A:
 	def fun(self):
 		self.action()
 
@@ -891,6 +1006,7 @@ class B(A):
 	def action(self):
 		pass
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -920,8 +1036,8 @@ class B(A):
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 22 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/python/2016/11/22/python5.html</link>
-        <guid isPermaLink="true">http://colorful.ren/python/2016/11/22/python5.html</guid>
+        <link>http://localhost:4000/python/2016/11/22/python5.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2016/11/22/python5.html</guid>
         
         
         <category>python</category>
@@ -934,7 +1050,7 @@ class B(A):
   &lt;p&gt;初次接触python对它的模块和包的概念感觉非常的绕，和java中的包的概念有很大的出入，总是迷迷糊糊的。这里记录一下自己的理解。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;模块&lt;/h2&gt;
+&lt;h2 id=&quot;模块&quot;&gt;模块&lt;/h2&gt;
 
 &lt;p&gt;模块其实就是Python代码组成的文本文件，其实也就是一个命名空间。&lt;/p&gt;
 
@@ -945,7 +1061,7 @@ class B(A):
   &lt;li&gt;
     &lt;p&gt;import和from语句都是可执行的赋值语句&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; a.py
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; a.py
  b.py
  两个文件
  在模块a.py中执行
@@ -953,11 +1069,12 @@ class B(A):
  import b
  效果是先执行b.py中的代码，然后在a.py中定义了一个变量b，引用了b.py的命名空间
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;import 和 from … import …&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt; from module import name1,name2
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; from module import name1,name2
 
  等价于下面的语句
 
@@ -966,11 +1083,12 @@ class B(A):
  name2 = module.name2
  del module
 &lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;如果属性名前面有&lt;code&gt;_&lt;/code&gt;,就不会被&lt;code&gt;from c import *&lt;/code&gt;导入&lt;/li&gt;
+  &lt;li&gt;如果属性名前面有&lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt;,就不会被&lt;code class=&quot;highlighter-rouge&quot;&gt;from c import *&lt;/code&gt;导入&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;模块的作用&lt;/h3&gt;
+&lt;h3 id=&quot;模块的作用&quot;&gt;模块的作用&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;代码重用&lt;/li&gt;
@@ -978,27 +1096,27 @@ class B(A):
   &lt;li&gt;实现数据和服务的共享&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;包&lt;/h2&gt;
+&lt;h2 id=&quot;包&quot;&gt;包&lt;/h2&gt;
 
 &lt;p&gt;python代码以及其所在的目录就是包。包的容器目录（顶层目录）需要能在搜索列表中存在，包其实也是一种命名空间&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;只有&lt;code&gt;__init__.py&lt;/code&gt;文件的目录才能称之为包&lt;/li&gt;
+  &lt;li&gt;只有&lt;code class=&quot;highlighter-rouge&quot;&gt;__init__.py&lt;/code&gt;文件的目录才能称之为包&lt;/li&gt;
   &lt;li&gt;包导入就是把计算机上的目录变成一个Python命名空间，而这个命名空间的属性则是对应目录中的子目录和模块文件&lt;/li&gt;
   &lt;li&gt;包导入之后，包就和模块没什么区别了&lt;/li&gt;
-  &lt;li&gt;包第一次导入时，会自动执行&lt;code&gt;__init__.py&lt;/code&gt;文件中的代码&lt;/li&gt;
+  &lt;li&gt;包第一次导入时，会自动执行&lt;code class=&quot;highlighter-rouge&quot;&gt;__init__.py&lt;/code&gt;文件中的代码&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;分发与安装&lt;/h2&gt;
+&lt;h2 id=&quot;分发与安装&quot;&gt;分发与安装&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;注意关注 &lt;code&gt;distutils&lt;/code&gt; 这个工具的使用&lt;/li&gt;
-  &lt;li&gt;注意关注 &lt;code&gt;eggs&lt;/code&gt; 这个开源系统的使用&lt;/li&gt;
+  &lt;li&gt;注意关注 &lt;code class=&quot;highlighter-rouge&quot;&gt;distutils&lt;/code&gt; 这个工具的使用&lt;/li&gt;
+  &lt;li&gt;注意关注 &lt;code class=&quot;highlighter-rouge&quot;&gt;eggs&lt;/code&gt; 这个开源系统的使用&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 21 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/python/2016/11/21/python4.html</link>
-        <guid isPermaLink="true">http://colorful.ren/python/2016/11/21/python4.html</guid>
+        <link>http://localhost:4000/python/2016/11/21/python4.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2016/11/21/python4.html</guid>
         
         
         <category>python</category>
@@ -1008,9 +1126,9 @@ class B(A):
       <item>
         <title>python基础知识点之文件输入和输出</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#openfile&quot; id=&quot;markdown-toc-openfile&quot;&gt;open()，file()功能相同&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;文件对象的方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;文件内建属性&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#openfile功能相同&quot; id=&quot;markdown-toc-openfile功能相同&quot;&gt;open()，file()功能相同&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#文件对象的方法&quot; id=&quot;markdown-toc-文件对象的方法&quot;&gt;文件对象的方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#文件内建属性&quot; id=&quot;markdown-toc-文件内建属性&quot;&gt;文件内建属性&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1019,9 +1137,9 @@ class B(A):
   &lt;p&gt;内建函数 open() [以及 file()]提供了初始化输入/输出(I/O)操作的通用接口,是打开文件之门的”钥匙”…..&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;openfile&quot;&gt;open()，file()功能相同&lt;/h2&gt;
+&lt;h2 id=&quot;openfile功能相同&quot;&gt;open()，file()功能相同&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;file_object = open(file_name, access_mode=&#39;r&#39;, buffering=-1)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;file_object = open(file_name, access_mode='r', buffering=-1)
 
 file_name:是包含要打开文件名的字符串
 access_mode:是一个字符串，代表文件打开的模式，模式后面会详解
@@ -1043,15 +1161,16 @@ wb+ 		以二进制读写模式打开 (参见 w+ )
 ab+ 		以二进制读写模式打开 (参见 a+ )
 
 
-fp = open(&#39;/etc/motd&#39;) 		# 以读方式打开
-fp = open(&#39;test&#39;, &#39;w&#39;) 		# 以写方式打开
-fp = open(&#39;data&#39;, &#39;r+&#39;) 	# 以读写方式打开
-fp = open(&#39;c:\io.sys&#39;, &#39;rb&#39;) 	# 以二进制读模式打开
+fp = open('/etc/motd') 		# 以读方式打开
+fp = open('test', 'w') 		# 以写方式打开
+fp = open('data', 'r+') 	# 以读写方式打开
+fp = open('c:\io.sys', 'rb') 	# 以二进制读模式打开
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;文件对象的方法&lt;/h3&gt;
+&lt;h3 id=&quot;文件对象的方法&quot;&gt;文件对象的方法&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;file.close()			#关闭文件
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;file.close()			#关闭文件
 file.flush()			#刷新文件的内部缓冲区
 file.readline(size=-1)		#从文件中读取并返回一行(包括行结束符), 或返回最大 size个字符
 file.readlines(sizhint=0)	#读取文件的所有行并作为一个列表返回(包含所有的行结束符); 如果给定 sizhint 且大于 0 , 那么将返回总和大约为sizhint 字节的行(大小由缓冲器容量的下一个值决定）（ 比如说缓冲器的大小只能为4K 的倍数，如果sizhint 为15k，则最后返回的可能是16k———译者按)
@@ -1060,173 +1179,20 @@ file.tell()			#返回当前在文件中的位置
 file.seek(off, whence=0)	#在文件中移动文件指针, 从 whence ( 0 代表文件其始, 1 代表当前位置, 2 代表文件末尾)偏移 off 字节
 file.write(str)			#向文件写入字符串
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;文件内建属性&lt;/h3&gt;
+&lt;h3 id=&quot;文件内建属性&quot;&gt;文件内建属性&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;file.name		#文件名
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;file.name		#文件名
 file.closed		#True 表示文件已经被关闭, 否则为 False
 file.encoding		#文件所使用的编码 - 当 Unicode 字符串被写入数据时, 它们将自动使用 file.encoding 转换为字节字符串; 若file.encoding 为 None 时使用系统默认编码
 file.mode		#文件打开时使用的访问模式
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/python/2016/11/20/python3.html</link>
-        <guid isPermaLink="true">http://colorful.ren/python/2016/11/20/python3.html</guid>
-        
-        
-        <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>python基础知识点之易错语法</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#python-&quot; id=&quot;markdown-toc-python-&quot;&gt;python 语法基本原则&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;条件语句&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#if&quot; id=&quot;markdown-toc-if&quot;&gt;if语句&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;条件表达式&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;循环语句&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#while&quot; id=&quot;markdown-toc-while&quot;&gt;while语句&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#for&quot; id=&quot;markdown-toc-for&quot;&gt;for语句&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;迭代器和生成器&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;函数要注意的地方&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;变量的作用域&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;python的语法结构非常的简单，尤其是对于熟悉其他原因的人来说，但是还是会有一些细节需要注意的，这里仅仅记录一下重要的细节&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;python-&quot;&gt;python 语法基本原则&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;python语法和vb的语法有很大的相似性，都要求严格的缩进，用缩进来保证语法格式。而且冒号&lt;code&gt;:&lt;/code&gt;在python语法中有特殊的含义。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;python中没有自增自减运算&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;python中没有switch语句&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;python中没有foreach语句&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;python中的else和其他语言不同，可以用在循环语句中，表示循环完成后执行&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;条件语句&lt;/h2&gt;
-
-&lt;h3 id=&quot;if&quot;&gt;if语句&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;if expression:
-	expr_true_suite
-elif expression:
-	expr_true_suite
-else:
-	expr_false_suite
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;条件表达式&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;X if C else Y
-
-a = x if x&amp;lt;y else y
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;循环语句&lt;/h2&gt;
-
-&lt;h3 id=&quot;while&quot;&gt;while语句&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;while expression:
-	suite_to_repeat
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;for&quot;&gt;for语句&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;for iter_var in iterable:
-	suite_to_repeat
-for语句经常和range()内建函数联合使用.
-range()内建函数的语法：
-range(start, end, step =1)  ;包前不包后
-
-range(2,9,2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;迭代器和生成器&lt;/h3&gt;
-
-&lt;p&gt;迭代器和生成器是python中的神器。后面会进行详细的总结。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;列表解析:
-[expr for iter_var in iterable if cond_expr]
-生成器表达式:
-(expr for iter_var in iterable if cond_expr)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;函数要注意的地方&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;函数定义的第一行的字符串是文档字符串。写文档字符串是一个好习惯&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;函数的形参有很多种定义方法&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; 1,直接定义
-     def fun(x=1,y=2):
-         print x,y
-     fun(1,2)
-     1,2
-
- 2,形参前一个*代表传递的是元组
-     def fun(*param):
-         print param
-     fun(1,2)
-     (1,2)
-	
- 3,形参前两个*代表传递的是字典
-     def fun(**param):
-         print param
-     fun(x=1,y=2)
-     {&#39;x&#39;=1,&#39;y&#39;=2}
-	
- 4,传递参数时候的反转，将元组或字典拆开传递给函数
-     def fun(x,y)
-         return x+y
-     params = (1,2)
-     fun(*params)
-     3
-		
-     def fun(job = &#39;x&#39;,name = &#39;y&#39;):
-         print &#39;name :&#39;+name+&quot; job : &#39;+job
-
-     params = {&#39;name&#39;:&#39;fulin&#39;,&#39;job&#39;:&#39;it&#39;}
-     fun(**params)
-     &#39;name :fulin job : it&#39;
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;变量的作用域&lt;/h2&gt;
-
-&lt;p&gt;作用域其实就是命名空间，在哪里声明的变量，命名空间就是那里。这里有一个原则：LEGB原则。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;L:本地作用域，函数内的名字空间，包括局部变量和形参
-E:嵌套作用域，外部嵌套函数的名字空间（闭包中常见）
-G:全局作用域，全局变量，函数定义所在模块的名字空间
-B:内置作用域，内置模块的名字空间
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;python的变量作用域和其他语言有比较大的区别，是一个难点，需要特别留意&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 19 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://colorful.ren/python/2016/11/19/python2.html</link>
-        <guid isPermaLink="true">http://colorful.ren/python/2016/11/19/python2.html</guid>
+        <link>http://localhost:4000/python/2016/11/20/python3.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2016/11/20/python3.html</guid>
         
         
         <category>python</category>

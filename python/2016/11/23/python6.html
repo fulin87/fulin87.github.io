@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/python/2016/11/23/python6.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/python/2016/11/23/python6.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,18 +66,18 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#random-" id="markdown-toc-random-">random 模块（随机数模块）</a></li>
-  <li><a href="#shelve-" id="markdown-toc-shelve-">shelve 模块</a></li>
-  <li><a href="#re-" id="markdown-toc-re-">re 模块</a></li>
+  <li><a href="#random-模块随机数模块" id="markdown-toc-random-模块随机数模块">random 模块（随机数模块）</a></li>
+  <li><a href="#shelve-模块" id="markdown-toc-shelve-模块">shelve 模块</a></li>
+  <li><a href="#re-模块" id="markdown-toc-re-模块">re 模块</a></li>
 </ul>
 
 <blockquote>
   <p>python中的标准模块有很多实用的功能，将常用的操作进行了封装，掌握了常用的标准模块的功能可以大幅度的提高工作效率</p>
 </blockquote>
 
-<h2 id="random-">random 模块（随机数模块）</h2>
+<h2 id="random-模块随机数模块">random 模块（随机数模块）</h2>
 
-<pre><code>import random
+<div class="highlighter-rouge"><pre class="highlight"><code>import random
 random.random()		
 	#返回0到1之间的小数
 random.getrandbits(16)
@@ -93,24 +93,26 @@ random.shuffles(s)
 random.sample(s,n)
 	#随机的返回序列s中的n个元素，返回类型是列表
 </code></pre>
+</div>
 
-<h2 id="shelve-">shelve 模块</h2>
+<h2 id="shelve-模块">shelve 模块</h2>
 
 <p>shelve 模块使用数据库驱动实现了字典对象的持久保存. shelve 对象使用字符串作为键, 但值可以是任意类型,我们简单的理解为shelve对象就是一个字典。</p>
 
-<pre><code>import shelve
+<div class="highlighter-rouge"><pre class="highlight"><code>import shelve
 db = shelve.open('D://dbdata.db')
 db['person']=range(100)
 db.close()
 </code></pre>
+</div>
 
 <p>使用shelve比较简单，但是要注意，最后一定要调用其close()方法。</p>
 
-<h2 id="re-">re 模块</h2>
+<h2 id="re-模块">re 模块</h2>
 
 <p>re 模块提供了一系列功能强大的正则表达式工具, 它允许你快速检查给定字符串是否与给定的模式匹配 (使用 match 函数), 或者包含这个模式 (使用 search 函数)</p>
 
-<pre><code>compile(): 创建模式对象
+<div class="highlighter-rouge"><pre class="highlight"><code>compile(): 创建模式对象
 search():  从字符串中根据模式搜索匹配
 
 match():   根据模式匹配字符串，返回Match object对象
@@ -157,6 +159,7 @@ escape():  转义正则表达式中所用的特殊字符
 	&gt;&gt;&gt; re.escape('But where is the ambiguity?')
 	'But\\ where\\ is\\ the\\ ambiguity\\?'
 </code></pre>
+</div>
 
 
   </div>

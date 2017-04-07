@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2016/08/20/ssh2.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/linux/2016/08/20/SSH2.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,10 +66,10 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">文件类型</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">文件扩展名</a></li>
-  <li><a href="#section-2" id="markdown-toc-section-2">文件属性</a>    <ul>
-      <li><a href="#inode-" id="markdown-toc-inode-">inode 索引节点属性</a></li>
+  <li><a href="#文件类型" id="markdown-toc-文件类型">文件类型</a></li>
+  <li><a href="#文件扩展名" id="markdown-toc-文件扩展名">文件扩展名</a></li>
+  <li><a href="#文件属性" id="markdown-toc-文件属性">文件属性</a>    <ul>
+      <li><a href="#inode-索引节点属性" id="markdown-toc-inode-索引节点属性">inode 索引节点属性</a></li>
     </ul>
   </li>
 </ul>
@@ -78,7 +78,7 @@
   <p>Linux中一切皆文件，所有一定要对其文件有深入的认识。</p>
 </blockquote>
 
-<h2 id="section">文件类型</h2>
+<h2 id="文件类型">文件类型</h2>
 
 <p><img src="/image/fileType.PNG" alt="" /></p>
 
@@ -86,7 +86,7 @@
 
 <p><em>file 命令可以看出文件的类型</em></p>
 
-<pre><code>"-" 代表普通文件，绝大多数都是普通文件，Linux中普通文件又分三种类型：
+<div class="highlighter-rouge"><pre class="highlight"><code>"-" 代表普通文件，绝大多数都是普通文件，Linux中普通文件又分三种类型：
     纯文本文件；二级制文件；数据格式的文件。/var/log/wtmp就是数据文件
 
 "d" 表示目录
@@ -134,12 +134,13 @@
     l      symbolic  link;  this  is  never true if the -L option or the -follow option is in effect, unless the symbolic link is broken.  If you want to search for symbolic links when -L is in effect, use -xtype.
     s      socket
 </code></pre>
+</div>
 
-<h2 id="section-1">文件扩展名</h2>
+<h2 id="文件扩展名">文件扩展名</h2>
 
 <p>Linux虽然不区分文件扩展名，但是还是会使用扩展名来区分文件的作用</p>
 
-<pre><code>.tar;.tar.gz;.tgz;.zip;.tar.bz 表示压缩文件，创建命令一般是tar,gzip,zip等
+<div class="highlighter-rouge"><pre class="highlight"><code>.tar;.tar.gz;.tgz;.zip;.tar.bz 表示压缩文件，创建命令一般是tar,gzip,zip等
 .sh 表示shell脚本文件，通过shell语言开发的程序
 .pl 表示perl语言文件,通过perl语言开发的程序
 .py 表示python语言文件,通过python语言开发的程序
@@ -149,8 +150,9 @@
 
 运维开发语言： Shell/python/perl/php四者之一。
 </code></pre>
+</div>
 
-<h2 id="section-2">文件属性</h2>
+<h2 id="文件属性">文件属性</h2>
 
 <p><em>ls -lih</em> 命令显示的内容和含义</p>
 
@@ -158,7 +160,7 @@
 
 <p>如下的显示结果</p>
 
-<pre><code>9577538 -rwxr-xr-x. 1 root root 5.3M Jun 21 02:48 nginx
+<div class="highlighter-rouge"><pre class="highlight"><code>9577538 -rwxr-xr-x. 1 root root 5.3M Jun 21 02:48 nginx
 
 inode 索引节点编号:9577538
 文件类型： 普通文件
@@ -170,8 +172,9 @@ inode 索引节点编号:9577538
 文件修改时间：这里的时间是该文件的最好被更新（包括创建、内容更新，修改等操作）的时间，可以用下面的命令来查看文件的修改，访问，创建时间。
 stat 文件名
 </code></pre>
+</div>
 
-<h3 id="inode-">inode 索引节点属性</h3>
+<h3 id="inode-索引节点属性">inode 索引节点属性</h3>
 
 <p>系统分区要格式化，创建文件系统</p>
 
@@ -179,7 +182,7 @@ stat 文件名
   <li>
     <p><strong>Inode</strong></p>
 
-    <p>中文意思是索引节点（index node）.在每个linux存储设备或设备的分区被格式化为ext3文件系统后，一般都有两个部分。第一部分是Inode，第二部分是Block.查看Inode的使用情况命令:<code>df -i</code></p>
+    <p>中文意思是索引节点（index node）.在每个linux存储设备或设备的分区被格式化为ext3文件系统后，一般都有两个部分。第一部分是Inode，第二部分是Block.查看Inode的使用情况命令:<code class="highlighter-rouge">df -i</code></p>
   </li>
   <li>
     <p><strong>Block</strong></p>
@@ -199,7 +202,7 @@ stat 文件名
 
     <p>5,查看Inode和block的信息</p>
 
-    <pre><code>  # dumpe2fs /dev/sda2 | grep -i "Inode size"
+    <div class="highlighter-rouge"><pre class="highlight"><code>  # dumpe2fs /dev/sda2 | grep -i "Inode size"
   dumpe2fs 1.39 (29-May-2006)
   Inode size:               128
 
@@ -216,8 +219,9 @@ stat 文件名
   Block count:              104388
   Reserved block count:     5219
 </code></pre>
+    </div>
 
-    <p>6,访问文件流程是这样的：<code>文件名 -&gt; inode -&gt; block</code></p>
+    <p>6,访问文件流程是这样的：<code class="highlighter-rouge">文件名 -&gt; inode -&gt; block</code></p>
 
     <p>7,一个block只能由一个文件使用，如果文件很小block很大，剩余空间浪费无法被其他文件使用。</p>
 

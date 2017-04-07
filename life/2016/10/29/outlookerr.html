@@ -10,8 +10,8 @@
   <meta name="description" content="  作为一个有轻微强迫症的用户，遇到一点不协调的东西，都会有点不舒服，一周以前，我电脑中的outlook图标出现了异常，变成了很难看的样子，一直想把这个图标恢复，没有找到什么好的办法，咨询了很多人，也没有解决，这个事一直耿耿于怀，直到今天，才解决，这里记录一下解决办法……">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/life/2016/10/29/outlookerr.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/life/2016/10/29/outlookerr.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -69,23 +69,24 @@
   <p>作为一个有轻微强迫症的用户，遇到一点不协调的东西，都会有点不舒服，一周以前，我电脑中的outlook图标出现了异常，变成了很难看的样子，一直想把这个图标恢复，没有找到什么好的办法，咨询了很多人，也没有解决，这个事一直耿耿于怀，直到今天，才解决，这里记录一下解决办法……</p>
 </blockquote>
 
-<h2 id="section">异常之后的图标</h2>
+<h2 id="异常之后的图标">异常之后的图标</h2>
 
 <p><img src="/image/out_look_err.PNG" alt="" /></p>
 
-<h2 id="section-1">解决办法</h2>
+<h2 id="解决办法">解决办法</h2>
 
-<pre><code>1,切换至用户家目录中的本地数据目录，比如我的目录是：C：\User\870850\AppData\Local
+<div class="highlighter-rouge"><pre class="highlight"><code>1,切换至用户家目录中的本地数据目录，比如我的目录是：C：\User\870850\AppData\Local
 2,找到文件：iconcache.db
 3,将iconcache.db文件删除
 4,重启系统
 </code></pre>
+</div>
 
-<h2 id="section-2">原理</h2>
+<h2 id="原理">原理</h2>
 
-<p><code>C：\User\870850\AppData\Local\iconcache.db</code> 文件是一个缓存的数据文件，存储着系统中应用程序的图标等信息。将其删除后，系统重启时在explorer.exe程序启动时，会重建这个文件，也就会解决图标异常的问题了。</p>
+<p><code class="highlighter-rouge">C：\User\870850\AppData\Local\iconcache.db</code> 文件是一个缓存的数据文件，存储着系统中应用程序的图标等信息。将其删除后，系统重启时在explorer.exe程序启动时，会重建这个文件，也就会解决图标异常的问题了。</p>
 
-<h2 id="section-3">解决之后</h2>
+<h2 id="解决之后">解决之后</h2>
 
 <p><img src="/image/out_look_right.PNG" alt="" /></p>
 

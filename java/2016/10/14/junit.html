@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/java/2016/10/14/junit.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/java/2016/10/14/Junit.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,40 +66,40 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#junit" id="markdown-toc-junit">Junit的官方信息</a></li>
-  <li><a href="#section" id="markdown-toc-section">学习笔记</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">准备测试类</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">测试方法一</a></li>
-      <li><a href="#section-3" id="markdown-toc-section-3">测试方法二</a></li>
-      <li><a href="#section-4" id="markdown-toc-section-4">测试过程和结果解读</a>        <ul>
-          <li><a href="#junit4" id="markdown-toc-junit4">Junit4的生命周期</a></li>
-          <li><a href="#junit-1" id="markdown-toc-junit-1">Junit注解解释</a></li>
+  <li><a href="#junit的官方信息" id="markdown-toc-junit的官方信息">Junit的官方信息</a></li>
+  <li><a href="#学习笔记" id="markdown-toc-学习笔记">学习笔记</a>    <ul>
+      <li><a href="#准备测试类" id="markdown-toc-准备测试类">准备测试类</a></li>
+      <li><a href="#测试方法一" id="markdown-toc-测试方法一">测试方法一</a></li>
+      <li><a href="#测试方法二" id="markdown-toc-测试方法二">测试方法二</a></li>
+      <li><a href="#测试过程和结果解读" id="markdown-toc-测试过程和结果解读">测试过程和结果解读</a>        <ul>
+          <li><a href="#junit4的生命周期" id="markdown-toc-junit4的生命周期">Junit4的生命周期</a></li>
+          <li><a href="#junit注解解释" id="markdown-toc-junit注解解释">Junit注解解释</a></li>
         </ul>
       </li>
-      <li><a href="#junit-2" id="markdown-toc-junit-2">Junit源码解析</a></li>
+      <li><a href="#junit源码解析" id="markdown-toc-junit源码解析">Junit源码解析</a></li>
     </ul>
   </li>
-  <li><a href="#section-5" id="markdown-toc-section-5">网友的精彩博客</a></li>
+  <li><a href="#网友的精彩博客" id="markdown-toc-网友的精彩博客">网友的精彩博客</a></li>
 </ul>
 
 <blockquote>
   <p>减少程序中的bug的一个有效的方法是编写程序逻辑的同时编写测试用例，尽早发现问题。同时Junit作为开源类库， <strong><a href="http://www.oschina.net/news/73667/2016-top-100-java-library">受欢迎程度</a></strong> 是非常高的，已经成为java单元测试事实上的标准，有必要做深入的学习。</p>
 </blockquote>
 
-<h2 id="junit">Junit的官方信息</h2>
+<h2 id="junit的官方信息">Junit的官方信息</h2>
 
 <ul>
   <li><strong><a href="http://junit.org/junit4/">Junit官网</a></strong></li>
   <li><strong><a href="https://github.com/junit-team/junit4">github地址</a></strong></li>
 </ul>
 
-<h2 id="section">学习笔记</h2>
+<h2 id="学习笔记">学习笔记</h2>
 
-<h3 id="section-1">准备测试类</h3>
+<h3 id="准备测试类">准备测试类</h3>
 
-<p><code>TestCast1</code>,<code>TestCast2</code></p>
+<p><code class="highlighter-rouge">TestCast1</code>,<code class="highlighter-rouge">TestCast2</code></p>
 
-<pre><code>package com.fulin.test.testJunt;
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.fulin.test.testJunt;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -143,10 +143,11 @@ public class TestCast1{
 	}
 }
 </code></pre>
+</div>
 
 <hr />
 
-<pre><code>package com.fulin.test.testJunt;
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.fulin.test.testJunt;
 
 import org.junit.Test;
 
@@ -157,14 +158,15 @@ public class TestCast2 {
 	}
 }
 </code></pre>
+</div>
 
 <p>编写好测试类之后，就可以使用Junit4来运行测试类了。运行测试类的方法有两种：</p>
 
-<h3 id="section-2">测试方法一</h3>
+<h3 id="测试方法一">测试方法一</h3>
 
 <p>使用Junit原生的JUnitCore.runClasses(Class…class)方法,如下所示</p>
 
-<pre><code>package com.fulin.test.testJunt;
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.fulin.test.testJunt;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -185,10 +187,11 @@ public class JunnerTest {
 	
 }
 </code></pre>
+</div>
 
 <p>输出如下：</p>
 
-<pre><code>beforeClass
+<div class="highlighter-rouge"><pre class="highlight"><code>beforeClass
 Constrctor...
 before
 test1
@@ -201,22 +204,23 @@ afterClass
 test3
 All tests finished successfully...
 </code></pre>
+</div>
 
-<h3 id="section-3">测试方法二</h3>
+<h3 id="测试方法二">测试方法二</h3>
 
-<p>使用eclipse这个IDE自带的测试工具，在测试类中 <code>右键-&gt; run as -&gt; Junit Test</code> 也可以得到相同的结果</p>
+<p>使用eclipse这个IDE自带的测试工具，在测试类中 <code class="highlighter-rouge">右键-&gt; run as -&gt; Junit Test</code> 也可以得到相同的结果</p>
 
-<h3 id="section-4">测试过程和结果解读</h3>
+<h3 id="测试过程和结果解读">测试过程和结果解读</h3>
 
-<h4 id="junit4">Junit4的生命周期</h4>
+<h4 id="junit4的生命周期">Junit4的生命周期</h4>
 
-<p>Junit4提供了一系列的注解，给编写测试测试类提供了极大的便利，也减少了侵入性。在不同的方法和字段上使用不同的注解，会有不同的效果。但是正真的测试核心方法还是 <code>@Test</code> 标注的方法，其他都是围绕这个核心展开的，相当于其生命周期的一部分。</p>
+<p>Junit4提供了一系列的注解，给编写测试测试类提供了极大的便利，也减少了侵入性。在不同的方法和字段上使用不同的注解，会有不同的效果。但是正真的测试核心方法还是 <code class="highlighter-rouge">@Test</code> 标注的方法，其他都是围绕这个核心展开的，相当于其生命周期的一部分。</p>
 
 <p>同时，我们发现，不过是用那种测试方法，最终的结果都一样，我们有理由相信，Junit4的测试入口就是JunitCore.runClasses。这也是接下来分析源码的入口。</p>
 
-<h4 id="junit-1">Junit注解解释</h4>
+<h4 id="junit注解解释">Junit注解解释</h4>
 
-<pre><code>1. @Test :   测试方法，测试程序会运行的方法
+<div class="highlighter-rouge"><pre class="highlight"><code>1. @Test :   测试方法，测试程序会运行的方法
              后边可以跟参数代表不同的测试如
              (expected=XXException.class) 异常测试
              (timeout=xxx)超时测试
@@ -226,14 +230,15 @@ All tests finished successfully...
 5. @BeforeClass: 所有测试开始之前运行
 6. @AfterClass:  所有测试结束之后运行
 </code></pre>
+</div>
 
-<h3 id="junit-2">Junit源码解析</h3>
+<h3 id="junit源码解析">Junit源码解析</h3>
 
 <p>这是根据Junit源码画出的时序图</p>
 
 <p><img src="/image/Junit-time.png" alt="" /></p>
 
-<h2 id="section-5">网友的精彩博客</h2>
+<h2 id="网友的精彩博客">网友的精彩博客</h2>
 
 <ul>
   <li><strong><a href="https://my.oschina.net/pangyangyang/blog/144495">Junit学习系列一</a></strong></li>

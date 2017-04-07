@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2014/12/30/web-name.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/linux/2014/12/30/web-name.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,50 +66,50 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">中间件</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">灰度发布</a></li>
-  <li><a href="#ab" id="markdown-toc-ab">A/B测试</a></li>
-  <li><a href="#section-2" id="markdown-toc-section-2">高可用</a></li>
-  <li><a href="#section-3" id="markdown-toc-section-3">负载均衡</a></li>
-  <li><a href="#section-4" id="markdown-toc-section-4">容灾</a></li>
+  <li><a href="#中间件" id="markdown-toc-中间件">中间件</a></li>
+  <li><a href="#灰度发布" id="markdown-toc-灰度发布">灰度发布</a></li>
+  <li><a href="#ab测试" id="markdown-toc-ab测试">A/B测试</a></li>
+  <li><a href="#高可用" id="markdown-toc-高可用">高可用</a></li>
+  <li><a href="#负载均衡" id="markdown-toc-负载均衡">负载均衡</a></li>
+  <li><a href="#容灾" id="markdown-toc-容灾">容灾</a></li>
   <li><a href="#soa" id="markdown-toc-soa">SOA</a></li>
   <li><a href="#situatdevpro" id="markdown-toc-situatdevpro">SIT/UAT/DEV/PRO</a></li>
-  <li><a href="#section-5" id="markdown-toc-section-5">回归测试</a></li>
-  <li><a href="#section-6" id="markdown-toc-section-6">有关互联网架构的精彩博文</a></li>
+  <li><a href="#回归测试" id="markdown-toc-回归测试">回归测试</a></li>
+  <li><a href="#有关互联网架构的精彩博文" id="markdown-toc-有关互联网架构的精彩博文">有关互联网架构的精彩博文</a></li>
 </ul>
 
 <blockquote>
   <p>一个合格的后端开发工程师的学习路线大体上是这样的: <strong>计算机基础理论 -&gt; 操作系统 -&gt; 计算机语言 -&gt; 数据库 -&gt; 互联网架构 -&gt; 大数据技术</strong>  当然这里省略了很多的细节，但是我认为大致的方向是这样的，现在的技术日新月异,有很多名词是上学的时候没有学过的，需要工作中积累。</p>
 </blockquote>
 
-<h2 id="section">中间件</h2>
+<h2 id="中间件">中间件</h2>
 
 <p><strong><a href="http://baike.baidu.com/link?url=PgrBVJsVc0Z0ZhfZ3b08YEdkUUfigsdhNIJKr1pphogwntwgbe_aSeVFGnG3zwsV41Pu2_7ShyAFHulSchZHPnDVwbi8wub9amz5jUiO8nPbbHmPDcL6Np9jOH4m-qs4W56JEYF-f7a170S2_wMeA_">百度百科的解释</a></strong></p>
 
 <p>中间件我的理解就是一种介于操作系统和业务系统之间的一种软件系统或者技术。</p>
 
-<h2 id="section-1">灰度发布</h2>
+<h2 id="灰度发布">灰度发布</h2>
 
 <p><strong><a href="http://baike.baidu.com/link?url=3bQ92ecrVPqTulYjgFtQ8aYBuV0KwkXyISE2GN6wm1TdFGYL6UGIuJfBLuJOBCTfCbp5ZGXcwOBa20xnjsf4ZY1zCyeeGwCYo0dBcHAy8VfvxPxY3HYJ8XX3fiUEj2Vw">百度百科的解释</a></strong></p>
 
 <p>灰度发布我自己的理解就是：在保证系统不停机的情况下，逐步发布，替换，针对效果十分理想而进行全面发布或者回滚。和A/B测试有重叠的地方。</p>
 
-<h2 id="ab">A/B测试</h2>
+<h2 id="ab测试">A/B测试</h2>
 
 <p><strong><a href="http://baike.baidu.com/link?url=6rZxP5pTzB2Jb_muT9tdwvzzOf7MXDmy_HuK05XrFq-qGHgrEasXisxdK0OLa3hvqZBZIoelqOfOR4yYccfEhY8ZpsOccO1p2BKBSH6gdQu">百度百科的解释</a></strong></p>
 
 <p>A/B测试我自己的理解就是在不知道用户真正的需求的时候，做A/B两套或者更多的方案，在生产环境进行验证，由用户的行为数据来决定到底使用那一套方案的测试。</p>
 
-<h2 id="section-2">高可用</h2>
+<h2 id="高可用">高可用</h2>
 
 <p><strong><a href="http://baike.baidu.com/link?url=uBJRDHZ2TVawCjBsAwUBl0DvrsbAYiqBFiom-7FG2JQHhnQebjNCuNq0z49QzUc1h4hzXrq-3P4oeuk3EGXHbMEwYgq8jmP5M3ly5bgFntwCwiZAg00uyEsbES2nkmLc">百度百科的解释</a></strong></p>
 
-<h2 id="section-3">负载均衡</h2>
+<h2 id="负载均衡">负载均衡</h2>
 <p><strong><a href="http://baike.baidu.com/link?url=5A9DS5Tv_zgAr2no_4jhtypJSEBCofNM4MudmaubzrYhE0QTyA_hhH2FlJl_-63wsWr5krluw_-qPPm1B-fKlZeJQW6qpUlLZh4pmMybdMWAVPGLztgOd10Jv5IHfeut">百度百科的解释</a></strong></p>
 
 <p>负载均衡，我的理解就是均衡器，有点类似于MVC中的C，在互联网架构中具有举足轻重的地位，没有它，其他的技术无从谈起。</p>
 
-<h2 id="section-4">容灾</h2>
+<h2 id="容灾">容灾</h2>
 
 <p><strong><a href="http://baike.baidu.com/link?url=FAeSIHuua6xRFdvGSvTguAaj7BrLwR0HM0_V33ZVS-GGCjoVNzd76ij_IN4od76BEVm7_ZkM1dRkSphUyxLZJh8GeupJsNY9Vea3Sk6DTje">百度百科的解释</a></strong></p>
 
@@ -127,19 +127,20 @@
 
 <p>我的理解是，这些是软件工程中的不同测试环境。</p>
 
-<pre><code>DEV:开发人员使用的环境，开发环境
+<div class="highlighter-rouge"><pre class="highlight"><code>DEV:开发人员使用的环境，开发环境
 SIT:功能集成测试环境，测试环境
 UAT:用户验收环境，用户体验环境
 PRO:正式环境，也叫生产环境，是真正的环境。
 </code></pre>
+</div>
 
-<h2 id="section-5">回归测试</h2>
+<h2 id="回归测试">回归测试</h2>
 
 <p><strong><a href="http://baike.baidu.com/link?url=u4JX6jEBIlfz77k6_Vo2jcXNnzm2ZeGqpyCOefTv4iR3pCOqAkIjgWV0t_e_-Q2WX4Kr30XEao7MFM_zkQr7_fA1cclpNrMsnv7gY-efGrRGEg5BSSWvArgeEiFEB11S">百度百科的解释</a></strong></p>
 
 <p>回归测试，我的理解就是冒烟测试，主要作用是保证核心功能的可用性。</p>
 
-<h2 id="section-6">有关互联网架构的精彩博文</h2>
+<h2 id="有关互联网架构的精彩博文">有关互联网架构的精彩博文</h2>
 
 <p><strong><a href="http://mp.weixin.qq.com/s?__biz=MzA4NDc2MDQ1Nw==&amp;mid=2650238076&amp;idx=1&amp;sn=26a8ef34afb15a7fb0101e1ace6cbc51&amp;chksm=87e18e9ab096078ced8ecc55a39d2d4298b77f24351a29353fb4a49d4b8891103578be50680e&amp;scene=0#wechat_redirect">一号店的架构演进</a></strong></p>
 

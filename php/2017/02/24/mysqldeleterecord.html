@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/php/2017/02/24/mysqldeleterecord.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/php/2017/02/24/mysqldeleterecord.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,48 +66,51 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">为什么会出现磁盘被占满的情况</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">一次性删除大量数据产生的危害有哪些</a></li>
-  <li><a href="#section-2" id="markdown-toc-section-2">删除数据正确的姿势是什么</a></li>
-  <li><a href="#section-3" id="markdown-toc-section-3">启示</a></li>
+  <li><a href="#为什么会出现磁盘被占满的情况" id="markdown-toc-为什么会出现磁盘被占满的情况">为什么会出现磁盘被占满的情况</a></li>
+  <li><a href="#一次性删除大量数据产生的危害有哪些" id="markdown-toc-一次性删除大量数据产生的危害有哪些">一次性删除大量数据产生的危害有哪些</a></li>
+  <li><a href="#删除数据正确的姿势是什么" id="markdown-toc-删除数据正确的姿势是什么">删除数据正确的姿势是什么</a></li>
+  <li><a href="#启示" id="markdown-toc-启示">启示</a></li>
 </ul>
 
 <blockquote>
-  <p>昨天，一位同事在A系统的测试环境的mysql数据库中执行了一条<code>DELETE</code> 语句，删除了一千多万条数据，导致监控平台告警，数据库服务器磁盘空间被占满,对于这件事，我们是需要思考和总结的。</p>
+  <p>昨天，一位同事在A系统的测试环境的mysql数据库中执行了一条<code class="highlighter-rouge">DELETE</code> 语句，删除了一千多万条数据，导致监控平台告警，数据库服务器磁盘空间被占满,对于这件事，我们是需要思考和总结的。</p>
 </blockquote>
 
 <p><img src="/image/mysqlDelete.PNG" alt="" /></p>
 
-<h3 id="section">为什么会出现磁盘被占满的情况</h3>
+<h3 id="为什么会出现磁盘被占满的情况">为什么会出现磁盘被占满的情况</h3>
 
-<p>在<code>mysql</code>数据库中,<code>UPDATE,DELETE,INSERT</code>操作都会记录到一个二进制日志文件中,也就是大家平时所说的<code>binlog</code>,这个日志文件的格式与mysql的一个参数设置有关。</p>
+<p>在<code class="highlighter-rouge">mysql</code>数据库中,<code class="highlighter-rouge">UPDATE,DELETE,INSERT</code>操作都会记录到一个二进制日志文件中,也就是大家平时所说的<code class="highlighter-rouge">binlog</code>,这个日志文件的格式与mysql的一个参数设置有关。</p>
 
-<p><code>binlog</code>有很多用途：</p>
+<p><code class="highlighter-rouge">binlog</code>有很多用途：</p>
 
-<pre><code>* 根据binlog进行主从同步（常用）
+<div class="highlighter-rouge"><pre class="highlight"><code>* 根据binlog进行主从同步（常用）
 * 根据binlog进行数据恢复（不常用）
 * 可以用来查询数据库的操作记录
 </code></pre>
+</div>
 
-<p>因此，大量的DML语句对参数大量的<code>binlog</code>,像上面的情况，一次删除千万级别的数据，参数的日志文件就有20多G，直接导致了磁盘被占满。</p>
+<p>因此，大量的DML语句对参数大量的<code class="highlighter-rouge">binlog</code>,像上面的情况，一次删除千万级别的数据，参数的日志文件就有20多G，直接导致了磁盘被占满。</p>
 
-<h3 id="section-1">一次性删除大量数据产生的危害有哪些</h3>
+<h3 id="一次性删除大量数据产生的危害有哪些">一次性删除大量数据产生的危害有哪些</h3>
 
-<p>根据上面的分析可知，大量的DML操作参数的直接影响就是导致服务器磁盘被占满，其实还有另外一种更大的危害：<code>破坏数据库主从同步</code>导致数据库主从不一致，进而影响应用系统的逻辑。</p>
+<p>根据上面的分析可知，大量的DML操作参数的直接影响就是导致服务器磁盘被占满，其实还有另外一种更大的危害：<code class="highlighter-rouge">破坏数据库主从同步</code>导致数据库主从不一致，进而影响应用系统的逻辑。</p>
 
-<h3 id="section-2">删除数据正确的姿势是什么</h3>
+<h3 id="删除数据正确的姿势是什么">删除数据正确的姿势是什么</h3>
 
-<pre><code>1，分批删除，观察磁盘占有情况和数据同步情况
+<div class="highlighter-rouge"><pre class="highlight"><code>1，分批删除，观察磁盘占有情况和数据同步情况
 2，交给专业DBA执行
 </code></pre>
+</div>
 
-<h3 id="section-3">启示</h3>
+<h3 id="启示">启示</h3>
 
 <p>事情发生后，那位同事被领导批评了一顿，但是从这件事我们至少可以吸取两个教训：</p>
 
-<pre><code>1，对数据库的操作，至少是DML操作应该有严格的流程限制，不能随便让人去执行，否则后果很严重
+<div class="highlighter-rouge"><pre class="highlight"><code>1，对数据库的操作，至少是DML操作应该有严格的流程限制，不能随便让人去执行，否则后果很严重
 2，作为程序员，数据库的知识要扎实，否则就会引来大麻烦。
 </code></pre>
+</div>
 
   </div>
 

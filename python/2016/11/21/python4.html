@@ -10,8 +10,8 @@
   <meta name="description" content="  初次接触python对它的模块和包的概念感觉非常的绕，和java中的包的概念有很大的出入，总是迷迷糊糊的。这里记录一下自己的理解。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/python/2016/11/21/python4.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/python/2016/11/21/python4.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -69,7 +69,7 @@
   <p>初次接触python对它的模块和包的概念感觉非常的绕，和java中的包的概念有很大的出入，总是迷迷糊糊的。这里记录一下自己的理解。</p>
 </blockquote>
 
-<h2 id="section">模块</h2>
+<h2 id="模块">模块</h2>
 
 <p>模块其实就是Python代码组成的文本文件，其实也就是一个命名空间。</p>
 
@@ -80,7 +80,7 @@
   <li>
     <p>import和from语句都是可执行的赋值语句</p>
 
-    <pre><code> a.py
+    <div class="highlighter-rouge"><pre class="highlight"><code> a.py
  b.py
  两个文件
  在模块a.py中执行
@@ -88,11 +88,12 @@
  import b
  效果是先执行b.py中的代码，然后在a.py中定义了一个变量b，引用了b.py的命名空间
 </code></pre>
+    </div>
   </li>
   <li>
     <p>import 和 from … import …</p>
 
-    <pre><code> from module import name1,name2
+    <div class="highlighter-rouge"><pre class="highlight"><code> from module import name1,name2
 
  等价于下面的语句
 
@@ -101,11 +102,12 @@
  name2 = module.name2
  del module
 </code></pre>
+    </div>
   </li>
-  <li>如果属性名前面有<code>_</code>,就不会被<code>from c import *</code>导入</li>
+  <li>如果属性名前面有<code class="highlighter-rouge">_</code>,就不会被<code class="highlighter-rouge">from c import *</code>导入</li>
 </ul>
 
-<h3 id="section-1">模块的作用</h3>
+<h3 id="模块的作用">模块的作用</h3>
 
 <ul>
   <li>代码重用</li>
@@ -113,22 +115,22 @@
   <li>实现数据和服务的共享</li>
 </ul>
 
-<h2 id="section-2">包</h2>
+<h2 id="包">包</h2>
 
 <p>python代码以及其所在的目录就是包。包的容器目录（顶层目录）需要能在搜索列表中存在，包其实也是一种命名空间</p>
 
 <ul>
-  <li>只有<code>__init__.py</code>文件的目录才能称之为包</li>
+  <li>只有<code class="highlighter-rouge">__init__.py</code>文件的目录才能称之为包</li>
   <li>包导入就是把计算机上的目录变成一个Python命名空间，而这个命名空间的属性则是对应目录中的子目录和模块文件</li>
   <li>包导入之后，包就和模块没什么区别了</li>
-  <li>包第一次导入时，会自动执行<code>__init__.py</code>文件中的代码</li>
+  <li>包第一次导入时，会自动执行<code class="highlighter-rouge">__init__.py</code>文件中的代码</li>
 </ul>
 
-<h2 id="section-3">分发与安装</h2>
+<h2 id="分发与安装">分发与安装</h2>
 
 <ul>
-  <li>注意关注 <code>distutils</code> 这个工具的使用</li>
-  <li>注意关注 <code>eggs</code> 这个开源系统的使用</li>
+  <li>注意关注 <code class="highlighter-rouge">distutils</code> 这个工具的使用</li>
+  <li>注意关注 <code class="highlighter-rouge">eggs</code> 这个开源系统的使用</li>
 </ul>
 
   </div>

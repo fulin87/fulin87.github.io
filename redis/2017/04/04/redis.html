@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>java集合备忘录</title>
-  <meta name="description" content="">
+  <title>redis 知识点总结</title>
+  <meta name="description" content="  redis是一个高性能的键值对数据库，redis是意大利人在2009年开发完成并开源的软件产品。redis本身的含义是 remote dictionary server (远程字典服务器)，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/java/2016/08/28/javacollection.html">
-  <link rel="alternate" type="application/rss+xml" title="2B程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/redis/2017/04/04/redis.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">2B程序员的笔记</a>
+    <a class="site-title" href="/">水货程序员的笔记</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -60,42 +60,86 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">java集合备忘录</h1>
-    <p class="post-meta"><time datetime="2016-08-28T13:07:11+08:00" itemprop="datePublished">Aug 28, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">redis 知识点总结</h1>
+    <p class="post-meta"><time datetime="2017-04-04T13:07:11+08:00" itemprop="datePublished">Apr 4, 2017</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <ul id="markdown-toc">
-  <li><a href="#java" id="markdown-toc-java">java集合的总体框架</a></li>
-</ul>
-
-<blockquote>
-  <p>java集合的运用和认识的深入程度是一个java程序员水平的重要体现，但是要想把这一部分的内容理解透彻，深刻掌握是需要整理和总结的。以前总结过，但是没有形成文字，时间长了难免会忘记，现在记录在此。</p>
+    <blockquote>
+  <p>redis是一个高性能的键值对数据库，redis是意大利人在2009年开发完成并开源的软件产品。
+redis本身的含义是 <em>remote dictionary server (远程字典服务器)</em>，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。</p>
 </blockquote>
 
-<h3 id="java">java集合的总体框架</h3>
-<p><img src="/image/javaCollection.PNG" alt="collectionMap" /></p>
-
-<p>java集合类框架有两个顶层接口,有多个子接口和抽象类，若干实现类。这些接口和类可以抽象的分成2类：一类是”序列”,一类是”键值对”。其实就是下面这两类：</p>
-
-<pre><code>java.util.Collection
-java.util.Map
-</code></pre>
-
-<p>这里我们不讨论抽象类，直接说实现类。  <br />
-Collection的具体实现分成两部分：List相关的和Set相关的。List和Set都是接口。两者最大的区别就是元素是否唯一。List是不唯一的，Set是唯一的。  <br />
-List的具体实现有下面几种:</p>
-
-<pre><code>ArrayList
-LinkedList
-</code></pre>
+<h3 id="redis的特点">redis的特点</h3>
 
 <ul>
-  <li><em>ArrayList是一个数组队列，相当于动态数组。它是由数组实现的，随机访问效率高，随机插入，删除效率低</em></li>
-  <li><em>LinkedList是一个双向链表。它可以被当做堆栈，队列或者双向队列进行操作。随机访问效率低，但是插入、删除效率高</em></li>
-  <li><em>ArryList和LinkedList都不是线程安全的，想要线程安全，可以使用Collections.synchronizedList(List list)进行处理</em></li>
-  <li><em>List当然还有其他的实现类，比如：Vector，Stack。这些因为比较</em></li>
+  <li>
+    <p>支持丰富的数据类型</p>
+
+    <p>字符串类型(string)，散列类型(hash)，列表类型(list)，集合类型(set)，有序集合类型(zset)</p>
+  </li>
+  <li>
+    <p>内存存储和持久化</p>
+
+    <p>redis的数据存储在内存中，读写速度远快于硬盘，可以提供一秒10W+的键值的读写同时还提供了持久化的支持</p>
+  </li>
+  <li>
+    <p>功能丰富</p>
+
+    <p>redis虽然是作为数据库开发的，但是越来越多的人将其作为缓存，队列系统使用</p>
+  </li>
+  <li>
+    <p>简单稳定</p>
+
+    <p>redis提供了一系列简单的命令来操作redis</p>
+  </li>
 </ul>
+
+<h3 id="redis的启动和停止">redis的启动和停止</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>启动：  ./bin/redis-server ./redis-conf
+停止：  ./bin/redis-cli shutdown
+</code></pre>
+</div>
+
+<h3 id="基本命令">基本命令</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>keys *  //获取所有的键
+type key //获取键key的类型
+</code></pre>
+</div>
+
+<h3 id="redis的事务">redis的事务</h3>
+
+<p>redis提供了类似关系型数据库的事务功能，但是没有提供回滚机制,开发者必须在事务执行出错后自己收拾残局。命令：</p>
+
+<p><strong><em>MULTI  EXEC 命令</em></strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>MULTI
+
+code ...
+
+EXEC
+</code></pre>
+</div>
+
+<p>同时因为redis不支持回滚功能，所以redis的事务上可以保持简洁和快速</p>
+
+<p><strong><em>WATCH 命令</em></strong></p>
+
+<p><em>WATCH</em>命令可以监控一个或多个键，一旦其中有一个键被修改，之后的事务就不会被执行。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>WATCH key1 key2 key3 ....
+</code></pre>
+</div>
+
+<p><strong><em>UNWATCH 命令</em></strong></p>
+
+<p><em>UNWATCH</em>命令可以取消对键的监控</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>UNWATCH key1 key2 key3 ....
+</code></pre>
+</div>
 
 
   </div>
@@ -114,7 +158,7 @@ LinkedList
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
 		
-          <li>2B程序员的笔记</li>
+          <li>水货程序员的笔记</li>
           <li><a href="mailto:fulin87@sina.com">fulin87@sina.com</a></li>
         </ul>
       </div>

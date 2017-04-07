@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/java/2016/02/20/aslist.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/java/2016/02/20/asList.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,16 +66,16 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#javanan" id="markdown-toc-javanan">java中的NaN;无穷大;异常</a></li>
-  <li><a href="#javautilarraysarraylistjavautilarraylist" id="markdown-toc-javautilarraysarraylistjavautilarraylist">java.util.Arrays.ArrayList与java.util.ArrayList的有关问题</a></li>
-  <li><a href="#java--" id="markdown-toc-java--">java中的 &amp;&amp;;&amp;;||;|;^ 这些运算符的区别</a></li>
+  <li><a href="#java中的nan无穷大异常" id="markdown-toc-java中的nan无穷大异常">java中的NaN;无穷大;异常</a></li>
+  <li><a href="#javautilarraysarraylist与javautilarraylist的有关问题" id="markdown-toc-javautilarraysarraylist与javautilarraylist的有关问题">java.util.Arrays.ArrayList与java.util.ArrayList的有关问题</a></li>
+  <li><a href="#java中的--这些运算符的区别" id="markdown-toc-java中的--这些运算符的区别">java中的 &amp;&amp;;&amp;;||;|;^ 这些运算符的区别</a></li>
 </ul>
 
 <blockquote>
   <p><em>把工作中遇到的一些容易出错的知识点记录整理下来，时间长了就是一笔宝贵的财富，这就是经验…</em></p>
 </blockquote>
 
-<h2 id="javanan">java中的NaN;无穷大;异常</h2>
+<h2 id="java中的nan无穷大异常">java中的NaN;无穷大;异常</h2>
 
 <ul>
   <li>java中整数除以0将会产生一个异常</li>
@@ -85,43 +85,48 @@
 
 <p>代码示例</p>
 
-<pre><code>public static void main(String[] args){
+<div class="highlighter-rouge"><pre class="highlight"><code>public static void main(String[] args){
 	System.out.println(2.1d/0);
 	System.out.println(Math.sqrt(-2));
 	System.out.println(1/0);
 }
 </code></pre>
+</div>
 
 <p>将输出：</p>
 
-<pre><code>Infinity
+<div class="highlighter-rouge"><pre class="highlight"><code>Infinity
 NaN
 Exception in thread "main" java.lang.ArithmeticException: / by zero
 	at com.fulin.test.test_local.Test4.main(Test4.java:8)
 </code></pre>
+</div>
 
-<h2 id="javautilarraysarraylistjavautilarraylist">java.util.Arrays.ArrayList与java.util.ArrayList的有关问题</h2>
+<h2 id="javautilarraysarraylist与javautilarraylist的有关问题">java.util.Arrays.ArrayList与java.util.ArrayList的有关问题</h2>
 
 <p>问题是这样的，将数组转成List，通常我们习惯这样写成:</p>
 
-<pre><code>List&lt;String&gt; list = Arrays.asList("1","2");
+<div class="highlighter-rouge"><pre class="highlight"><code>List&lt;String&gt; list = Arrays.asList("1","2");
 </code></pre>
+</div>
 
 <p>于是我们这样就得到了一个<strong>list</strong>,但是这个List的实现类是<strong>java.util.Arrays.ArrayList</strong>(而不是java.util.ArrayList)。</p>
 
 <p>这里需要注意这两个同名但是不同包的类：</p>
 
-<pre><code>java.util.Arrays.ArrayList
+<div class="highlighter-rouge"><pre class="highlight"><code>java.util.Arrays.ArrayList
 java.util.ArrayList
 </code></pre>
+</div>
 
 <p>剖析JDK源代码可以发现:java.util.Arrays.ArrayList继承了java.util.AbstractList这个类，再来看看java.util.AbstractList类是啥样子的？可以发现：</p>
 
-<pre><code>public E set(int index, E element)
+<div class="highlighter-rouge"><pre class="highlight"><code>public E set(int index, E element)
 public E set(int index, E element)
 public E remove(int index)
 public void add(int index, E element)  | public boolean add(E e)调用add(int index, E element)
 </code></pre>
+</div>
 
 <p>以上方法的实现全部是抛出UnsupportedOperationException异常。因此有Arrays.asList转换出来的List他其实是一个AbstractList他可以像List一样访问，但是不可其做任何修改操作。</p>
 
@@ -129,22 +134,22 @@ public void add(int index, E element)  | public boolean add(E e)调用add(int in
 
 <p>换句话说，其实java.util.Arrays.ArrayList其实只是对数组做了一个装饰，可以看到里面的实现，E get(int index)、E set(int index, E element)等方法都是对数组的操作，他的目的只是提供了可以像访问List那样来访问数组而已。<strong>本质上其实还是一个数组。</strong></p>
 
-<h2 id="java--">java中的 &amp;&amp;;&amp;;||;|;^ 这些运算符的区别</h2>
+<h2 id="java中的--这些运算符的区别">java中的 &amp;&amp;;&amp;;||;|;^ 这些运算符的区别</h2>
 
-<p>如果阅读开源项目的源码,比如FastJson的源码，会发现，大量的使用了 <code>&amp;</code> 和 <code>|</code> 运算符。但是这些运算符一般在我们自己的项目中是很少用的，时间一长就忘记了它的含义。这里总结一下。</p>
+<p>如果阅读开源项目的源码,比如FastJson的源码，会发现，大量的使用了 <code class="highlighter-rouge">&amp;</code> 和 <code class="highlighter-rouge">|</code> 运算符。但是这些运算符一般在我们自己的项目中是很少用的，时间一长就忘记了它的含义。这里总结一下。</p>
 
 <ul>
-  <li><code>&amp;&amp;</code> 的含义就是逻辑与运算，操作数必须是boolean类型的。</li>
-  <li><code>||</code> 的含义就是逻辑或运算，操作数必须是boolean类型的。</li>
-  <li><code>&amp;</code>  的含义就是按位与运算，操作数要么都是boolean类型，要么是char或int或long。</li>
-  <li><code>|</code>  的含义就是按位或运算，操作数要么都是boolean类型，要么是char或int或long。</li>
-  <li><code>^</code>  的含义就是按位异或运算，按位进行相同为0，不同为1，操作数要么都是boolean类型，要么是char或int或long。</li>
-  <li><code>&amp;&amp;</code> 运算符和 <code>||</code> 运算符都是短路运算符。但是 <code>&amp;</code> 运算符 和 <code>|</code> 运算符不是短路运算符，这一点需要注意*</li>
+  <li><code class="highlighter-rouge">&amp;&amp;</code> 的含义就是逻辑与运算，操作数必须是boolean类型的。</li>
+  <li><code class="highlighter-rouge">||</code> 的含义就是逻辑或运算，操作数必须是boolean类型的。</li>
+  <li><code class="highlighter-rouge">&amp;</code>  的含义就是按位与运算，操作数要么都是boolean类型，要么是char或int或long。</li>
+  <li><code class="highlighter-rouge">|</code>  的含义就是按位或运算，操作数要么都是boolean类型，要么是char或int或long。</li>
+  <li><code class="highlighter-rouge">^</code>  的含义就是按位异或运算，按位进行相同为0，不同为1，操作数要么都是boolean类型，要么是char或int或long。</li>
+  <li><code class="highlighter-rouge">&amp;&amp;</code> 运算符和 <code class="highlighter-rouge">||</code> 运算符都是短路运算符。但是 <code class="highlighter-rouge">&amp;</code> 运算符 和 <code class="highlighter-rouge">|</code> 运算符不是短路运算符，这一点需要注意*</li>
 </ul>
 
 <p>举例如下：</p>
 
-<pre><code>public static void main(String[] args) {
+<div class="highlighter-rouge"><pre class="highlight"><code>public static void main(String[] args) {
 	char a = 2,b = 3;
 	int c = 10;
 	long d = 100l;
@@ -158,14 +163,16 @@ public void add(int index, E element)  | public boolean add(E e)调用add(int in
 	System.out.println(flagT | flagF);
 }
 </code></pre>
+</div>
 
-<p><code>这里说的按位与和按位或就是二进制数的按位与和按位或。</code></p>
+<p><code class="highlighter-rouge">这里说的按位与和按位或就是二进制数的按位与和按位或。</code></p>
 
  	^ 运算符有一个经典运用，来交互两个整数
-<pre><code>e ^= f;
+<div class="highlighter-rouge"><pre class="highlight"><code>e ^= f;
 f ^= e;
 e ^= f;
 </code></pre>
+</div>
 
   </div>
 

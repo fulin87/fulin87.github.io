@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2016/08/23/ssh5.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/linux/2016/08/23/SSH5.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,36 +66,36 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#linux" id="markdown-toc-linux">Linux权限表示法</a></li>
-  <li><a href="#linux-1" id="markdown-toc-linux-1">Linux权限管理</a>    <ul>
-      <li><a href="#chmod-" id="markdown-toc-chmod-">chmod 管理权限</a></li>
-      <li><a href="#chown-" id="markdown-toc-chown-">chown 管理文件所属的主或组</a></li>
-      <li><a href="#section" id="markdown-toc-section">系统文件权限管理</a></li>
+  <li><a href="#linux权限表示法" id="markdown-toc-linux权限表示法">Linux权限表示法</a></li>
+  <li><a href="#linux权限管理" id="markdown-toc-linux权限管理">Linux权限管理</a>    <ul>
+      <li><a href="#chmod-管理权限" id="markdown-toc-chmod-管理权限">chmod 管理权限</a></li>
+      <li><a href="#chown-管理文件所属的主或组" id="markdown-toc-chown-管理文件所属的主或组">chown 管理文件所属的主或组</a></li>
+      <li><a href="#系统文件权限管理" id="markdown-toc-系统文件权限管理">系统文件权限管理</a></li>
     </ul>
   </li>
-  <li><a href="#section-1" id="markdown-toc-section-1">用户管理</a></li>
-  <li><a href="#section-2" id="markdown-toc-section-2">企业中权限管理的最佳实践</a></li>
+  <li><a href="#用户管理" id="markdown-toc-用户管理">用户管理</a></li>
+  <li><a href="#企业中权限管理的最佳实践" id="markdown-toc-企业中权限管理的最佳实践">企业中权限管理的最佳实践</a></li>
 </ul>
 
 <blockquote>
   <p>linux中的权限管理是基础中的基础，知识点相对零散，这里特意总结一下Linux中权限管理相关功能的知识点。</p>
 </blockquote>
 
-<h2 id="linux">Linux权限表示法</h2>
+<h2 id="linux权限表示法">Linux权限表示法</h2>
 
 <p>一图胜千言语</p>
 
 <p><img src="/image/right2.PNG" alt="" /></p>
 
-<h2 id="linux-1">Linux权限管理</h2>
+<h2 id="linux权限管理">Linux权限管理</h2>
 
-<h3 id="chmod-">chmod 管理权限</h3>
+<h3 id="chmod-管理权限">chmod 管理权限</h3>
 
 <ul>
   <li>
     <p>普通文件的权限先总结如下：</p>
 
-    <pre><code> 可读 r：
+    <div class="highlighter-rouge"><pre class="highlight"><code> 可读 r：
      表示具有阅读文件内容的权限
  可写 w：
      表示具有新增，修改文件内容的权限
@@ -106,11 +106,12 @@
      用户同时还需要r的权限，root用户有权限也能执行，
      当然文件本身也需要能够执行）
 </code></pre>
+    </div>
   </li>
   <li>
     <p>目录的权限总结如下</p>
 
-    <pre><code> 可读 r : 
+    <div class="highlighter-rouge"><pre class="highlight"><code> 可读 r : 
      表示具有浏览目录下面文件及目录的权限
      如果目录没有r权限,则不能进入到目录里
      如果没有x权限，ls也会有问题。
@@ -119,11 +120,12 @@
  可执行 x : 
      表示具有进入目录的权限,如果连x权限都没有则读和写无意义
 </code></pre>
+    </div>
   </li>
   <li>
     <p>最终总结</p>
 
-    <pre><code> 可读 r :
+    <div class="highlighter-rouge"><pre class="highlight"><code> 可读 r :
      对文件而言，表示具有读取阅读文件内容的权限
      对目录而言，表示具有浏览目录的权限(与进入目录不同)
  可写 w :
@@ -134,37 +136,42 @@
      对文件而言，就是执行文件的权限（普通用户还需要r的权限）
      对目录而言，表示具有进入目录的权限
 </code></pre>
+    </div>
   </li>
   <li>
     <p>创建目录和文件的默认权限问题</p>
 
-    <pre><code> 创建的目录默认权限是 755
+    <div class="highlighter-rouge"><pre class="highlight"><code> 创建的目录默认权限是 755
  创建的文件默认权限是 644
  这是一个相对安全的权限，是linux中权限的一个分水岭	
 </code></pre>
+    </div>
   </li>
   <li>
     <p>改变文件和目录的默认权限</p>
 
-    <pre><code> umask 044
+    <div class="highlighter-rouge"><pre class="highlight"><code> umask 044
 </code></pre>
+    </div>
   </li>
   <li>
     <p>如何计算新umask下，文件及目录的默认权限</p>
 
-    <pre><code> 文件： 
+    <div class="highlighter-rouge"><pre class="highlight"><code> 文件： 
      umask 的每个位都是偶数的情况，666-umask
      umask 的数字中有奇数的情况,666-umask,然后将umask对应的奇数位加1
 </code></pre>
+    </div>
   </li>
   <li>
     <p>setuid &amp; setgid &amp; setfacl &amp; sbit的权限控制</p>
 
-    <pre><code> 这里不做总结了，因为用的比较少。 
+    <div class="highlighter-rouge"><pre class="highlight"><code> 这里不做总结了，因为用的比较少。 
  这几个命令和目录的权限很特别，要知道，并能解释
  /bin/passwd
  /tmp
 </code></pre>
+    </div>
   </li>
 </ul>
 
@@ -172,13 +179,13 @@
 
 <p><img src="/image/right1.PNG" alt="" /></p>
 
-<p><code>+</code> 增加某种权限; <code>-</code> 取消某种权限; <code>=</code> 取消原来的所有权限，重新赋予新的权限</p>
+<p><code class="highlighter-rouge">+</code> 增加某种权限; <code class="highlighter-rouge">-</code> 取消某种权限; <code class="highlighter-rouge">=</code> 取消原来的所有权限，重新赋予新的权限</p>
 
 <p>chmod -R 递归的来赋予权限，常用于对目录进行赋权。</p>
 
 <p>给用户增加读的权限</p>
 
-<pre><code>chmod u+r /config/config.conf  给用户组去掉执行的权限
+<div class="highlighter-rouge"><pre class="highlight"><code>chmod u+r /config/config.conf  给用户组去掉执行的权限
 
 chmod u-x /config/config.conf  给用户；用户组；其他用户赋权限
 
@@ -188,6 +195,7 @@ chmod 722 /config/config.conf
 等价于
 chmod u=rwx,g=r--,o=r-- /config.conf
 </code></pre>
+</div>
 
 <p><em>属主用户对文件的写权限是特殊的，虽然没有写权限但是如果强制写还是可以写</em></p>
 
@@ -195,41 +203,43 @@ chmod u=rwx,g=r--,o=r-- /config.conf
 
 <p><strong><em>实际工作中尽量使用数字来赋权限，视情况来决定是否使用字符来赋权限</em></strong></p>
 
-<h3 id="chown-">chown 管理文件所属的主或组</h3>
+<h3 id="chown-管理文件所属的主或组">chown 管理文件所属的主或组</h3>
 
 <p>chown -R 递归的更改</p>
 
 <p>将文件的属主改为fulin，属组改为root
 	chown fulin.root /config/config.conf</p>
 
-<h3 id="section">系统文件权限管理</h3>
+<h3 id="系统文件权限管理">系统文件权限管理</h3>
 
-<p><code>chmod</code> 只能用来控制文件或目录的读写执行权限，更底层的权限控制，需要Linux内核的支持。这里有两个相关的命令:<code>chattr</code>,<code>lsattr</code></p>
+<p><code class="highlighter-rouge">chmod</code> 只能用来控制文件或目录的读写执行权限，更底层的权限控制，需要Linux内核的支持。这里有两个相关的命令:<code class="highlighter-rouge">chattr</code>,<code class="highlighter-rouge">lsattr</code></p>
 
 <ul>
   <li>
     <p>chattr</p>
 
-    <pre><code> 用chattr命令防止系统中某个关键文件被修改
+    <div class="highlighter-rouge"><pre class="highlight"><code> 用chattr命令防止系统中某个关键文件被修改
  chattr +i /etc/fstab
 
  让某个文件只能往里面追加内容，不能删除，一些日志文件适用于这种操作
  chattr +a /data1/user_act.log
 </code></pre>
+    </div>
   </li>
   <li>
     <p>isattr</p>
 
-    <pre><code> 这个命令比较简单，只是用来显示文件系统属性
+    <div class="highlighter-rouge"><pre class="highlight"><code> 这个命令比较简单，只是用来显示文件系统属性
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<h2 id="section-1">用户管理</h2>
+<h2 id="用户管理">用户管理</h2>
 
 <p>增加一个名为incohome的组</p>
 
-<pre><code>groupadd incohome  创建一个用户oldboy到组incohome
+<div class="highlighter-rouge"><pre class="highlight"><code>groupadd incohome  创建一个用户oldboy到组incohome
 
 useradd oldboy -g incohome  删除用户oldboy的同时，删除其家目录
 
@@ -241,10 +251,11 @@ passwd
 passwd oldboy
 直接输入新密码
 </code></pre>
+</div>
 
-<h2 id="section-2">企业中权限管理的最佳实践</h2>
+<h2 id="企业中权限管理的最佳实践">企业中权限管理的最佳实践</h2>
 
-<pre><code>根据公司内部的不同部门，不同职能，分层次，分等级的实现对linux服务器的权限最小化，规范化。
+<div class="highlighter-rouge"><pre class="highlight"><code>根据公司内部的不同部门，不同职能，分层次，分等级的实现对linux服务器的权限最小化，规范化。
 这样可以减少运维成本和安全隐患，使运维工作系统化，标准化，可量化。
 
 具体实施步骤，大致如下：
@@ -256,11 +267,13 @@ passwd oldboy
 
 详细的权限，大致可以这样划分：
 </code></pre>
+</div>
 
 <p><img src="/image/rightConfig.PNG" alt="" /></p>
 
-<pre><code>同时可以更进一步，通过sudo和syslog对用户的日志进行审计。
+<div class="highlighter-rouge"><pre class="highlight"><code>同时可以更进一步，通过sudo和syslog对用户的日志进行审计。
 </code></pre>
+</div>
 
 
   </div>

@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/mysql/2016/09/21/mysql.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/mysql/2016/09/21/mysql.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,8 +66,8 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#mysql" id="markdown-toc-mysql">mysql的安装</a></li>
-  <li><a href="#mysql-1" id="markdown-toc-mysql-1">mysql基础信息（[]表示可选）</a></li>
+  <li><a href="#mysql的安装" id="markdown-toc-mysql的安装">mysql的安装</a></li>
+  <li><a href="#mysql基础信息表示可选" id="markdown-toc-mysql基础信息表示可选">mysql基础信息（[]表示可选）</a></li>
 </ul>
 
 <blockquote>
@@ -75,7 +75,7 @@
   就比如学东西吧，以前总是东学一点，西学一点。到头来发现什么都会，什么都不精，所以，到头来才明白：少才是多，less is more。数据库，以后就选择mysql了。</p>
 </blockquote>
 
-<h2 id="mysql">mysql的安装</h2>
+<h2 id="mysql的安装">mysql的安装</h2>
 
 <p><em>因为仅做学习使用，这里只讲centos下的 mysql 安装过程，其他环境下的不做过多解释。而且，这里介绍的也是最方便的安装过程，不一定是最好的方式</em></p>
 
@@ -83,48 +83,54 @@
   <li>
     <p>操作系统信息</p>
 
-    <pre><code> Description:		CentOS Linux release 7.2.1511 (Core) 
+    <div class="highlighter-rouge"><pre class="highlight"><code> Description:		CentOS Linux release 7.2.1511 (Core) 
  Release:		7.2.1511
 </code></pre>
+    </div>
   </li>
   <li>
     <p>首先查看本系统有没有安装 mariadb</p>
 
    	$ rpm -qa |　grep -i mariadb    //这里的-i是忽略大小写
 
-    <pre><code>   mariadb-libs-5.5.44-2.el7.centos.x86_64
+    <div class="highlighter-rouge"><pre class="highlight"><code>   mariadb-libs-5.5.44-2.el7.centos.x86_64
 </code></pre>
+    </div>
   </li>
   <li>
     <p>如果有安装，则需要卸载(–nodeps意思是如果有依赖关系，则同时卸载掉)</p>
 
-    <pre><code> $ rpm -e --nodeps mariadb-libs-5.5.44-2.el7.centos.x86_64 
+    <div class="highlighter-rouge"><pre class="highlight"><code> $ rpm -e --nodeps mariadb-libs-5.5.44-2.el7.centos.x86_64 
 </code></pre>
+    </div>
   </li>
   <li>
     <p>下载mysql的安装包</p>
 
-    <pre><code> $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-server-5.6.21-1.rhel5.x86_64.rpm
+    <div class="highlighter-rouge"><pre class="highlight"><code> $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-server-5.6.21-1.rhel5.x86_64.rpm
  $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-devel-5.6.21-1.rhel5.x86_64.rpm
  $ wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-client-5.6.21-1.rhel5.x86_64.rpm
 </code></pre>
+    </div>
   </li>
   <li>
     <p>安装rpm软件包</p>
 
-    <pre><code> $ rpm -ivh MySQL-****.rpm 	
+    <div class="highlighter-rouge"><pre class="highlight"><code> $ rpm -ivh MySQL-****.rpm 	
 </code></pre>
+    </div>
   </li>
   <li>
     <p>安装MySQL-server会报一个错，因为缺少依赖，使用yum安装即可</p>
 
-    <pre><code> $ yum install -y libaio
+    <div class="highlighter-rouge"><pre class="highlight"><code> $ yum install -y libaio
 </code></pre>
+    </div>
   </li>
   <li>
     <p>初始化MySQL及设置密码</p>
 
-    <pre><code> $ /usr/bin/mysql_install_db
+    <div class="highlighter-rouge"><pre class="highlight"><code> $ /usr/bin/mysql_install_db
  $ service mysql start
  $ cat /root/.mysql_secret  #查看root账号密码
  $ mysql -uroot -pAsTsb42   #AsTsb42是看到的密码
@@ -132,27 +138,30 @@
  mysql&gt; exit
  $ mysql -uroot -p123456
 </code></pre>
+    </div>
   </li>
   <li>
     <p>远程登陆用户设置</p>
 
-    <pre><code> mysql&gt; use mysql;
+    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; use mysql;
  mysql&gt; select host,user,password from user;
  mysql&gt; update user set password=password('123456') where user='root';
  mysql&gt; update user set host='%' where user='root' and host='localhost';
  mysql&gt; flush privileges;
  mysql&gt; exit
 </code></pre>
+    </div>
   </li>
   <li>
     <p>修改mysql的配置文件</p>
 
-    <pre><code> $ vi /etc/my.cnf.d/my-default.cnf
+    <div class="highlighter-rouge"><pre class="highlight"><code> $ vi /etc/my.cnf.d/my-default.cnf
 </code></pre>
+    </div>
 
     <p><strong><em>加入如下内容：</em></strong></p>
 
-    <pre><code> [client]
+    <div class="highlighter-rouge"><pre class="highlight"><code> [client]
  password=123456
  port=3306
  default-character-set=utf8
@@ -169,40 +178,44 @@
  [mysql]
  default-character-set=utf8
 </code></pre>
+    </div>
   </li>
   <li>
     <p>mysql的默认安装位置</p>
 
-    <pre><code> /var/lib/mysql/               #数据库目录
+    <div class="highlighter-rouge"><pre class="highlight"><code> /var/lib/mysql/               #数据库目录
  /usr/share/mysql              #配置文件目录
  /usr/bin                      #相关命令目录
  /etc/init.d/mysql             #启动脚本
 </code></pre>
+    </div>
   </li>
   <li>
     <p>mysql的启动和停止</p>
 
-    <pre><code> $ service mysql stop
+    <div class="highlighter-rouge"><pre class="highlight"><code> $ service mysql stop
  $ service mysql start
  $ service mysql restart
 </code></pre>
+    </div>
   </li>
   <li>
     <p>设置开机自启动</p>
 
-    <pre><code> $ chkconfig mysql on
+    <div class="highlighter-rouge"><pre class="highlight"><code> $ chkconfig mysql on
  $ chkconfig --list | grep mysql
 </code></pre>
+    </div>
   </li>
 </ul>
 
-<h2 id="mysql-1">mysql基础信息（[]表示可选）</h2>
+<h2 id="mysql基础信息表示可选">mysql基础信息（[]表示可选）</h2>
 
 <ul>
   <li>
     <p>DBA和运维同学常用</p>
 
-    <pre><code> -- 查看mysql版本信息
+    <div class="highlighter-rouge"><pre class="highlight"><code> -- 查看mysql版本信息
  select version(); 
 		
  -- 查看字符集
@@ -292,13 +305,15 @@
  -- 查看数据库文件的路径
  show variables like "%datadir%";
 </code></pre>
+    </div>
   </li>
   <li>
     <p>快速建立一张一模一样的表，并插入数据</p>
 
-    <pre><code> mysql&gt; create table t as select * from information_schema.tables；
+    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; create table t as select * from information_schema.tables；
  mysql&gt; insert into t select *  from t;
 </code></pre>
+    </div>
   </li>
 </ul>
 

@@ -10,8 +10,8 @@
   <meta name="description" content="  一直以来对CGI,FASTCGI,wsgi,uwsgi,servlet之间的区别都不是特别的清楚，总是迷迷糊糊的，这里整理一下自己的理解思路，此处只记录自己的理解，不对细节进行过多的阐述，底层的原理和实现先不深究，尽量用最浅显和通俗的语言来描述">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2014/03/01/cgi-fastcgi-wsgi.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/linux/2014/03/01/CGI-FASTCGI-WSGI.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,12 +66,12 @@
 
   <div class="post-content" itemprop="articleBody">
     <blockquote>
-  <p>一直以来对<code>CGI,FASTCGI,wsgi,uwsgi,servlet</code>之间的区别都不是特别的清楚，总是迷迷糊糊的，这里整理一下自己的理解思路，此处只记录自己的理解，不对细节进行过多的阐述，底层的原理和实现先不深究，尽量用最浅显和通俗的语言来描述</p>
+  <p>一直以来对<code class="highlighter-rouge">CGI,FASTCGI,wsgi,uwsgi,servlet</code>之间的区别都不是特别的清楚，总是迷迷糊糊的，这里整理一下自己的理解思路，此处只记录自己的理解，不对细节进行过多的阐述，底层的原理和实现先不深究，尽量用最浅显和通俗的语言来描述</p>
 </blockquote>
 
-<h3 id="web">web服务器和应用服务器</h3>
+<h3 id="web服务器和应用服务器">web服务器和应用服务器</h3>
 
-<p>如果是初学者，对<code>服务器</code>这个概念应该非常的迷惑，因为这个词既可以代表硬件的机器，也可以代表软件的产品，同时还可以代表抽象的逻辑概念。</p>
+<p>如果是初学者，对<code class="highlighter-rouge">服务器</code>这个概念应该非常的迷惑，因为这个词既可以代表硬件的机器，也可以代表软件的产品，同时还可以代表抽象的逻辑概念。</p>
 
 <p>其实，这个可以大致这样理解。</p>
 
@@ -84,11 +84,11 @@
 
 <p>随着计算机历史的发展，这些概念之间的界限越来越模糊，有时候一台主机既可以当做web服务器使用，同时也可以作为应用服务器使用。比如tomcat，既可以作为web服务器使用，也可以作为应用服务器。</p>
 
-<p>对这一块的理解，我们可以把服务器抽象成<code>服务提供方</code>。</p>
+<p>对这一块的理解，我们可以把服务器抽象成<code class="highlighter-rouge">服务提供方</code>。</p>
 
 <h3 id="cgi">CGI</h3>
 
-<p>网上对CGI的解释非常的多，我的理解，CGI就是一套规范，这套规范就是制定了一套数据交换的基本格式，它一头连接着表中输入（可以是http请求，或输入流），一头连接着应用程序（php，python，ruby写的程序），它的作用就是讲表中输入整理成特定的格式，<code>传</code>给应用程序进行处理。应用程序处理完毕，返回响应。它有将结果解析之后转变为标准输出。它的标准输入可以来自web服务器。抽象的说，CGI规范只关注三个东西：<code>标准输入，标准输出，环境变量</code></p>
+<p>网上对CGI的解释非常的多，我的理解，CGI就是一套规范，这套规范就是制定了一套数据交换的基本格式，它一头连接着表中输入（可以是http请求，或输入流），一头连接着应用程序（php，python，ruby写的程序），它的作用就是讲表中输入整理成特定的格式，<code class="highlighter-rouge">传</code>给应用程序进行处理。应用程序处理完毕，返回响应。它有将结果解析之后转变为标准输出。它的标准输入可以来自web服务器。抽象的说，CGI规范只关注三个东西：<code class="highlighter-rouge">标准输入，标准输出，环境变量</code></p>
 
 <p>注意，这里的CGI是一套规范，是需要实现的，只要按照他的规范实现，就可以进行通信。</p>
 
@@ -104,9 +104,9 @@
 
 <p>uWSGI是实现了wsgi的软件，常常和nginx,python联合使用。</p>
 
-<h3 id="tomcatjvmservlet">tomcat,jvm,servlet的关系</h3>
+<h3 id="tomcatjvmservlet的关系">tomcat,jvm,servlet的关系</h3>
 
-<p>这写都是java相关的技术，首先,tomcat，servlet都是java语言编写的程序，都需要运行在java虚拟机(<code>jvm</code>)中，servlet其实是一套规范。tomcat就是实现了该规范的软件。也叫做servlet容器。</p>
+<p>这写都是java相关的技术，首先,tomcat，servlet都是java语言编写的程序，都需要运行在java虚拟机(<code class="highlighter-rouge">jvm</code>)中，servlet其实是一套规范。tomcat就是实现了该规范的软件。也叫做servlet容器。</p>
 
   </div>
 

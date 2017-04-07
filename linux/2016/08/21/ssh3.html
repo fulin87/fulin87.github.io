@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/linux/2016/08/21/ssh3.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/linux/2016/08/21/SSH3.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,29 +66,29 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#linux" id="markdown-toc-linux">Linux中查阅硬件信息</a>    <ul>
+  <li><a href="#linux中查阅硬件信息" id="markdown-toc-linux中查阅硬件信息">Linux中查阅硬件信息</a>    <ul>
       <li><a href="#cpu" id="markdown-toc-cpu">CPU</a></li>
-      <li><a href="#section" id="markdown-toc-section">内存</a></li>
-      <li><a href="#section-1" id="markdown-toc-section-1">磁盘</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">网卡</a></li>
+      <li><a href="#内存" id="markdown-toc-内存">内存</a></li>
+      <li><a href="#磁盘" id="markdown-toc-磁盘">磁盘</a></li>
+      <li><a href="#网卡" id="markdown-toc-网卡">网卡</a></li>
       <li><a href="#bois" id="markdown-toc-bois">BOIS</a></li>
     </ul>
   </li>
-  <li><a href="#linux-1" id="markdown-toc-linux-1">Linux中的磁盘分区和目录</a></li>
-  <li><a href="#section-3" id="markdown-toc-section-3">网友的精彩总结</a></li>
+  <li><a href="#linux中的磁盘分区和目录" id="markdown-toc-linux中的磁盘分区和目录">Linux中的磁盘分区和目录</a></li>
+  <li><a href="#网友的精彩总结" id="markdown-toc-网友的精彩总结">网友的精彩总结</a></li>
 </ul>
 
 <blockquote>
   <p>Linux不像windows那么直观，或者是我自己使用windows时间很长了，在windows下，对磁盘，分区，硬件信息都能很好的查看和理解，但是自从接触Linux后，长期以来，对Linux下的硬件；分区和目录的关系一直比较模糊，所以，特意花了一些时间来整理。</p>
 </blockquote>
 
-<h2 id="linux">Linux中查阅硬件信息</h2>
+<h2 id="linux中查阅硬件信息">Linux中查阅硬件信息</h2>
 
 <h3 id="cpu">CPU</h3>
 
-<p>命令：<code>lscpu</code> 可以显示CPU的统计信息</p>
+<p>命令：<code class="highlighter-rouge">lscpu</code> 可以显示CPU的统计信息</p>
 
-<pre><code>Architecture:          x86_64
+<div class="highlighter-rouge"><pre class="highlight"><code>Architecture:          x86_64
 CPU op-mode(s):        32-bit, 64-bit
 Byte Order:            Little Endian
 CPU(s):                1
@@ -111,10 +111,11 @@ L2 cache:              256K
 L3 cache:              12288K
 NUMA node0 CPU(s):     0
 </code></pre>
+</div>
 
-<p>命令 <code>cat /proc/cpuinfo</code> 可以知道每个cpu信息，如每个CPU的型号，主频等</p>
+<p>命令 <code class="highlighter-rouge">cat /proc/cpuinfo</code> 可以知道每个cpu信息，如每个CPU的型号，主频等</p>
 
-<pre><code>processor	: 0
+<div class="highlighter-rouge"><pre class="highlight"><code>processor	: 0
 vendor_id	: GenuineIntel
 cpu family	: 6
 model		: 44
@@ -140,20 +141,22 @@ cache_alignment	: 64
 address sizes	: 40 bits physical, 48 bits virtual
 power management:
 </code></pre>
+</div>
 
-<h3 id="section">内存</h3>
+<h3 id="内存">内存</h3>
 
-<p>命令 <code>free -m</code> 查看内存的统计信息</p>
+<p>命令 <code class="highlighter-rouge">free -m</code> 查看内存的统计信息</p>
 
-<pre><code>             total       used       free     shared    buffers     cached
+<div class="highlighter-rouge"><pre class="highlight"><code>             total       used       free     shared    buffers     cached
 Mem:          1878       1026        852         31        173        394
 -/+ buffers/cache:        458       1419
 Swap:         5119         49       5070
 </code></pre>
+</div>
 
-<p>命令 <code>cat /proc/meminfo</code> 查看内存的详细使用情况</p>
+<p>命令 <code class="highlighter-rouge">cat /proc/meminfo</code> 查看内存的详细使用情况</p>
 
-<pre><code>MemTotal:        1923396 kB
+<div class="highlighter-rouge"><pre class="highlight"><code>MemTotal:        1923396 kB
 MemFree:          873108 kB
 Buffers:          177256 kB
 Cached:           403736 kB
@@ -196,10 +199,11 @@ Hugepagesize:       2048 kB
 DirectMap4k:        8192 kB
 DirectMap2M:     2088960 kB
 </code></pre>
+</div>
 
-<p>命令 <code>dmidecode -t memory</code> 查看内存硬件信息,这里不做过多介绍</p>
+<p>命令 <code class="highlighter-rouge">dmidecode -t memory</code> 查看内存硬件信息,这里不做过多介绍</p>
 
-<pre><code># dmidecode 2.12
+<div class="highlighter-rouge"><pre class="highlight"><code># dmidecode 2.12
 SMBIOS 2.4 present.
 
 Handle 0x0044, DMI type 5, 46 bytes
@@ -249,12 +253,13 @@ Memory Module Information
 		Enabled Size: 2048 MB (Single-bank Connection)
 		Error Status: OK
 </code></pre>
+</div>
 
-<h3 id="section-1">磁盘</h3>
+<h3 id="磁盘">磁盘</h3>
 
-<p>命令 <code>lsblk</code> 查看磁盘分区分布</p>
+<p>命令 <code class="highlighter-rouge">lsblk</code> 查看磁盘分区分布</p>
 
-<pre><code>NAME                         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+<div class="highlighter-rouge"><pre class="highlight"><code>NAME                         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda                            8:0    0   30G  0 disk 
 ├─sda1                         8:1    0  200M  0 part /boot
 └─sda2                         8:2    0 29.8G  0 part 
@@ -264,10 +269,11 @@ sdb                            8:16   0   30G  0 disk
 └─VolGroup00-LVroot (dm-1)   253:1    0 54.8G  0 lvm  /
 sr0                           11:0    1 1024M  0 rom 
 </code></pre>
+</div>
 
-<p>命令 <code>fdisk -l</code> 查看磁盘和分区的详细信息</p>
+<p>命令 <code class="highlighter-rouge">fdisk -l</code> 查看磁盘和分区的详细信息</p>
 
-<pre><code>Disk /dev/sda: 32.2 GB, 32212254720 bytes
+<div class="highlighter-rouge"><pre class="highlight"><code>Disk /dev/sda: 32.2 GB, 32212254720 bytes
 64 heads, 32 sectors/track, 30720 cylinders
 Units = cylinders of 2048 * 512 = 1048576 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
@@ -301,10 +307,11 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 Disk identifier: 0x00000000
 </code></pre>
+</div>
 
 <p><img src="/image/diskTotal.PNG" alt="" /></p>
 
-<h3 id="section-2">网卡</h3>
+<h3 id="网卡">网卡</h3>
 
 <table>
   <tbody>
@@ -315,14 +322,15 @@ Disk identifier: 0x00000000
   </tbody>
 </table>
 
-<pre><code>0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
+<div class="highlighter-rouge"><pre class="highlight"><code>0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
 </code></pre>
+</div>
 
 <h3 id="bois">BOIS</h3>
 
-<p>命令 <code>dmidecode -t bios</code> 查看当前的BOIS信息</p>
+<p>命令 <code class="highlighter-rouge">dmidecode -t bios</code> 查看当前的BOIS信息</p>
 
-<pre><code># dmidecode 2.12
+<div class="highlighter-rouge"><pre class="highlight"><code># dmidecode 2.12
 SMBIOS 2.4 present.
 
 Handle 0x0000, DMI type 0, 24 bytes
@@ -358,8 +366,9 @@ BIOS Information
 	BIOS Revision: 4.6
 	Firmware Revision: 0.0
 </code></pre>
+</div>
 
-<h2 id="linux-1">Linux中的磁盘分区和目录</h2>
+<h2 id="linux中的磁盘分区和目录">Linux中的磁盘分区和目录</h2>
 
 <p>首先先看看磁盘的逻辑物理结构图</p>
 
@@ -367,9 +376,9 @@ BIOS Information
 
 <p>常见的硬盘一般分为三类。IDE硬盘，SCSI硬盘和SATA硬盘。通常我们电脑上的硬盘都是IDE和SATA，而服务器一般用SCSI硬盘。SCSI的硬盘接口设备叫sd，第一块硬盘就是sda，第二块硬盘是sdb…以此类推。Linux规定，一块硬盘上主分区和扩展分区总数不能超过4个，扩展分区又可以包含逻辑分区。主分区的命名方式分别是sda1，sda2，sda3，sda4。而逻辑分区从sd5开始，没有数量限制，命名方式为sd5，sd6…sd无穷大。主分区可以简单的理解为windows下的C盘，也就是系统分区，是引导操作系统必要的分区。而逻辑分区可以简单的理解为windows下的CDE盘等等。</p>
 
-<p>Linux磁盘分区不像windows把分区用盘符区分。在Linux中是先建立一个以根目录<code>/</code>为根节点的目录树,然后将磁盘分区挂载到相应的目录上，对于Linux文件系统的约定大致如下：</p>
+<p>Linux磁盘分区不像windows把分区用盘符区分。在Linux中是先建立一个以根目录<code class="highlighter-rouge">/</code>为根节点的目录树,然后将磁盘分区挂载到相应的目录上，对于Linux文件系统的约定大致如下：</p>
 
-<pre><code>/bin        ##存放系统的核心最常用的命令
+<div class="highlighter-rouge"><pre class="highlight"><code>/bin        ##存放系统的核心最常用的命令
 /boot       ##内核与启动文件
 /dev        ##各种设备文件
 /etc        ##系统软件的配置文件
@@ -381,14 +390,15 @@ BIOS Information
 /usr        ##非系统的程序和命令
 /var        ##数据目录，一般数据库文件也存放在此目录下
 </code></pre>
+</div>
 
 <p>至于不同目录上挂载的分区大小分配，要根据linux文件系统的规则和作用来。</p>
 
-<p><code>/boot</code> 需挂载主分区，因为是内核和启动文件，不需要太大 500M 就足够用了。单独挂载boot是为了保证系统启动的稳定性，防止其他的硬盘分区坏了影响启动</p>
+<p><code class="highlighter-rouge">/boot</code> 需挂载主分区，因为是内核和启动文件，不需要太大 500M 就足够用了。单独挂载boot是为了保证系统启动的稳定性，防止其他的硬盘分区坏了影响启动</p>
 
-<p><code>/var</code> 是数据目录，可以挂载容量大一点的分区,比如分配20G。其他依次类推</p>
+<p><code class="highlighter-rouge">/var</code> 是数据目录，可以挂载容量大一点的分区,比如分配20G。其他依次类推</p>
 
-<p><code>/</code> 我的理解是一定需要给根目录挂载分区</p>
+<p><code class="highlighter-rouge">/</code> 我的理解是一定需要给根目录挂载分区</p>
 
 <p>理论上来说我们可以为所有的目录都划分一个分区。没划分的文件和目录以及空余的硬盘一般都自动存放挂载到/根目录。因此如果你分区分的足够细，根目录所需的空间就很小。</p>
 
@@ -404,7 +414,7 @@ BIOS Information
 
 <p><em>需要深刻的理解Linux的文件系统和系统分区，这里和 windows 是有很大区别的，如果不理解透彻，会带来很多的疑问</em></p>
 
-<h2 id="section-3">网友的精彩总结</h2>
+<h2 id="网友的精彩总结">网友的精彩总结</h2>
 
 <p><strong><a href="https://www.zhihu.com/question/22484307">知乎的总结</a></strong></p>
 

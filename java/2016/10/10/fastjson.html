@@ -10,8 +10,8 @@
   <meta name="description" content="  FastJSON是一个处理JSON的 java 工具包， json （反序列化）和对象转 json （序列化）两部分的功能。是由阿里使用Apache License 2.0协议开源，易用，无依赖，性能优越，唯一不足的是文档不完善，用户需要自己根据源码来摸索。这里记录一下自己的学习历程，作为我膜拜大师杰作，虚心...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/java/2016/10/10/fastjson.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/java/2016/10/10/fastJSON.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -69,13 +69,13 @@
   <p><strong><a href="https://github.com/alibaba/fastjson/wiki">FastJSON</a></strong>是一个处理<strong><a href="http://json.org">JSON</a></strong>的 java 工具包， json （反序列化）和对象转 json （序列化）两部分的功能。是由阿里使用Apache License 2.0协议开源，易用，无依赖，性能优越，唯一不足的是文档不完善，用户需要自己根据源码来摸索。这里记录一下自己的学习历程，作为我膜拜大师杰作，虚心偷技的成果，也方便来者学习。</p>
 </blockquote>
 
-<h3 id="section">主要功能</h3>
+<h3 id="主要功能">主要功能</h3>
 
 <ul>
   <li>
     <p>FastJson的最主要的使用入口是 com.alibaba.fastjson.JSON 的一系列静态方法</p>
 
-    <pre><code> // 把JSON文本parse为JSONObject或者JSONArray 
+    <div class="highlighter-rouge"><pre class="highlight"><code> // 把JSON文本parse为JSONObject或者JSONArray 
  public static final Object parse(String text); 
  // 把JSON文本parse成JSONObject
  public static final JSONObject parseObject(String text)； 
@@ -92,15 +92,17 @@
  // 将JavaBean转换为JSONObject或者JSONArray。
  public static final Object toJSON(Object javaObject); 
 </code></pre>
+    </div>
   </li>
   <li>
     <p>FastJson 的相关类的说明</p>
 
-    <pre><code> SerializeWriter：	相当于StringBuffer
+    <div class="highlighter-rouge"><pre class="highlight"><code> SerializeWriter：	相当于StringBuffer
  JSONArray：			相当于List&lt;Object&gt;
  JSONObject：			相当于Map&lt;String, Object&gt;
  JSON反序列化没有真正的数组，本质类型都是List&lt;Object&gt;
 </code></pre>
+    </div>
   </li>
   <li>
     <p>FastJson 的高级特性</p>
@@ -111,14 +113,15 @@
       <li>
         <p>序列化形式可以自定义和灵活选择</p>
 
-        <pre><code>  比如有一个注解：@JSONField;就可以实现序列号和反序列化的时候bean的属性名的灵活配置，非常实用。
+        <div class="highlighter-rouge"><pre class="highlight"><code>  比如有一个注解：@JSONField;就可以实现序列号和反序列化的时候bean的属性名的灵活配置，非常实用。
 </code></pre>
+        </div>
       </li>
     </ul>
   </li>
 </ul>
 
-<h3 id="section-1">源码解析</h3>
+<h3 id="源码解析">源码解析</h3>
 
  	<img src="/image/fastJson.PNG" alt="test" />
 

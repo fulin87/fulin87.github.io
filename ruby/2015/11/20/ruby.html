@@ -10,8 +10,8 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://colorful.ren/ruby/2015/11/20/ruby.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/ruby/2015/11/20/ruby.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
 
@@ -66,18 +66,18 @@
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#rubygem" id="markdown-toc-rubygem">ruby的包管理工具:gem</a></li>
-  <li><a href="#ruby" id="markdown-toc-ruby">将ruby的源更换为淘宝的源</a></li>
+  <li><a href="#ruby的包管理工具gem" id="markdown-toc-ruby的包管理工具gem">ruby的包管理工具:gem</a></li>
+  <li><a href="#将ruby的源更换为淘宝的源" id="markdown-toc-将ruby的源更换为淘宝的源">将ruby的源更换为淘宝的源</a></li>
 </ul>
 
 <blockquote>
   <p>ruby这几年的名气越来越大了，甚至传说ruby是进行web开发效率最高的语言。前段时间折腾自己的github个人博客，接触到jekyll，进而接触到ruby，就稍微了解了一下。感觉ruby跟python和node这两种语言非常接近。这里记一下自己了解到的一点点有限的知识，防止遗忘。</p>
 </blockquote>
 
-<h3 id="rubygem">ruby的包管理工具:gem</h3>
+<h3 id="ruby的包管理工具gem">ruby的包管理工具:gem</h3>
 <p>像ruby，pyhon,node这几种语言都有自己的包管理工具，用起来真的感觉非常的爽，唯一不好的地方是：有时候下载的网速太慢了。遇到这种情况，就需要更换源。</p>
 
-<pre><code>gem -v 									#gem版本
+<div class="highlighter-rouge"><pre class="highlight"><code>gem -v 									#gem版本
 gem source								#gem资源
 gem sources -a url ｜gem sources -r url				        #gem添加或删除配置源
 gem update							        #更新所有包
@@ -101,9 +101,10 @@ gem contents rake	 						#显示rake包中所包含的文件
 gem dependency rails -v 0.10.1 						#列出与rails相互依赖的包
 gem environment 							#查看gem的环境
 </code></pre>
+</div>
 
-<h3 id="ruby">将ruby的源更换为淘宝的源</h3>
-<pre><code>$ gem sources --remove http://rubygems.org/ 
+<h3 id="将ruby的源更换为淘宝的源">将ruby的源更换为淘宝的源</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ gem sources --remove http://rubygems.org/ 
 $ gem sources -a http://ruby.taobao.org/  
 $ gem sources -l  
 *** CURRENT SOURCES ***  
@@ -112,6 +113,7 @@ http://ruby.taobao.org
 # 请确保只有 ruby.taobao.org  这时候就可以安装jekyll包了
 $ gem install jekyll  #安装jekyll包  
 </code></pre>
+</div>
 
   </div>
 
