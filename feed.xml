@@ -5,8 +5,8 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 09 Apr 2017 15:58:03 +0800</pubDate>
-    <lastBuildDate>Sun, 09 Apr 2017 15:58:03 +0800</lastBuildDate>
+    <pubDate>Sun, 09 Apr 2017 16:13:35 +0800</pubDate>
+    <lastBuildDate>Sun, 09 Apr 2017 16:13:35 +0800</lastBuildDate>
     <generator>Jekyll v3.4.3</generator>
     
       <item>
@@ -54,9 +54,7 @@ redis本身的含义是 &lt;em&gt;remote dictionary server (远程字典服务�
 type key //获取键key的类型
 EXISTS key //判断一个键是否存在，存在返回1，否则返回0
 DEL key [key1 ...] //删除键 key，key1 ...,返回值是删除键的个数
-
 redis 不区分命令的大小写，但是作为使用规范，约定命令都使用大写表示
-
 GET key //获取键key的值
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
