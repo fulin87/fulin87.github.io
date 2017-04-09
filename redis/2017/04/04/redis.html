@@ -10,8 +10,8 @@
   <meta name="description" content="  redis是一个高性能的键值对数据库，redis是意大利人在2009年开发完成并开源的软件产品。redis本身的含义是 remote dictionary server (远程字典服务器)，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/redis/2017/04/04/redis.html">
-  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
+  <link rel="canonical" href="http://colorful.ren/redis/2017/04/04/redis.html">
+  <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://colorful.ren/feed.xml">
 </head>
 
 
@@ -106,6 +106,12 @@ redis本身的含义是 <em>remote dictionary server (远程字典服务器)</em
 
 <div class="highlighter-rouge"><pre class="highlight"><code>keys *  //获取所有的键
 type key //获取键key的类型
+EXISTS key //判断一个键是否存在，存在返回1，否则返回0
+DEL key [key1 ...] //删除键 key，key1 ...,返回值是删除键的个数
+
+redis 不区分命令的大小写，但是作为使用规范，约定命令都使用大写表示
+
+GET key //获取键key的值
 </code></pre>
 </div>
 

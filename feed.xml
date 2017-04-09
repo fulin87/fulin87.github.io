@@ -3,10 +3,10 @@
   <channel>
     <title>水货程序员的笔记</title>
     <description></description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 07 Apr 2017 21:05:54 +0800</pubDate>
-    <lastBuildDate>Fri, 07 Apr 2017 21:05:54 +0800</lastBuildDate>
+    <link>http://colorful.ren/</link>
+    <atom:link href="http://colorful.ren/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 09 Apr 2017 15:50:35 +0800</pubDate>
+    <lastBuildDate>Sun, 09 Apr 2017 15:50:35 +0800</lastBuildDate>
     <generator>Jekyll v3.4.3</generator>
     
       <item>
@@ -52,6 +52,12 @@ redis本身的含义是 &lt;em&gt;remote dictionary server (远程字典服务�
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;keys *  //获取所有的键
 type key //获取键key的类型
+EXISTS key //判断一个键是否存在，存在返回1，否则返回0
+DEL key [key1 ...] //删除键 key，key1 ...,返回值是删除键的个数
+
+redis 不区分命令的大小写，但是作为使用规范，约定命令都使用大写表示
+
+GET key //获取键key的值
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -89,8 +95,8 @@ EXEC
 
 </description>
         <pubDate>Tue, 04 Apr 2017 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/redis/2017/04/04/redis.html</link>
-        <guid isPermaLink="true">http://localhost:4000/redis/2017/04/04/redis.html</guid>
+        <link>http://colorful.ren/redis/2017/04/04/redis.html</link>
+        <guid isPermaLink="true">http://colorful.ren/redis/2017/04/04/redis.html</guid>
         
         
         <category>redis</category>
@@ -147,8 +153,8 @@ EXEC
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 24 Feb 2017 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/php/2017/02/24/mysqldeleterecord.html</link>
-        <guid isPermaLink="true">http://localhost:4000/php/2017/02/24/mysqldeleterecord.html</guid>
+        <link>http://colorful.ren/php/2017/02/24/mysqldeleterecord.html</link>
+        <guid isPermaLink="true">http://colorful.ren/php/2017/02/24/mysqldeleterecord.html</guid>
         
         
         <category>php</category>
@@ -200,8 +206,8 @@ EXEC
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 04 Jan 2017 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/php/2017/01/04/php-stop.html</link>
-        <guid isPermaLink="true">http://localhost:4000/php/2017/01/04/php-stop.html</guid>
+        <link>http://colorful.ren/php/2017/01/04/php-stop.html</link>
+        <guid isPermaLink="true">http://colorful.ren/php/2017/01/04/php-stop.html</guid>
         
         
         <category>php</category>
@@ -217,8 +223,8 @@ EXEC
 &lt;p&gt;&lt;img src=&quot;/image/excelJia.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 22 Dec 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/java/2016/12/22/exceljia.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2016/12/22/exceljia.html</guid>
+        <link>http://colorful.ren/java/2016/12/22/exceljia.html</link>
+        <guid isPermaLink="true">http://colorful.ren/java/2016/12/22/exceljia.html</guid>
         
         
         <category>java</category>
@@ -470,8 +476,8 @@ EXEC
 
 </description>
         <pubDate>Sat, 26 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/26/uwsgi-python.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/26/uwsgi-python.html</guid>
+        <link>http://colorful.ren/python/2016/11/26/uwsgi-python.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/26/uwsgi-python.html</guid>
         
         
         <category>python</category>
@@ -848,8 +854,8 @@ setoutputsize(size[,column])
 &lt;/div&gt;
 </description>
         <pubDate>Thu, 24 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/24/python7.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/24/python7.html</guid>
+        <link>http://colorful.ren/python/2016/11/24/python7.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/24/python7.html</guid>
         
         
         <category>python</category>
@@ -956,8 +962,8 @@ escape():  转义正则表达式中所用的特殊字符
 
 </description>
         <pubDate>Wed, 23 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/23/python6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/23/python6.html</guid>
+        <link>http://colorful.ren/python/2016/11/23/python6.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/23/python6.html</guid>
         
         
         <category>python</category>
@@ -1036,8 +1042,8 @@ class B(A):
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 22 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/22/python5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/22/python5.html</guid>
+        <link>http://colorful.ren/python/2016/11/22/python5.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/22/python5.html</guid>
         
         
         <category>python</category>
@@ -1115,8 +1121,8 @@ class B(A):
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 21 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/21/python4.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/21/python4.html</guid>
+        <link>http://colorful.ren/python/2016/11/21/python4.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/21/python4.html</guid>
         
         
         <category>python</category>
@@ -1191,8 +1197,8 @@ file.mode		#文件打开时使用的访问模式
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/20/python3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/20/python3.html</guid>
+        <link>http://colorful.ren/python/2016/11/20/python3.html</link>
+        <guid isPermaLink="true">http://colorful.ren/python/2016/11/20/python3.html</guid>
         
         
         <category>python</category>
