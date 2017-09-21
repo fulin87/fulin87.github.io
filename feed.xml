@@ -5,9 +5,121 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 13 Apr 2017 12:59:24 +0800</pubDate>
-    <lastBuildDate>Thu, 13 Apr 2017 12:59:24 +0800</lastBuildDate>
+    <pubDate>Thu, 21 Sep 2017 19:11:08 +0800</pubDate>
+    <lastBuildDate>Thu, 21 Sep 2017 19:11:08 +0800</lastBuildDate>
     <generator>Jekyll v3.4.3</generator>
+    
+      <item>
+        <title>python中的json模块和requests模块</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#requests模块&quot; id=&quot;markdown-toc-requests模块&quot;&gt;requests模块&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#json模块&quot; id=&quot;markdown-toc-json模块&quot;&gt;json模块&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#字典转json&quot; id=&quot;markdown-toc-字典转json&quot;&gt;字典转json&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#dumps-和-dump-的区别&quot; id=&quot;markdown-toc-dumps-和-dump-的区别&quot;&gt;dumps 和 dump 的区别&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#json转字典&quot; id=&quot;markdown-toc-json转字典&quot;&gt;json转字典&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#loads-和-load-的区别&quot; id=&quot;markdown-toc-loads-和-load-的区别&quot;&gt;loads 和 load 的区别&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;最近经常修复生产环境的数据，修复脚本是使用python写的，这也是我第一次把python使用在生产环境，这里记录一下写修复脚本的时候，使用最多的两个模块:requests和json&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;requests模块&quot;&gt;requests模块&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://cn.python-requests.org/zh_CN/latest/&quot;&gt;点击查看官方文档&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;json模块&quot;&gt;json模块&lt;/h3&gt;
+
+&lt;p&gt;json模块的主要作用有两点&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;json 转字典；字典转json
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;就是这么简洁。&lt;/p&gt;
+
+&lt;h4 id=&quot;字典转json&quot;&gt;字典转json&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import json
+obj = {'name':'fulin','age':27,'family':{'fname':'f'}}
+s = json.dumps(obj,sort_keys=True,indent=4)
+print s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/image/python-json01.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;json.dumps(obj,sort_keys=True,indent=4)
+ 
+上面这句代码，需要说明一下，obj是不能省略的，其他都可以
+
+sort_keys=True表示按key排序，升序，
+
+indent=4，表示层次缩进是4个字符。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;dumps-和-dump-的区别&quot;&gt;dumps 和 dump 的区别&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dumps 的准确定义是： str = json.dumps(obj),是将一个对象转换为json
+dump  的准确定义是： json.dump(obj,f),f是一个文件，是将obj对象以josn形式保存在了f中
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;json转字典&quot;&gt;json转字典&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;str = '{&quot;name&quot;:&quot;fulin&quot;,&quot;age&quot;27,&quot;family&quot;:{&quot;fname&quot;:&quot;f&quot;}}'
+b = json.loads(str)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;loads-和-load-的区别&quot;&gt;loads 和 load 的区别&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;loads 的准确定义是：obj = json.loads(str),是将一个json串转换为对象
+load  的准确定义是：obj = json.load(f),将一个文件中的内容转换为对象
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Thu, 01 Jun 2017 13:07:11 +0800</pubDate>
+        <link>http://localhost:4000/python/2017/06/01/python8.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2017/06/01/python8.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>Intellij 使用相关的知识点</title>
+        <description>
+&lt;blockquote&gt;
+  &lt;p&gt;进入华润网络之后，有一个项目是外购的，开发方使用的开发工具是IntelliJ IDEA，因此我也接触到了这样一个开发工具，但是我之前使用Eclipse已经使用的非常熟练了，突然换开发工具有些不适应，反思了一下，作为一个开发人员，不应该被开发工具束缚啊，所以还是抓紧时间学习要紧。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;###快捷键：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ctrl + Q  查看类的相关信息
+ctrl + shift + /- 折叠所有代码
+ctrl + . 折叠当前光标处方法的代码
+ctrl + shift + + 展开所有的代码
+alt + 上下方向键
+ctrl + F3 在当前类中快速搜索，相当于eclipse中的ctrl + k
+
+双击shift可以快速查找
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Fri, 14 Apr 2017 13:07:11 +0800</pubDate>
+        <link>http://localhost:4000/redis/2017/04/14/intellij.html</link>
+        <guid isPermaLink="true">http://localhost:4000/redis/2017/04/14/intellij.html</guid>
+        
+        
+        <category>redis</category>
+        
+      </item>
     
       <item>
         <title>redis 知识点总结</title>
@@ -1042,161 +1154,6 @@ class B(A):
         <pubDate>Tue, 22 Nov 2016 13:07:11 +0800</pubDate>
         <link>http://localhost:4000/python/2016/11/22/python5.html</link>
         <guid isPermaLink="true">http://localhost:4000/python/2016/11/22/python5.html</guid>
-        
-        
-        <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>python基础知识点模块和包</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;初次接触python对它的模块和包的概念感觉非常的绕，和java中的包的概念有很大的出入，总是迷迷糊糊的。这里记录一下自己的理解。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;模块&quot;&gt;模块&lt;/h2&gt;
-
-&lt;p&gt;模块其实就是Python代码组成的文本文件，其实也就是一个命名空间。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在一个模块文件的顶层定义的所有变量都会成为被导入模块的属性&lt;/li&gt;
-  &lt;li&gt;导入给予了对模块的全局作用域中的变量名的读取权也就是在模块导入后，模块文件的全局作用域变成了模块对象的命名空间&lt;/li&gt;
-  &lt;li&gt;模块其实就是变量名的软件包&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;import和from语句都是可执行的赋值语句&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; a.py
- b.py
- 两个文件
- 在模块a.py中执行
-
- import b
- 效果是先执行b.py中的代码，然后在a.py中定义了一个变量b，引用了b.py的命名空间
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;import 和 from … import …&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; from module import name1,name2
-
- 等价于下面的语句
-
- import module
- name1 = module.name1
- name2 = module.name2
- del module
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;如果属性名前面有&lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt;,就不会被&lt;code class=&quot;highlighter-rouge&quot;&gt;from c import *&lt;/code&gt;导入&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;模块的作用&quot;&gt;模块的作用&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;代码重用&lt;/li&gt;
-  &lt;li&gt;系统命名空间划分&lt;/li&gt;
-  &lt;li&gt;实现数据和服务的共享&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;包&quot;&gt;包&lt;/h2&gt;
-
-&lt;p&gt;python代码以及其所在的目录就是包。包的容器目录（顶层目录）需要能在搜索列表中存在，包其实也是一种命名空间&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;只有&lt;code class=&quot;highlighter-rouge&quot;&gt;__init__.py&lt;/code&gt;文件的目录才能称之为包&lt;/li&gt;
-  &lt;li&gt;包导入就是把计算机上的目录变成一个Python命名空间，而这个命名空间的属性则是对应目录中的子目录和模块文件&lt;/li&gt;
-  &lt;li&gt;包导入之后，包就和模块没什么区别了&lt;/li&gt;
-  &lt;li&gt;包第一次导入时，会自动执行&lt;code class=&quot;highlighter-rouge&quot;&gt;__init__.py&lt;/code&gt;文件中的代码&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;分发与安装&quot;&gt;分发与安装&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;注意关注 &lt;code class=&quot;highlighter-rouge&quot;&gt;distutils&lt;/code&gt; 这个工具的使用&lt;/li&gt;
-  &lt;li&gt;注意关注 &lt;code class=&quot;highlighter-rouge&quot;&gt;eggs&lt;/code&gt; 这个开源系统的使用&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 21 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/21/python4.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/21/python4.html</guid>
-        
-        
-        <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>python基础知识点之文件输入和输出</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#openfile功能相同&quot; id=&quot;markdown-toc-openfile功能相同&quot;&gt;open()，file()功能相同&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#文件对象的方法&quot; id=&quot;markdown-toc-文件对象的方法&quot;&gt;文件对象的方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#文件内建属性&quot; id=&quot;markdown-toc-文件内建属性&quot;&gt;文件内建属性&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;内建函数 open() [以及 file()]提供了初始化输入/输出(I/O)操作的通用接口,是打开文件之门的”钥匙”…..&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;openfile功能相同&quot;&gt;open()，file()功能相同&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;file_object = open(file_name, access_mode='r', buffering=-1)
-
-file_name:是包含要打开文件名的字符串
-access_mode:是一个字符串，代表文件打开的模式，模式后面会详解
-buffering:指示访问文件所采用的缓冲方式,一般使用系统默认机制即可
-
-文件模式 	操作
-r 		以读方式打开
-rU或Ua 	   	以读方式打开, 同时提供通用换行符支持 (PEP 278)
-w 		以写方式打开 (必要时清空)
-a 		以追加模式打开 (从 EOF 开始, 必要时创建新文件)
-r+		以读写模式打开
-w+ 		以读写模式打开 (参见 w )
-a+ 		以读写模式打开 (参见 a )
-rb 		以二进制读模式打开
-wb 		以二进制写模式打开 (参见 w )
-ab 		以二进制追加模式打开 (参见 a )
-rb+ 		以二进制读写模式打开 (参见 r+ )
-wb+ 		以二进制读写模式打开 (参见 w+ )
-ab+ 		以二进制读写模式打开 (参见 a+ )
-
-
-fp = open('/etc/motd') 		# 以读方式打开
-fp = open('test', 'w') 		# 以写方式打开
-fp = open('data', 'r+') 	# 以读写方式打开
-fp = open('c:\io.sys', 'rb') 	# 以二进制读模式打开
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;文件对象的方法&quot;&gt;文件对象的方法&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;file.close()			#关闭文件
-file.flush()			#刷新文件的内部缓冲区
-file.readline(size=-1)		#从文件中读取并返回一行(包括行结束符), 或返回最大 size个字符
-file.readlines(sizhint=0)	#读取文件的所有行并作为一个列表返回(包含所有的行结束符); 如果给定 sizhint 且大于 0 , 那么将返回总和大约为sizhint 字节的行(大小由缓冲器容量的下一个值决定）（ 比如说缓冲器的大小只能为4K 的倍数，如果sizhint 为15k，则最后返回的可能是16k———译者按)
-file.xreadlines()		#用于迭代, 可以替换 readlines() 的一个更高效的方法
-file.tell()			#返回当前在文件中的位置
-file.seek(off, whence=0)	#在文件中移动文件指针, 从 whence ( 0 代表文件其始, 1 代表当前位置, 2 代表文件末尾)偏移 off 字节
-file.write(str)			#向文件写入字符串
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;文件内建属性&quot;&gt;文件内建属性&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;file.name		#文件名
-file.closed		#True 表示文件已经被关闭, 否则为 False
-file.encoding		#文件所使用的编码 - 当 Unicode 字符串被写入数据时, 它们将自动使用 file.encoding 转换为字节字符串; 若file.encoding 为 None 时使用系统默认编码
-file.mode		#文件打开时使用的访问模式
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sun, 20 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/20/python3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/20/python3.html</guid>
         
         
         <category>python</category>
