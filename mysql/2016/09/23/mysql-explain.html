@@ -76,9 +76,8 @@
 
 <h3 id="语法">语法</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>explain &lt;语句&gt;  //explain是专门分析select等查询语句的执行计划的
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>explain &lt;语句&gt;  //explain是专门分析select等查询语句的执行计划的
+</code></pre></div></div>
 
 <h3 id="例子">例子</h3>
 
@@ -86,7 +85,7 @@
   <li>
     <p>执行以下sql语句，看一下它的执行计划(<em>这是一个比较复杂的查询了，比较典型</em>)</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> EXPLAIN 
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> EXPLAIN 
      SELECT
          o.order_id,
          o.order_sn,
@@ -137,13 +136,12 @@
          t.order_id IS NOT NULL
      ORDER BY
          t.cacle_time DESC
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>执行结果如下：</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> +----+-------------+------------+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------+----------------------+------+-----------------------------+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> +----+-------------+------------+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------+----------------------+------+-----------------------------+
  | id | select_type | table      | type   | possible_keys                                                                                                                                                 | key         | key_len | ref                  | rows | Extra                       |
  +----+-------------+------------+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------+----------------------+------+-----------------------------+
  |  1 | PRIMARY     | &lt;derived2&gt; | ALL    | NULL                                                                                                                                                          | NULL        | NULL    | NULL                 |    2 | Using where; Using filesort |
@@ -154,15 +152,14 @@
  |  2 | DERIVED     | g2         | ref    | idx_orderid                                                                                                                                                   | idx_orderid | 4       | gshop_db.g1.order_id |    1 | Using where                 |
  +----+-------------+------------+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------+----------------------+------+-----------------------------+
  6 rows in set
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>explain 结果详解</p>
 
     <p>看到	explain 出来的结果，相信初学者应该已经懵逼了，面对这种情况，千万不能慌，要沉住气，要相信 <em>“我们的宇宙是存在规律的，并且规律是可以被认识的”</em>，其实就是说，所有的技术，只要认真学，都是可以学会的，下面对explain结果的每一个字段的含义进行解释</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> id
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> id
      SQL执行顺序的标识，执行顺序是从大到小，例子中最先执行的是id为2的，也就是说是从下往上执行的。
 
  select_type
@@ -219,8 +216,7 @@
      Using index ： 列数据是从仅仅使用了索引中的信息而没有读取实际的行动的表返回的，这发生在对表的全部的请求列都是同一个索引的部分的时候
      Using temporary ： 看到这个的时候，查询需要优化了。这里，MYSQL需要创建一个临时表来存储结果，这通常发生在对不同的列集进行ORDER BY上，而不是GROUP BY上
      Using where ： 使用了WHERE从句来限制哪些行将与下一张表匹配或者是返回给用户。如果不想返回表中的全部行，并且连接类型ALL或index，这就会发生，或者是查询有问题
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>本例的执行计划解读</p>

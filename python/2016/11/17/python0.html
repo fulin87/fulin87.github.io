@@ -88,18 +88,16 @@ python 的包管理工具pip使用起来非常的舒服，一条命令就可以�
 
 <h2 id="pip工具的使用">pip工具的使用</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip list              //查看已经安装的python包
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip list              //查看已经安装的python包
 pip show package      //查看packageName的详细情况
 pip install package   //安装包package
 pip uninstall package //卸载包package
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="python的命令行开发工具ipython">python的命令行开发工具ipython</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install ipython  //安装ipython
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install ipython  //安装ipython
+</code></pre></div></div>
 
 <h2 id="windows安装mysqldb-python遇到的问题">windows安装MySQLdb-python遇到的问题</h2>
 
@@ -109,86 +107,75 @@ pip uninstall package //卸载包package
   <li>
     <p>首先是发现系统没有MySQLdb这个模块</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> import MySQLdb
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> import MySQLdb
 
  Traceback (most recent call last):
  File "test.py", line 3, in &lt;module&gt;
  import MySQLdb
  ImportError: No module named MySQLdb
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>使用pip进行安装</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> pip install MySQLdb-python
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pip install MySQLdb-python
+</code></pre></div>    </div>
   </li>
   <li>
     <p>然后给了我一个提示</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> You are using pip version 8.1.2, however version 9.0.1 is available.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> You are using pip version 8.1.2, however version 9.0.1 is available.
  You should consider upgrading via the 'python -m pip install --upgrade pip' command.
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>按照提示对pip进行升级</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> python -m pip install --upgrade pip
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> python -m pip install --upgrade pip
+</code></pre></div>    </div>
   </li>
   <li>
     <p>升级完成之后，再次安装</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> pip install MySQLdb-python
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pip install MySQLdb-python
+</code></pre></div>    </div>
   </li>
   <li>
     <p>这次报一个新的错误</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from http://aka.ms/vcpython27
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from http://aka.ms/vcpython27
+</code></pre></div>    </div>
   </li>
   <li>安装提示安装  Microsoft Visual C++ 9.0</li>
   <li>
     <p>然后再次安装MySQLdb</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> pip install MySQLdb-python
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pip install MySQLdb-python
+</code></pre></div>    </div>
   </li>
   <li>
     <p>这次又报了一个新的错误</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> error: command 'C:\\Users\\870850\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0\\VC\\Bin\\cl.exe' failed with exit status 2
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> error: command 'C:\\Users\\870850\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0\\VC\\Bin\\cl.exe' failed with exit status 2
+</code></pre></div>    </div>
   </li>
   <li>
     <p>上网搜索，发现这个问题很多人都遇到了，根据网友的提示，尝试手动安装，这这里找</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> http://www.lfd.uci.edu/~gohlke/pythonlibs
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> http://www.lfd.uci.edu/~gohlke/pythonlibs
+</code></pre></div>    </div>
   </li>
   <li>
     <p>下载 <code class="highlighter-rouge">MySQL_python‑1.2.5‑cp27‑none‑win32.whl</code> 这个wheel安装包</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> pip install D:\MySQL_python‑1.2.5‑cp27‑none‑win32.whl
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pip install D:\MySQL_python‑1.2.5‑cp27‑none‑win32.whl
+</code></pre></div>    </div>
   </li>
   <li>
     <p>终于安装好了，试试</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> import MySQLdb
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> import MySQLdb
+</code></pre></div>    </div>
   </li>
   <li>没有异常，OK了</li>
 </ul>
@@ -199,14 +186,13 @@ pip uninstall package //卸载包package
   <li>
     <p>使用pip进行安装</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> pip install MySQL-python
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pip install MySQL-python
+</code></pre></div>    </div>
   </li>
   <li>
     <p>报以下异常</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> Complete output from command python setup.py egg_info:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Complete output from command python setup.py egg_info:
  sh: mysql_config: command not found
  Traceback (most recent call last):
    File "&lt;string&gt;", line 1, in &lt;module&gt;
@@ -220,30 +206,26 @@ pip uninstall package //卸载包package
     
  ----------------------------------------
  Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-qy_rtM/MySQL-python/
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>安装 mysql-dev</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> yum install mysql-devel
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> yum install mysql-devel
+</code></pre></div>    </div>
   </li>
   <li>
     <p>这时又报一个新的错</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> error: command 'gcc' failed with exit status 1
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> error: command 'gcc' failed with exit status 1
+</code></pre></div>    </div>
   </li>
   <li>
     <p>安装<code class="highlighter-rouge">gcc</code>和<code class="highlighter-rouge">python-devel</code></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> yum install gcc -y
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> yum install gcc -y
  yum install python-devel -y
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>总算OK了</p>

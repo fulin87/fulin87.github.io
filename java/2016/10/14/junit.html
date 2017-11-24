@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/java/2016/10/14/junit.html">
+  <link rel="canonical" href="http://localhost:4000/java/2016/10/14/Junit.html">
   <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
@@ -99,66 +99,64 @@
 
 <p><code class="highlighter-rouge">TestCast1</code>,<code class="highlighter-rouge">TestCast2</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.fulin.test.testJunt;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">com</span><span class="p">.</span><span class="n">fulin</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">testJunt</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">After</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">AfterClass</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">Before</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">BeforeClass</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">Test</span><span class="p">;</span>
 
-public class TestCast1{
+<span class="k">public</span> <span class="n">class</span> <span class="n">TestCast1</span><span class="p">{</span>
 	
-	public TestCast1(){
-		System.out.println("Constrctor...");
-	}
+	<span class="k">public</span> <span class="n">TestCast1</span><span class="p">(){</span>
+		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Constrctor..."</span><span class="p">);</span>
+	<span class="p">}</span>
 	
-	@Before
-	public void before(){
-		System.out.println("before");
-	}
+	<span class="p">@</span><span class="n">Before</span>
+	<span class="k">public</span> <span class="n">void</span> <span class="n">before</span><span class="p">(){</span>
+		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"before"</span><span class="p">);</span>
+	<span class="p">}</span>
 	
-	@BeforeClass
-	public static void beforeClass(){
-		System.out.println("beforeClass");
-	}
+	<span class="p">@</span><span class="n">BeforeClass</span>
+	<span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">beforeClass</span><span class="p">(){</span>
+		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"beforeClass"</span><span class="p">);</span>
+	<span class="p">}</span>
 	
-	@After
-	public void after(){
-		System.out.println("after");
-	}
+	<span class="p">@</span><span class="n">After</span>
+	<span class="k">public</span> <span class="n">void</span> <span class="n">after</span><span class="p">(){</span>
+		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"after"</span><span class="p">);</span>
+	<span class="p">}</span>
 	
-	@AfterClass
-	public static void afterClass(){
-		System.out.println("afterClass");
-	}
+	<span class="p">@</span><span class="n">AfterClass</span>
+	<span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">afterClass</span><span class="p">(){</span>
+		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"afterClass"</span><span class="p">);</span>
+	<span class="p">}</span>
 	
-	@Test
-	public void test1(){
-		System.out.println("test1");
-	}
+	<span class="p">@</span><span class="n">Test</span>
+	<span class="k">public</span> <span class="n">void</span> <span class="n">test1</span><span class="p">(){</span>
+		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"test1"</span><span class="p">);</span>
+	<span class="p">}</span>
 	
-	@Test
-	public void test2(){
-		System.out.println("test2");
-	}
-}
-</code></pre>
-</div>
+	<span class="p">@</span><span class="n">Test</span>
+	<span class="k">public</span> <span class="n">void</span> <span class="n">test2</span><span class="p">(){</span>
+		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"test2"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <hr />
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.fulin.test.testJunt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">com</span><span class="p">.</span><span class="n">fulin</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">testJunt</span><span class="p">;</span>
 
-import org.junit.Test;
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">Test</span><span class="p">;</span>
 
-public class TestCast2 {
-	@Test
-	public void test3(){
-		System.out.println("test3");
-	}
-}
-</code></pre>
-</div>
+<span class="k">public</span> <span class="n">class</span> <span class="n">TestCast2</span> <span class="p">{</span>
+	<span class="p">@</span><span class="n">Test</span>
+	<span class="k">public</span> <span class="n">void</span> <span class="n">test3</span><span class="p">(){</span>
+		<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"test3"</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>编写好测试类之后，就可以使用Junit4来运行测试类了。运行测试类的方法有两种：</p>
 
@@ -166,32 +164,31 @@ public class TestCast2 {
 
 <p>使用Junit原生的JUnitCore.runClasses(Class…class)方法,如下所示</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.fulin.test.testJunt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">com</span><span class="p">.</span><span class="n">fulin</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">testJunt</span><span class="p">;</span>
 
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">runner</span><span class="p">.</span><span class="n">JUnitCore</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">runner</span><span class="p">.</span><span class="n">Result</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">runner</span><span class="p">.</span><span class="n">notification</span><span class="p">.</span><span class="n">Failure</span><span class="p">;</span>
 
-public class JunnerTest {
+<span class="k">public</span> <span class="n">class</span> <span class="n">JunnerTest</span> <span class="p">{</span>
 
-	public static void main(String[] args) {
-		Result result = JUnitCore.runClasses(TestCast1.class,TestCast2.class);
-		for (Failure fail : result.getFailures()) {
-			System.out.println(fail.toString());
-		}
+	<span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">Result</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JUnitCore</span><span class="p">.</span><span class="n">runClasses</span><span class="p">(</span><span class="n">TestCast1</span><span class="p">.</span><span class="n">class</span><span class="p">,</span><span class="n">TestCast2</span><span class="p">.</span><span class="n">class</span><span class="p">);</span>
+		<span class="n">for</span> <span class="p">(</span><span class="n">Failure</span> <span class="n">fail</span> <span class="p">:</span> <span class="n">result</span><span class="p">.</span><span class="n">getFailures</span><span class="p">())</span> <span class="p">{</span>
+			<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">fail</span><span class="p">.</span><span class="n">toString</span><span class="p">());</span>
+		<span class="p">}</span>
 		
-		if(result.wasSuccessful()){
-			System.out.println("All tests finished successfully...");
-		}
-	}
+		<span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">wasSuccessful</span><span class="p">()){</span>
+			<span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"All tests finished successfully..."</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 	
-}
-</code></pre>
-</div>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>输出如下：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>beforeClass
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>beforeClass
 Constrctor...
 before
 test1
@@ -203,8 +200,7 @@ after
 afterClass
 test3
 All tests finished successfully...
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="测试方法二">测试方法二</h3>
 
@@ -220,7 +216,7 @@ All tests finished successfully...
 
 <h4 id="junit注解解释">Junit注解解释</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>1. @Test :   测试方法，测试程序会运行的方法
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. @Test :   测试方法，测试程序会运行的方法
              后边可以跟参数代表不同的测试如
              (expected=XXException.class) 异常测试
              (timeout=xxx)超时测试
@@ -229,8 +225,7 @@ All tests finished successfully...
 4. @After :  每一个测试方法之后运行
 5. @BeforeClass: 所有测试开始之前运行
 6. @AfterClass:  所有测试结束之后运行
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="junit源码解析">Junit源码解析</h3>
 

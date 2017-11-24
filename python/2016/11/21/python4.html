@@ -80,20 +80,19 @@
   <li>
     <p>import和from语句都是可执行的赋值语句</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> a.py
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> a.py
  b.py
  两个文件
  在模块a.py中执行
 
  import b
  效果是先执行b.py中的代码，然后在a.py中定义了一个变量b，引用了b.py的命名空间
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>import 和 from … import …</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> from module import name1,name2
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> from module import name1,name2
 
  等价于下面的语句
 
@@ -101,8 +100,7 @@
  name1 = module.name1
  name2 = module.name2
  del module
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>如果属性名前面有<code class="highlighter-rouge">_</code>,就不会被<code class="highlighter-rouge">from c import *</code>导入</li>
 </ul>

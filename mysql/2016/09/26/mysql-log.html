@@ -94,17 +94,16 @@
       <li>
         <p>开启bin_log日志功能,在my.cnf中修改，在[mysqld]下增加:</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code> log-bin=/tmp/mysql-log
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> log-bin=/tmp/mysql-log
  binlog_format=mixed
-</code></pre>
-        </div>
+</code></pre></div>        </div>
       </li>
     </ul>
   </li>
   <li>
     <p>查看二进制日志功能是否开启</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; show variables like '%log_bin%';
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; show variables like '%log_bin%';
  +---------------------------------+----------------------+
  | Variable_name                   | Value                |
  +---------------------------------+----------------------+
@@ -116,13 +115,12 @@
  | sql_log_bin                     | ON                   |
  +---------------------------------+----------------------+
  6 rows in set
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>查看二进制文件的情况</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; show master logs;
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; show master logs;
  +------------------+-----------+
  | Log_name         | File_size |
  +------------------+-----------+
@@ -130,12 +128,11 @@
  | mysql-log.000002 |       562 |
  +------------------+-----------+
  2 rows in set
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>或者</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; show binary logs;
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; show binary logs;
  +------------------+-----------+
  | Log_name         | File_size |
  +------------------+-----------+
@@ -143,13 +140,12 @@
  | mysql-log.000002 |       562 |
  +------------------+-----------+
  2 rows in set
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>切换二进制文件</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; flush logs;
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; flush logs;
  Query OK, 0 rows affected
 
  mysql&gt; show binary logs;
@@ -161,13 +157,12 @@
  | mysql-log.000003 |       120 |
  +------------------+-----------+
  3 rows in set
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>删除或者初始化二进制文件</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; reset master;
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; reset master;
  Query OK, 0 rows affected
 	
  mysql&gt; show binary logs;
@@ -177,13 +172,12 @@
  | mysql-log.000001 |       120 |
  +------------------+-----------+
  1 row in set
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>指定二进制日志失效期</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; show variables like "%expire%";
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; show variables like "%expire%";
  +--------------------------------+-------+
  | Variable_name                  | Value |
  +--------------------------------+-------+
@@ -203,13 +197,12 @@
  | expire_logs_days               | 5     |
  +--------------------------------+-------+
  2 rows in set
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>二进制日志的格式的查看和格式介绍,这里仅做了解,有三种</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> mysql&gt; show variables like '%format%';
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; show variables like '%format%';
  +--------------------------+-------------------+
  | Variable_name            | Value             |
  +--------------------------+-------------------+
@@ -227,13 +220,12 @@
  Row : 日志中会记录成每一行数据被修改的形式，然后在 slave 端再对相同的数据进行修改
  Statement ： 每一条会修改数据的 SQL 都会记录到 master 的 bin-log 中。slave 在复制的时候 SQL 进程会解析成和原来 master 端执行过的相同的 SQL 再次执行。
  Mixed : MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 statement 和 row 之间选择一种,相当于前两种的混合。
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>查看二进制日志文件的内容</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # mysqlbinlog mysql-log.00000
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # mysqlbinlog mysql-log.00000
 
  SET TIMESTAMP=1474882546/*!*/;
  insert into t select * from t
@@ -248,8 +240,7 @@
  /*!*/;
  # at 849
  #160926  2:35:47 server id 1  end_log_pos 952 CRC32 0x596b7cf9 	Query	thread_id=1	exec_time=0	error_code=0
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>仔细观察会发现，这里记录了数据库的每一次查询和修改过程，就像数据库的变更记录一样，难怪可以用来恢复数据。</p>
   </li>

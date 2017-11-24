@@ -122,90 +122,78 @@
   <li>
     <p>先更换<code class="highlighter-rouge">yum</code>源，更改成阿里的<code class="highlighter-rouge">yum</code>源</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+</code></pre></div>    </div>
   </li>
   <li>
     <p>安装pcre这个软件</p>
 
     <p>PCRE(Perl Compatible Regular Expressions)是一个Perl库，可以兼容正则表达式，nginx的一些功能依赖这个。</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # yum install pcre pcre-devel -y
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # yum install pcre pcre-devel -y
+</code></pre></div>    </div>
   </li>
   <li>
     <p>安装openssl这个软件</p>
 
     <p>nginx如果要支持https需要这个软件的支持，所以需要安装</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # yum install openssl openssl-devel -y
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # yum install openssl openssl-devel -y
+</code></pre></div>    </div>
   </li>
   <li>
     <p>下载nginx，尽量选择一年一前的稳定版本</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # cd /home/fulin/tools
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # cd /home/fulin/tools
  # wget http://nginx.org/download/nginx-1.11.5.tar.gz
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>创建一个用户来运行nginx，不能登录，没有家目录</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # useradd nginx -s /sbin/nologin -M
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # useradd nginx -s /sbin/nologin -M
+</code></pre></div>    </div>
   </li>
   <li>
     <p>安装c，c++编译器</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # yum -y install make gcc gcc-c++ ncurses-devel
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # yum -y install make gcc gcc-c++ ncurses-devel
+</code></pre></div>    </div>
   </li>
   <li>
     <p>安装nginx</p>
 
     <p><em>解压</em></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # tar xf nginx-1.11.5.tar.gz
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # tar xf nginx-1.11.5.tar.gz
+</code></pre></div>    </div>
 
     <p><em>进入目录</em></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # cd nginx-1.11.5
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # cd nginx-1.11.5
+</code></pre></div>    </div>
 
     <p><em>安装前检测</em></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # ./configure --user=nginx --group=nginx --prefix=/application/nginx1.11.5 --with-http_stub_status_module --with-http_ssl_module
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # ./configure --user=nginx --group=nginx --prefix=/application/nginx1.11.5 --with-http_stub_status_module --with-http_ssl_module
+</code></pre></div>    </div>
 
     <p><em>查看是否检测通过，0为通过</em></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # echo $?
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # echo $?
+</code></pre></div>    </div>
 
     <p><em>编译安装</em></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # make
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # make
  # make install
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p><em>做一个软链接，作用是去掉版本号</em></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # ln -s /application/nginx1.11.5/ /application/nginx
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # ln -s /application/nginx1.11.5/ /application/nginx
  # cd /application/nginx/
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -215,63 +203,55 @@
   <li>
     <p>启动</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # /application/nginx/sbin/nginx
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # /application/nginx/sbin/nginx
+</code></pre></div>    </div>
   </li>
   <li>
     <p>检查语法，也就是检查配置文件的语法</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # /application/nginx/sbin/nginx -t
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # /application/nginx/sbin/nginx -t
+</code></pre></div>    </div>
   </li>
   <li>
     <p>重启</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # /application/nginx/sbin/nginx -s reload
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # /application/nginx/sbin/nginx -s reload
+</code></pre></div>    </div>
   </li>
   <li>
     <p>停止nginx服务</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> # /application/nginx/sbin/nginx -s stop
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # /application/nginx/sbin/nginx -s stop
+</code></pre></div>    </div>
   </li>
   <li>
     <p>访问</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> http://192.168.116.131:80
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> http://192.168.116.131:80
+</code></pre></div>    </div>
   </li>
   <li>
     <p>排错</p>
 
     <p>看网络通不通</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> ping 192.168.116.131
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ping 192.168.116.131
+</code></pre></div>    </div>
 
     <p>端口通不通</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> telnet 192.168.116.131 80
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> telnet 192.168.116.131 80
+</code></pre></div>    </div>
 
     <p>查看nginx的错误日志</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> /application/nginx/log/error.log
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /application/nginx/log/error.log
+</code></pre></div>    </div>
   </li>
   <li>
     <p>nginx的目录结构</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> ├── client_body_temp    #客户端临时文件
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ├── client_body_temp    #客户端临时文件
  ├── conf				#nginx配置文件
  │   ├── fastcgi.conf
  │   ├── fastcgi.conf.default
@@ -301,13 +281,12 @@
  │   └── nginx
  ├── scgi_temp		#临时目录
  └── uwsgi_temp		#临时目录
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>nginx的配置文件,nginx.conf</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> 默认用户
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 默认用户
  #user  nobody;    
  子进程的个数，一般与cpu的核数相当
  worker_processes  1;  
@@ -368,8 +347,7 @@
          }
      }
  }
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>用nginx实现简单的负载均衡</p>
@@ -379,7 +357,7 @@
  <code class="highlighter-rouge">max_fails</code> 是最多请求失效次数时将节点去除  <br />
  <code class="highlighter-rouge">fail_timeout</code> 是请求超时时间</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> upstream backend{
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> upstream backend{
   server 10.202.33.86:8080 max_fails=3 fail_timeout=30s;
   server 10.202.33.87:8080 max_fails=3 fail_timeout=30s;
  }
@@ -391,8 +369,7 @@
          proxy_pass http://backend;
      }
  }
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 

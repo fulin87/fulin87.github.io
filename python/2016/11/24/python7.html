@@ -101,15 +101,14 @@
 
 <p>数据库的访问是通过连接对象（connection objects）来实现的。程序模块中必须提供以下形式的连接对象构造函数：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>connect(parameters...)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>connect(parameters...)
+</code></pre></div></div>
 
 <p>数据库连接对象的构造函数，返回值为Connection对象实例。 由于目的数据库不同，函数接收数量不等的一些参数。</p>
 
 <p>模块中必须定义下面这些模块级的属性：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>apilevel
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apilevel
 	字符串常量，表明支持的DB API版本。
 	目前只允许取值'1.0'和'2.0'。
 	如果没有定义本常量，默认为DB-API 1.0DB-API
@@ -146,14 +145,13 @@ Error
 	这应该是警告以外所有其他错误类的基类。你可以使用这个类在单一
 	的‘except’语句中捕捉所有的错误。警告（Warnings）不应认为是错误，
 	因此不应该以此类作为基类，而只应该以Python StandardError作为基类。
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="数据库连接对象connection">数据库连接对象(connection)</h3>
 
 <p>连接对象应该具有下面的方法：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>close()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>close()
 	马上关闭数据连接（而不是当__del__方法被调用的时候）。
 
 	连接应该此后变得不可用，再次访问本连接对象应该触发
@@ -181,8 +179,7 @@ rollback()
 cursor()
 	方法返回给定连接上建立的游标对象（Cursor Object）。如果数据库
 	没有提供对应的游标对象，那么将由程序来模拟实现游标功能
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="游标对象cursor">游标对象（cursor）</h3>
 
@@ -190,7 +187,7 @@ cursor()
 
 <p>游标对象应具有以下的方法和属性：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>description 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>description 
 	这是一个只读属性，是7个项目组成的tulip的序列。
 	每个tulip包含描述一个结果集中的列的信息描述：
 
@@ -377,12 +374,11 @@ setoutputsize(size[,column])
 	
 	Implementations are free to have this method do nothing
 	and users are free to not use it.
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>##sqlite3连接实例</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import sqlite3
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; import sqlite3
 &gt;&gt;&gt; conn = sqlite3.connect(r'D:\test.db')
 &gt;&gt;&gt; cursor = conn.cursor()
 &gt;&gt;&gt; cursor.execute('create table user (id varchar(20) primary key,name varchar(20))')
@@ -402,12 +398,11 @@ setoutputsize(size[,column])
 &gt;&gt;&gt; info = curo.fetchall()
 &gt;&gt;&gt; info
 [(u'1', u'Michael')]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>##mysql连接实例</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import MySQLdb
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; import MySQLdb
 &gt;&gt;&gt; conn = MySQLdb.connect(host = 'xx.xxx.xx.xx',\
                    port = 3306,\
                    user = 'xxx',\
@@ -429,8 +424,7 @@ setoutputsize(size[,column])
 8283 255138
 8285 255139
 8287 255140
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </div>
 

@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/linux/2016/08/21/ssh3.html">
+  <link rel="canonical" href="http://localhost:4000/linux/2016/08/21/SSH3.html">
   <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
@@ -88,7 +88,7 @@
 
 <p>命令：<code class="highlighter-rouge">lscpu</code> 可以显示CPU的统计信息</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Architecture:          x86_64
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Architecture:          x86_64
 CPU op-mode(s):        32-bit, 64-bit
 Byte Order:            Little Endian
 CPU(s):                1
@@ -110,53 +110,50 @@ L1i cache:             32K
 L2 cache:              256K
 L3 cache:              12288K
 NUMA node0 CPU(s):     0
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>命令 <code class="highlighter-rouge">cat /proc/cpuinfo</code> 可以知道每个cpu信息，如每个CPU的型号，主频等</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>processor	: 0
-vendor_id	: GenuineIntel
-cpu family	: 6
-model		: 44
-model name	: Intel(R) Xeon(R) CPU           E5640  @ 2.67GHz
-stepping	: 2
-microcode	: 21
-cpu MHz		: 2660.000
-cache size	: 12288 KB
-physical id	: 0
-siblings	: 1
-core id		: 0
-cpu cores	: 1
-apicid		: 0
-initial apicid	: 0
-fpu		: yes
-fpu_exception	: yes
-cpuid level	: 11
-wp		: yes
-flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts mmx fxsr sse sse2 ss syscall nx rdtscp lm constant_tsc up arch_perfmon pebs bts xtopology tsc_reliable nonstop_tsc aperfmperf unfair_spinlock pni pclmulqdq ssse3 cx16 sse4_1 sse4_2 x2apic popcnt aes hypervisor lahf_lm ida arat dts
-bogomips	: 5320.00
-clflush size	: 64
-cache_alignment	: 64
-address sizes	: 40 bits physical, 48 bits virtual
-power management:
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">processor</span>	<span class="p">:</span> <span class="m">0</span>
+<span class="n">vendor_id</span>	<span class="p">:</span> <span class="n">GenuineIntel</span>
+<span class="n">cpu</span> <span class="n">family</span>	<span class="p">:</span> <span class="m">6</span>
+<span class="k">model</span>		<span class="p">:</span> <span class="m">44</span>
+<span class="k">model</span> <span class="n">name</span>	<span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">CPU</span>           <span class="n">E5640</span>  <span class="p">@</span> <span class="m">2.67</span><span class="n">GHz</span>
+<span class="n">stepping</span>	<span class="p">:</span> <span class="m">2</span>
+<span class="n">microcode</span>	<span class="p">:</span> <span class="m">21</span>
+<span class="n">cpu</span> <span class="n">MHz</span>		<span class="p">:</span> <span class="m">2660.000</span>
+<span class="n">cache</span> <span class="n">size</span>	<span class="p">:</span> <span class="m">12288</span> <span class="n">KB</span>
+<span class="n">physical</span> <span class="n">id</span>	<span class="p">:</span> <span class="m">0</span>
+<span class="n">siblings</span>	<span class="p">:</span> <span class="m">1</span>
+<span class="n">core</span> <span class="n">id</span>		<span class="p">:</span> <span class="m">0</span>
+<span class="n">cpu</span> <span class="n">cores</span>	<span class="p">:</span> <span class="m">1</span>
+<span class="n">apicid</span>		<span class="p">:</span> <span class="m">0</span>
+<span class="n">initial</span> <span class="n">apicid</span>	<span class="p">:</span> <span class="m">0</span>
+<span class="n">fpu</span>		<span class="p">:</span> <span class="n">yes</span>
+<span class="n">fpu_exception</span>	<span class="p">:</span> <span class="n">yes</span>
+<span class="n">cpuid</span> <span class="n">level</span>	<span class="p">:</span> <span class="m">11</span>
+<span class="n">wp</span>		<span class="p">:</span> <span class="n">yes</span>
+<span class="n">flags</span>		<span class="p">:</span> <span class="n">fpu</span> <span class="n">vme</span> <span class="n">de</span> <span class="n">pse</span> <span class="n">tsc</span> <span class="n">msr</span> <span class="n">pae</span> <span class="n">mce</span> <span class="n">cx8</span> <span class="n">apic</span> <span class="n">sep</span> <span class="n">mtrr</span> <span class="n">pge</span> <span class="n">mca</span> <span class="n">cmov</span> <span class="n">pat</span> <span class="n">pse36</span> <span class="n">clflush</span> <span class="n">dts</span> <span class="n">mmx</span> <span class="n">fxsr</span> <span class="n">sse</span> <span class="n">sse2</span> <span class="n">ss</span> <span class="n">syscall</span> <span class="n">nx</span> <span class="n">rdtscp</span> <span class="n">lm</span> <span class="n">constant_tsc</span> <span class="n">up</span> <span class="n">arch_perfmon</span> <span class="n">pebs</span> <span class="n">bts</span> <span class="n">xtopology</span> <span class="n">tsc_reliable</span> <span class="n">nonstop_tsc</span> <span class="n">aperfmperf</span> <span class="n">unfair_spinlock</span> <span class="n">pni</span> <span class="n">pclmulqdq</span> <span class="n">ssse3</span> <span class="n">cx16</span> <span class="n">sse4_1</span> <span class="n">sse4_2</span> <span class="n">x2apic</span> <span class="n">popcnt</span> <span class="n">aes</span> <span class="n">hypervisor</span> <span class="n">lahf_lm</span> <span class="n">ida</span> <span class="n">arat</span> <span class="n">dts</span>
+<span class="n">bogomips</span>	<span class="p">:</span> <span class="m">5320.00</span>
+<span class="n">clflush</span> <span class="n">size</span>	<span class="p">:</span> <span class="m">64</span>
+<span class="n">cache_alignment</span>	<span class="p">:</span> <span class="m">64</span>
+<span class="n">address</span> <span class="n">sizes</span>	<span class="p">:</span> <span class="m">40</span> <span class="n">bits</span> <span class="n">physical</span><span class="p">,</span> <span class="m">48</span> <span class="n">bits</span> <span class="n">virtual</span>
+<span class="n">power</span> <span class="n">management</span><span class="p">:</span>
+</code></pre></div></div>
 
 <h3 id="内存">内存</h3>
 
 <p>命令 <code class="highlighter-rouge">free -m</code> 查看内存的统计信息</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>             total       used       free     shared    buffers     cached
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             total       used       free     shared    buffers     cached
 Mem:          1878       1026        852         31        173        394
 -/+ buffers/cache:        458       1419
 Swap:         5119         49       5070
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>命令 <code class="highlighter-rouge">cat /proc/meminfo</code> 查看内存的详细使用情况</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>MemTotal:        1923396 kB
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MemTotal:        1923396 kB
 MemFree:          873108 kB
 Buffers:          177256 kB
 Cached:           403736 kB
@@ -198,12 +195,11 @@ HugePages_Surp:        0
 Hugepagesize:       2048 kB
 DirectMap4k:        8192 kB
 DirectMap2M:     2088960 kB
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>命令 <code class="highlighter-rouge">dmidecode -t memory</code> 查看内存硬件信息,这里不做过多介绍</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># dmidecode 2.12
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># dmidecode 2.12
 SMBIOS 2.4 present.
 
 Handle 0x0044, DMI type 5, 46 bytes
@@ -252,14 +248,13 @@ Memory Module Information
 		Installed Size: 2048 MB (Single-bank Connection)
 		Enabled Size: 2048 MB (Single-bank Connection)
 		Error Status: OK
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="磁盘">磁盘</h3>
 
 <p>命令 <code class="highlighter-rouge">lsblk</code> 查看磁盘分区分布</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>NAME                         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda                            8:0    0   30G  0 disk 
 ├─sda1                         8:1    0  200M  0 part /boot
 └─sda2                         8:2    0 29.8G  0 part 
@@ -268,12 +263,11 @@ sda                            8:0    0   30G  0 disk
 sdb                            8:16   0   30G  0 disk 
 └─VolGroup00-LVroot (dm-1)   253:1    0 54.8G  0 lvm  /
 sr0                           11:0    1 1024M  0 rom 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>命令 <code class="highlighter-rouge">fdisk -l</code> 查看磁盘和分区的详细信息</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Disk /dev/sda: 32.2 GB, 32212254720 bytes
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Disk /dev/sda: 32.2 GB, 32212254720 bytes
 64 heads, 32 sectors/track, 30720 cylinders
 Units = cylinders of 2048 * 512 = 1048576 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
@@ -306,8 +300,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 Disk identifier: 0x00000000
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><img src="/image/diskTotal.PNG" alt="" /></p>
 
@@ -322,15 +315,14 @@ Disk identifier: 0x00000000
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
+</code></pre></div></div>
 
 <h3 id="bois">BOIS</h3>
 
 <p>命令 <code class="highlighter-rouge">dmidecode -t bios</code> 查看当前的BOIS信息</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># dmidecode 2.12
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># dmidecode 2.12
 SMBIOS 2.4 present.
 
 Handle 0x0000, DMI type 0, 24 bytes
@@ -365,8 +357,7 @@ BIOS Information
 		Targeted content distribution is supported
 	BIOS Revision: 4.6
 	Firmware Revision: 0.0
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="linux中的磁盘分区和目录">Linux中的磁盘分区和目录</h2>
 
@@ -378,7 +369,7 @@ BIOS Information
 
 <p>Linux磁盘分区不像windows把分区用盘符区分。在Linux中是先建立一个以根目录<code class="highlighter-rouge">/</code>为根节点的目录树,然后将磁盘分区挂载到相应的目录上，对于Linux文件系统的约定大致如下：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/bin        ##存放系统的核心最常用的命令
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/bin        ##存放系统的核心最常用的命令
 /boot       ##内核与启动文件
 /dev        ##各种设备文件
 /etc        ##系统软件的配置文件
@@ -389,8 +380,7 @@ BIOS Information
 /tmp        ##临时文件存放点
 /usr        ##非系统的程序和命令
 /var        ##数据目录，一般数据库文件也存放在此目录下
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>至于不同目录上挂载的分区大小分配，要根据linux文件系统的规则和作用来。</p>
 

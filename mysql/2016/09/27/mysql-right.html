@@ -81,7 +81,7 @@
 
 <h3 id="具体的优化技巧如下">具体的优化技巧如下</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>1,禁止使用　select * from table ;尽量查询特定的字段.
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1,禁止使用　select * from table ;尽量查询特定的字段.
   select * 会增加数据库开销
 
 2,尽量不使用游标.
@@ -108,8 +108,7 @@
 10,必要时强制查询优化器使用某个索引
 
 11,能用UNION ALL就不要用UNION
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>这些可以说是sql语句优化的基本常识了，必须会使用，熟练使用。</p>

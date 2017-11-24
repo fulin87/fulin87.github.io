@@ -110,54 +110,49 @@
 
 <h3 id="if语句">if语句</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>if expression:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if expression:
 	expr_true_suite
 elif expression:
 	expr_true_suite
 else:
 	expr_false_suite
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="条件表达式">条件表达式</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>X if C else Y
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X if C else Y
 
 a = x if x&lt;y else y
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="循环语句">循环语句</h2>
 
 <h3 id="while语句">while语句</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>while expression:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while expression:
 	suite_to_repeat
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="for语句">for语句</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>for iter_var in iterable:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for iter_var in iterable:
 	suite_to_repeat
 for语句经常和range()内建函数联合使用.
 range()内建函数的语法：
 range(start, end, step =1)  ;包前不包后
 
 range(2,9,2)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="迭代器和生成器">迭代器和生成器</h3>
 
 <p>迭代器和生成器是python中的神器。后面会进行详细的总结。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>列表解析:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>列表解析:
 [expr for iter_var in iterable if cond_expr]
 生成器表达式:
 (expr for iter_var in iterable if cond_expr)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="函数要注意的地方">函数要注意的地方</h2>
 
@@ -166,7 +161,7 @@ range(2,9,2)
   <li>
     <p>函数的形参有很多种定义方法</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> 1,直接定义
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1,直接定义
      def fun(x=1,y=2):
          print x,y
      fun(1,2)
@@ -197,8 +192,7 @@ range(2,9,2)
      params = {'name':'fulin','job':'it'}
      fun(**params)
      'name :fulin job : it'
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -206,12 +200,11 @@ range(2,9,2)
 
 <p>作用域其实就是命名空间，在哪里声明的变量，命名空间就是那里。这里有一个原则：LEGB原则。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>L:本地作用域，函数内的名字空间，包括局部变量和形参
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>L:本地作用域，函数内的名字空间，包括局部变量和形参
 E:嵌套作用域，外部嵌套函数的名字空间（闭包中常见）
 G:全局作用域，全局变量，函数定义所在模块的名字空间
 B:内置作用域，内置模块的名字空间
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>python的变量作用域和其他语言有比较大的区别，是一个难点，需要特别留意</p>
 

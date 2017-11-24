@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/java/2016/09/20/plantuml.html">
+  <link rel="canonical" href="http://localhost:4000/java/2016/09/20/plantUML.html">
   <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
@@ -86,7 +86,7 @@
 
 <p>这是使用plantUml画的一个Junit运行的时序图</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@startuml
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@startuml
 	actor user #blue 
 	user -&gt; Client : 1,开始
 	Client -&gt; JunitCode : 2,调runClasses
@@ -99,8 +99,7 @@
 	Client -&gt; user : 结束
 	'user -&gt; JunitCode : 调用JunitCode.runClass(Class...class)方法
 @enduml
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>结果如下</p>
 

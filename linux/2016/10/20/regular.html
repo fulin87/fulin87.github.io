@@ -82,48 +82,43 @@
   <li>
     <p><code class="highlighter-rouge">^dog</code> 以dog开头</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> ls -l /home | grep ^d  #过滤出/home目录下的子目录
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ls -l /home | grep ^d  #过滤出/home目录下的子目录
  grep -v ^# /home/config.conf #过滤掉config.conf中的注释内容
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li><code class="highlighter-rouge">[^dog]</code> 不包含dog</li>
   <li>
     <p><code class="highlighter-rouge">dog$</code> 以dog结尾</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> ls -Fl /home | grep /$ #过滤出/home目录下的子目录
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ls -Fl /home | grep /$ #过滤出/home目录下的子目录
+</code></pre></div>    </div>
   </li>
   <li><code class="highlighter-rouge">^$</code> 表示空行</li>
   <li>
     <p><code class="highlighter-rouge">.</code> 表示且只能表示一个任意字符</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> grep "\." /home/config.conf #过滤出config.conf中包含.的行
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> grep "\." /home/config.conf #过滤出config.conf中包含.的行
+</code></pre></div>    </div>
   </li>
   <li><code class="highlighter-rouge">*</code> 重复0个或多个前面的一个字符</li>
   <li><code class="highlighter-rouge">.*</code> 匹配所有字符</li>
   <li>
     <p><code class="highlighter-rouge">[]</code> 配置包含有其中的字符的内容</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> grep "[abc]" /home/config.conf #匹配出不包含a,b,c字符的行
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> grep "[abc]" /home/config.conf #匹配出不包含a,b,c字符的行
  grep "[0-9]" /home/config.conf #匹配出包含有数字的行
  grep "[a-Z]" /home/config.conf #匹配出包含有因为字符的行
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p><code class="highlighter-rouge">[^]</code> 作用和 <code class="highlighter-rouge">[]</code> 刚好相反</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> grep "[^0-9]" /home/config.conf #匹配出含有数字之外字符的行
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> grep "[^0-9]" /home/config.conf #匹配出含有数字之外字符的行
  grep "[^a-Z]" /home/config.conf #匹配出含有字母之外字符的行
  grep "^[^t]"  /home/config.conf #匹配出不是t开头的行
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
-  <li><code class="highlighter-rouge"><span class="p">{</span><span class="err">n,m</span><span class="p">}</span></code> 重复前一个字符n到m次</li>
+  <li><code class="highlighter-rouge">{n,m}</code> 重复前一个字符n到m次</li>
 </ul>
 
 <h2 id="扩展正则表达式">扩展正则表达式</h2>
@@ -132,16 +127,14 @@
   <li>
     <p><code class="highlighter-rouge">+</code> 重复前面的字符一次或多次</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> egrep "s+" /home/config.conf #匹配包含有s的行
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> egrep "s+" /home/config.conf #匹配包含有s的行
+</code></pre></div>    </div>
   </li>
   <li>
     <p><code class="highlighter-rouge">?</code> 重复0个或一个前面的字符</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> egrep "s?" /home/config.conf #匹配没有s或没有连续s的行
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> egrep "s?" /home/config.conf #匹配没有s或没有连续s的行
+</code></pre></div>    </div>
   </li>
   <li>
     <p><code class="highlighter-rouge">|</code> 用或的方式查找多个符合条件的字符串

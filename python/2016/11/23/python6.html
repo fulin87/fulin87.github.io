@@ -77,7 +77,7 @@
 
 <h2 id="random-模块随机数模块">random 模块（随机数模块）</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import random
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import random
 random.random()		
 	#返回0到1之间的小数
 random.getrandbits(16)
@@ -92,19 +92,17 @@ random.shuffles(s)
 	#将列表s的元素随机的混乱处理，处理之后，s中的元素位置就变了
 random.sample(s,n)
 	#随机的返回序列s中的n个元素，返回类型是列表
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="shelve-模块">shelve 模块</h2>
 
 <p>shelve 模块使用数据库驱动实现了字典对象的持久保存. shelve 对象使用字符串作为键, 但值可以是任意类型,我们简单的理解为shelve对象就是一个字典。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import shelve
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import shelve
 db = shelve.open('D://dbdata.db')
 db['person']=range(100)
 db.close()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>使用shelve比较简单，但是要注意，最后一定要调用其close()方法。</p>
 
@@ -112,7 +110,7 @@ db.close()
 
 <p>re 模块提供了一系列功能强大的正则表达式工具, 它允许你快速检查给定字符串是否与给定的模式匹配 (使用 match 函数), 或者包含这个模式 (使用 search 函数)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>compile(): 创建模式对象
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>compile(): 创建模式对象
 search():  从字符串中根据模式搜索匹配
 
 match():   根据模式匹配字符串，返回Match object对象
@@ -158,8 +156,7 @@ escape():  转义正则表达式中所用的特殊字符
 	'www\\.python\\.org'
 	&gt;&gt;&gt; re.escape('But where is the ambiguity?')
 	'But\\ where\\ is\\ the\\ ambiguity\\?'
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
   </div>

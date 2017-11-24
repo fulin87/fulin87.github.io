@@ -88,19 +88,17 @@
   <li>
     <p>连接（+）</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> sq1 = [12,3]
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sq1 = [12,3]
  sq2 = [5,6]
  sq1 + sq2
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>重复（*）</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> sq1 = [12,3]
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sq1 = [12,3]
  sq1 * 2
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>切片（[], [:], [::]）</p>
@@ -117,11 +115,10 @@
 
     <p>python中创建字符串没有单引号和双引号之分。</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  str1 = "fulin"
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  str1 = "fulin"
   str2 = 'fulin'
   str3 = str('fulin')
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>字符串的方法</p>
@@ -136,22 +133,20 @@
   <li>
     <p>创建列表</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  list1 = [1,2,3]
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  list1 = [1,2,3]
   list2 = [1,2,[2,3]]
   list3 = list()
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>列表的方法</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  list.append(obj)		#向列表中添加一个对象obj
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  list.append(obj)		#向列表中添加一个对象obj
   list.count(obj)		#返回一个对象obj 在列表中出现的次数
   list.extend(seq)		#把序列seq 的内容添加到列表中
   list.remove(obj)		#从列表中删除对象obj
   list.reverse()		#原地翻转列表
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -168,15 +163,14 @@
 
     <p>这里的集合和数学中的集合概念差不多，就是容纳不同元素的容器，不过python中的集合分两类：<code class="highlighter-rouge">可变集合</code> 和 <code class="highlighter-rouge">不可变集合</code></p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  s = set([1,2,3]) //set()方法产生一个可变集合
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  s = set([1,2,3]) //set()方法产生一个可变集合
   s1= frozenset([1,2,4]) //frozenset()方法产生一个不可变集合
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>集合的运算</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  set1 = set([1,2,3])	
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  set1 = set([1,2,3])	
       //创建集合
   set2 = set([1,2,4])	
       //创建集合
@@ -204,15 +198,14 @@
       //判断1是否是set1的成员
   1 not in set1		
       //判断1是否不是set1的成员
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>集合的操作(方法)</p>
 
     <p>集合的方法应该分两类，一类是可变集合的，一类是不可变集合的，但是在使用的时候，根据方法的功能，应该是很好区分的，这里不做区分。</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  set1.add(5)		
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  set1.add(5)		
       //向set1中添加元素
   set1.update([1,2,3])	
       //向set1中一次添加多个元素
@@ -237,8 +230,7 @@
       //移除并返回s 中的任意一个元素
   s.clear() 		
       //清除操作: 移除s 中的所有元素
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -252,18 +244,17 @@
   <li>
     <p>创建字典</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> dic1 = {}	//创建一个空字典
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> dic1 = {}	//创建一个空字典
  dic2 = {'name':'fulin','age':27}    //创建一个有两个元素的字段
  dic3 = dict()		//用dict()内建函数创建一个空字典
  dic4 = dict((['x',1],['y',2])) 
  dic5 = {}.fromkeys(('x','y','z'),-1)
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>操作字典</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> del dict2['name'] 		#删除键为“name”的条目
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> del dict2['name'] 		#删除键为“name”的条目
  dict2.clear()			#删除dict2 中所有的条目
  del dict2				#删除整个dict2 字典
  dict2.pop('name')		#删除并返回键为“name”的条目
@@ -279,8 +270,7 @@
  dict.update(dict2)		#将字典dict2 的键-值对添加到字典dict
  dict.values() 			#返回一个包含字典中所有值的列表
  dict.setdefault(key,default=None) #和方法set()相似，如果字典中不存在key 键，由dict[key]=default 为它赋值。
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 

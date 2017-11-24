@@ -5,9 +5,49 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Sep 2017 19:11:08 +0800</pubDate>
-    <lastBuildDate>Thu, 21 Sep 2017 19:11:08 +0800</lastBuildDate>
-    <generator>Jekyll v3.4.3</generator>
+    <pubDate>Fri, 24 Nov 2017 16:17:45 +0800</pubDate>
+    <lastBuildDate>Fri, 24 Nov 2017 16:17:45 +0800</lastBuildDate>
+    <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>node中的包管理工具npm</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#npm-介绍&quot; id=&quot;markdown-toc-npm-介绍&quot;&gt;npm 介绍&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#npm的常用命令&quot; id=&quot;markdown-toc-npm的常用命令&quot;&gt;npm的常用命令&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;最近小组中的任务大部分都累积在前端，所以想帮前端的小伙伴分担一点压力。所以接触了node和vue,还对webpack有了一定的了解。在学习的过程中，发现node的环境经常出问题，尤其是npm的包管理过程，这里总结一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;npm-介绍&quot;&gt;npm 介绍&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://www.npmjs.com/&quot;&gt;点击查看官方文档&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;npm的常用命令&quot;&gt;npm的常用命令&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install express      	安装最新版的express包到当前目录
+npm install express@2.1.1  	安装2.1.1这个版本的express包到当前目录
+npm install express -g   	将最新版的express包安装到全局环境中
+npm view vue				查看vue模块的package.json文件
+npm view vue repository 	查看vue模块的源信息
+npm outdated				检查包是否过期，会列出所有已经过时的包
+npm update vue				更新vue模块
+npm uninstall vue			卸载vue模块
+npm root					查看当前模块安装路径
+npm root -g 				查看全局的模块安装路径
+npm -v 						查看npm的安装版本
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Thu, 23 Nov 2017 13:07:11 +0800</pubDate>
+        <link>http://localhost:4000/node/2017/11/23/node-npm.html</link>
+        <guid isPermaLink="true">http://localhost:4000/node/2017/11/23/node-npm.html</guid>
+        
+        
+        <category>node</category>
+        
+      </item>
     
       <item>
         <title>python中的json模块和requests模块</title>
@@ -34,53 +74,47 @@
 
 &lt;p&gt;json模块的主要作用有两点&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;json 转字典；字典转json
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;json 转字典；字典转json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;就是这么简洁。&lt;/p&gt;
 
 &lt;h4 id=&quot;字典转json&quot;&gt;字典转json&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import json
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import json
 obj = {'name':'fulin','age':27,'family':{'fname':'f'}}
 s = json.dumps(obj,sort_keys=True,indent=4)
 print s
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;/image/python-json01.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;json.dumps(obj,sort_keys=True,indent=4)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;json.dumps(obj,sort_keys=True,indent=4)
  
 上面这句代码，需要说明一下，obj是不能省略的，其他都可以
 
 sort_keys=True表示按key排序，升序，
 
 indent=4，表示层次缩进是4个字符。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;dumps-和-dump-的区别&quot;&gt;dumps 和 dump 的区别&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dumps 的准确定义是： str = json.dumps(obj),是将一个对象转换为json
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dumps 的准确定义是： str = json.dumps(obj),是将一个对象转换为json
 dump  的准确定义是： json.dump(obj,f),f是一个文件，是将obj对象以josn形式保存在了f中
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;json转字典&quot;&gt;json转字典&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;str = '{&quot;name&quot;:&quot;fulin&quot;,&quot;age&quot;27,&quot;family&quot;:{&quot;fname&quot;:&quot;f&quot;}}'
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;str = '{&quot;name&quot;:&quot;fulin&quot;,&quot;age&quot;27,&quot;family&quot;:{&quot;fname&quot;:&quot;f&quot;}}'
 b = json.loads(str)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;loads-和-load-的区别&quot;&gt;loads 和 load 的区别&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;loads 的准确定义是：obj = json.loads(str),是将一个json串转换为对象
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;loads 的准确定义是：obj = json.loads(str),是将一个json串转换为对象
 load  的准确定义是：obj = json.load(f),将一个文件中的内容转换为对象
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 </description>
         <pubDate>Thu, 01 Jun 2017 13:07:11 +0800</pubDate>
@@ -101,7 +135,7 @@ load  的准确定义是：obj = json.load(f),将一个文件中的内容转换�
 
 &lt;p&gt;###快捷键：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ctrl + Q  查看类的相关信息
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ctrl + Q  查看类的相关信息
 ctrl + shift + /- 折叠所有代码
 ctrl + . 折叠当前光标处方法的代码
 ctrl + shift + + 展开所有的代码
@@ -109,8 +143,7 @@ alt + 上下方向键
 ctrl + F3 在当前类中快速搜索，相当于eclipse中的ctrl + k
 
 双击shift可以快速查找
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Fri, 14 Apr 2017 13:07:11 +0800</pubDate>
         <link>http://localhost:4000/redis/2017/04/14/intellij.html</link>
@@ -155,21 +188,19 @@ redis本身的含义是 &lt;em&gt;remote dictionary server (远程字典服务�
 
 &lt;h3 id=&quot;redis的启动和停止&quot;&gt;redis的启动和停止&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;启动：  ./bin/redis-server ./redis-conf
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;启动：  ./bin/redis-server ./redis-conf
 停止：  ./bin/redis-cli shutdown
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;基本命令&quot;&gt;基本命令&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;keys *  //获取所有的键
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;keys *  //获取所有的键
 type key //获取键key的类型
 EXISTS key //判断一个键是否存在，存在返回1，否则返回0
 DEL key [key1 ...] //删除键 key，key1 ...,返回值是删除键的个数
 redis 不区分命令的大小写，但是作为使用规范，约定命令都使用大写表示
 GET key //获取键key的值
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;redis的事务&quot;&gt;redis的事务&lt;/h3&gt;
 
@@ -177,13 +208,12 @@ GET key //获取键key的值
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;MULTI  EXEC 命令&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MULTI
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MULTI
 
 code ...
 
 EXEC
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;同时因为redis不支持回滚功能，所以redis的事务上可以保持简洁和快速&lt;/p&gt;
 
@@ -191,17 +221,15 @@ EXEC
 
 &lt;p&gt;&lt;em&gt;WATCH&lt;/em&gt;命令可以监控一个或多个键，一旦其中有一个键被修改，之后的事务就不会被执行。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WATCH key1 key2 key3 ....
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WATCH key1 key2 key3 ....
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;UNWATCH 命令&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;UNWATCH&lt;/em&gt;命令可以取消对键的监控&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;UNWATCH key1 key2 key3 ....
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;UNWATCH key1 key2 key3 ....
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 </description>
         <pubDate>Tue, 04 Apr 2017 13:07:11 +0800</pubDate>
@@ -234,11 +262,10 @@ EXEC
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;binlog&lt;/code&gt;有很多用途：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* 根据binlog进行主从同步（常用）
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* 根据binlog进行主从同步（常用）
 * 根据binlog进行数据恢复（不常用）
 * 可以用来查询数据库的操作记录
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;因此，大量的DML语句对参数大量的&lt;code class=&quot;highlighter-rouge&quot;&gt;binlog&lt;/code&gt;,像上面的情况，一次删除千万级别的数据，参数的日志文件就有20多G，直接导致了磁盘被占满。&lt;/p&gt;
 
@@ -248,19 +275,17 @@ EXEC
 
 &lt;h3 id=&quot;删除数据正确的姿势是什么&quot;&gt;删除数据正确的姿势是什么&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1，分批删除，观察磁盘占有情况和数据同步情况
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1，分批删除，观察磁盘占有情况和数据同步情况
 2，交给专业DBA执行
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;启示&quot;&gt;启示&lt;/h3&gt;
 
 &lt;p&gt;事情发生后，那位同事被领导批评了一顿，但是从这件事我们至少可以吸取两个教训：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1，对数据库的操作，至少是DML操作应该有严格的流程限制，不能随便让人去执行，否则后果很严重
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1，对数据库的操作，至少是DML操作应该有严格的流程限制，不能随便让人去执行，否则后果很严重
 2，作为程序员，数据库的知识要扎实，否则就会引来大麻烦。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Fri, 24 Feb 2017 13:07:11 +0800</pubDate>
         <link>http://localhost:4000/php/2017/02/24/mysqldeleterecord.html</link>
@@ -385,9 +410,8 @@ EXEC
 
 &lt;p&gt;我这里有一台虚拟机:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;192.168.116.131
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;192.168.116.131
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;我将nginx和uwsgi都安装在131上，这里nginx我之前已经安装过了。&lt;/p&gt;
 
@@ -395,31 +419,28 @@ EXEC
   &lt;li&gt;
     &lt;p&gt;安装uwsgi，安装到&lt;code class=&quot;highlighter-rouge&quot;&gt;/application/uwsgi-2.0.14&lt;/code&gt;这个目录&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; wget https://projects.unbit.it/downloads/uwsgi-latest.tar.gz
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; wget https://projects.unbit.it/downloads/uwsgi-latest.tar.gz
  tar zxvf uwsgi-latest.tar.gz -C /application/uwsgi-2.0.14
  cd /application/uwsgi-2.0.14
  make
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;将uwsgi添加进环境变量搜索路径中&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cp /application/uwsgi-2.0.14/uwsgi /usr/local/sbin/
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cp /application/uwsgi-2.0.14/uwsgi /usr/local/sbin/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;建立一个软链接,这是一个好习惯&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ln -s /application/uwsgi-2.0.14 /application/uwsgi
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ln -s /application/uwsgi-2.0.14 /application/uwsgi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;编写python脚本，这里假设mysql已经部署好了&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /home/fulin/temp/
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /home/fulin/temp/
  vi app.py
 	
  #!/usr/bin/env python
@@ -447,41 +468,36 @@ EXEC
  conn.commit()
  conn.close()
  return '.'.join([str(i) for i in x])
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;启动uwsgi&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; uwsgi --socket 127.0.0.1:3031 --wsgi-file /home/fulin/temp/app.py --master --processes 4 --threads 2 --stats 127.0.0.1:9191
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; uwsgi --socket 127.0.0.1:3031 --wsgi-file /home/fulin/temp/app.py --master --processes 4 --threads 2 --stats 127.0.0.1:9191
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;配置nginx，因为这里仅仅是学习，所以不必用配置太复杂，先从最简单的开始&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; location / {
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; location / {
     include uwsgi_params;
     uwsgi_pass 192.168.116.132:3031;
  }
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;启动nginx&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /application/nginx/sbin
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /application/nginx/sbin
  ./nginx
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;测试&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  浏览器输入  http://192.168.116.131
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  浏览器输入  http://192.168.116.131
   响应出admin表中的数据，表示OK
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -493,7 +509,7 @@ EXEC
   &lt;li&gt;
     &lt;p&gt;启用&lt;code class=&quot;highlighter-rouge&quot;&gt;ini&lt;/code&gt;配置文件,文件为&lt;code class=&quot;highlighter-rouge&quot;&gt;/home/fulin/temp/web/config.ini&lt;/code&gt;&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; [uwsgi]
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; [uwsgi]
  socket = /tmp/my.sock     	#和web服务器通信的socket文件
  chmod-socket = 666		  	#更改socket文件的权限为666
  daemonize = /home/fulin/temp/flask2.log  #将uwsgi以守护进程的方式启动，同时制定日志文件
@@ -503,8 +519,7 @@ EXEC
  callable = app			#入口对象
  processes =1    		#进程数
  threads = 1				#线程数
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -516,7 +531,7 @@ EXEC
   &lt;li&gt;
     &lt;p&gt;准备flask项目文件&lt;code class=&quot;highlighter-rouge&quot;&gt;/home/fulin/temp/web/app.py&lt;/code&gt;&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; from flask import Flask
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; from flask import Flask
 
  app = Flask(__name__)
 	
@@ -530,8 +545,7 @@ EXEC
 	
  #if __name__ == __name__:
  #    app.run(debug=True)
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -541,21 +555,19 @@ EXEC
   &lt;li&gt;
     &lt;p&gt;uwsgi的启动&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; uwsgi --ini /home/fulin/temp/web/config.ini
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; uwsgi --ini /home/fulin/temp/web/config.ini
  输出：
  [uWSGI] getting INI configuration from /home/fulin/temp/web/config.ini
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;nginx的配置&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; location / {
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; location / {
     include uwsgi_params;
     uwsgi_pass unix:/tmp/my.sock;
  }
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -565,18 +577,16 @@ EXEC
   &lt;li&gt;
     &lt;p&gt;启动nginx&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /application/nginx/sbin
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cd /application/nginx/sbin
  nginx
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;测试&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 浏览器输入  http://192.168.116.131
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 浏览器输入  http://192.168.116.131
  响应出hello world，表示OK
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -632,15 +642,14 @@ EXEC
 
 &lt;p&gt;数据库的访问是通过连接对象（connection objects）来实现的。程序模块中必须提供以下形式的连接对象构造函数：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;connect(parameters...)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;connect(parameters...)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;数据库连接对象的构造函数，返回值为Connection对象实例。 由于目的数据库不同，函数接收数量不等的一些参数。&lt;/p&gt;
 
 &lt;p&gt;模块中必须定义下面这些模块级的属性：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apilevel
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apilevel
 	字符串常量，表明支持的DB API版本。
 	目前只允许取值'1.0'和'2.0'。
 	如果没有定义本常量，默认为DB-API 1.0DB-API
@@ -677,14 +686,13 @@ Error
 	这应该是警告以外所有其他错误类的基类。你可以使用这个类在单一
 	的‘except’语句中捕捉所有的错误。警告（Warnings）不应认为是错误，
 	因此不应该以此类作为基类，而只应该以Python StandardError作为基类。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;数据库连接对象connection&quot;&gt;数据库连接对象(connection)&lt;/h3&gt;
 
 &lt;p&gt;连接对象应该具有下面的方法：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;close()
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;close()
 	马上关闭数据连接（而不是当__del__方法被调用的时候）。
 
 	连接应该此后变得不可用，再次访问本连接对象应该触发
@@ -712,8 +720,7 @@ rollback()
 cursor()
 	方法返回给定连接上建立的游标对象（Cursor Object）。如果数据库
 	没有提供对应的游标对象，那么将由程序来模拟实现游标功能
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;游标对象cursor&quot;&gt;游标对象（cursor）&lt;/h3&gt;
 
@@ -721,7 +728,7 @@ cursor()
 
 &lt;p&gt;游标对象应具有以下的方法和属性：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;description 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;description 
 	这是一个只读属性，是7个项目组成的tulip的序列。
 	每个tulip包含描述一个结果集中的列的信息描述：
 
@@ -908,12 +915,11 @@ setoutputsize(size[,column])
 	
 	Implementations are free to have this method do nothing
 	and users are free to not use it.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;##sqlite3连接实例&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sqlite3
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sqlite3
 &amp;gt;&amp;gt;&amp;gt; conn = sqlite3.connect(r'D:\test.db')
 &amp;gt;&amp;gt;&amp;gt; cursor = conn.cursor()
 &amp;gt;&amp;gt;&amp;gt; cursor.execute('create table user (id varchar(20) primary key,name varchar(20))')
@@ -933,12 +939,11 @@ setoutputsize(size[,column])
 &amp;gt;&amp;gt;&amp;gt; info = curo.fetchall()
 &amp;gt;&amp;gt;&amp;gt; info
 [(u'1', u'Michael')]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;##mysql连接实例&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import MySQLdb
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import MySQLdb
 &amp;gt;&amp;gt;&amp;gt; conn = MySQLdb.connect(host = 'xx.xxx.xx.xx',\
                    port = 3306,\
                    user = 'xxx',\
@@ -960,8 +965,7 @@ setoutputsize(size[,column])
 8283 255138
 8285 255139
 8287 255140
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 24 Nov 2016 13:07:11 +0800</pubDate>
         <link>http://localhost:4000/python/2016/11/24/python7.html</link>
@@ -986,7 +990,7 @@ setoutputsize(size[,column])
 
 &lt;h2 id=&quot;random-模块随机数模块&quot;&gt;random 模块（随机数模块）&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import random
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import random
 random.random()		
 	#返回0到1之间的小数
 random.getrandbits(16)
@@ -1001,19 +1005,17 @@ random.shuffles(s)
 	#将列表s的元素随机的混乱处理，处理之后，s中的元素位置就变了
 random.sample(s,n)
 	#随机的返回序列s中的n个元素，返回类型是列表
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;shelve-模块&quot;&gt;shelve 模块&lt;/h2&gt;
 
 &lt;p&gt;shelve 模块使用数据库驱动实现了字典对象的持久保存. shelve 对象使用字符串作为键, 但值可以是任意类型,我们简单的理解为shelve对象就是一个字典。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import shelve
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import shelve
 db = shelve.open('D://dbdata.db')
 db['person']=range(100)
 db.close()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;使用shelve比较简单，但是要注意，最后一定要调用其close()方法。&lt;/p&gt;
 
@@ -1021,7 +1023,7 @@ db.close()
 
 &lt;p&gt;re 模块提供了一系列功能强大的正则表达式工具, 它允许你快速检查给定字符串是否与给定的模式匹配 (使用 match 函数), 或者包含这个模式 (使用 search 函数)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;compile(): 创建模式对象
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;compile(): 创建模式对象
 search():  从字符串中根据模式搜索匹配
 
 match():   根据模式匹配字符串，返回Match object对象
@@ -1067,93 +1069,12 @@ escape():  转义正则表达式中所用的特殊字符
 	'www\\.python\\.org'
 	&amp;gt;&amp;gt;&amp;gt; re.escape('But where is the ambiguity?')
 	'But\\ where\\ is\\ the\\ ambiguity\\?'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 </description>
         <pubDate>Wed, 23 Nov 2016 13:07:11 +0800</pubDate>
         <link>http://localhost:4000/python/2016/11/23/python6.html</link>
         <guid isPermaLink="true">http://localhost:4000/python/2016/11/23/python6.html</guid>
-        
-        
-        <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>python基础知识点OOP总结</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;面向对象的思想虽然好理解，但是不同的语言的实现方式是有区别的，python的面向对象机制非常的灵活，也很优雅…..&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;python的oop的实质&quot;&gt;python的OOP的实质&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python的面向对象其实就是在已连接的命名空间对象上搜索属性
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;这里再次出现了命名空间，命名空间在python中的重要性再怎么强调也不为过。python中的命名空间本来是孤立的，但是因为OOP而将不同的命名空间联系了起来，从而我们可以形成一个命名空间组成的 “树状结构”，python的OOP机制就是在这个树状结构上的搜索机制，这就是python的OOP的本质所在。&lt;/p&gt;
-
-&lt;h2 id=&quot;python的类和继承&quot;&gt;python的类和继承&lt;/h2&gt;
-
-&lt;p&gt;因为学习过java。感觉python的oop机制的实现还是比较粗糙的。当然也是比较灵活的，有动态语言的特定。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class A:
-	pass
-
-class B(A):
-	pass
-
-class C:
-	pass
-
-class D(A,C):
-	pass
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;这里B继承了A；D继承了A和C。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class A:
-	def fun(self):
-		self.action()
-
-class B(A):
-	def action(self):
-		pass
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;这里A作为基类，定义了方法fun，隐含了子类需要实现action方法。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;python的继承搜索会现在实例对象中寻找属性，然后才是创建实例的类，之后是所有超类，当首次找到时，搜索就会停止。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;类和实例对象都是命名空间，两者的主要区别是，类是建立实例的工厂，类也支持运算符重载方法，由实例继承。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;类总是位于模块中，类是模块对象的属性，类和模块都是命名空间。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;类是通过运行class语句创建的；实例是像函数那样调用类来创建的&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;类属性的创建是通过把属性赋值给类对象实现的，类属性是由class语句中的顶层赋值语句产生的。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;实例属性是通过对实例对象赋值属性来创建的，实例属性一般是在class语句中的类方法函数中对self参数赋值属性而创建的。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;self 通常是给类方法函数中的第一个参数的名称&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 22 Nov 2016 13:07:11 +0800</pubDate>
-        <link>http://localhost:4000/python/2016/11/22/python5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2016/11/22/python5.html</guid>
         
         
         <category>python</category>

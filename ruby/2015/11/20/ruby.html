@@ -77,7 +77,7 @@
 <h3 id="ruby的包管理工具gem">ruby的包管理工具:gem</h3>
 <p>像ruby，pyhon,node这几种语言都有自己的包管理工具，用起来真的感觉非常的爽，唯一不好的地方是：有时候下载的网速太慢了。遇到这种情况，就需要更换源。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>gem -v 									#gem版本
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem -v 									#gem版本
 gem source								#gem资源
 gem sources -a url ｜gem sources -r url				        #gem添加或删除配置源
 gem update							        #更新所有包
@@ -100,11 +100,10 @@ gem cleanup 								#清除所有包旧版本，保留最新版本
 gem contents rake	 						#显示rake包中所包含的文件
 gem dependency rails -v 0.10.1 						#列出与rails相互依赖的包
 gem environment 							#查看gem的环境
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="将ruby的源更换为淘宝的源">将ruby的源更换为淘宝的源</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>$ gem sources --remove http://rubygems.org/ 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gem sources --remove http://rubygems.org/ 
 $ gem sources -a http://ruby.taobao.org/  
 $ gem sources -l  
 *** CURRENT SOURCES ***  
@@ -112,8 +111,7 @@ $ gem sources -l
 http://ruby.taobao.org  
 # 请确保只有 ruby.taobao.org  这时候就可以安装jekyll包了
 $ gem install jekyll  #安装jekyll包  
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </div>
 

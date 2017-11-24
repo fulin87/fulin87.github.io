@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/linux/2016/08/24/ssh6.html">
+  <link rel="canonical" href="http://localhost:4000/linux/2016/08/24/SSH6.html">
   <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
@@ -82,7 +82,7 @@
 
 <h2 id="系统自身定期执行的任务">系统自身定期执行的任务</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/var/log/message
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/log/message
 /var/log/secure
 
 此外还有：
@@ -95,8 +95,7 @@ drwxr-xr-x.  2 root root       44 Jun 20 20:35 cron.hourly
 drwxr-xr-x.  2 root root        6 Jun  9  2014 cron.monthly
 -rw-r--r--.  1 root root      451 Jun  9  2014 crontab
 drwxr-xr-x.  2 root root        6 Jun  9  2014 cron.weekly
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="用户执行的定时任务">用户执行的定时任务</h2>
 
@@ -112,19 +111,18 @@ drwxr-xr-x.  2 root root        6 Jun  9  2014 cron.weekly
   <li>
     <p>相关配置文件</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> /etc/cron.deny     
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /etc/cron.deny     
      此文件中所列用户不允许使用crontab命令
  /etc/cron.allow	   
      此文件中所列用户允许使用crontab命令，优先于/etc/cron.deny
  /var/spool/cron/   
      所有用户crontab配置文件默认都存放在此目录，文件名以用户名命名
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>相关命令</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> -l 查看crontab文件内容，相当于查看当前用户的crontab定时任务有哪些
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> -l 查看crontab文件内容，相当于查看当前用户的crontab定时任务有哪些
  -e 编辑crontab文件内容，相对于编辑当前用户的crontab定时任务
  -u 指定特定的用户
  -i 删除crontab文件内容，删除前会提示确认，很少使用
@@ -133,8 +131,7 @@ drwxr-xr-x.  2 root root        6 Jun  9  2014 cron.weekly
  crontab -l  #查看当前用户的crontab定时任务
  crontab -e  #编辑当前用户的crontab定时任务
  crontab -u mwopr -l #查看mwopr这个用户的crontab定时任务
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p><em><code class="highlighter-rouge">crontab</code> 命令实际操作的是 <code class="highlighter-rouge">/var/spool/cron/</code> 目录下对应的文件</em></p>
   </li>
@@ -145,38 +142,35 @@ drwxr-xr-x.  2 root root        6 Jun  9  2014 cron.weekly
       <li>
         <p>系统的cron表达式，有8列</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code>  cat /etc/crontab
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cat /etc/crontab
 
   01 * * * * root run-parts /etc/cron.hourly
   02 4 * * * root run-parts /etc/cron.daily
   22 4 * * 0 root run-parts /etc/cron.weekly
   42 4 1 * * root run-parts /etc/cron.monthly
-</code></pre>
-        </div>
+</code></pre></div>        </div>
       </li>
       <li>
         <p>用户的cron表达式，有6列</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code>  crontab -l
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  crontab -l
 
   0 * * * * /data/jobscripts/run_status60.sh
   */5 7-23 * * * /data/jobscripts/run_sendsms.sh
   0 4 * * * /data/jobscripts/run_orgs.sh
-</code></pre>
-        </div>
+</code></pre></div>        </div>
       </li>
       <li>
         <p>cron表达式的格式，口诀（<code class="highlighter-rouge">分时日月周</code>）</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code>  .---------------- minute (0 - 59)
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  .---------------- minute (0 - 59)
   |  .------------- hour (0 - 23)
   |  |  .---------- day of month (1 - 31)
   |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
   |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
   |  |  |  |  |
   *  *  *  *  *
-</code></pre>
-        </div>
+</code></pre></div>        </div>
 
         <p>见下图详细解释</p>
 
@@ -184,7 +178,7 @@ drwxr-xr-x.  2 root root        6 Jun  9  2014 cron.weekly
 
         <p>例如</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code>  30 */6 * * * a.sh &gt;/dev/null 2&gt;&amp;1
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  30 */6 * * * a.sh &gt;/dev/null 2&gt;&amp;1
       每6个小时的半点时刻执行a.sh
   30 8-18/2 * * * a.sh &gt;/dev/null 2&gt;&amp;1
       上午8点到下午18点之间每隔2小时的半点时刻执行a.sh
@@ -202,17 +196,15 @@ drwxr-xr-x.  2 root root        6 Jun  9  2014 cron.weekly
       每天的23点的时候和0点到7点之间每隔一个小时的时候，每分钟执行一次a.sh
   00 11 * 4 1-3 a.sh &gt;/dev/null 2&gt;&amp;1
       4月的每周一到周三上午11点执行a.sh	   ***&gt;/dev/null 2&gt;&amp;1******意思是将标准输出和标准错误输出都重定向到/dev/null这个空文件去，防止产生系统垃圾***
-</code></pre>
-        </div>
+</code></pre></div>        </div>
       </li>
       <li>
         <p>crond服务的查看和启动</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code>  /etc/init.d/crond status  # 查看crond 的状态
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  /etc/init.d/crond status  # 查看crond 的状态
   /etc/init.d/crond start	  # 启动crond服务
   /etc/init.d/crond restart # 重启crond服务
-</code></pre>
-        </div>
+</code></pre></div>        </div>
       </li>
     </ul>
   </li>

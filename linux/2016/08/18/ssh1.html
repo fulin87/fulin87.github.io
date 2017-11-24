@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/linux/2016/08/18/ssh1.html">
+  <link rel="canonical" href="http://localhost:4000/linux/2016/08/18/SSH1.html">
   <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
@@ -92,7 +92,7 @@
   <li>
     <p>目录</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  /dev/
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  /dev/
       Device files      
       设备目录
   /etc/
@@ -133,13 +133,12 @@
       系统定时任务的相关目录
   /proc
       虚拟目录，是内存的映射，内核和进程的虚拟文件系统目录
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>非常重要的文件</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  网卡的配置文件
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  网卡的配置文件
       /etc/sysconfig/network-scripts/ifcfg-eno16777736		
   重启网卡
       /etc/init.d/network restart
@@ -183,21 +182,19 @@
       /proc/interrupts
   系统负载平均值信息
       /proc/loadavg
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
 <h2 id="基本常识">基本常识</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>1，添加用户如果不指定组，就会创建一个和用户同名的组。
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1，添加用户如果不指定组，就会创建一个和用户同名的组。
 2，/etc/sudoers文件不能让普通用户修改，否则会有验证的权限安全问题
 3，windows中是通过扩展名来区分文件类型，Linux中文件类型与扩展名无关
 4，linux的命令中不要在=两边加空格
 5，linux中删除很危险，一定要目标最小化，删除时要使用find | args组合可以最小化
 6，如果服务启动很慢，需要在hosts中配置ip和主机名的映射
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="命令总结">命令总结</h2>
 
@@ -205,7 +202,7 @@
   <li>
     <p>核心命令</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  ls 
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ls 
       列出目录的内容
       -h 人类可读的格式
       -l 长格式显示
@@ -318,13 +315,12 @@
 
   chkconfig
       查看设置开机自动启动软件的命令		
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>一般命令和功能</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  lsof
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  lsof
       列表打开的文件，可以查看打开文件的一些状态,专家级别的运维专用的
       -i :port 查看端口	
   diff
@@ -383,8 +379,7 @@
   shutdown
       -r 重启
       -h 关机
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 

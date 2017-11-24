@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>python中的json模块和requests模块</title>
+  <title>node中的包管理工具npm</title>
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/python/2017/06/01/python8.html">
+  <link rel="canonical" href="http://localhost:4000/node/2017/11/23/node-npm.html">
   <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
@@ -60,74 +60,37 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">python中的json模块和requests模块</h1>
-    <p class="post-meta"><time datetime="2017-06-01T13:07:11+08:00" itemprop="datePublished">Jun 1, 2017</time></p>
+    <h1 class="post-title" itemprop="name headline">node中的包管理工具npm</h1>
+    <p class="post-meta"><time datetime="2017-11-23T13:07:11+08:00" itemprop="datePublished">Nov 23, 2017</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <ul id="markdown-toc">
-  <li><a href="#requests模块" id="markdown-toc-requests模块">requests模块</a></li>
-  <li><a href="#json模块" id="markdown-toc-json模块">json模块</a>    <ul>
-      <li><a href="#字典转json" id="markdown-toc-字典转json">字典转json</a></li>
-      <li><a href="#dumps-和-dump-的区别" id="markdown-toc-dumps-和-dump-的区别">dumps 和 dump 的区别</a></li>
-      <li><a href="#json转字典" id="markdown-toc-json转字典">json转字典</a></li>
-      <li><a href="#loads-和-load-的区别" id="markdown-toc-loads-和-load-的区别">loads 和 load 的区别</a></li>
-    </ul>
-  </li>
+  <li><a href="#npm-介绍" id="markdown-toc-npm-介绍">npm 介绍</a></li>
+  <li><a href="#npm的常用命令" id="markdown-toc-npm的常用命令">npm的常用命令</a></li>
 </ul>
 
 <blockquote>
-  <p>最近经常修复生产环境的数据，修复脚本是使用python写的，这也是我第一次把python使用在生产环境，这里记录一下写修复脚本的时候，使用最多的两个模块:requests和json</p>
+  <p>最近小组中的任务大部分都累积在前端，所以想帮前端的小伙伴分担一点压力。所以接触了node和vue,还对webpack有了一定的了解。在学习的过程中，发现node的环境经常出问题，尤其是npm的包管理过程，这里总结一下。</p>
 </blockquote>
 
-<h3 id="requests模块">requests模块</h3>
+<h3 id="npm-介绍">npm 介绍</h3>
 
-<p><strong><a href="http://cn.python-requests.org/zh_CN/latest/">点击查看官方文档</a></strong></p>
+<p><strong><a href="https://www.npmjs.com/">点击查看官方文档</a></strong></p>
 
-<h3 id="json模块">json模块</h3>
+<h3 id="npm的常用命令">npm的常用命令</h3>
 
-<p>json模块的主要作用有两点</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>json 转字典；字典转json
-</code></pre></div></div>
-
-<p>就是这么简洁。</p>
-
-<h4 id="字典转json">字典转json</h4>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import json
-obj = {'name':'fulin','age':27,'family':{'fname':'f'}}
-s = json.dumps(obj,sort_keys=True,indent=4)
-print s
-</code></pre></div></div>
-
-<p><img src="/image/python-json01.PNG" alt="" /></p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>json.dumps(obj,sort_keys=True,indent=4)
- 
-上面这句代码，需要说明一下，obj是不能省略的，其他都可以
-
-sort_keys=True表示按key排序，升序，
-
-indent=4，表示层次缩进是4个字符。
-</code></pre></div></div>
-
-<h4 id="dumps-和-dump-的区别">dumps 和 dump 的区别</h4>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dumps 的准确定义是： str = json.dumps(obj),是将一个对象转换为json
-dump  的准确定义是： json.dump(obj,f),f是一个文件，是将obj对象以josn形式保存在了f中
-</code></pre></div></div>
-
-<h4 id="json转字典">json转字典</h4>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>str = '{"name":"fulin","age"27,"family":{"fname":"f"}}'
-b = json.loads(str)
-</code></pre></div></div>
-
-<h4 id="loads-和-load-的区别">loads 和 load 的区别</h4>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loads 的准确定义是：obj = json.loads(str),是将一个json串转换为对象
-load  的准确定义是：obj = json.load(f),将一个文件中的内容转换为对象
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install express      	安装最新版的express包到当前目录
+npm install express@2.1.1  	安装2.1.1这个版本的express包到当前目录
+npm install express -g   	将最新版的express包安装到全局环境中
+npm view vue				查看vue模块的package.json文件
+npm view vue repository 	查看vue模块的源信息
+npm outdated				检查包是否过期，会列出所有已经过时的包
+npm update vue				更新vue模块
+npm uninstall vue			卸载vue模块
+npm root					查看当前模块安装路径
+npm root -g 				查看全局的模块安装路径
+npm -v 						查看npm的安装版本
 </code></pre></div></div>
 
 

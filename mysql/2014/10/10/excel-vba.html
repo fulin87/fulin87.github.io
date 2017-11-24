@@ -71,7 +71,7 @@
 
 <h3 id="数据库连接信息">数据库连接信息</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Public Const IP As String = "xx.xxx.xx.xxx"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Public Const IP As String = "xx.xxx.xx.xxx"
 Public Const DB_NAME As String = "xx"
 Public Const USER As String = "xx"
 Public Const PWD As String = "xx"
@@ -83,12 +83,11 @@ Public Const connStr As String = "DRIVER={MySQL ODBC 5.3 Unicode Driver};" &amp;
                                  "OPTION=3"
 
 Public Const sql As String = "select COLUMN_NAME,COLUMN_COMMENT from information_schema.columns where table_name='pmp_abroad_epiemp_all'"
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="操作数据库">操作数据库</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Sub testMysqlOdbc()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sub testMysqlOdbc()
     Set conn = CreateObject("ADODB.Connection")
     Set rest = CreateObject("ADODB.Recordset")
     conn.ConnectionString = connStr
@@ -99,15 +98,13 @@ Public Const sql As String = "select COLUMN_NAME,COLUMN_COMMENT from information
     Set conn = Nothing
     Set rest = Nothing
 End Sub
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="说明">说明</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>其他的可以都不用改，只用改数据库连接信息和sql语句就可以了。其实，这说明什么？
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>其他的可以都不用改，只用改数据库连接信息和sql语句就可以了。其实，这说明什么？
 这说明，Excel本身就是一种轻量级的数据库，Excel就可以直接连接Excel，当然可以连接其他数据库。
-</code></pre>
-</div>
+</code></pre></div></div>
 
   </div>
 

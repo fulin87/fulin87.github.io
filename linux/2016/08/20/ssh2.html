@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/linux/2016/08/20/ssh2.html">
+  <link rel="canonical" href="http://localhost:4000/linux/2016/08/20/SSH2.html">
   <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
@@ -86,7 +86,7 @@
 
 <p><em>file 命令可以看出文件的类型</em></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>"-" 代表普通文件，绝大多数都是普通文件，Linux中普通文件又分三种类型：
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"-" 代表普通文件，绝大多数都是普通文件，Linux中普通文件又分三种类型：
     纯文本文件；二级制文件；数据格式的文件。/var/log/wtmp就是数据文件
 
 "d" 表示目录
@@ -133,14 +133,13 @@
     -      regular file
     l      symbolic  link;  this  is  never true if the -L option or the -follow option is in effect, unless the symbolic link is broken.  If you want to search for symbolic links when -L is in effect, use -xtype.
     s      socket
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="文件扩展名">文件扩展名</h2>
 
 <p>Linux虽然不区分文件扩展名，但是还是会使用扩展名来区分文件的作用</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>.tar;.tar.gz;.tgz;.zip;.tar.bz 表示压缩文件，创建命令一般是tar,gzip,zip等
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.tar;.tar.gz;.tgz;.zip;.tar.bz 表示压缩文件，创建命令一般是tar,gzip,zip等
 .sh 表示shell脚本文件，通过shell语言开发的程序
 .pl 表示perl语言文件,通过perl语言开发的程序
 .py 表示python语言文件,通过python语言开发的程序
@@ -149,8 +148,7 @@
 .rpm 表示rpm安装包文件
 
 运维开发语言： Shell/python/perl/php四者之一。
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="文件属性">文件属性</h2>
 
@@ -160,7 +158,7 @@
 
 <p>如下的显示结果</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>9577538 -rwxr-xr-x. 1 root root 5.3M Jun 21 02:48 nginx
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9577538 -rwxr-xr-x. 1 root root 5.3M Jun 21 02:48 nginx
 
 inode 索引节点编号:9577538
 文件类型： 普通文件
@@ -171,8 +169,7 @@ inode 索引节点编号:9577538
 文件大小：文件大小是5.3M
 文件修改时间：这里的时间是该文件的最好被更新（包括创建、内容更新，修改等操作）的时间，可以用下面的命令来查看文件的修改，访问，创建时间。
 stat 文件名
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="inode-索引节点属性">inode 索引节点属性</h3>
 
@@ -202,7 +199,7 @@ stat 文件名
 
     <p>5,查看Inode和block的信息</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  # dumpe2fs /dev/sda2 | grep -i "Inode size"
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # dumpe2fs /dev/sda2 | grep -i "Inode size"
   dumpe2fs 1.39 (29-May-2006)
   Inode size:               128
 
@@ -218,8 +215,7 @@ stat 文件名
   dumpe2fs 1.39 (29-May-2006)
   Block count:              104388
   Reserved block count:     5219
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>6,访问文件流程是这样的：<code class="highlighter-rouge">文件名 -&gt; inode -&gt; block</code></p>
 

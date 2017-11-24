@@ -97,21 +97,19 @@ redis本身的含义是 <em>remote dictionary server (远程字典服务器)</em
 
 <h3 id="redis的启动和停止">redis的启动和停止</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>启动：  ./bin/redis-server ./redis-conf
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>启动：  ./bin/redis-server ./redis-conf
 停止：  ./bin/redis-cli shutdown
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="基本命令">基本命令</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>keys *  //获取所有的键
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>keys *  //获取所有的键
 type key //获取键key的类型
 EXISTS key //判断一个键是否存在，存在返回1，否则返回0
 DEL key [key1 ...] //删除键 key，key1 ...,返回值是删除键的个数
 redis 不区分命令的大小写，但是作为使用规范，约定命令都使用大写表示
 GET key //获取键key的值
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="redis的事务">redis的事务</h3>
 
@@ -119,13 +117,12 @@ GET key //获取键key的值
 
 <p><strong><em>MULTI  EXEC 命令</em></strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>MULTI
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MULTI
 
 code ...
 
 EXEC
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>同时因为redis不支持回滚功能，所以redis的事务上可以保持简洁和快速</p>
 
@@ -133,17 +130,15 @@ EXEC
 
 <p><em>WATCH</em>命令可以监控一个或多个键，一旦其中有一个键被修改，之后的事务就不会被执行。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>WATCH key1 key2 key3 ....
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WATCH key1 key2 key3 ....
+</code></pre></div></div>
 
 <p><strong><em>UNWATCH 命令</em></strong></p>
 
 <p><em>UNWATCH</em>命令可以取消对键的监控</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>UNWATCH key1 key2 key3 ....
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UNWATCH key1 key2 key3 ....
+</code></pre></div></div>
 
 
   </div>

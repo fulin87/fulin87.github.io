@@ -71,9 +71,8 @@
 
 <h2 id="python的oop的实质">python的OOP的实质</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>python的面向对象其实就是在已连接的命名空间对象上搜索属性
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python的面向对象其实就是在已连接的命名空间对象上搜索属性
+</code></pre></div></div>
 
 <p>这里再次出现了命名空间，命名空间在python中的重要性再怎么强调也不为过。python中的命名空间本来是孤立的，但是因为OOP而将不同的命名空间联系了起来，从而我们可以形成一个命名空间组成的 “树状结构”，python的OOP机制就是在这个树状结构上的搜索机制，这就是python的OOP的本质所在。</p>
 
@@ -81,7 +80,7 @@
 
 <p>因为学习过java。感觉python的oop机制的实现还是比较粗糙的。当然也是比较灵活的，有动态语言的特定。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class A:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class A:
 	pass
 
 class B(A):
@@ -92,20 +91,18 @@ class C:
 
 class D(A,C):
 	pass
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这里B继承了A；D继承了A和C。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class A:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class A:
 	def fun(self):
 		self.action()
 
 class B(A):
 	def action(self):
 		pass
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>

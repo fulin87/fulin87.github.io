@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/java/2016/09/06/java-equals-hashcode.html">
+  <link rel="canonical" href="http://localhost:4000/java/2016/09/06/java-equals-hashCode.html">
   <link rel="alternate" type="application/rss+xml" title="水货程序员的笔记" href="http://localhost:4000/feed.xml">
 </head>
 
@@ -104,9 +104,8 @@ hashCode()具有如下约定：</p>
 <p>###clone方法
 clone方法虽然使用的不多，但是如果需要重复创建多个相同对象的时候，可以使用这个方法，使用方法也很简单：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>return super.clone();//这里返回的是一个Object类型的，需要依据实际情况进行转型
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return super.clone();//这里返回的是一个Object类型的，需要依据实际情况进行转型
+</code></pre></div></div>
 
 <p>使用clone方法，需要注意的一点是：clone的对象，如果有有引用类型的属性，是需要深度克隆的，否则，clone的对象和原对象是的属性引用指向的是相同的实例。</p>
 
