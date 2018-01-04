@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>mysql中sql优化的思路和原则 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>mysql中sql优化的思路和原则</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月22日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/mysql/">mysql</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>大部分系统的性能瓶颈都是IO操作，数据库的IO消耗是其中的重要组成部分，SQL语句性能的优化是很有必要的，如果一开始不注意，后期的改动成本是比较大的,下面是根据我自己的经验总结的一套sql优化的思路和方法，不一定是最好的，但是却真实的产生过效果。</p>
+</blockquote>
+<h3 id="入乎其内；出乎其外"><a href="#入乎其内；出乎其外" class="headerlink" title="入乎其内；出乎其外"></a>入乎其内；出乎其外</h3><p> <em>为什么人类到今天为止对宇宙的认识都很有限？因为我们自己就在宇宙之中；为什么人类到今天为止对海洋的认识都很少？因为人类从来没有正真的进入过海洋！</em></p>
+<p> 一样的道理，认识一个事物，最有效的方式就是：先站在事物的外面观察观察它，然后进入事物的内部再研究它，这样才是最全面的。</p>
+<p> 对于SQL来说，平时使用sql，编写sql语句就相当于站在sql的外面观察它，但是sql的内部机制和执行过程是怎样的呢？一个sql语句的执行过程，大致是这样的：</p>
+<pre><code>8    SELECT  DISTINCT &lt;select_list&gt;
+1    FROM &lt;left_table&gt;
+3    &lt;join_type&gt;JOIN&lt;right_table&gt;
+2        ON&lt;join_condition&gt;
+4    WHERE &lt;where_condition&gt;
+5    GROUP BY&lt;group_by_list&gt;
+6    WITH{CUBE|ROLLUP}
+7    HAVING&lt;having_condition&gt;
+10    ORDER BY&lt;order_by_list&gt;
+11    LIMIT&lt;limit_number&gt;
+</code></pre><p>下面是详细的执行过程</p>
+<pre><code>1,FROM :     对FROM的左边表和右边的表计算笛卡尔积，产生虚拟表VT1。
+2,ON :         对虚拟表VT1进行ON筛选，只有那些符合&lt;join_condition&gt;的行才会被记录在虚拟表VT2中。
+3,JOIN :     如果指定了OUTER JOIN (比如left join,right join),那么保留表中未匹配的行就会作为外部行添加到虚拟表VT2中，产生虚拟表VT3,from 字句中包含两个以上的表的话，就会对上一个join连接产生的结果VT3和下一个表重复执行步骤1-3这三个步骤，一直到处理完所有的表为止。
+4,WHERE :     对虚拟表VT3进行WHERE条件过滤。只要符合&lt;where-condition&gt;的记录才会被插入到虚拟表VT4中。
+5,GROUP BY :     根据group by字句中的列，对VT4中的记录进行分组操作，产生VT5。
+6,CUBE | ROLLUP: 对表VT5进行cube或者rollup操作，产生表VT6。
+7,HAVING：    对虚拟表VT6应用having过滤，只有符合&lt;having-condition&gt;的记录才会被 插入到虚拟表VT7中。
+8,SELECT：     执行select操作，选择指定的列，插入到虚拟表VT8中。
+9,DISTINCT：     对VT8中的记录进行去重。产生虚拟表VT9。
+10,ORDER BY:     将虚拟表VT9中的记录按照&lt;order_by_list&gt;进行排序操作，产生虚拟表VT10。
+11,LIMIT：    取出指定行的记录，产生虚拟表VT11, 并将结果返回。
+</code></pre><h3 id="SQL优化的思路"><a href="#SQL优化的思路" class="headerlink" title="SQL优化的思路"></a>SQL优化的思路</h3><ul>
+<li>1.优化更需要优化的sql；</li>
+<li>2.定位优化对象的性能瓶颈：优化前需了解查询的瓶颈是IO还是CPU可通过PROFILING很容易定位查询的瓶颈。</li>
+<li>3.明确优化目标；</li>
+<li>4.从Explain入手；</li>
+<li>5.多使用profile；</li>
+</ul>
+<h3 id="SQL优化的基本原则"><a href="#SQL优化的基本原则" class="headerlink" title="SQL优化的基本原则"></a>SQL优化的基本原则</h3><ul>
+<li><p>永远用小结果集驱动大结果集</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 尽可能在索引中完成排序</span><br><span class="line"></span><br><span class="line">```排序算法有两种：a.查出排序字段和行指针，排序，再通过行指针获得行数据所需列，返回结果集；b.取出所有排序列数据，在排序缓冲区中排完序直接返回结果集。索引排序是利用索引的有序性对数据排序的。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只取出子集需要的colums</p>
+</li>
+<li>仅仅使用最有效的过滤条件</li>
+<li>尽可能避免复杂的Join和子查询</li>
+</ul>
+<h3 id="索引相关的总结"><a href="#索引相关的总结" class="headerlink" title="索引相关的总结"></a>索引相关的总结</h3><blockquote>
+<p>什么是索引，可以把索引想象成数据库的目录，查找某一样东西之前，先在目录中确定好位置，直奔位置而去，这就是提高查询效率的原因。</p>
+</blockquote>
+<ul>
+<li><p>索引的好处</p>
+<pre><code>提高数据检索效率，降低数据库的IO成本
+降低数据排序成本：要求排序字段和索引键字段一致
+降低数据分组成本：因为分组之前会先排序，同意如果分组字段与索引字段一致，会降低分组消耗的成本。
+</code></pre></li>
+<li><p>索引的弊端</p>
+<pre><code>索引是独立于基础数据的数据库对象，因此它会占用存储空间
+数据新增、更新会导致索引的同步更新，所以会增加数据新增、更新所消耗的成本
+</code></pre></li>
+<li><p>否需要创建索引</p>
+<pre><code>较为频繁的作为查询条件的字段需要创建索引
+唯一性太差的字段不适合单独创建索引，即使频繁作为查询条件
+更新非常频繁的字段不适合创建索引
+不会出现在where子句中的字段不要创建索引
+</code></pre></li>
+<li><p>索引语法</p>
+<ul>
+<li><p>唯一索引</p>
+<pre><code>ALTER TABLE tableName ADD UNIQUE indexName (column);
+CREATE UNIQUE INDEX indexName ON tableName (column);
+</code></pre></li>
+<li><p>普通索引</p>
+<pre><code>ALTER TABLE tableName ADD INDEX indexName(column);
+CREATE INDEX indexName ON tableName(column);
+</code></pre></li>
+<li><p>主键索引</p>
+<pre><code>ALTER TABLE tableName ADD PRIMARY KEY (column);
+</code></pre></li>
+<li><p>全文索引</p>
+<pre><code>ALTER TABLE tableName ADD FULLTEXT (column);
+</code></pre></li>
+<li><p>组合索引</p>
+<pre><code>ALTER TABLE tableName ADD INDEX indexName(col1,col2,...);
+</code></pre></li>
+</ul>
+</li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#入乎其内；出乎其外"><span class="toc-number">1.</span> <span class="toc-text">入乎其内；出乎其外</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL优化的思路"><span class="toc-number">2.</span> <span class="toc-text">SQL优化的思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL优化的基本原则"><span class="toc-number">3.</span> <span class="toc-text">SQL优化的基本原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引相关的总结"><span class="toc-number">4.</span> <span class="toc-text">索引相关的总结</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

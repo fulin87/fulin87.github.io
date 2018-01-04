@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>系统学习Junit4 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>系统学习Junit4</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年10月14日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>减少程序中的bug的一个有效的方法是编写程序逻辑的同时编写测试用例，尽早发现问题。同时Junit作为开源类库， <strong><a href="http://www.oschina.net/news/73667/2016-top-100-java-library" target="_blank" rel="noopener">受欢迎程度</a></strong> 是非常高的，已经成为java单元测试事实上的标准，有必要做深入的学习。</p>
+</blockquote>
+<h2 id="Junit的官方信息"><a href="#Junit的官方信息" class="headerlink" title="Junit的官方信息"></a>Junit的官方信息</h2><ul>
+<li><strong><a href="http://junit.org/junit4/" target="_blank" rel="noopener">Junit官网</a></strong></li>
+<li><strong><a href="https://github.com/junit-team/junit4" target="_blank" rel="noopener">github地址</a></strong></li>
+</ul>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><h3 id="准备测试类"><a href="#准备测试类" class="headerlink" title="准备测试类"></a>准备测试类</h3><p><code>TestCast1</code>,<code>TestCast2</code> </p>
+<pre><code>package com.fulin.test.testJunt;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class TestCast1{
+
+    public TestCast1(){
+        System.out.println(&quot;Constrctor...&quot;);
+    }
+
+    @Before
+    public void before(){
+        System.out.println(&quot;before&quot;);
+    }
+
+    @BeforeClass
+    public static void beforeClass(){
+        System.out.println(&quot;beforeClass&quot;);
+    }
+
+    @After
+    public void after(){
+        System.out.println(&quot;after&quot;);
+    }
+
+    @AfterClass
+    public static void afterClass(){
+        System.out.println(&quot;afterClass&quot;);
+    }
+
+    @Test
+    public void test1(){
+        System.out.println(&quot;test1&quot;);
+    }
+
+    @Test
+    public void test2(){
+        System.out.println(&quot;test2&quot;);
+    }
+}
+</code></pre><hr>
+<pre><code>package com.fulin.test.testJunt;
+
+import org.junit.Test;
+
+public class TestCast2 {
+    @Test
+    public void test3(){
+        System.out.println(&quot;test3&quot;);
+    }
+}
+</code></pre><p> 编写好测试类之后，就可以使用Junit4来运行测试类了。运行测试类的方法有两种：</p>
+<h3 id="测试方法一"><a href="#测试方法一" class="headerlink" title="测试方法一"></a>测试方法一</h3><p>使用Junit原生的JUnitCore.runClasses(Class…class)方法,如下所示</p>
+<pre><code>package com.fulin.test.testJunt;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+public class JunnerTest {
+
+    public static void main(String[] args) {
+        Result result = JUnitCore.runClasses(TestCast1.class,TestCast2.class);
+        for (Failure fail : result.getFailures()) {
+            System.out.println(fail.toString());
+        }
+
+        if(result.wasSuccessful()){
+            System.out.println(&quot;All tests finished successfully...&quot;);
+        }
+    }
+
+}
+</code></pre><p>输出如下：</p>
+<pre><code>beforeClass
+Constrctor...
+before
+test1
+after
+Constrctor...
+before
+test2
+after
+afterClass
+test3
+All tests finished successfully...
+</code></pre><h3 id="测试方法二"><a href="#测试方法二" class="headerlink" title="测试方法二"></a>测试方法二</h3><p> 使用eclipse这个IDE自带的测试工具，在测试类中 <code>右键-&gt; run as -&gt; Junit Test</code> 也可以得到相同的结果</p>
+<h3 id="测试过程和结果解读"><a href="#测试过程和结果解读" class="headerlink" title="测试过程和结果解读"></a>测试过程和结果解读</h3><h4 id="Junit4的生命周期"><a href="#Junit4的生命周期" class="headerlink" title="Junit4的生命周期"></a>Junit4的生命周期</h4><p> Junit4提供了一系列的注解，给编写测试测试类提供了极大的便利，也减少了侵入性。在不同的方法和字段上使用不同的注解，会有不同的效果。但是正真的测试核心方法还是 <code>@Test</code> 标注的方法，其他都是围绕这个核心展开的，相当于其生命周期的一部分。</p>
+<p> 同时，我们发现，不过是用那种测试方法，最终的结果都一样，我们有理由相信，Junit4的测试入口就是JunitCore.runClasses。这也是接下来分析源码的入口。</p>
+<h4 id="Junit注解解释"><a href="#Junit注解解释" class="headerlink" title="Junit注解解释"></a>Junit注解解释</h4><pre><code>1. @Test :   测试方法，测试程序会运行的方法
+             后边可以跟参数代表不同的测试如
+             (expected=XXException.class) 异常测试
+             (timeout=xxx)超时测试
+2. @Ignore : 被忽略的测试方法
+3. @Before : 每一个测试方法之前运行
+4. @After :  每一个测试方法之后运行
+5. @BeforeClass: 所有测试开始之前运行
+6. @AfterClass:  所有测试结束之后运行
+</code></pre><h3 id="Junit源码解析"><a href="#Junit源码解析" class="headerlink" title="Junit源码解析"></a>Junit源码解析</h3><p> 这是根据Junit源码画出的时序图</p>
+<p> <img src="/image/Junit-time.png" alt=""></p>
+<h2 id="网友的精彩博客"><a href="#网友的精彩博客" class="headerlink" title="网友的精彩博客"></a>网友的精彩博客</h2><ul>
+<li><strong><a href="https://my.oschina.net/pangyangyang/blog/144495" target="_blank" rel="noopener">Junit学习系列一</a></strong></li>
+<li><strong><a href="https://my.oschina.net/pangyangyang/blog/146015" target="_blank" rel="noopener">Junit学习系列二</a></strong></li>
+<li><strong><a href="https://my.oschina.net/pangyangyang/blog/153320" target="_blank" rel="noopener">Junit学习系列三</a></strong></li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Junit的官方信息"><span class="toc-number">1.</span> <span class="toc-text">Junit的官方信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习笔记"><span class="toc-number">2.</span> <span class="toc-text">学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备测试类"><span class="toc-number">2.1.</span> <span class="toc-text">准备测试类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试方法一"><span class="toc-number">2.2.</span> <span class="toc-text">测试方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试方法二"><span class="toc-number">2.3.</span> <span class="toc-text">测试方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试过程和结果解读"><span class="toc-number">2.4.</span> <span class="toc-text">测试过程和结果解读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Junit4的生命周期"><span class="toc-number">2.4.1.</span> <span class="toc-text">Junit4的生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Junit注解解释"><span class="toc-number">2.4.2.</span> <span class="toc-text">Junit注解解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Junit源码解析"><span class="toc-number">2.5.</span> <span class="toc-text">Junit源码解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网友的精彩博客"><span class="toc-number">3.</span> <span class="toc-text">网友的精彩博客</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

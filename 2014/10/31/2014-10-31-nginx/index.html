@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>Nginx知识点汇总 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>Nginx知识点汇总</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2014年10月31日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>nginx的使用越来越广泛，在工作中也有接触，把与其相关的知识点记录一下，免得遗忘了</p>
+</blockquote>
+<h2 id="nginx介绍"><a href="#nginx介绍" class="headerlink" title="nginx介绍"></a>nginx介绍</h2><p> <strong><a href="http://nginx.org/" target="_blank" rel="noopener">nginx</a></strong> 是由一位叫Igor Sysoev的俄罗斯人开发的www软件，是一个高性能的http和反向代理服务器</p>
+<h2 id="nginx的主要功能"><a href="#nginx的主要功能" class="headerlink" title="nginx的主要功能"></a>nginx的主要功能</h2><ul>
+<li>web服务</li>
+<li>反向代理</li>
+<li>web缓存</li>
+</ul>
+<h3 id="nginx的优点"><a href="#nginx的优点" class="headerlink" title="nginx的优点"></a>nginx的优点</h3><ul>
+<li>高并发（静态小文件），1-2W的并发</li>
+<li>占用资源少，2W并发，10个线程，占用150M内存</li>
+<li>功能种类比较多，每一个功能都不是特别强</li>
+<li>支持epoll模型，使的nginx可以支持高并发</li>
+<li>利用nginx可以对ip限速，可以限制连接数</li>
+<li><p>配置简单，更灵活</p>
+<p>原理见下图（和apache做对比）</p>
+<p><img src="/image/nginx01.PNG" alt=""></p>
+</li>
+</ul>
+<h3 id="nginx的适用场景"><a href="#nginx的适用场景" class="headerlink" title="nginx的适用场景"></a>nginx的适用场景</h3><ul>
+<li>静态服务器（图片，视频服务，html,js,css,flv）</li>
+<li>动态服务，nginx + fastcgi</li>
+<li>反向代理，负载均衡，日PV2000W以下，都可以直接使用nginx做负载均衡</li>
+<li>缓存服务</li>
+</ul>
+<h2 id="nginx的安装"><a href="#nginx的安装" class="headerlink" title="nginx的安装"></a>nginx的安装</h2><ul>
+<li><p>先更换<code>yum</code>源，更改成阿里的<code>yum</code>源</p>
+<pre><code># wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+</code></pre></li>
+<li><p>安装pcre这个软件</p>
+<p> PCRE(Perl Compatible Regular Expressions)是一个Perl库，可以兼容正则表达式，nginx的一些功能依赖这个。</p>
+<pre><code># yum install pcre pcre-devel -y
+</code></pre></li>
+<li><p>安装openssl这个软件</p>
+<p> nginx如果要支持https需要这个软件的支持，所以需要安装</p>
+<pre><code># yum install openssl openssl-devel -y
+</code></pre></li>
+<li><p>下载nginx，尽量选择一年一前的稳定版本</p>
+<pre><code># cd /home/fulin/tools
+# wget http://nginx.org/download/nginx-1.11.5.tar.gz
+</code></pre></li>
+<li><p>创建一个用户来运行nginx，不能登录，没有家目录</p>
+<pre><code># useradd nginx -s /sbin/nologin -M
+</code></pre></li>
+<li><p>安装c，c++编译器</p>
+<pre><code># yum -y install make gcc gcc-c++ ncurses-devel
+</code></pre></li>
+<li><p>安装nginx</p>
+<p> <em>解压</em></p>
+<pre><code># tar xf nginx-1.11.5.tar.gz
+</code></pre><p> <em>进入目录</em></p>
+<pre><code># cd nginx-1.11.5
+</code></pre><p> <em>安装前检测</em></p>
+<pre><code># ./configure --user=nginx --group=nginx --prefix=/application/nginx1.11.5 --with-http_stub_status_module --with-http_ssl_module
+</code></pre><p> <em>查看是否检测通过，0为通过</em></p>
+<pre><code># echo $?
+</code></pre><p> <em>编译安装</em></p>
+<pre><code># make
+# make install
+</code></pre><p> <em>做一个软链接，作用是去掉版本号</em></p>
+<pre><code># ln -s /application/nginx1.11.5/ /application/nginx
+# cd /application/nginx/
+</code></pre></li>
+</ul>
+<h2 id="使用nginx"><a href="#使用nginx" class="headerlink" title="使用nginx"></a>使用nginx</h2><ul>
+<li><p>启动</p>
+<pre><code># /application/nginx/sbin/nginx
+</code></pre></li>
+<li><p>检查语法，也就是检查配置文件的语法</p>
+<pre><code># /application/nginx/sbin/nginx -t
+</code></pre></li>
+<li><p>重启</p>
+<pre><code># /application/nginx/sbin/nginx -s reload
+</code></pre></li>
+<li><p>停止nginx服务</p>
+<pre><code># /application/nginx/sbin/nginx -s stop
+</code></pre></li>
+<li><p>访问</p>
+<pre><code>http://192.168.116.131:80
+</code></pre></li>
+<li><p>排错</p>
+<p> 看网络通不通</p>
+<pre><code>ping 192.168.116.131
+</code></pre><p> 端口通不通</p>
+<pre><code>telnet 192.168.116.131 80
+</code></pre><p> 查看nginx的错误日志</p>
+<pre><code>/application/nginx/log/error.log
+</code></pre></li>
+<li><p>nginx的目录结构</p>
+<pre><code>├── client_body_temp    #客户端临时文件
+├── conf                #nginx配置文件
+│   ├── fastcgi.conf
+│   ├── fastcgi.conf.default
+│   ├── fastcgi_params
+│   ├── fastcgi_params.default
+│   ├── koi-utf
+│   ├── koi-win
+│   ├── mime.types
+│   ├── mime.types.default
+│   ├── nginx.conf        #默认的配置文件
+│   ├── nginx.conf.default #默认配置文件的备份文件
+│   ├── scgi_params
+│   ├── scgi_params.default
+│   ├── uwsgi_params
+│   ├── uwsgi_params.default
+│   └── win-utf
+├── fastcgi_temp    #临时目录
+├── html            #默认站点目录
+│   ├── 50x.html    #错误页面
+│   └── index.html    #默认首页
+├── logs            #默认日志目录
+│   ├── access.log    #nginx的访问日志，可以通过此文件查看用户访问情况
+│   ├── error.log    #nginx的错误日志
+│   └── nginx.pid    #nginx启动后会把所有的进程ID号写入此文件
+├── proxy_temp        
+├── sbin            #nginx命令的目录，比如nginx的启动命令：nginx
+│   └── nginx
+├── scgi_temp        #临时目录
+└── uwsgi_temp        #临时目录
+</code></pre></li>
+<li><p>nginx的配置文件,nginx.conf</p>
+<pre><code>默认用户
+#user  nobody;    
+子进程的个数，一般与cpu的核数相当
+worker_processes  1;  
+
+错误日志，错误日志基本的级别从低往高：debug,info,notice,error
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+nginx的进程号
+#pid        logs/nginx.pid;
+
+nginx处理的最大连接数量
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    记录的访问日志的格式
+    #log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;
+    #                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
+    #                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
+
+    记录访问日志
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    虚拟主机
+    server {
+        监听的端口好
+        listen       80;
+        域名
+        server_name  localhost;
+
+        #charset koi8-r;
+        访问日志
+        #access_log  logs/host.access.log  main;
+
+        根据前面的结果执行后面的任务，就是执行RUI跳转的
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+        错误页面
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+}
+</code></pre></li>
+<li><p>用nginx实现简单的负载均衡</p>
+<p> <code>upstream</code> 是nginx的一个模块，可以实现负载均衡的功能，也就是反向代理。<br> <code>upstream</code> backend标签中的server代表一个目标服务器。<br> <code>max_fails</code> 是最多请求失效次数时将节点去除<br> <code>fail_timeout</code> 是请求超时时间</p>
+<pre><code>upstream backend{
+ server 10.202.33.86:8080 max_fails=3 fail_timeout=30s;
+ server 10.202.33.87:8080 max_fails=3 fail_timeout=30s;
+}
+
+server {
+    listen       80;
+    server_name  www.etiantian.org;
+    location / {
+        proxy_pass http://backend;
+    }
+}
+</code></pre></li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx介绍"><span class="toc-number">1.</span> <span class="toc-text">nginx介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx的主要功能"><span class="toc-number">2.</span> <span class="toc-text">nginx的主要功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx的优点"><span class="toc-number">2.1.</span> <span class="toc-text">nginx的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx的适用场景"><span class="toc-number">2.2.</span> <span class="toc-text">nginx的适用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx的安装"><span class="toc-number">3.</span> <span class="toc-text">nginx的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用nginx"><span class="toc-number">4.</span> <span class="toc-text">使用nginx</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
