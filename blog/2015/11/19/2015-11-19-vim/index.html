@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>vi的基本配置和常用命令 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/blog/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/blog/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/blog/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>vi的基本配置和常用命令</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2015年11月19日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/vi/">vi</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>vi或者vim功能的强大是毋庸置疑的。全键盘的操作体验，快速定位，流畅的编辑能力。但是还是有一些细节是需要注意的。这里记录一下我平时使用vim的配置情况和一些容易忘记的命令,方便以后查阅。</p>
+</blockquote>
+<h3 id="vi的基本配置-vimrc文件的配置"><a href="#vi的基本配置-vimrc文件的配置" class="headerlink" title="vi的基本配置(.vimrc文件的配置)"></a>vi的基本配置(.vimrc文件的配置)</h3><pre><code>syn on                      &quot;语法支持
+
+&quot;common conf \{\{             通用配置
+
+&quot;设置文件的代码输出
+set encoding=utf-8          
+set termencoding=utf-8     
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,chinese,cp936
+
+&quot;vim的菜单乱码解决
+source $VIMRUNTIME/delmenu.vim 
+source $VIMRUNTIME/menu.vim
+
+&quot;vim提示信息乱码的解决
+language messages zh_CH.utf-8
+
+set ai                      &quot;自动缩进
+set bs=2                    &quot;在insert模式下用退格键删除
+set showmatch               &quot;代码匹配
+set laststatus=2            &quot;总是显示状态行
+set expandtab               &quot;以下三个配置配合使用，设置tab和缩进空格数
+set shiftwidth=4
+set tabstop=4
+set cursorline              &quot;为光标所在行加下划线
+set number                  &quot;显示行号
+set autoread                &quot;文件在Vim之外修改过，自动重新读入
+set ignorecase              &quot;检索时忽略大小写
+set fileencodings=uft-8     &quot;使用utf-8或gbk打开文件
+set hls                     &quot;检索时高亮显示匹配项
+set helplang=cn             &quot;帮助系统设置为中文
+set foldmethod=syntax       &quot;代码折叠
+set nobackup                &quot;不要普通的加~备份文件
+set nowritebackup        &quot;不要容灾的备份文件
+&quot;\}\}
+</code></pre><p><em>这里需要注意在vim的配置文件中的引号是注释的作用</em></p>
+<p>###vi最常用的命令<br>    gg                    表示移动到文件的首行<br>    G                     表示移动到文件的末行<br>    28G                   表示移动到28行<br>    ^                     表示移动到行首<br>    $                     表示移动到行尾<br>    /abc                  表示正向查找”abc”<br>    ?abc                  表示反向查找”abc”<br>    yy                    表示复制当前行<br>    yw                    表示复制单词<br>    p                     表示粘贴到当前位置<br>    n                     表示正向查找下一个关键字<br>    N                     表示反向查找下一个关键字<br>    o                     表示在下一行的行首插入<br>    O                     表示在上一行的行首插入<br>    I                     表示当前字符的后面插入<br>    i                     表示当前字符的前面插入<br>    :12,15 co 20          将从12到15行的内容复制后粘贴到20行<br>    :34              跳转到34行<br>    f+              查找当前行的下一个+号<br>    .              重复执行上一次修改<br>    ;                     重复上一次的查找<br>    ,                     反向执行上一次的查找<br>    :s/test/abcde         将当前行的第一个test替换成abcde<br>    :s/te/abc/g           将当前行的所有te替换成abc<br>    :%s/test/&amp;/gn         统计字符串test在当前文件中出现的次数</p>
+<p> 掌握这些功能，就能处理平时大部分的服务器端编辑任务，当然，VI的功能是非常强大的，号称是伪装成编辑器的操作系统，也有人说这是神的编辑器。这个工具，需要我们持久的学习。</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#vi的基本配置-vimrc文件的配置"><span class="toc-number">1.</span> <span class="toc-text">vi的基本配置(.vimrc文件的配置)</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/blog/lib/in-view.min.js"></script>
+<script src="/blog/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

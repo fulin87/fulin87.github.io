@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>FastJson的使用与源码解读 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/blog/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/blog/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/blog/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>FastJson的使用与源码解读</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年10月10日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p><strong><a href="https://github.com/alibaba/fastjson/wiki" target="_blank" rel="noopener">FastJSON</a></strong>是一个处理<strong><a href="http://json.org" target="_blank" rel="noopener">JSON</a></strong>的 java 工具包， json （反序列化）和对象转 json （序列化）两部分的功能。是由阿里使用Apache License 2.0协议开源，易用，无依赖，性能优越，唯一不足的是文档不完善，用户需要自己根据源码来摸索。这里记录一下自己的学习历程，作为我膜拜大师杰作，虚心偷技的成果，也方便来者学习。</p>
+</blockquote>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><ul>
+<li><p>FastJson的最主要的使用入口是 com.alibaba.fastjson.JSON 的一系列静态方法</p>
+<pre><code>// 把JSON文本parse为JSONObject或者JSONArray 
+public static final Object parse(String text); 
+// 把JSON文本parse成JSONObject
+public static final JSONObject parseObject(String text)； 
+// 把JSON文本parse为JavaBean
+public static final  T parseObject(String text, Class clazz); 
+// 把JSON文本parse成JSONArray
+public static final JSONArray parseArray(String text); 
+// 把JSON文本parse成JavaBean集合
+public static final  List parseArray(String text, Class clazz); 
+// 将JavaBean序列化为JSON文本
+public static final String toJSONString(Object object); 
+// 将JavaBean序列化为带格式的JSON文本 
+public static final String toJSONString(Object object, boolean prettyFormat); 
+// 将JavaBean转换为JSONObject或者JSONArray。
+public static final Object toJSON(Object javaObject); 
+</code></pre></li>
+<li><p>FastJson 的相关类的说明</p>
+<pre><code>SerializeWriter：    相当于StringBuffer
+JSONArray：            相当于List&lt;Object&gt;
+JSONObject：            相当于Map&lt;String, Object&gt;
+JSON反序列化没有真正的数组，本质类型都是List&lt;Object&gt;
+</code></pre></li>
+<li><p>FastJson 的高级特性</p>
+<p> <em>支持注解、支持全类型序列化，这些都是很好的特性，功能强大</em></p>
+</li>
+</ul>
+<pre><code>* 序列化形式可以自定义和灵活选择
+
+    比如有一个注解：@JSONField;就可以实现序列号和反序列化的时候bean的属性名的灵活配置，非常实用。
+</code></pre><h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p> <img src="/image/fastJson.PNG" alt=""></p>
+<p> 已经有前辈总结了心得,可以先理解透彻再自己去看源代码。<br> 记录在此，以后来完善。</p>
+<p><strong><a href="http://www.csdn.net/article/2014-09-25/2821866" target="_blank" rel="noopener">FastJson的源码研究</a></strong></p>
+<p><strong><a href="http://www.iteye.com/topic/1113183" target="_blank" rel="noopener">FastJson为什么这么快</a></strong></p>
+<p><strong><a href="http://blog.csdn.net/u010246789/article/details/52539576" target="_blank" rel="noopener">FastJson SerializerFeature的使用</a></strong></p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要功能"><span class="toc-number">1.</span> <span class="toc-text">主要功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">2.</span> <span class="toc-text">源码解析</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/blog/lib/in-view.min.js"></script>
+<script src="/blog/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

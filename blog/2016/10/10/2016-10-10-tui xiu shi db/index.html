@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>忒修斯之船 &amp; 数据库 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/blog/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/blog/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/blog/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>忒修斯之船 &amp; 数据库</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年10月10日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/life/">life</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <p><code>这是一个古老的哲学问题</code></p>
+<blockquote>
+<p>忒修斯的船在海上航行了几百年,它被不间断地维修和替换部件。只要一块木板腐烂了，它就会被替换掉，以此类推，直到所有的功能部件都不是最开始的那些了。<br>问题是，最终产生的这艘船是否还是原来的那艘特修斯之船，还是一艘完全不同的船？如果不是原来的船，那么在什么时候它不再是原来的船了？<br>哲学家托马斯·霍布斯后来对此进来了延伸，如果用特修斯之船上取下来的老部件来重新建造一艘新的船，那么两艘船中哪艘才是真正的特修斯之船？</p>
+</blockquote>
+<p><code>几百年来，人们在这个问题上争论不休，谁也不能彻底说服对方，但是这个看似不能解决的问题却能带给我们一定的启发，那就是可以解释生活中的现象</code></p>
+<blockquote>
+<p>一群能力超群的软件工程师在一家软件公司工作，做了一个伟大的产品，经过几年的迭代，产品从UI到逻辑，甚至数据库结构都发生了翻天覆地的变化，以至于这个产品最初的创造者也看不懂它的源代码了，越来越多的人开始吐槽……</p>
+</blockquote>
+<p><code>问题来了，这个产品还是原来的那个伟大的产品吗？</code></p>
+<h3 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h3><pre><code>数据库中有一条SKU的数据记录，本来SKU编码可以用来识别这条数据的唯一性。
+可惜，一开始的时候为了图方便没有定好编码生成规则，后来需要改。
+这一改麻烦了，唯一性只好由SKU的ID来负责，这也带来了一连串的问题因为
+SKU的编码原本不仅有唯一性的约束功能，还有很多识别功能，而ID显然是没有。
+因为变更，也带来的新的问题：怎样监控变更的历史。
+于是诸如这样新的字段被不断加入
+
+&quot;update_time ; insert_time ; update_user ; last_status&quot;
+
+这些新增的信息让我们能尽可能多的追溯到当时的场景，可是这样好吗？
+</code></pre><p>悲哀的是，现实中大部分的软件系统，都无法逃脱冗余和混乱的宿命，这也再次印证了物理中“熵”的概念：任何事物都是朝混乱度大的方向发展。</p>
+<h3 id="质变"><a href="#质变" class="headerlink" title="质变"></a>质变</h3><p><code>如果不是原来的船，那么在什么时候它不再是原来的船了?</code></p>
+<pre><code>当唯一识别标示失效的时候，它就不再是原来的船了。可是，什么是唯一识别标示？
+身份证可以伪装，DNA都有可能相同，茫茫人海，是有可能存在两个你无法区分的人的。
+</code></pre><p><em>世界上不存在绝对的唯一性，所谓的唯一只存在于我们的想象中</em></p>
+<h3 id="启示"><a href="#启示" class="headerlink" title="启示"></a>启示</h3><pre><code>“任何系统熵都是逐渐变大的，自然状态下无法逆转，若想改变，必须做功。”
+这一物理学的规律同样适用于现实生活。虽然我们无法做的绝对，但是可以尽量精确。
+流程和标准就是行之有效的方法，甚至是唯一可行的方法。
+</code></pre>
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#渐变"><span class="toc-number">1.</span> <span class="toc-text">渐变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#质变"><span class="toc-number">2.</span> <span class="toc-text">质变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启示"><span class="toc-number">3.</span> <span class="toc-text">启示</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/blog/lib/in-view.min.js"></script>
+<script src="/blog/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

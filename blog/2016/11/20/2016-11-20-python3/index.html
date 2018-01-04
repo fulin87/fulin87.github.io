@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>python基础知识点之文件输入和输出 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/blog/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/blog/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/blog/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>python基础知识点之文件输入和输出</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年11月20日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/python/">python</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>内建函数 open() [以及 file()]提供了初始化输入/输出(I/O)操作的通用接口,是打开文件之门的”钥匙”…..</p>
+</blockquote>
+<h2 id="open-，file-功能相同"><a href="#open-，file-功能相同" class="headerlink" title="open()，file()功能相同"></a>open()，file()功能相同</h2><pre><code>file_object = open(file_name, access_mode=&apos;r&apos;, buffering=-1)
+
+file_name:是包含要打开文件名的字符串
+access_mode:是一个字符串，代表文件打开的模式，模式后面会详解
+buffering:指示访问文件所采用的缓冲方式,一般使用系统默认机制即可
+
+文件模式     操作
+r         以读方式打开
+rU或Ua            以读方式打开, 同时提供通用换行符支持 (PEP 278)
+w         以写方式打开 (必要时清空)
+a         以追加模式打开 (从 EOF 开始, 必要时创建新文件)
+r+        以读写模式打开
+w+         以读写模式打开 (参见 w )
+a+         以读写模式打开 (参见 a )
+rb         以二进制读模式打开
+wb         以二进制写模式打开 (参见 w )
+ab         以二进制追加模式打开 (参见 a )
+rb+         以二进制读写模式打开 (参见 r+ )
+wb+         以二进制读写模式打开 (参见 w+ )
+ab+         以二进制读写模式打开 (参见 a+ )
+
+
+fp = open(&apos;/etc/motd&apos;)         # 以读方式打开
+fp = open(&apos;test&apos;, &apos;w&apos;)         # 以写方式打开
+fp = open(&apos;data&apos;, &apos;r+&apos;)     # 以读写方式打开
+fp = open(&apos;c:\io.sys&apos;, &apos;rb&apos;)     # 以二进制读模式打开
+</code></pre><h3 id="文件对象的方法"><a href="#文件对象的方法" class="headerlink" title="文件对象的方法"></a>文件对象的方法</h3><pre><code>file.close()            #关闭文件
+file.flush()            #刷新文件的内部缓冲区
+file.readline(size=-1)        #从文件中读取并返回一行(包括行结束符), 或返回最大 size个字符
+file.readlines(sizhint=0)    #读取文件的所有行并作为一个列表返回(包含所有的行结束符); 如果给定 sizhint 且大于 0 , 那么将返回总和大约为sizhint 字节的行(大小由缓冲器容量的下一个值决定）（ 比如说缓冲器的大小只能为4K 的倍数，如果sizhint 为15k，则最后返回的可能是16k———译者按)
+file.xreadlines()        #用于迭代, 可以替换 readlines() 的一个更高效的方法
+file.tell()            #返回当前在文件中的位置
+file.seek(off, whence=0)    #在文件中移动文件指针, 从 whence ( 0 代表文件其始, 1 代表当前位置, 2 代表文件末尾)偏移 off 字节
+file.write(str)            #向文件写入字符串
+</code></pre><h3 id="文件内建属性"><a href="#文件内建属性" class="headerlink" title="文件内建属性"></a>文件内建属性</h3><pre><code>file.name        #文件名
+file.closed        #True 表示文件已经被关闭, 否则为 False
+file.encoding        #文件所使用的编码 - 当 Unicode 字符串被写入数据时, 它们将自动使用 file.encoding 转换为字节字符串; 若file.encoding 为 None 时使用系统默认编码
+file.mode        #文件打开时使用的访问模式
+</code></pre>
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#open-，file-功能相同"><span class="toc-number">1.</span> <span class="toc-text">open()，file()功能相同</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件对象的方法"><span class="toc-number">1.1.</span> <span class="toc-text">文件对象的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件内建属性"><span class="toc-number">1.2.</span> <span class="toc-text">文件内建属性</span></a></li></ol></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/blog/lib/in-view.min.js"></script>
+<script src="/blog/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

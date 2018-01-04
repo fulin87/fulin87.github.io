@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>python基础知识点之环境 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/blog/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/blog/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/blog/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/blog/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>python基础知识点之环境</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年11月17日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/python/">python</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>学习java的时候，都知道java有很多优秀的第三方jar包，但是管理这些jar包真是一件麻烦事，虽然有像maven这样的依赖管理工具，但是学习成本还是蛮高的。<br>python 的包管理工具pip使用起来非常的舒服，一条命令就可以搞定下载安装，再用不用为包的管理而烦恼了，让人想起那句著名的话：<strong>less is more</strong></p>
+</blockquote>
+<h2 id="python的包管理工具pip"><a href="#python的包管理工具pip" class="headerlink" title="python的包管理工具pip"></a>python的包管理工具pip</h2><ul>
+<li>访问：<a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">get-pip.py</a> 访问需要的python文件。</li>
+<li>将源代码copy到一个文本文件，将文本文件重命名的get-pip.py。</li>
+<li>通过命令行进入上述文本文件的所在位置，运行一下命令： <code>python get-pip.py</code>    </li>
+</ul>
+<h2 id="pip工具的使用"><a href="#pip工具的使用" class="headerlink" title="pip工具的使用"></a>pip工具的使用</h2><pre><code>pip list              //查看已经安装的python包
+pip show package      //查看packageName的详细情况
+pip install package   //安装包package
+pip uninstall package //卸载包package
+</code></pre><h2 id="python的命令行开发工具ipython"><a href="#python的命令行开发工具ipython" class="headerlink" title="python的命令行开发工具ipython"></a>python的命令行开发工具ipython</h2><pre><code>pip install ipython  //安装ipython
+</code></pre><h2 id="windows安装MySQLdb-python遇到的问题"><a href="#windows安装MySQLdb-python遇到的问题" class="headerlink" title="windows安装MySQLdb-python遇到的问题"></a>windows安装MySQLdb-python遇到的问题</h2><p> 学习python对数据库的支持的时候，因为手边有现成的mysql数据库，可以直接使用，就选择先学习python连接mysql。</p>
+<ul>
+<li><p>首先是发现系统没有MySQLdb这个模块</p>
+<pre><code>import MySQLdb
+
+Traceback (most recent call last):
+File &quot;test.py&quot;, line 3, in &lt;module&gt;
+import MySQLdb
+ImportError: No module named MySQLdb
+</code></pre></li>
+<li><p>使用pip进行安装</p>
+<pre><code>pip install MySQLdb-python
+</code></pre></li>
+<li><p>然后给了我一个提示</p>
+<pre><code>You are using pip version 8.1.2, however version 9.0.1 is available.
+You should consider upgrading via the &apos;python -m pip install --upgrade pip&apos; command.
+</code></pre></li>
+<li><p>按照提示对pip进行升级</p>
+<pre><code>python -m pip install --upgrade pip
+</code></pre></li>
+<li><p>升级完成之后，再次安装</p>
+<pre><code>pip install MySQLdb-python
+</code></pre></li>
+<li><p>这次报一个新的错误</p>
+<pre><code>error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from http://aka.ms/vcpython27
+</code></pre></li>
+<li><p>安装提示安装  Microsoft Visual C++ 9.0</p>
+</li>
+<li><p>然后再次安装MySQLdb</p>
+<pre><code>pip install MySQLdb-python
+</code></pre></li>
+<li><p>这次又报了一个新的错误</p>
+<pre><code>error: command &apos;C:\\Users\\870850\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0\\VC\\Bin\\cl.exe&apos; failed with exit status 2
+</code></pre></li>
+<li><p>上网搜索，发现这个问题很多人都遇到了，根据网友的提示，尝试手动安装，这这里找</p>
+<pre><code>http://www.lfd.uci.edu/~gohlke/pythonlibs
+</code></pre></li>
+<li><p>下载 <code>MySQL_python‑1.2.5‑cp27‑none‑win32.whl</code> 这个wheel安装包</p>
+<pre><code>pip install D:\MySQL_python‑1.2.5‑cp27‑none‑win32.whl
+</code></pre></li>
+<li><p>终于安装好了，试试</p>
+<pre><code>import MySQLdb
+</code></pre></li>
+<li><p>没有异常，OK了</p>
+</li>
+</ul>
+<h2 id="linux安装MySQLdb-python遇到的问题的解决方案"><a href="#linux安装MySQLdb-python遇到的问题的解决方案" class="headerlink" title="linux安装MySQLdb-python遇到的问题的解决方案"></a>linux安装MySQLdb-python遇到的问题的解决方案</h2><ul>
+<li><p>使用pip进行安装</p>
+<pre><code>pip install MySQL-python
+</code></pre></li>
+<li><p>报以下异常</p>
+<pre><code>Complete output from command python setup.py egg_info:
+sh: mysql_config: command not found
+Traceback (most recent call last):
+  File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;/tmp/pip-build-qy_rtM/MySQL-python/setup.py&quot;, line 17, in &lt;module&gt;
+    metadata, options = get_config()
+  File &quot;setup_posix.py&quot;, line 43, in get_config
+    libs = mysql_config(&quot;libs_r&quot;)
+  File &quot;setup_posix.py&quot;, line 25, in mysql_config
+    raise EnvironmentError(&quot;%s not found&quot; % (mysql_config.path,))
+EnvironmentError: mysql_config not found
+
+----------------------------------------
+Command &quot;python setup.py egg_info&quot; failed with error code 1 in /tmp/pip-build-qy_rtM/MySQL-python/
+</code></pre></li>
+<li><p>安装 mysql-dev</p>
+<pre><code>yum install mysql-devel
+</code></pre></li>
+<li><p>这时又报一个新的错</p>
+<pre><code>error: command &apos;gcc&apos; failed with exit status 1
+</code></pre></li>
+<li><p>安装<code>gcc</code>和<code>python-devel</code></p>
+<pre><code>yum install gcc -y
+yum install python-devel -y
+</code></pre></li>
+<li><p>总算OK了</p>
+</li>
+</ul>
+<p><strong><em>配置开发环境是最锻炼人的，因为这里面牵扯的东西非常多，把搭建环境的过程中遇到的问题记录下来，以后遇到了有据可循</em></strong></p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#python的包管理工具pip"><span class="toc-number">1.</span> <span class="toc-text">python的包管理工具pip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pip工具的使用"><span class="toc-number">2.</span> <span class="toc-text">pip工具的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python的命令行开发工具ipython"><span class="toc-number">3.</span> <span class="toc-text">python的命令行开发工具ipython</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows安装MySQLdb-python遇到的问题"><span class="toc-number">4.</span> <span class="toc-text">windows安装MySQLdb-python遇到的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux安装MySQLdb-python遇到的问题的解决方案"><span class="toc-number">5.</span> <span class="toc-text">linux安装MySQLdb-python遇到的问题的解决方案</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/blog/lib/in-view.min.js"></script>
+<script src="/blog/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
