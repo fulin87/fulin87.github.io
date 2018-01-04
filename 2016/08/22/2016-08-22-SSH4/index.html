@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>Linux基础知识点四之常用技巧和运行级别 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>Linux基础知识点四之常用技巧和运行级别</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月22日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>在使用 linux 的过程中有很多技巧和零散的知识点，对这些知识点进行整理和记录，是一个不错的习惯，因为人难免会遗忘，记录在这里，以后如果忘记了，来这里查询，很快就能记起来</p>
+</blockquote>
+<h2 id="linux使用小技巧"><a href="#linux使用小技巧" class="headerlink" title="linux使用小技巧"></a>linux使用小技巧</h2><ul>
+<li><p>快速的回到上一次的目录</p>
+<pre><code>OLDPWD 这个环境变量存放的是上一次的目录
+env | grep -i old # 查看OLDPWD这个环境变量的值 
+cd - # 快速的回到上一次的目录
+</code></pre></li>
+<li><p>快速的使用之前使用过的命令</p>
+<pre><code>history 命令之后使用 `!行号` 可以直接调用对应的命令
+</code></pre></li>
+<li><p>快速回到家目录</p>
+<pre><code>cd ~ 回到家目录
+</code></pre></li>
+<li><p>查看最近更新的文件</p>
+<pre><code>ls -lrt #r是逆序；t是按修改时间;结果是最后更新的在最下面
+</code></pre></li>
+<li><p>使 grep 过滤的字符串有颜色</p>
+<pre><code>grep &apos;www&apos; --color=auto /tmp/test
+</code></pre></li>
+<li><p>增加一个别名</p>
+<pre><code>vi /etc/profile
+alias grep=&apos;grep --color=auto&apos; #这里的=两边不能有空格
+</code></pre></li>
+<li><p>查看压缩包中的内容</p>
+<pre><code>gar tf test.tar.gz
+</code></pre></li>
+<li><p>压缩的时候排除文件</p>
+<ul>
+<li><p>方法一</p>
+<pre><code>tar zcvf test.tar.gz --exclude ./test/fulin1.test ./test
+</code></pre></li>
+<li><p>方法二</p>
+<pre><code>先把不需要打包的文件的文件名放入一个文件a.txt
+tar zcvfX test.tar.gz a.txt ./test/
+</code></pre></li>
+</ul>
+</li>
+<li><p>将查找的结果打包</p>
+<pre><code>tar zcvf test.tar.gz `find . -type d -name fulin`
+</code></pre></li>
+<li><p>查询文件的行号</p>
+<pre><code>wc -l /etc/service
+cat -n /etc/service | tail -1
+</code></pre></li>
+<li><p>echo 不换行输出</p>
+<pre><code>echo -n &quot;124&quot;
+</code></pre></li>
+<li><p>查找具有suid的命令</p>
+<pre><code>find /usr/bin/ -type f -perm 4755 -exec ls -l {} \;
+</code></pre></li>
+<li><p>查看开机自启动服务</p>
+<pre><code>chkconfig --list | grep 3:on
+</code></pre></li>
+<li><p>查看系统是否安装了sendmail软件</p>
+<pre><code>rpm -qa|grep sendmail
+</code></pre></li>
+<li><p>检查软件安装是否正常，也就是上一条命令的退出状态,如果是0就正常</p>
+<pre><code>echo $?
+</code></pre></li>
+<li><p>检查某个端口是否开启</p>
+<pre><code>lsof -i :80
+</code></pre></li>
+<li><p>一次性删除某个程序所有的线程,这里删除uwsgi的所有线程</p>
+<pre><code>ps -ef|grep uwsgi|grep -v grep|cut -c 9-15|xargs kill -9
+</code></pre></li>
+</ul>
+<h2 id="linux运行级别"><a href="#linux运行级别" class="headerlink" title="linux运行级别"></a>linux运行级别</h2><p> 先看看linux的启动流程图</p>
+<p><img src="/image/start.PNG" alt=""></p>
+<p> 在目录 <code>/etc/rc.d/init.d</code> 下有很多服务器脚本程序，一般称为服务。</p>
+<p> 在 <code>/etc/rc.d</code> 下有7个名为rcN.d的目录，对应系统的7个运行级别。</p>
+<p> 在rcN.d目录下都是一些符合连接(软连接)文件，这些文件都指向 <code>/etc/init.d</code> 目录下的service脚本文件，命名规则是 <code>K+nn+服务名</code> 或者 <code>S+nn+服务名</code> ，其中nn是两位阿拉伯数字</p>
+<p> 系统启动时，会根据指定的运行级别进入对应的 <code>rcN.d</code> 目录,并按照文件名顺序检索目录下的连接文件，对于以K开头的文件，系统将终止对应的服务，对于以S开头的文件，系统将启动对于的服务。</p>
+<pre><code>0 : halt (Do NOT set initdefault to this) 关机模式，需要慎重使用。
+1 : Single user mode 单用户模式,特定场景使用，如重置root密码。
+2 : Multiuser,without NFS 无NFS的多用户模式
+3 : Full multiuser mode 文本模式
+4 : unserd 无用
+5 : X11 图形化
+6 : redboot (Do NOT set initdefault to this) 重启模式    ，需要慎重使用
+</code></pre>
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux使用小技巧"><span class="toc-number">1.</span> <span class="toc-text">linux使用小技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux运行级别"><span class="toc-number">2.</span> <span class="toc-text">linux运行级别</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
