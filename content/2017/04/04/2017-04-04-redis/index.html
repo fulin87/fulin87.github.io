@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>redis 知识点总结 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>redis 知识点总结</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年04月04日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/redis/">redis</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>redis是一个高性能的键值对数据库，redis是意大利人在2009年开发完成并开源的软件产品。<br>redis本身的含义是 <em>remote dictionary server (远程字典服务器)</em>，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。</p>
+</blockquote>
+<h3 id="redis的特点"><a href="#redis的特点" class="headerlink" title="redis的特点"></a>redis的特点</h3><ul>
+<li><p>支持丰富的数据类型</p>
+<p>  字符串类型(string)，散列类型(hash)，列表类型(list)，集合类型(set)，有序集合类型(zset)</p>
+</li>
+<li><p>内存存储和持久化</p>
+<p>  redis的数据存储在内存中，读写速度远快于硬盘，可以提供一秒10W+的键值的读写同时还提供了持久化的支持</p>
+</li>
+<li><p>功能丰富</p>
+<p>  redis虽然是作为数据库开发的，但是越来越多的人将其作为缓存，队列系统使用</p>
+</li>
+<li><p>简单稳定</p>
+<p>  redis提供了一系列简单的命令来操作redis</p>
+</li>
+</ul>
+<h3 id="redis的启动和停止"><a href="#redis的启动和停止" class="headerlink" title="redis的启动和停止"></a>redis的启动和停止</h3><pre><code>启动：  ./bin/redis-server ./redis-conf
+停止：  ./bin/redis-cli shutdown
+</code></pre><h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><pre><code>keys *  //获取所有的键
+type key //获取键key的类型
+EXISTS key //判断一个键是否存在，存在返回1，否则返回0
+DEL key [key1 ...] //删除键 key，key1 ...,返回值是删除键的个数
+redis 不区分命令的大小写，但是作为使用规范，约定命令都使用大写表示
+GET key //获取键key的值
+</code></pre><h3 id="redis的事务"><a href="#redis的事务" class="headerlink" title="redis的事务"></a>redis的事务</h3><p> redis提供了类似关系型数据库的事务功能，但是没有提供回滚机制,开发者必须在事务执行出错后自己收拾残局。命令：</p>
+<p> <strong><em>MULTI  EXEC 命令</em></strong></p>
+<pre><code>MULTI
+
+code ...
+
+EXEC
+</code></pre><p> 同时因为redis不支持回滚功能，所以redis的事务上可以保持简洁和快速</p>
+<p> <strong><em>WATCH 命令</em></strong></p>
+<p> <em>WATCH</em>命令可以监控一个或多个键，一旦其中有一个键被修改，之后的事务就不会被执行。</p>
+<pre><code>WATCH key1 key2 key3 ....
+</code></pre><p> <strong><em>UNWATCH 命令</em></strong></p>
+<p> <em>UNWATCH</em>命令可以取消对键的监控</p>
+<pre><code>UNWATCH key1 key2 key3 ....
+</code></pre>
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的特点"><span class="toc-number">1.</span> <span class="toc-text">redis的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的启动和停止"><span class="toc-number">2.</span> <span class="toc-text">redis的启动和停止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本命令"><span class="toc-number">3.</span> <span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的事务"><span class="toc-number">4.</span> <span class="toc-text">redis的事务</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

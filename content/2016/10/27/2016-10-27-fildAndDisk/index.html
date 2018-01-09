@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>Linux中的文件大小和磁盘占有空间的关系 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>Linux中的文件大小和磁盘占有空间的关系</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年10月27日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/linux/">linux</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>文件的真实大小和文件占有的磁盘空间不是一回事，根本的原因是由于系统和磁盘的存储机制决定的。最具有代表性的是crontab定时任务执行之后由sendmail产生的文件。下面详细分析一下整个过程。</p>
+</blockquote>
+<h2 id="crontab-定时任务产生的问题"><a href="#crontab-定时任务产生的问题" class="headerlink" title="crontab 定时任务产生的问题"></a>crontab 定时任务产生的问题</h2><p> 现在有一台服务器A</p>
+<pre><code># cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 5.4 (Tikanga)
+
+# rpm -qa|grep sendmail
+sendmail-8.13.8-2.el5
+</code></pre><p> 是centos 5.4这个版本，而且已经安装了sendmail软件。</p>
+<p> 有几个crontab定时任务</p>
+<pre><code># crontab -l
+
+0 * * * * /data/jobscripts/run_status60.sh
+0 * * * * /data/jobscripts/run_statusin.sh
+*/5 7-23 * * * /data/jobscripts/run_sendsms.sh
+*/5 * * * * /data/jobscripts/adjustment_product_store.sh
+0 3 * * * /data/jobscripts/collate_product_store.sh
+</code></pre><blockquote>
+<p><strong>注意这里这里的定时任务都没有对标准输出和标准错误输出进行重定向到/dev/null文件，那么这样做有什么隐患呢？</strong></p>
+</blockquote>
+<p> 定时任务启动之后，发现 <code>/var/spool/clientmqueue/</code> 目录下的文件开始不断增加，这是一年之后我无意中发现的情况：</p>
+<pre><code># ls -lihd /var/spool/clientmqueue/
+2080777 drwxrwx--- 2 smmsp smmsp 12M Oct 28 11:36 /var/spool/clientmqueue/
+
+# du -h /var/spool/clientmqueue/
+1.4G    /var/spool/clientmqueue/
+</code></pre><p> 发现没有，目录 <code>/var/spool/clientmqueue/</code> 实际的大小只有12M，但是占有的磁盘空间确达到了1.4G，是不是非常奇怪？继续排查。</p>
+<pre><code># ls -lih /var/spool/clientmqueue/ | wc -l
+345047
+
+# ls -lih /var/spool/clientmqueue/ | head -5
+total 1.4G
+2080837 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEf1nJ007902
+2080823 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEK15v025165
+2080839 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEp1UL009526
+2080836 -rw-rw---- 1 smmsp smmsp  880 Jan 23  2014 dfs0NEV2M6006278
+</code></pre><p> 看到这里，才恍然大悟，原来 <code>/var/spool/clientmqueue/</code> 这个目录中的文件有345047个之多，但是每个文件却只有880 byte 大。这就造成了磁盘Block的大量浪费，所以才会有目录磁盘占用量远大于目录本身大小的情况。</p>
+<p> 那么这些小文件是怎么来的呢？其实是crontab定时任务在执行之后，就会尝试通过sendmail给任务所有者发送一个邮件，如果发现sendmail服务没有启动，就产生了一个880 byte的小文件，临时放在<code>/var/spool/clientmqueue/</code>目录下，知道sendmail服务启动后才会清除。每次执行都产生一个，日积月累，数量非常庞大，给系统的安全还造成了一个隐患。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p> 其实解决办法非常简单，将定时任务的标准输出和标准错误输出重定向到 <code>/dev/null</code> 即可，将定时任务改造如下：</p>
+<pre><code>0 * * * * /data/jobscripts/run_status60.sh &gt;/dev/null 2&gt;&amp;1
+0 * * * * /data/jobscripts/run_statusin.sh &gt;/dev/null 2&gt;&amp;1
+*/5 7-23 * * * /data/jobscripts/run_sendsms.sh &gt;/dev/null 2&gt;&amp;1
+*/5 * * * * /data/jobscripts/adjustment_product_store.sh &gt;/dev/null 2&gt;&amp;1
+0 3 * * * /data/jobscripts/collate_product_store.sh &gt;/dev/null 2&gt;&amp;1
+</code></pre><p> 这里还有一个需要注意的地方，<code>/var/spool/clientmqueue/</code> 这个目录下面有太多的文件，如果需要删除,使用 <code>rm -rf /var/spool/clientmqueue/*</code>会发现删不了，因为文件太多，怎么办了，是有方法的。</p>
+<ul>
+<li><p>方法一</p>
+<pre><code>ls /var/spool/clientmqueue/|xargs rm -f
+</code></pre></li>
+<li><p>方法二</p>
+<pre><code>find /var/spool/clientmqueue/ -type f|xargs rm -f
+</code></pre></li>
+<li><p>方法三</p>
+<pre><code>直接将目录   `/var/spool/clientmqueue/`    删除
+然后重建目录及给目录赋权限和属主和属组
+</code></pre></li>
+</ul>
+<h2 id="启示"><a href="#启示" class="headerlink" title="启示"></a>启示</h2><p> 通过这个案例，知道了crontab定时任务有一个小小的风险，但是可以通过重定向到 <code>/dev/null</code> 来解决。</p>
+<p> 同时，对这个问题的深入剖析，可以帮助我们更加深刻的理解 Inode;Block 和文件存储的机制。</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#crontab-定时任务产生的问题"><span class="toc-number">1.</span> <span class="toc-text">crontab 定时任务产生的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法"><span class="toc-number">2.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启示"><span class="toc-number">3.</span> <span class="toc-text">启示</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

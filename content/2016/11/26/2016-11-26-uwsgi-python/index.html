@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>nginx+uwsgi+python+mysql+flask 实战过程 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>nginx+uwsgi+python+mysql+flask 实战过程</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年11月26日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/python/">python</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>使用python进行web开发，环境的搭建并不简单，这里面出现了很多问题。记录一下自己搭建环境的过程，顺便记录一下自己对于用python进行web开发的原理的一点粗浅的理解。</p>
+</blockquote>
+<h3 id="nginx-uwsgi-python工作的原理"><a href="#nginx-uwsgi-python工作的原理" class="headerlink" title="nginx,uwsgi,python工作的原理"></a>nginx,uwsgi,python工作的原理</h3><p> 如下图所示：</p>
+<p> <img src="/image/python8.PNG" alt=""> </p>
+<p> 以上是python进行web开发的基本工作原理，当然了，也可以不用使用uwsgi,但是使用uwsgi才是主流，非主流的这里就不记录了。</p>
+<ul>
+<li>用户发起http请求，请求到达nginx服务器。</li>
+<li>nginx根据请求的url和自己的配置来决定怎么处理</li>
+<li>一般如果是静态请求，直接索引文件系统返回静态资源</li>
+<li>如果是动态请求，则交给后面的uwsgi来处理</li>
+<li>uwsgi进程接到请求后，启动python解释器来执行python程序。</li>
+<li><p>执行解释返回结果</p>
+<p>以上是大体的过程，用词可能不够准确。这个过程中有一个核心概念：<code>uwsgi</code>，如果要把这个说清楚，会牵扯出一些列的知识：CGI,FAST-CGI,WSGI。这个之前有记录。</p>
+</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="http://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html" target="_blank" rel="noopener">uwsgi官方文档英文</a></p>
+<p><a href="http://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/WSGIquickstart.html" target="_blank" rel="noopener">uwsgi官方文档中文</a></p>
+<h3 id="原生环境搭建过程"><a href="#原生环境搭建过程" class="headerlink" title="原生环境搭建过程"></a>原生环境搭建过程</h3><p> <em>首先不使用任何python框架搭建一个原生的python web环境</em></p>
+<p> 我这里有一台虚拟机:</p>
+<pre><code>192.168.116.131
+</code></pre><p> 我将nginx和uwsgi都安装在131上，这里nginx我之前已经安装过了。</p>
+<ul>
+<li><p>安装uwsgi，安装到<code>/application/uwsgi-2.0.14</code>这个目录</p>
+<pre><code>wget https://projects.unbit.it/downloads/uwsgi-latest.tar.gz
+tar zxvf uwsgi-latest.tar.gz -C /application/uwsgi-2.0.14
+cd /application/uwsgi-2.0.14
+make
+</code></pre></li>
+<li><p>将uwsgi添加进环境变量搜索路径中</p>
+<pre><code>cp /application/uwsgi-2.0.14/uwsgi /usr/local/sbin/
+</code></pre></li>
+<li><p>建立一个软链接,这是一个好习惯</p>
+<pre><code>ln -s /application/uwsgi-2.0.14 /application/uwsgi
+</code></pre></li>
+<li><p>编写python脚本，这里假设mysql已经部署好了</p>
+<pre><code>cd /home/fulin/temp/
+vi app.py
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+&quot;&quot;&quot;application.py&quot;&quot;&quot;
+
+import MySQLdb
+def application(environ, start_response):
+&quot;&quot;&quot;Simplest possible application object&quot;&quot;&quot;
+start_response(&apos;200 OK&apos;, [(&apos;Content-Type&apos;,&apos;text/html&apos;)])
+conn = MySQLdb.connect(host = &apos;10.2xx.xx.62&apos;,\
+                       port = 3306,\
+                       user = &apos;xx&apos;,\
+                       passwd = &apos;xxx&apos;,\
+                       db = &apos;test&apos;)
+cur = conn.cursor()
+
+aa =cur.execute(&quot;select * from vc_admin limit 10&quot;)
+x = []
+info = cur.fetchmany(aa)
+for i in info:
+    x.append(i)
+cur.close()
+conn.commit()
+conn.close()
+return &apos;.&apos;.join([str(i) for i in x])
+</code></pre></li>
+<li><p>启动uwsgi</p>
+<pre><code>uwsgi --socket 127.0.0.1:3031 --wsgi-file /home/fulin/temp/app.py --master --processes 4 --threads 2 --stats 127.0.0.1:9191
+</code></pre></li>
+<li><p>配置nginx，因为这里仅仅是学习，所以不必用配置太复杂，先从最简单的开始</p>
+<pre><code>location / {
+   include uwsgi_params;
+   uwsgi_pass 192.168.116.132:3031;
+}
+</code></pre></li>
+<li><p>启动nginx</p>
+<pre><code>cd /application/nginx/sbin
+./nginx
+</code></pre></li>
+</ul>
+<ul>
+<li><p>测试</p>
+<pre><code>浏览器输入  http://192.168.116.131
+响应出admin表中的数据，表示OK
+</code></pre></li>
+</ul>
+<h3 id="uwsgi和flask进行集成"><a href="#uwsgi和flask进行集成" class="headerlink" title="uwsgi和flask进行集成"></a>uwsgi和flask进行集成</h3><p> <code>这里web服务器和应用服务器选择使用socket通信,不再使用低效的http</code></p>
+<ul>
+<li><p>启用<code>ini</code>配置文件,文件为<code>/home/fulin/temp/web/config.ini</code></p>
+<pre><code>[uwsgi]
+socket = /tmp/my.sock         #和web服务器通信的socket文件
+chmod-socket = 666              #更改socket文件的权限为666
+daemonize = /home/fulin/temp/flask2.log  #将uwsgi以守护进程的方式启动，同时制定日志文件
+master = true                #是否为主进程
+pidfile = /home/fulin/temp/master.pid   #创建主进程的pid文件
+wsgi-file = app.py      #web项目的入口
+callable = app            #入口对象
+processes =1            #进程数
+threads = 1                #线程数
+</code></pre><p><strong><em>注意这里的ini配置文件出现是有背景的，之前我们启动uwsgi是使用命令行的方式：uwsgi –socket 127.0.0.1:3031 –wsgi-file /home/fulin/temp/app.py –master –processes 4 –threads 2 –stats 127.0.0.1:9191，这种方式非常的不人性，如果能把命令行中的参数写入配置文件就好了。uwsgi是支持的。最标准的方法是使用ini格式的配置文件,我们的配置文件名为config.ini</em></strong></p>
+<p><strong><em>这里要特别提醒一下,config.ini文件的开头的<code>[uwsgi]</code>这几个字符是不能少的，我就是因为没有这几个字符，启动的时候出现了一个很诡异的异常而浪费了很长时间</em></strong></p>
+</li>
+<li><p>准备flask项目文件<code>/home/fulin/temp/web/app.py</code></p>
+<pre><code>from flask import Flask
+
+app = Flask(__name__)
+
+@app.route(&apos;/&apos;)
+def index():
+    return &apos;&lt;h1&gt;hello world&lt;/h1&gt;&apos;
+
+@app.route(&apos;/&lt;name&gt;&apos;)
+def user(name):
+    return &apos;&lt;h1&gt;hello, %s&lt;/h1&gt;&apos; % name
+
+#if __name__ == __name__:
+#    app.run(debug=True)
+</code></pre><p><strong><em>这里要注意：<code>__name__==__name__</code>那两句代码是被注释掉的。因为uwsgi启动的时候会运行app.py，这段代码不注释掉，会启动python自己的 wsgi 服务器，从而产生冲突。也只有和uwsgi配合使用的时候才需要注释，开发的时候，还需要用这个功能才测试。</em></strong></p>
+</li>
+<li><p>uwsgi的启动</p>
+<pre><code>uwsgi --ini /home/fulin/temp/web/config.ini
+输出：
+[uWSGI] getting INI configuration from /home/fulin/temp/web/config.ini
+</code></pre></li>
+<li><p>nginx的配置</p>
+<pre><code>location / {
+   include uwsgi_params;
+   uwsgi_pass unix:/tmp/my.sock;
+}
+</code></pre><p><strong><em>这里要注意<code>uwsgi_pass unix:/tmp/my.sock;</code>,/tmp/my.sock这个文件，nginx进程需要有读写和执行权限才行，这个套接字文件是nginx和uwsgi进行通信的纽带</em></strong></p>
+</li>
+<li><p>启动nginx</p>
+<pre><code>cd /application/nginx/sbin
+nginx
+</code></pre></li>
+<li><p>测试</p>
+</li>
+</ul>
+<pre><code>浏览器输入  http://192.168.116.131
+响应出hello world，表示OK
+</code></pre><blockquote>
+<p>这两个环境的搭建，虽然逻辑比较简单，但是还是花了我两天的时候，我自己反思了一下，为什么会这么久，主要是有两方面的原因：一方面是之前确实没有接触过<code>uwsgi</code>,所以需要摸索一下，另一方面出现问题之后，没有认真看官方文档，很多细节，官方文档中都有详细的描述。如果认真阅读会事半功倍的。</p>
+</blockquote>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx-uwsgi-python工作的原理"><span class="toc-number">1.</span> <span class="toc-text">nginx,uwsgi,python工作的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文档"><span class="toc-number">2.</span> <span class="toc-text">参考文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原生环境搭建过程"><span class="toc-number">3.</span> <span class="toc-text">原生环境搭建过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#uwsgi和flask进行集成"><span class="toc-number">4.</span> <span class="toc-text">uwsgi和flask进行集成</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

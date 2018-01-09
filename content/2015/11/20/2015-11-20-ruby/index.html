@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>与ruby有关的笔记 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>与ruby有关的笔记</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2015年11月20日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/ruby/">ruby</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>ruby这几年的名气越来越大了，甚至传说ruby是进行web开发效率最高的语言。前段时间折腾自己的github个人博客，接触到jekyll，进而接触到ruby，就稍微了解了一下。感觉ruby跟python和node这两种语言非常接近。这里记一下自己了解到的一点点有限的知识，防止遗忘。</p>
+</blockquote>
+<h3 id="ruby的包管理工具-gem"><a href="#ruby的包管理工具-gem" class="headerlink" title="ruby的包管理工具:gem"></a>ruby的包管理工具:gem</h3><p>像ruby，pyhon,node这几种语言都有自己的包管理工具，用起来真的感觉非常的爽，唯一不好的地方是：有时候下载的网速太慢了。遇到这种情况，就需要更换源。</p>
+<pre><code>gem -v                                     #gem版本
+gem source                                #gem资源
+gem sources -a url ｜gem sources -r url                        #gem添加或删除配置源
+gem update                                    #更新所有包
+gem update --system                            #更新RubyGems软件
+gem install rake                            #安装rake,从本地或远程服务器
+gem install rake --remote                            #安装rake,从远程服务器
+gem install watir -v(或者--version) 1.6.2                    #指定安装版本的
+gem uninstall rake                            #卸载rake包
+gem list d                                     #列出本地以d打头的包
+gem query -n &apos;&apos;[0-9]&apos;&apos; --local                         #查找本地含有数字的包
+gem search log --both                             #从本地和远程服务器上查找含有log字符串的包
+gem search log --remoter                         #只从远程服务器上查找含有log字符串的包
+gem search -r log                             #只从远程服务器上查找含有log字符串的包
+gem help                                 #提醒式的帮助
+gem help install                            #列出install命令 帮助
+gem help examples                             #列出gem命令使用一些例子
+gem build rake.gemspec                             #把rake.gemspec编译成rake.gem
+gem check -v pkg/rake-0.4.0.gem                     #检测rake是否有效
+gem cleanup                                 #清除所有包旧版本，保留最新版本
+gem contents rake                             #显示rake包中所包含的文件
+gem dependency rails -v 0.10.1                         #列出与rails相互依赖的包
+gem environment                             #查看gem的环境
+</code></pre><h3 id="将ruby的源更换为淘宝的源"><a href="#将ruby的源更换为淘宝的源" class="headerlink" title="将ruby的源更换为淘宝的源"></a>将ruby的源更换为淘宝的源</h3><pre><code>$ gem sources --remove http://rubygems.org/ 
+$ gem sources -a http://ruby.taobao.org/  
+$ gem sources -l  
+*** CURRENT SOURCES ***  
+
+http://ruby.taobao.org  
+# 请确保只有 ruby.taobao.org  这时候就可以安装jekyll包了
+$ gem install jekyll  #安装jekyll包  
+</code></pre>
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ruby的包管理工具-gem"><span class="toc-number">1.</span> <span class="toc-text">ruby的包管理工具:gem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将ruby的源更换为淘宝的源"><span class="toc-number">2.</span> <span class="toc-text">将ruby的源更换为淘宝的源</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
