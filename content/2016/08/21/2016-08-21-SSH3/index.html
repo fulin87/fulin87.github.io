@@ -264,7 +264,7 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 Disk identifier: 0x00000000
-</code></pre><p> <img src="/image/diskTotal.PNG" alt=""></p>
+</code></pre><p> <img src="/content/image/diskTotal.PNG" alt=""></p>
 <h3 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h3><p> 命令 <code>lspci | grep -i &#39;eth&#39;</code> 查看网卡信息</p>
 <pre><code>0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
 </code></pre><h3 id="BOIS"><a href="#BOIS" class="headerlink" title="BOIS"></a>BOIS</h3><p> 命令 <code>dmidecode -t bios</code> 查看当前的BOIS信息</p>
@@ -304,7 +304,7 @@ BIOS Information
     BIOS Revision: 4.6
     Firmware Revision: 0.0
 </code></pre><h2 id="Linux中的磁盘分区和目录"><a href="#Linux中的磁盘分区和目录" class="headerlink" title="Linux中的磁盘分区和目录"></a>Linux中的磁盘分区和目录</h2><p> 首先先看看磁盘的逻辑物理结构图</p>
-<p> <img src="/image/disk.PNG" alt=""></p>
+<p> <img src="/content/image/disk.PNG" alt=""></p>
 <p> 常见的硬盘一般分为三类。IDE硬盘，SCSI硬盘和SATA硬盘。通常我们电脑上的硬盘都是IDE和SATA，而服务器一般用SCSI硬盘。SCSI的硬盘接口设备叫sd，第一块硬盘就是sda，第二块硬盘是sdb…以此类推。Linux规定，一块硬盘上主分区和扩展分区总数不能超过4个，扩展分区又可以包含逻辑分区。主分区的命名方式分别是sda1，sda2，sda3，sda4。而逻辑分区从sd5开始，没有数量限制，命名方式为sd5，sd6…sd无穷大。主分区可以简单的理解为windows下的C盘，也就是系统分区，是引导操作系统必要的分区。而逻辑分区可以简单的理解为windows下的CDE盘等等。</p>
 <p> Linux磁盘分区不像windows把分区用盘符区分。在Linux中是先建立一个以根目录<code>/</code>为根节点的目录树,然后将磁盘分区挂载到相应的目录上，对于Linux文件系统的约定大致如下：</p>
 <pre><code>/bin        ##存放系统的核心最常用的命令

@@ -73,7 +73,7 @@
           <blockquote>
 <p>昨天，一位同事在A系统的测试环境的mysql数据库中执行了一条<code>DELETE</code> 语句，删除了一千多万条数据，导致监控平台告警，数据库服务器磁盘空间被占满,对于这件事，我们是需要思考和总结的。</p>
 </blockquote>
-<p> <img src="/image/mysqlDelete.PNG" alt=""></p>
+<p> <img src="/content/image/mysqlDelete.PNG" alt=""></p>
 <h3 id="为什么会出现磁盘被占满的情况"><a href="#为什么会出现磁盘被占满的情况" class="headerlink" title="为什么会出现磁盘被占满的情况"></a>为什么会出现磁盘被占满的情况</h3><p> 在<code>mysql</code>数据库中,<code>UPDATE,DELETE,INSERT</code>操作都会记录到一个二进制日志文件中,也就是大家平时所说的<code>binlog</code>,这个日志文件的格式与mysql的一个参数设置有关。</p>
 <p> <code>binlog</code>有很多用途：</p>
 <pre><code>* 根据binlog进行主从同步（常用）

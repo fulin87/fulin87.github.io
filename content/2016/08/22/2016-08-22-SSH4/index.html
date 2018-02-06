@@ -139,7 +139,7 @@ cat -n /etc/service | tail -1
 </code></pre></li>
 </ul>
 <h2 id="linux运行级别"><a href="#linux运行级别" class="headerlink" title="linux运行级别"></a>linux运行级别</h2><p> 先看看linux的启动流程图</p>
-<p><img src="/image/start.PNG" alt=""></p>
+<p><img src="/content/image/start.PNG" alt=""></p>
 <p> 在目录 <code>/etc/rc.d/init.d</code> 下有很多服务器脚本程序，一般称为服务。</p>
 <p> 在 <code>/etc/rc.d</code> 下有7个名为rcN.d的目录，对应系统的7个运行级别。</p>
 <p> 在rcN.d目录下都是一些符合连接(软连接)文件，这些文件都指向 <code>/etc/init.d</code> 目录下的service脚本文件，命名规则是 <code>K+nn+服务名</code> 或者 <code>S+nn+服务名</code> ，其中nn是两位阿拉伯数字</p>
