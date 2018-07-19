@@ -76,6 +76,97 @@
 <ul>
 <li>本书的官方网站，看了一眼，内容很丰富啊 <strong><a href="http://redisbook.com" target="_blank" rel="noopener">本书官网</a></strong></li>
 </ul>
+<h2 id="redis的数据结构的实现机制"><a href="#redis的数据结构的实现机制" class="headerlink" title="redis的数据结构的实现机制"></a>redis的数据结构的实现机制</h2><h3 id="简单动态字符串"><a href="#简单动态字符串" class="headerlink" title="简单动态字符串"></a>简单动态字符串</h3><p>redis的字符串对象的数据结构：</p>
+<pre><code>struct sdshdr{
+    int len;     //记录buf数组中已经使用的字节的数量,等于字符串的长度
+    int free;     //记录buf数组中未使用的字节的数量
+    char buf[]; //字节数组，用于保存字符串
+}
+</code></pre><p>redis中字符串的优点：</p>
+<ul>
+<li>获取字符串长度的复杂度是O(1)</li>
+<li>API是安全的不会造成缓冲区溢出</li>
+<li>修改字符串长度N次最多需要执行N次内存重分配</li>
+<li>可以保存文本或者二进制数据</li>
+<li>可以使用一部分C字符串的函数</li>
+</ul>
+<h3 id="redis中的链表"><a href="#redis中的链表" class="headerlink" title="redis中的链表"></a>redis中的链表</h3><ul>
+<li>链表提供了高效的节点重排能力和顺序性的节点访问方式还提供了高效的增删节点能力</li>
+<li>redis中的列表，发布与订阅，慢查询，监视器都用到了链表</li>
+<li>redis本身还是要链表来保存多个客户端的连接状态</li>
+<li>redis还使用链表还构建客户端输出缓冲区</li>
+</ul>
+<p>redis中链表的数据结构</p>
+<p>redis中使用了两种hash算法，分别是<strong>djb</strong> 和 <strong>murmurhash</strong></p>
+<pre><code>typedef struct listNode{
+    //前置节点
+    struct listNode * prev;
+    //后置节点
+    struct listNode * next;
+    //节点的值
+    void * value;
+}listNode;
+</code></pre><p>redis中list的数据结构</p>
+<pre><code>typedef struct list{
+    //表头节点
+    listNode * head;
+    //表尾节点
+    listNode * tail;
+    //链表所包含的节点数量
+    unsigned long len;
+    //节点值复制函数
+    void *(*dup)(void *ptr);
+    //节点值释放函数
+    void (*free)(void *ptr);
+    //节点值对比函数
+    int (*match)(void *ptr,void *key);
+}list;
+</code></pre><p><img src="/content/image/redis_list1.PNG" alt=""></p>
+<p>redis的链表实现是双端链表,而且是无环链表，redis链表可以保存各种不同类型的值</p>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>哈希表的节点：</p>
+<pre><code>typeof struct dictEntry{
+    //键
+    void *key;
+    //值
+    union{
+        void *val;
+        uint64_tu64;
+        int64_ts64;
+    } v;
+    //指向下一个哈希表节点，形成链表
+    struct dictEntry *next;
+} dictEntry;
+</code></pre><ul>
+<li>key属性保存着键值对中的键</li>
+<li>v属性保存着键值对中的值</li>
+<li>值可以是一个指针，或者是一个uint64/int64的整数</li>
+<li>next属性是指向另一个哈希表节点的指针,依次来解决哈希冲突</li>
+</ul>
+<p>redis字典的数据结构</p>
+<pre><code>typedf struct dict {
+    //类型特定函数
+    dictType *type;
+    //私有数据
+    void *privdata;
+    //哈希表
+    dictht ht[2];
+    //rehash索引，当rehash不在进行时，值为-1
+    int rehashidx;
+}
+</code></pre><ul>
+<li>ht属性是一个包含两个项的数组，数组中的每一个项都是一个dictht哈希表</li>
+<li>一般情况下，字典只使用ht[0]哈希表，ht[1]哈希表只会对ht[0]哈希表进行rehash时使用。</li>
+<li>rehashidx记录了rehash目前的进度,如果没有在进行rehash则其值为-1</li>
+<li>redis使用MurmurHash2算法来进行键的哈希运算</li>
+</ul>
+<p><img src="/content/image/redis_dict1.PNG" alt=""></p>
+<ul>
+<li>redis的rehash使用的是渐进式rehash</li>
+<li>每次对字典进行curd操作时，程序除了执行指定的操作之外，还会顺带执行一部分rehash操作</li>
+<li>最终在某个时间点上ht[0]的键值对会被rehash到ht[1]</li>
+<li>渐进式rehash的好处在于它采取分而治之的方式，将rehash的操作分摊到对字典的每次操作上</li>
+<li>渐进式rehash避免了集中式rehash而带来的庞大计算量</li>
+</ul>
 <p>redis是单进程单线程的K/V数据库,其为什么会那么快，主要是因为：</p>
 <ul>
 <li>完全基于内存</li>
@@ -94,7 +185,6 @@
 <li>memecache只支持String结构，Redis有比较丰富的数据结构</li>
 <li>value的大小，redis可以达到1G，memcache只有1M</li>
 </ul>
-<p>redis常见的性能问题有哪些</p>
 
         </section>
     </article>
@@ -102,6 +192,13 @@
         
   </div>
   <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis的数据结构的实现机制"><span class="toc-number">1.</span> <span class="toc-text">redis的数据结构的实现机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单动态字符串"><span class="toc-number">1.1.</span> <span class="toc-text">简单动态字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis中的链表"><span class="toc-number">1.2.</span> <span class="toc-text">redis中的链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典"><span class="toc-number">1.3.</span> <span class="toc-text">字典</span></a></li></ol></li></ol>
+        </div>
+    </div>
     
   </aside>
 </main>

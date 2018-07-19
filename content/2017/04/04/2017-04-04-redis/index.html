@@ -73,7 +73,24 @@
           <blockquote>
 <p>redis是一个高性能的键值对数据库，redis是意大利人在2009年开发完成并开源的软件产品。<br>redis本身的含义是 <em>remote dictionary server (远程字典服务器)</em>，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。</p>
 </blockquote>
-<h3 id="redis的特点"><a href="#redis的特点" class="headerlink" title="redis的特点"></a>redis的特点</h3><ul>
+<h3 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h3><ul>
+<li>下载 : wget <a href="http://download.redis.io/releases/redis-4.0.6.tar.gz" target="_blank" rel="noopener">http://download.redis.io/releases/redis-4.0.6.tar.gz</a></li>
+<li>解压 : tar zxvf redis-4.0.6.tar.gz</li>
+<li>进入 : cd redis-4.0.6</li>
+<li>安装测试 ： make test</li>
+<li>安装到/app/redis目录 : make PREFIX=/app/redis install</li>
+<li>进入安装目录 ： cd /app/redis</li>
+<li>运行redis ： ./bin/redis-server ./redis.conf</li>
+<li>让redis在后台运行 ： vim redis.conf 修改daemonize后的值改为 yes</li>
+</ul>
+<p><img src="/content/image/redis_bin.PNG" alt=""></p>
+<p>文件说明 </p>
+<pre><code>redis-benchmark ：    性能测试工具 
+redis-check-aof ：    检查aof日志工具 
+redis-check-rdb ：    检查rdb日志工具 
+redis-cli       ：    客户端工具
+redis-server    ：    redis服务进程
+</code></pre><h3 id="redis的特点"><a href="#redis的特点" class="headerlink" title="redis的特点"></a>redis的特点</h3><ul>
 <li><p>支持丰富的数据类型</p>
 <p>  字符串类型(string)，散列类型(hash)，列表类型(list)，集合类型(set)，有序集合类型(zset)</p>
 </li>
@@ -137,6 +154,7 @@ ltrim key start end     //删除列表中指定范围以外的元素
 linsert key after|before prov val
                         //从左到右根据after还是before来决定在prov的前还是后插入val
 rpoplpush source target //将source中rpop的数据lpush到target中，可以实现一个环状数据结构
+brpop key seconds        //从列表中弹出一个元素，如果没有则阻塞，seconds是超时时间
 </code></pre><h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>这里的集合可以理解为是数学中的集合，元素不能重复。这里有必要比较一下集合和列表的区别</p>
 <pre><code>集合： 无序    元素唯一    最多2的32次方减1个元素
 列表： 有序  元素可重    最多2的32次方减1个元素
@@ -180,7 +198,14 @@ zremrangebyrank key start stop
                         //按照元素排名从小到大删除处在排名范围内的所有元素，返回删除的数量
 zremrangebyscore key min max
                         //按照元素分数范围删除元素
-</code></pre><h3 id="redis的事务"><a href="#redis的事务" class="headerlink" title="redis的事务"></a>redis的事务</h3><p> redis提供了类似关系型数据库的事务功能，但是没有提供回滚机制,开发者必须在事务执行出错后自己收拾残局。命令：</p>
+zinterstore target key key1
+                        //将有序集合交集之后存入target
+zunionstore target key key1
+                        //将有序集合并集之后存入target
+</code></pre><h3 id="redis的事务"><a href="#redis的事务" class="headerlink" title="redis的事务"></a>redis的事务</h3><p> redis事务解决的问题：</p>
+<pre><code>1，redis保证事务内多个命令执行的原子性
+2，redis保证事务内命令依次执行而不被其他命令插入
+</code></pre><p> redis提供了类似关系型数据库的事务功能，但是没有提供回滚机制,开发者必须在事务执行出错后自己收拾残局。命令：</p>
 <p> <strong><em>MULTI  EXEC 命令</em></strong></p>
 <pre><code>MULTI
 
@@ -188,12 +213,42 @@ code ...
 
 EXEC
 </code></pre><p> 同时因为redis不支持回滚功能，所以redis的事务上可以保持简洁和快速</p>
+<pre><code>redis事务中的命令是在EXEC之后才执行的
+</code></pre><h4 id="事务的异常处理"><a href="#事务的异常处理" class="headerlink" title="事务的异常处理"></a>事务的异常处理</h4><ul>
+<li><p>如果是语法错误</p>
+<pre><code>如果是语法错误，则在redis 2.6.5以前错误命令不执行，正确命令会执行，在redis2.6.5以后都不执行
+</code></pre></li>
+<li><p>如果是运行错误</p>
+<pre><code>如果是运行错误，则错误的不执行，正确的命令会执行
+</code></pre></li>
+</ul>
 <p> <strong><em>WATCH 命令</em></strong></p>
 <p> <em>WATCH</em>命令可以监控一个或多个键，一旦其中有一个键被修改，之后的事务就不会被执行。</p>
 <pre><code>WATCH key1 key2 key3 ....
+MULTI
+code
+EXEC
+
+WATCH命令需要和事务结合使用
 </code></pre><p> <strong><em>UNWATCH 命令</em></strong></p>
 <p> <em>UNWATCH</em>命令可以取消对键的监控</p>
 <pre><code>UNWATCH key1 key2 key3 ....
+</code></pre><h3 id="键的生存时间"><a href="#键的生存时间" class="headerlink" title="键的生存时间"></a>键的生存时间</h3><pre><code>expire key seconds            //设置键的生存时间,seconds的单位是秒
+ttl    key                        //显示键还有多长时间过期，单位是秒
+persist key                 //取消键的生存时间，set和getset命令也会清除键的生存时间
+pexpire key millconds        //设置键的生存时间，millconds的单位是毫秒数
+</code></pre><blockquote>
+<p>对于不常用到的功能或者在不损失过多性能的前提下可以使用现有命令来实现的功能，redis不会单独提供命令来实现，这一原则使得redis在拥有强大功能的同时，保持着相对精简的命令</p>
+</blockquote>
+<h3 id="redis的排序"><a href="#redis的排序" class="headerlink" title="redis的排序"></a>redis的排序</h3><pre><code>sort key by ageHash:*-&gt;age limit 0 2 desc get ageHash:*-&gt;age get # store sort.result
+                             //按照ageHash对应的key的age降序排列key，取前2个元素对应的age和本身的值并将结果保存在sort.result中
+sort命令中的*是一个占位符
+get #                         //返回元素本身的值
+sort命令的结果是列表类型，如果有store参数结果是保存的数据个数
+
+sort命令的时间复杂度是 O(n+mlogm) n为要排序的列表，m是要返回的元素个数，n较大时会有性能问题
+redis排序时会建立一个长度为n的容器来临时存储待排序元素，有时会有严重的性能问题
+</code></pre><h3 id="reids的任务队列"><a href="#reids的任务队列" class="headerlink" title="reids的任务队列"></a>reids的任务队列</h3><pre><code>blpop或者brpop可以实现具有优先级的任务队列
 </code></pre>
         </section>
     </article>
@@ -205,7 +260,7 @@ EXEC
     <div class="toc-container">
         <h1>目录</h1>
         <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的特点"><span class="toc-number">1.</span> <span class="toc-text">redis的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的一些性能参数和常识"><span class="toc-number">2.</span> <span class="toc-text">redis的一些性能参数和常识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的启动和停止"><span class="toc-number">3.</span> <span class="toc-text">redis的启动和停止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串类型"><span class="toc-number">4.</span> <span class="toc-text">字符串类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典类型"><span class="toc-number">5.</span> <span class="toc-text">字典类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表类型"><span class="toc-number">6.</span> <span class="toc-text">列表类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合"><span class="toc-number">7.</span> <span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序集合"><span class="toc-number">8.</span> <span class="toc-text">有序集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的事务"><span class="toc-number">9.</span> <span class="toc-text">redis的事务</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的安装"><span class="toc-number">1.</span> <span class="toc-text">redis的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的特点"><span class="toc-number">2.</span> <span class="toc-text">redis的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的一些性能参数和常识"><span class="toc-number">3.</span> <span class="toc-text">redis的一些性能参数和常识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的启动和停止"><span class="toc-number">4.</span> <span class="toc-text">redis的启动和停止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串类型"><span class="toc-number">5.</span> <span class="toc-text">字符串类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典类型"><span class="toc-number">6.</span> <span class="toc-text">字典类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表类型"><span class="toc-number">7.</span> <span class="toc-text">列表类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合"><span class="toc-number">8.</span> <span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序集合"><span class="toc-number">9.</span> <span class="toc-text">有序集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的事务"><span class="toc-number">10.</span> <span class="toc-text">redis的事务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#事务的异常处理"><span class="toc-number">10.1.</span> <span class="toc-text">事务的异常处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#键的生存时间"><span class="toc-number">11.</span> <span class="toc-text">键的生存时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的排序"><span class="toc-number">12.</span> <span class="toc-text">redis的排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reids的任务队列"><span class="toc-number">13.</span> <span class="toc-text">reids的任务队列</span></a></li></ol>
         </div>
     </div>
     
