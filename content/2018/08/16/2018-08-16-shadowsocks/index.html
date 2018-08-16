@@ -10,7 +10,7 @@
     <link rel="icon" href="">
   
     
-  <title>消息队列学习笔记 | 水货程序员的笔记</title>
+  <title>搭建自己的代理服务器 | 水货程序员的笔记</title>
   <link rel="stylesheet" href="/content/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
@@ -56,13 +56,13 @@
   <div class="content">
     <article>
         <section class="content markdown-body">
-          <h1>消息队列学习笔记</h1>
+          <h1>搭建自己的代理服务器</h1>
           <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年06月25日</time>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年08月16日</time>
             
               | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
   <div class="article-category">
-    <a class="article-category-link" href="/content/categories/MQ/">MQ</a>
+    <a class="article-category-link" href="/content/categories/life/">life</a>
   </div>
 
 
@@ -71,44 +71,16 @@
             
           </div>
           <blockquote>
-<p>消息队列已经成为了后端最常用的中间件之一，这里记录一下自己学习MQ的笔记</p>
+<p>为了使用科学的上网，我自己搭建了一个Shadowsocks代理服务。这里记录一下自己搭建的过程</p>
 </blockquote>
-<h3 id="消息队列的使用场景"><a href="#消息队列的使用场景" class="headerlink" title="消息队列的使用场景"></a>消息队列的使用场景</h3><ul>
-<li>解耦</li>
-<li>最终一致性</li>
-<li>广播</li>
-<li>错峰与流控</li>
-</ul>
-<h3 id="MQ的实现原理"><a href="#MQ的实现原理" class="headerlink" title="MQ的实现原理"></a>MQ的实现原理</h3><p>mq的实现其实本质上还是生产者发送RPC请求给”消息队列服务端”,然后消息队列服务端将数据进行存储，在适当的时候消息队列服务端发送RPC请求给消费端，消费端最后发送RPC请求给消息队列服务端完成消费确认。<br>因此：<strong>消息队列可以简单的理解为是3次RPC请求加上暂存</strong></p>
-<h3 id="activeMQ实战"><a href="#activeMQ实战" class="headerlink" title="activeMQ实战"></a>activeMQ实战</h3><h4 id="activeMQ的安装"><a href="#activeMQ的安装" class="headerlink" title="activeMQ的安装"></a>activeMQ的安装</h4><ul>
-<li>本地下载activeMQ</li>
-<li><p>服务器如果没有上传命令，需要按照上传和下载命令</p>
-<pre><code>yum install -y lrzsz
-</code></pre></li>
-<li><p>将本地的文件上传至服务器</p>
-</li>
-<li><p>解压</p>
-<pre><code>tar zvxf apache-activemq-5.15.4-bin.tar.gz
-</code></pre></li>
-<li><p>启动</p>
-<pre><code>cd /app/apache-activemq-5.15.4
-./bin/activemq start
-</code></pre></li>
-<li><p>访问控制台</p>
-<pre><code>http://192.168.182.129:8161/admin
-</code></pre></li>
-</ul>
-<p><strong>注意</strong></p>
-<pre><code>activemq依赖于jdk，需要提前在服务器上安装好jdk
-</code></pre><h3 id="kafka实战"><a href="#kafka实战" class="headerlink" title="kafka实战"></a>kafka实战</h3><h4 id="kafka的安装"><a href="#kafka的安装" class="headerlink" title="kafka的安装"></a>kafka的安装</h4><p>*下载kafka </p>
-<pre><code>wget http://mirror.bit.edu.cn/apache/kafka/2.0.0/kafka_2.11-2.0.0.tgz 
-</code></pre><p>*解压</p>
-<pre><code>tar -zvxf kafka_2.11-2.0.0.tgz
-</code></pre><p>*移动到指定目录</p>
-<pre><code>mv kafka_2.11-2.0.0 /app
-</code></pre><p>*启动kafka</p>
-<pre><code>cd /app/kafka_2.11-2.0.0/bin
-./kafka-server-start.sh -daemon ../config/server.properties
+<h3 id="首选需要有一台位于国外的主机"><a href="#首选需要有一台位于国外的主机" class="headerlink" title="首选需要有一台位于国外的主机"></a>首选需要有一台位于国外的主机</h3><p> 这里我选择的是国外的虚拟机,使用的是<a href="https://my.vultr.com" target="_blank" rel="noopener">云服务器厂商</a>的云服务,之所以选择这个是因为它支持支付宝支付。其他的需要使用信用卡的厂商，我总感觉不安全</p>
+<h3 id="安装-Shadowsocks-服务"><a href="#安装-Shadowsocks-服务" class="headerlink" title="安装 Shadowsocks 服务"></a>安装 Shadowsocks 服务</h3><pre><code>$ yum update    #这个命令的作用是更新一个yum源
+$ git clone https://github.com/flyzy2005/ss-fly
+</code></pre><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre><code>$ ss-fly/ss-fly.sh -i 123456 1024  #这里的123456是密码,1024是代理端口
+</code></pre><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code>默认的配置文件位于 /etc/shadowsock.json
+</code></pre><h3 id="启动与停止"><a href="#启动与停止" class="headerlink" title="启动与停止"></a>启动与停止</h3><pre><code>停止ss服务：ssserver -c /etc/shadowsocks.json -d stop
+启动ss服务：ssserver -c /etc/shadowsocks.json -d start
+重启ss服务：ssserver -c /etc/shadowsocks.json -d restart
 </code></pre>
         </section>
     </article>
@@ -120,7 +92,7 @@
     <div class="toc-container">
         <h1>目录</h1>
         <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#消息队列的使用场景"><span class="toc-number">1.</span> <span class="toc-text">消息队列的使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ的实现原理"><span class="toc-number">2.</span> <span class="toc-text">MQ的实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activeMQ实战"><span class="toc-number">3.</span> <span class="toc-text">activeMQ实战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#activeMQ的安装"><span class="toc-number">3.1.</span> <span class="toc-text">activeMQ的安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kafka实战"><span class="toc-number">4.</span> <span class="toc-text">kafka实战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#kafka的安装"><span class="toc-number">4.1.</span> <span class="toc-text">kafka的安装</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#首选需要有一台位于国外的主机"><span class="toc-number">1.</span> <span class="toc-text">首选需要有一台位于国外的主机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Shadowsocks-服务"><span class="toc-number">2.</span> <span class="toc-text">安装 Shadowsocks 服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">3.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动与停止"><span class="toc-number">5.</span> <span class="toc-text">启动与停止</span></a></li></ol>
         </div>
     </div>
     
