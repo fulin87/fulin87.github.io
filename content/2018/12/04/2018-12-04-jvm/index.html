@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>java虚拟机知识总结 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>java虚拟机知识总结</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月04日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>多年来学习java虚拟机的知识总是零零散散，一直没有做过笔记，所有的东西都是在自己的脑子里，现在有时间了，有必要做一下系统的总结</p>
+</blockquote>
+<h3 id="平时遇到的异常"><a href="#平时遇到的异常" class="headerlink" title="平时遇到的异常"></a>平时遇到的异常</h3><h4 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h4><pre><code>/**
+ * 
+ * @author fulin16
+ * 
+ * 模拟 Java heap space 溢出
+ * 运行参数：-verbose:gc -Xms10M -Xmx10M -Xss128k -XX:+PrintGCDetails
+ */
+class Person{}
+public class HeapException {
+    public static void main(String[] args) {
+        List&lt;Person&gt; list = new ArrayList&lt;Person&gt;();
+        while(true){
+            list.add(new Person());
+        }
+    }
+}
+</code></pre><blockquote>
+<p>异常堆栈</p>
+</blockquote>
+<pre><code>[GC (Allocation Failure) [PSYoungGen: 2528K-&gt;496K(2560K)] 6226K-&gt;6244K(9728K), 0.0036614 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+[Full GC (Ergonomics) [PSYoungGen: 496K-&gt;0K(2560K)] [ParOldGen: 5748K-&gt;5117K(7168K)] 6244K-&gt;5117K(9728K), [Metaspace: 2660K-&gt;2660K(1056768K)], 0.0733379 secs] [Times: user=0.16 sys=0.00, real=0.07 secs] 
+[GC (Allocation Failure) [PSYoungGen: 2048K-&gt;512K(2560K)] 7165K-&gt;7180K(9728K), 0.0027150 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+[Full GC (Ergonomics) [PSYoungGen: 512K-&gt;0K(2560K)] [ParOldGen: 6668K-&gt;6227K(7168K)] 7180K-&gt;6227K(9728K), [Metaspace: 2660K-&gt;2660K(1056768K)], 0.0365703 secs] [Times: user=0.14 sys=0.00, real=0.04 secs] 
+[Full GC (Ergonomics) [PSYoungGen: 1391K-&gt;863K(2560K)] [ParOldGen: 6227K-&gt;6735K(7168K)] 7618K-&gt;7599K(9728K), [Metaspace: 2660K-&gt;2660K(1056768K)], 0.0618754 secs] [Times: user=0.11 sys=0.00, real=0.06 secs] 
+[Full GC (Allocation Failure) [PSYoungGen: 863K-&gt;863K(2560K)] [ParOldGen: 6735K-&gt;6724K(7168K)] 7599K-&gt;7588K(9728K), [Metaspace: 2660K-&gt;2660K(1056768K)], 0.0571520 secs] [Times: user=0.11 sys=0.00, real=0.06 secs] 
+Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
+    at java.util.Arrays.copyOf(Arrays.java:3210)
+    at java.util.Arrays.copyOf(Arrays.java:3181)
+    at java.util.ArrayList.grow(ArrayList.java:261)
+    at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:235)
+    at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:227)
+    at java.util.ArrayList.add(ArrayList.java:458)
+    at com.fulin.exception.HeapException.main(HeapException.java:27)
+Heap
+ PSYoungGen      total 2560K, used 945K [0x00000000ffd00000, 0x0000000100000000, 0x0000000100000000)
+  eden space 2048K, 46% used [0x00000000ffd00000,0x00000000ffdec6e0,0x00000000fff00000)
+  from space 512K, 0% used [0x00000000fff00000,0x00000000fff00000,0x00000000fff80000)
+  to   space 512K, 0% used [0x00000000fff80000,0x00000000fff80000,0x0000000100000000)
+ ParOldGen       total 7168K, used 6724K [0x00000000ff600000, 0x00000000ffd00000, 0x00000000ffd00000)
+  object space 7168K, 93% used [0x00000000ff600000,0x00000000ffc91060,0x00000000ffd00000)
+ Metaspace       used 2692K, capacity 4486K, committed 4864K, reserved 1056768K
+  class space    used 289K, capacity 386K, committed 512K, reserved 1048576K
+</code></pre><p>……. 未完待续</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#平时遇到的异常"><span class="toc-number">1.</span> <span class="toc-text">平时遇到的异常</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆溢出"><span class="toc-number">1.1.</span> <span class="toc-text">堆溢出</span></a></li></ol></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
