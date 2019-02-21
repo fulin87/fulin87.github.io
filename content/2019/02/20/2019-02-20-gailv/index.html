@@ -89,19 +89,16 @@ p    30.1%    17.6%    12.5%    9.7%    7.9%    6.7%    5.8%    5.1%    4.6%
 
 private static void testBenfude(){
     //为了显示方便多余的数据省略
-    Map&lt;Integer, List&lt;Integer&gt;&gt; result = Arrays.asList(130.62,428.07,40.40,201.51,300.23,136.31,173.65)
+    Map&lt;Integer, Long&gt; result = Arrays.asList(130.62,428.07,40.40,201.51,300.23,136.31,173.65)
         .parallelStream()
         .map(p -&gt; Integer.valueOf(String.valueOf(p).substring(0,1)))
-        .collect(Collectors.groupingBy(Integer::intValue));
+        .collect(Collectors.groupingBy(p -&gt; p,Collectors.counting()));
 
     DecimalFormat df = new DecimalFormat(&quot;#.0&quot;);
-    int i = 1;
-    for(Integer key : result.keySet()){
-        Double pecent = result.get(key).size() / 2000.0 * 100;
-        String specent = df.format(pecent);
-        System.out.println(i + &quot; =&gt; &quot; + specent + &quot;%&quot;);
-        i ++;
-    }
+    result.forEach((k,v) -&gt; {
+        String pecent = String.format(&quot;%d =&gt; %s%%&quot;, k,df.format(v / 2000.0 * 100));
+        System.out.println(pecent);
+    });
 }
 
 输出：
