@@ -84,8 +84,113 @@ scrapy view http://taobao.com //下载一个网页，用于调试，可见哪些
 scrapy shell http://taobao.com //用于调试的命令行，非常方便
 scrapy version -v             //输出一些scrapy依赖库的版本
 scrapy bench http://taobao.com //测试当前硬件的爬行速度
-</code></pre><p>##未完待续…..</p>
+</code></pre><p>用scrapy爬取天猫数据的时候，发现天猫的反爬机制非常强大，接口隐藏的很深，爬取一段时间后竟然要求登录，为了绕开他的反爬机制，使用了selenium来模拟浏览器的行为</p>
+<h2 id="用selenium爬取天猫商品详情页的价格"><a href="#用selenium爬取天猫商品详情页的价格" class="headerlink" title="用selenium爬取天猫商品详情页的价格"></a>用selenium爬取天猫商品详情页的价格</h2><p>需求：给定一个天猫详情页的url，返回详情页的价格</p>
+<p>实现：flask实现web服务，提供rest接口，接收请求后使用selenium模拟浏览器，然后抓取页面数据</p>
+<pre><code>#! python2
+# coding: UTF-8
+&apos;&apos;&apos;
+Created on 2018年10月4日
 
+@author: fulin16
+&apos;&apos;&apos;
+
+from flask import Flask,request
+import json
+import requests
+
+from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+import time
+
+app = Flask(__name__)
+# browser = webdriver.Chrome()
+
+&apos;&apos;&apos;
+    code : 0,正常;1,请求方式不正确;2,获取请求参数异常
+    data : 根据url爬取到的数据
+    msg  : 响应描述信息
+&apos;&apos;&apos;
+@app.route(&quot;/getPrice&quot;,methods=[&apos;GET&apos;,&apos;POST&apos;,&apos;PUT&apos;])
+def resaveUrl():
+    url = &apos;&apos;
+    result = {
+        &apos;code&apos;:0,
+        &apos;data&apos;:&apos;&apos;,
+        &apos;msg&apos;:&apos;&apos;
+    }
+    try:
+        if request.method == &apos;GET&apos;:
+            #使用的是get请求
+            url = request.args.get(&apos;url&apos;, &apos;&apos;)
+        elif request.method == &apos;POST&apos;:
+            #使用的是post请求
+            if not request.json:
+                #post过来的数据不是json
+                url =  &quot;不是json&quot;
+            else:
+                print &quot;是json&quot;
+                #post过来的数据是json
+                data = request.get_data()
+                url = json.loads(data)[&apos;url&apos;]
+        else:
+            url = &apos;&apos;
+            result[&apos;code&apos;] = 1
+            result[&apos;msg&apos;] = &apos;只支持GET或者POST请求方式&apos;
+            return json.dumps(result,separators=(&apos;,&apos;,&apos;:&apos;),ensure_ascii=False)
+    except Exception :
+        result[&apos;code&apos;] = 2
+        result[&apos;msg&apos;] = &apos;爬虫系统获取请求参数出现异常&apos;
+        return json.dumps(result,separators=(&apos;,&apos;,&apos;:&apos;),ensure_ascii=False)
+
+    #根据URL进行数据的爬取
+    if(url.startswith(&quot;https://detail.tmall.com&quot;)):
+        #天猫
+        result[&apos;data&apos;] = spiderTianMaoWithSelenuim(url)
+        #result[&apos;data&apos;] = spiderTianMao(url)
+    return json.dumps(result,separators=(&apos;,&apos;,&apos;:&apos;),ensure_ascii=False)
+
+#通过接口来爬取天猫
+def spiderTianMao(url):
+    splitList = url.split(&apos;&amp;&apos;)
+    pId = splitList[0].split(&apos;id=&apos;)[1]
+    detailUrl = &quot;https://mdskip.taobao.com/core/initItemDetail.htm?isUseInventoryCenter=false&amp;cartEnable=true&amp;service3C=false&amp;isApparel=true&amp;isSecKill=false&amp;tmallBuySupport=true&amp;isAreaSell=false&amp;tryBeforeBuy=false&amp;offlineShop=false&amp;itemId=&quot;+ pId +&quot;&amp;showShopProm=false&amp;isPurchaseMallPage=false&amp;isRegionLevel=false&amp;household=false&amp;sellerPreview=false&amp;queryMemberRight=true&amp;addressLevel=2&amp;isForbidBuyItem=false&quot;
+#     detailUrl = detailUrl.format({&apos;id&apos;:pId})
+    print detailUrl
+    headers={
+        &apos;Referer&apos;:url,
+        &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36&apos;,
+        &apos;Accept-Language&apos;:&apos;zh-CN,zh;q=0.9&apos;,
+        &apos;Accept-Encoding&apos;:&apos;gzip,deflate,br&apos;
+    }
+    response = requests.get(url=detailUrl,headers=headers,verify=False)
+    print response
+    print response.content
+    return response.content
+
+
+#通过selenuim爬取天猫数据
+def spiderTianMaoWithSelenuim(url):
+    browser = webdriver.PhantomJS(service_args=[&apos;--load-images=false&apos;,&apos;--disk-cache=true&apos;,&apos;--ignore-ssl-errors=true&apos;, &apos;--ssl-protocol=TLSv1&apos;])
+    browser.set_window_size(1400,900)
+    browser.get(url)
+    #time.sleep(2)
+    browser.find_element_by_xpath(&apos;//*[@id=&quot;sufei-dialog-close&quot;]&apos;).click()
+    browser.execute_script(&quot;window.scrollBy(0,3000)&quot;)
+    browser.execute_script(&quot;window.scrollBy(0,-3000)&quot;)
+    price = WebDriverWait(browser,20).until(
+        EC.presence_of_element_located((By.XPATH,&apos;//*[@id=&quot;J_StrPriceModBox&quot;]/dd/span&apos;))
+    )
+    priceValue = price.text
+    print priceValue
+    browser.close()
+    return priceValue
+
+if __name__ == &apos;__main__&apos;:
+    app.run()
+</code></pre>
         </section>
     </article>
     
@@ -96,7 +201,7 @@ scrapy bench http://taobao.com //测试当前硬件的爬行速度
     <div class="toc-container">
         <h1>目录</h1>
         <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#scrapy的命令"><span class="toc-number">1.</span> <span class="toc-text">scrapy的命令</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#scrapy的命令"><span class="toc-number">1.</span> <span class="toc-text">scrapy的命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用selenium爬取天猫商品详情页的价格"><span class="toc-number"></span> <span class="toc-text">用selenium爬取天猫商品详情页的价格</span></a>
         </div>
     </div>
     
