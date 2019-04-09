@@ -71,13 +71,39 @@
             
           </div>
           <blockquote>
-<p>减少程序中的bug的一个有效的方法是编写程序逻辑的同时编写测试用例，尽早发现问题。同时Junit作为开源类库， <strong><a href="http://www.oschina.net/news/73667/2016-top-100-java-library" target="_blank" rel="noopener">受欢迎程度</a></strong> 是非常高的，已经成为java单元测试事实上的标准，有必要做深入的学习。</p>
+<p>减少程序中的bug的一个有效的方法是编写程序逻辑的同时进行单元测试，尽早发现问题。同时Junit作为开源类库， <strong><a href="http://www.oschina.net/news/73667/2016-top-100-java-library" target="_blank" rel="noopener">受欢迎程度</a></strong> 是非常高的，已经成为java单元测试事实上的标准，有必要做深入的学习。</p>
 </blockquote>
 <h2 id="Junit的官方信息"><a href="#Junit的官方信息" class="headerlink" title="Junit的官方信息"></a>Junit的官方信息</h2><ul>
 <li><strong><a href="http://junit.org/junit4/" target="_blank" rel="noopener">Junit官网</a></strong></li>
 <li><strong><a href="https://github.com/junit-team/junit4" target="_blank" rel="noopener">github地址</a></strong></li>
 </ul>
-<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><h3 id="准备测试类"><a href="#准备测试类" class="headerlink" title="准备测试类"></a>准备测试类</h3><p><code>TestCast1</code>,<code>TestCast2</code> </p>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><ul>
+<li>源代码和测试代码要分开放在不同的目录，不能混在一起</li>
+<li>测试类和目标类最好在同一个包下面,这样可以包的导入，因为他们的class文件位于同一个包下</li>
+<li>要明白单元测试不能保证代码正确，只能说明代码没有明显的错误，这个要看测试用例的选择</li>
+<li>单元测试是检测程序的输入数据和输出数据（异常）是否符合预期</li>
+<li>测试用例与测试用例之间应该绝对独立不能有任何依赖关系</li>
+</ul>
+<h3 id="junit使用规范"><a href="#junit使用规范" class="headerlink" title="junit使用规范"></a>junit使用规范</h3><ul>
+<li><p>测试类必须直接或间接继承TestCase,以下是TestCase的javaDoc</p>
+<blockquote>
+<p>A test case defines the fixture to run multiple tests. To define a test case</p>
+<ul>
+<li>1) implement a subclass of TestCase</li>
+<li>2) define instance variables that store the state of the fixture</li>
+<li>3) initialize the fixture state by overriding setUp</li>
+<li>4) clean-up after a test by overriding tearDown.</li>
+<li>Each test runs in its own fixture so there can be no side effects among test runs</li>
+</ul>
+</blockquote>
+</li>
+<li><p>测试目标类的私有方法可以采用反射的方式来测试</p>
+</li>
+<li>Eclipse为我们提供了工具可以一键生成测试类，可大幅度提高编写测试用例的效率</li>
+<li>Junit中有测试套件:testSuite，可以将多个测试用例组合成一个运行</li>
+<li>junit4开始全面支持注解，junit4并不要求测试类继承TestCase</li>
+</ul>
+<h3 id="准备测试类"><a href="#准备测试类" class="headerlink" title="准备测试类"></a>准备测试类</h3><p><code>TestCast1</code>,<code>TestCast2</code> </p>
 <pre><code>package com.fulin.test.testJunt;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -91,21 +117,25 @@ public class TestCast1{
         System.out.println(&quot;Constrctor...&quot;);
     }
 
+    //junit4中的@Before注解实现的功能与junit3中的setUp方法实现的功能相同
     @Before
     public void before(){
         System.out.println(&quot;before&quot;);
     }
 
+    //@BeforeClass注解在所有测试方法执行之前执行，仅执行一次，可以用来做一些初始化工作
     @BeforeClass
     public static void beforeClass(){
         System.out.println(&quot;beforeClass&quot;);
     }
 
+    //junit4中的@After注解实现的功能与junit3中的tearDown方法实现的功能相同
     @After
     public void after(){
         System.out.println(&quot;after&quot;);
     }
 
+    //@AfterClass注解在所有测试方法执行之后执行，仅执行一次，可以用来做一些收尾工作
     @AfterClass
     public static void afterClass(){
         System.out.println(&quot;afterClass&quot;);
@@ -197,7 +227,7 @@ All tests finished successfully...
     <div class="toc-container">
         <h1>目录</h1>
         <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Junit的官方信息"><span class="toc-number">1.</span> <span class="toc-text">Junit的官方信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习笔记"><span class="toc-number">2.</span> <span class="toc-text">学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备测试类"><span class="toc-number">2.1.</span> <span class="toc-text">准备测试类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试方法一"><span class="toc-number">2.2.</span> <span class="toc-text">测试方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试方法二"><span class="toc-number">2.3.</span> <span class="toc-text">测试方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试过程和结果解读"><span class="toc-number">2.4.</span> <span class="toc-text">测试过程和结果解读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Junit4的生命周期"><span class="toc-number">2.4.1.</span> <span class="toc-text">Junit4的生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Junit注解解释"><span class="toc-number">2.4.2.</span> <span class="toc-text">Junit注解解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Junit源码解析"><span class="toc-number">2.5.</span> <span class="toc-text">Junit源码解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网友的精彩博客"><span class="toc-number">3.</span> <span class="toc-text">网友的精彩博客</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Junit的官方信息"><span class="toc-number">1.</span> <span class="toc-text">Junit的官方信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习笔记"><span class="toc-number">2.</span> <span class="toc-text">学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最佳实践"><span class="toc-number">2.1.</span> <span class="toc-text">最佳实践</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#junit使用规范"><span class="toc-number">2.2.</span> <span class="toc-text">junit使用规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#准备测试类"><span class="toc-number">2.3.</span> <span class="toc-text">准备测试类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试方法一"><span class="toc-number">2.4.</span> <span class="toc-text">测试方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试方法二"><span class="toc-number">2.5.</span> <span class="toc-text">测试方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试过程和结果解读"><span class="toc-number">2.6.</span> <span class="toc-text">测试过程和结果解读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Junit4的生命周期"><span class="toc-number">2.6.1.</span> <span class="toc-text">Junit4的生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Junit注解解释"><span class="toc-number">2.6.2.</span> <span class="toc-text">Junit注解解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Junit源码解析"><span class="toc-number">2.7.</span> <span class="toc-text">Junit源码解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网友的精彩博客"><span class="toc-number">3.</span> <span class="toc-text">网友的精彩博客</span></a></li></ol>
         </div>
     </div>
     

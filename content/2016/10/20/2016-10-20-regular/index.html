@@ -108,7 +108,16 @@ grep &quot;^[^t]&quot;  /home/config.conf #匹配出不是t开头的行
 <li><p><code>?</code> 重复0个或一个前面的字符</p>
 <pre><code>egrep &quot;s?&quot; /home/config.conf #匹配没有s或没有连续s的行
 </code></pre></li>
-<li><code>|</code> 用或的方式查找多个符合条件的字符串<pre><code>egrep &quot;ss|ff&quot; /home/config.conf #匹配含有ss或ff的行
+<li><p><code>|</code> 用或的方式查找多个符合条件的字符串</p>
+<pre><code>egrep &quot;ss|ff&quot; /home/config.conf #匹配含有ss或ff的行
+</code></pre></li>
+<li><p><code>\</code> 的用法</p>
+<pre><code>\d 匹配任何十进制数；相当于[0-9]
+\D 匹配任何非数字字符;相当于[^0-9]
+\s 匹配任何空白字符;相当于[\t\n\r\f\v]
+\S 匹配任何非空白字符;相当于[^\t\n\r\f\v]
+\w 匹配任何字母数字字符，相当于[a-zA-Z0-9_]
+\W 匹配任何非字母数字字符;相当于[^a-zA-Z0-9_]
 </code></pre></li>
 </ul>
 

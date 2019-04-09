@@ -10,7 +10,7 @@
     <link rel="icon" href="">
   
     
-  <title>java虚拟机知识总结 | 水货程序员的笔记</title>
+  <title>老鸟眼中的JVM知识体系 | 水货程序员的笔记</title>
   <link rel="stylesheet" href="/content/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
@@ -56,7 +56,7 @@
   <div class="content">
     <article>
         <section class="content markdown-body">
-          <h1>java虚拟机知识总结</h1>
+          <h1>老鸟眼中的JVM知识体系</h1>
           <div class='post-meta'>
             <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月04日</time>
             
@@ -71,8 +71,73 @@
             
           </div>
           <blockquote>
-<p>多年来学习java虚拟机的知识总是零零散散，一直没有做过笔记，所有的东西都是在自己的脑子里，现在有时间了，有必要做一下系统的总结</p>
+<p>写了多年的java代码之后，现在以一个老鸟的视角来看java，真的和刚开始的时候是有天壤之别的，依然记得当初跑出第一个 <em>Hello World</em> 时候的感觉：<em>运行一个程序竟然什么感觉都没有，竟然如此平凡</em>。现在看来，当年的自己还是太稚嫩了，一个简单的 <em>Hello World</em> 其实已经包含了java技术体系中最核心，最重要的东西—–<strong>JVM</strong></p>
 </blockquote>
+<h3 id="java到底是什么"><a href="#java到底是什么" class="headerlink" title="java到底是什么"></a>java到底是什么</h3><blockquote>
+<p>现在大家说java，其实是包含了两部分 <strong>java语言本身</strong> 和 <strong>JVM</strong>,众所周知，java是跨平台的。<br>与其说java是跨平台的，不如说字节码是跨平台的。JVM本身不是跨平台的，不跨平台的JVM可以执行相同的字节码，从而间接的实现了字节码的跨平台运行。这里的字节码不一定是通过java语言编译获取，也可以通过其他语言间接得到，甚至直接编写。</p>
+</blockquote>
+<p><img src="/content/image/jvmkuapingtai.PNG" alt="java跨平台"></p>
+<blockquote>
+<p>因此 JVM是java技术的基石。平时我们所说的java规范分为两部分</p>
+</blockquote>
+<ul>
+<li>java语言规范</li>
+<li>JVM规范（字节码规范是属于JVM规范的一部分）</li>
+</ul>
+<h3 id="JVM到底是什么"><a href="#JVM到底是什么" class="headerlink" title="JVM到底是什么"></a>JVM到底是什么</h3><p> 通俗的说JVM就是运行在主机上的一个程序，是一个java进程。JVM由三大部分组成</p>
+<ul>
+<li>类加载子系统</li>
+<li>运行时数据区</li>
+<li>执行引擎</li>
+</ul>
+<p> 平时我们所说的堆和栈都是属于运行时数据区。JVM的类加载子系统是非常强大和灵活的，JVM允许我们在程序运行的过程中加载类，这给我们提供了很大的灵活性，也为热部署提供了可能。</p>
+<h3 id="jvm的运行模式"><a href="#jvm的运行模式" class="headerlink" title="jvm的运行模式"></a>jvm的运行模式</h3><pre><code>client 模式 java -client启用
+server 模式 java -server启动
+</code></pre><p>client模式启动的是Client VM的实现，可以减少启动时间和内存占用,一般用在java客户端上,比如java的GUI程序</p>
+<p>server模式启动的是server VM的实现，启动时间会有点长，但是程序运行速度更快</p>
+<p>不管是client还是server模式有些底层技术是通用的：</p>
+<pre><code>自适应编译(JIT)
+快速内存分配和垃圾回收
+线程同步
+</code></pre><h3 id="jvm调优的目标"><a href="#jvm调优的目标" class="headerlink" title="jvm调优的目标"></a>jvm调优的目标</h3><pre><code>尽可能大的吞吐量,尽可能小的GC停顿时间（吞吐量是GC时间在总时间中的占比，比值越小，吞吐量越高）
+</code></pre><h3 id="JVM的垃圾收集器"><a href="#JVM的垃圾收集器" class="headerlink" title="JVM的垃圾收集器"></a>JVM的垃圾收集器</h3><pre><code>串行收集器 &gt;&gt; 适合单处理器小数据集
+并行收集器 &gt;&gt; 吞吐量优先，多个线程执行GC，系统一定会出现短时Stop the World
+并发收集器 &gt;&gt; 响应时间优先，GC时系统不会出现Stop the World
+</code></pre><ul>
+<li><p>选择垃圾收集器的原则</p>
+<ul>
+<li>如果应用的数据集小于100M，或者在单个处理器上运行，没有暂停时间要求，则使用串行收集器</li>
+<li>如果系统的吞吐量是第一优先级而且系统的暂停是可以接受的，使用并行收集器</li>
+<li>如果系统的响应时间比吞吐量更重要，并且垃圾收集暂停必须小于1s,则使用并发收集器</li>
+</ul>
+</li>
+</ul>
+<p>###<br>    -XX:+UseSerialGC 使用串行收集器（串行）<br>    -XX:+UseParallelGC 使用并行收集器(并行）<br>    -XX:-UseParallelOldGC 关闭并行压缩（并行）<br>    -XX:+UseConcMarkSweepGC 启用CMS收集器(并发）<br>    -XX:+UseG1GC    启用G1收集器(并发）<br>    -XX:ParallelGCThreads=<n> 调整并行收集器的GC线程数量</n></p>
+<h3 id="java字节码"><a href="#java字节码" class="headerlink" title="java字节码"></a>java字节码</h3><p>  字节码的整体结构,按照顺序依次是</p>
+<pre><code> * Magic Number 
+     &gt; 魔数，4个字节。值为0xCAFEBABE 由java语言的作者James Gosling定义的
+* Version
+    &gt; 版本号，4个字节,前两个字节是minor_version，后两个字节是major_version
+* Constant Pool
+    &gt; 常量池，2 + n 个字节
+* Access Flags
+    &gt; 访问标志符,2个字节
+* This Class Name
+    &gt; 当前类的名字,2个字节
+* Supper Class Name
+    &gt; 父类的名字,2个字节
+* Interfaces
+    &gt; 接口,2+n个字节。一个类可能会实现多个接口，所以是2+n个字节
+* Fields
+    &gt; 成员变量,2+n个字节
+* Method
+    &gt; 方法,2+n个字节
+* Attributes
+    &gt; 属性，2+n个字节
+</code></pre><p><img src="/content/image/leijiegou.PNG" alt="字节码结构"></p>
+<p><img src="/content/image/leijiegou1.PNG" alt="字节码结构1"></p>
+<h3 id="volatile为什么不能实现线程安全"><a href="#volatile为什么不能实现线程安全" class="headerlink" title="volatile为什么不能实现线程安全"></a>volatile为什么不能实现线程安全</h3><p><a href="https://blog.csdn.net/qq_33330687/article/details/80990729" target="_blank" rel="noopener">为什么volatile不能保证线程安全</a></p>
+<p><a href="https://blog.csdn.net/wuzhilon88/article/details/49201891" target="_blank" rel="noopener">jvm调优</a></p>
 <h3 id="平时遇到的异常"><a href="#平时遇到的异常" class="headerlink" title="平时遇到的异常"></a>平时遇到的异常</h3><h4 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h4><pre><code>/**
  * 
  * @author fulin16
@@ -117,7 +182,10 @@ Heap
   object space 7168K, 93% used [0x00000000ff600000,0x00000000ffc91060,0x00000000ffd00000)
  Metaspace       used 2692K, capacity 4486K, committed 4864K, reserved 1056768K
   class space    used 289K, capacity 386K, committed 512K, reserved 1048576K
-</code></pre><p>……. 未完待续</p>
+</code></pre><p>###JVM相关的比较权威的人</p>
+<ul>
+<li>R大</li>
+</ul>
 
         </section>
     </article>
@@ -129,7 +197,7 @@ Heap
     <div class="toc-container">
         <h1>目录</h1>
         <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#平时遇到的异常"><span class="toc-number">1.</span> <span class="toc-text">平时遇到的异常</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆溢出"><span class="toc-number">1.1.</span> <span class="toc-text">堆溢出</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#java到底是什么"><span class="toc-number">1.</span> <span class="toc-text">java到底是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM到底是什么"><span class="toc-number">2.</span> <span class="toc-text">JVM到底是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jvm的运行模式"><span class="toc-number">3.</span> <span class="toc-text">jvm的运行模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jvm调优的目标"><span class="toc-number">4.</span> <span class="toc-text">jvm调优的目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM的垃圾收集器"><span class="toc-number">5.</span> <span class="toc-text">JVM的垃圾收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java字节码"><span class="toc-number">6.</span> <span class="toc-text">java字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile为什么不能实现线程安全"><span class="toc-number">7.</span> <span class="toc-text">volatile为什么不能实现线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#平时遇到的异常"><span class="toc-number">8.</span> <span class="toc-text">平时遇到的异常</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆溢出"><span class="toc-number">8.1.</span> <span class="toc-text">堆溢出</span></a></li></ol></li></ol>
         </div>
     </div>
     
