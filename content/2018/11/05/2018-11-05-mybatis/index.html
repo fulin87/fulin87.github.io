@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>mybatis相关知识点的总结 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>mybatis相关知识点的总结</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年11月05日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>曾经java中的数据持久化并不是一件轻松的事情。需要编写大量的代码。为了简化这一过程，出现了各种各样的持久化框架。</p>
+</blockquote>
+<pre><code>JDBC -&gt; DbUtils(queryRunner) -&gt; jdbcTemplate -&gt; ibatis -&gt; myBatis -&gt; Hibenate
+</code></pre><blockquote>
+<p>其中 mybatis 因为其功能强大,灵活又轻量最受欢迎,这里总结一下多年使用mybatis的成果方便查阅</p>
+</blockquote>
+<h3 id="mybatis的相关历史"><a href="#mybatis的相关历史" class="headerlink" title="mybatis的相关历史"></a>mybatis的相关历史</h3><p>mybatis的前身是ibatis。<br>ibatis曾经是apache的一个顶级项目，后来项目人员转战google，项目也改名叫mybatis。这一转变是从3.0这个版本开始的</p>
+<h3 id="mybatis的底层原理"><a href="#mybatis的底层原理" class="headerlink" title="mybatis的底层原理"></a>mybatis的底层原理</h3><p>mybatis的使用方式</p>
+<p><img src="/content/image/mybatis2.PNG" alt="mybatis使用"></p>
+<p>mybatis的整体组成</p>
+<p><img src="/content/image/mybatis1.PNG" alt="mybatis组成"></p>
+<p>sqlSessionFactory的创建过程</p>
+<p><img src="/content/image/mybatis3.PNG" alt="sqlSessionFactory创建过程"></p>
+<p>sqlSession的创建过程</p>
+<p><img src="/content/image/mybatis4.PNG" alt="sqlSession创建过程"></p>
+<p>mapperProxy的创建过程</p>
+<p><img src="/content/image/mybatis5.PNG" alt="mapperProxy创建过程"></p>
+<p>1,创建SqlSessionFactory对象<br>2,获取SqlSession对象<br>3,获取接口的代理对象（MapperProxy对象）</p>
+<h4 id="Hibenate与mybatis比较"><a href="#Hibenate与mybatis比较" class="headerlink" title="Hibenate与mybatis比较"></a>Hibenate与mybatis比较</h4><ul>
+<li>Hibenate是一个全自动的ORM框架，mybatis是半自动的</li>
+<li>mybatis对开发人员来说自由度更改</li>
+<li>Hibenate中sql的定制成本比较高，不利于灵活发乎</li>
+</ul>
+<h3 id="mybatis的配置文件"><a href="#mybatis的配置文件" class="headerlink" title="mybatis的配置文件"></a>mybatis的配置文件</h3><blockquote>
+<p>mybatis配置文件分两种</p>
+</blockquote>
+<ul>
+<li>全局配置文件</li>
+<li>Mapper配置文件</li>
+</ul>
+<h4 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h4><ul>
+<li>properties（属性）</li>
+<li>settings（设置）</li>
+<li>typeAliases（类型别名）</li>
+<li>typeHandlers（类型处理器）</li>
+<li>objectFactory（对象工厂）</li>
+<li>plugins（插件）</li>
+<li>environments（环境配置）,可以包含多个environment，可以实现环境的切换</li>
+<li>environment（环境变量）,依赖transactionManager和dataSource</li>
+<li>transactionManager（事务管理器）</li>
+<li>dataSource（数据源）</li>
+<li>databaseIdProvider（数据库厂商标识）,可以实现不同厂商数据库的移植，同时需要在Mapper的xml中指定</li>
+<li>mappers（映射器）,mybatis的sql不仅可以写在mapper文件中，还可以用注解的形式</li>
+</ul>
+<blockquote>
+<p>mapper配置有四种方式</p>
+</blockquote>
+<pre><code>&lt;mappers&gt;
+    &lt;mapper url=&quot;file:///var/mappers/xxxMapper.xml&quot;/&gt;  //url方式引起网络路径或者磁盘路径下的映射文件
+    &lt;mapper resource=&quot;mybatis/mappers/xxMapper.xml&quot;/&gt;  //resources方式引起类路径下的映射文件
+    &lt;mapper class=&quot;com.fulin.TestMapper&quot;/&gt;            //SQL语句写在接口上的
+    &lt;package name=&quot;com.fulin.mappers&quot;/&gt;                //批量注册包下面的映射文件
+&lt;/mappers&gt;
+</code></pre><h3 id="mybatis的插件"><a href="#mybatis的插件" class="headerlink" title="mybatis的插件"></a>mybatis的插件</h3><blockquote>
+<p>mybatis的插件依赖mybatis的4大对象：</p>
+</blockquote>
+<ul>
+<li>Executor</li>
+<li>ParameterHandler</li>
+<li>ResultSetHandler</li>
+<li>StatementHandler</li>
+</ul>
+<h3 id="mybatis最佳实践"><a href="#mybatis最佳实践" class="headerlink" title="mybatis最佳实践"></a>mybatis最佳实践</h3><blockquote>
+<p>mybatis中最好不要使用别名,使用别名不利于项目维护<br>SQL语句可以写在xml中也可以用注解的方式写在接口上，但是推荐使用XML的方式，这样方便维护<br>SqlsessionFactory创建Session，Session一定要关闭，而且Session是线程不安全的</p>
+</blockquote>
+<p>###相关资源</p>
+<p><strong><a href="http://www.mybatis.org/generator/" target="_blank" rel="noopener">generator官方文档</a></strong></p>
+<p><strong><a href="https://github.com/mybatis/generator" target="_blank" rel="noopener">generator源码</a></strong></p>
+<p>###generator到底是个什么东西？</p>
+<p><em>一句话，mybatis generator就是一个工具，可以实现从数据库表结构到java实体类和mapper映射文件之间的自动转换</em></p>
+<p>###generator的使用方式</p>
+<ul>
+<li>通过ant使用</li>
+<li>通过maven 插件的方式使用</li>
+<li>以java编码的方式使用</li>
+<li>以eclipse插件的方式使用</li>
+</ul>
+<p>这里我们只用关注maven插件的使用方式</p>
+<p>###generator的配置文件</p>
+<p>generator配置文件的作用在官方文档中是这样描述的：</p>
+<p>配置文件将告诉MBG</p>
+<ul>
+<li>怎样连接数据库</li>
+<li>创建哪些对象，怎样创建这些对象</li>
+<li>哪些表将会用于对象的创建</li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mybatis的相关历史"><span class="toc-number">1.</span> <span class="toc-text">mybatis的相关历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mybatis的底层原理"><span class="toc-number">2.</span> <span class="toc-text">mybatis的底层原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Hibenate与mybatis比较"><span class="toc-number">2.1.</span> <span class="toc-text">Hibenate与mybatis比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mybatis的配置文件"><span class="toc-number">3.</span> <span class="toc-text">mybatis的配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#全局配置文件"><span class="toc-number">3.1.</span> <span class="toc-text">全局配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mybatis的插件"><span class="toc-number">4.</span> <span class="toc-text">mybatis的插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mybatis最佳实践"><span class="toc-number">5.</span> <span class="toc-text">mybatis最佳实践</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

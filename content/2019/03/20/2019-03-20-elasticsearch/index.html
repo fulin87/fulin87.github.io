@@ -10,7 +10,7 @@
     <link rel="icon" href="">
   
     
-  <title>mybatis generator | 水货程序员的笔记</title>
+  <title>Elasticsearch实践总结 | 水货程序员的笔记</title>
   <link rel="stylesheet" href="/content/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
@@ -56,13 +56,13 @@
   <div class="content">
     <article>
         <section class="content markdown-body">
-          <h1>mybatis generator</h1>
+          <h1>Elasticsearch实践总结</h1>
           <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年11月05日</time>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年03月20日</time>
             
               | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
   <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
+    <a class="article-category-link" href="/content/categories/存储/">存储</a>
   </div>
 
 
@@ -71,29 +71,9 @@
             
           </div>
           <blockquote>
-<p><strong>mybatis generator</strong> 可以大幅度的提升开发的效率，这里总结一下相关的知识点</p>
+<p>我最早听说 <strong>ElasticSearch</strong> 是在2014年初，记得当时还是在华为做外包，在开会的时候，有人提出有一个数据查询的需求做不到，原因是数据库的单表数据量达到了2千万，儿查询又需要多表关联。这是，架构师提出使用ElasticSearch来做。</p>
 </blockquote>
-<p>###相关资源</p>
-<p><strong><a href="http://www.mybatis.org/generator/" target="_blank" rel="noopener">generator官方文档</a></strong></p>
-<p><strong><a href="https://github.com/mybatis/generator" target="_blank" rel="noopener">generator源码</a></strong></p>
-<p>###generator到底是个什么东西？</p>
-<p><em>一句话，mybatis generator就是一个工具，可以实现从数据库表结构到java实体类和mapper映射文件之间的自动转换</em></p>
-<p>###generator的使用方式</p>
-<ul>
-<li>通过ant使用</li>
-<li>通过maven 插件的方式使用</li>
-<li>以java编码的方式使用</li>
-<li>以eclipse插件的方式使用</li>
-</ul>
-<p>这里我们只用关注maven插件的使用方式</p>
-<p>###generator的配置文件</p>
-<p>generator配置文件的作用在官方文档中是这样描述的：</p>
-<p>配置文件将告诉MBG</p>
-<ul>
-<li>怎样连接数据库</li>
-<li>创建哪些对象，怎样创建这些对象</li>
-<li>哪些表将会用于对象的创建</li>
-</ul>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>存储数据到ES的行为就叫 <strong>索引</strong></p>
 
         </section>
     </article>
@@ -101,6 +81,13 @@
         
   </div>
   <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#索引"><span class="toc-number">1.</span> <span class="toc-text">索引</span></a></li></ol>
+        </div>
+    </div>
     
   </aside>
 </main>
