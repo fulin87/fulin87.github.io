@@ -117,20 +117,28 @@ server 模式 java -server启动
 <pre><code> * Magic Number 
      &gt; 魔数，4个字节。值为0xCAFEBABE 由java语言的作者James Gosling定义的
 * Version
+
     &gt; 版本号，4个字节,前两个字节是minor_version，后两个字节是major_version
 * Constant Pool
+
     &gt; 常量池，2 + n 个字节
 * Access Flags
+
     &gt; 访问标志符,2个字节
 * This Class Name
+
     &gt; 当前类的名字,2个字节
 * Supper Class Name
+
     &gt; 父类的名字,2个字节
 * Interfaces
+
     &gt; 接口,2+n个字节。一个类可能会实现多个接口，所以是2+n个字节
 * Fields
+
     &gt; 成员变量,2+n个字节
 * Method
+
     &gt; 方法,2+n个字节
 * Attributes
     &gt; 属性，2+n个字节

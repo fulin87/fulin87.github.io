@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>总结一下我使用过的设计模式 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>总结一下我使用过的设计模式</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年04月21日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>设计模式是java的精髓所在，深刻的体现了抽象和封装。能否运用好设计模式是衡量一个java程序员水平的重要分水岭，是衡量设计能力的一个综合指标。这里总结一下实际使用过的设计模式。</p>
+</blockquote>
+<h2 id="到底什么是设计模式"><a href="#到底什么是设计模式" class="headerlink" title="到底什么是设计模式"></a>到底什么是设计模式</h2><p>设计模式并不是软件领域特有的东西，而是一个跨领域的概念。从某种程度上讲，软件其实是对硬件的模拟，设计模式也是从硬件领域借鉴来一系列<em>最佳实践</em></p>
+<p>软件经过多年的发展，前人总结一套设计思想和方法，最终提炼出了5大设计原则和26种设计模式，26种设计模式又可以分成三大类。</p>
+<h3 id="五大设计原则"><a href="#五大设计原则" class="headerlink" title="五大设计原则"></a>五大设计原则</h3><ul>
+<li>开闭原则（<em>Open Close Principle</em>）</li>
+<li>依赖倒置原则（<em>Dependency Inversion Principle</em>）</li>
+<li>接口隔离原则（<em>Interface Segregation Principle</em>）</li>
+<li>单一职责原则（<em>Single Responsibility Principle</em>）</li>
+<li>里氏替换原则（<em>Liskov’s Substitution Principle</em>）</li>
+</ul>
+<h3 id="设计模式的分类"><a href="#设计模式的分类" class="headerlink" title="设计模式的分类"></a>设计模式的分类</h3><ul>
+<li><p>创建型模式</p>
+<p><em>Singleton , Factory , Factory Method , Abstract Factory , Builder , Prototype , Object pool</em></p>
+<blockquote>
+<p>创建型模式将对象的创建过程抽取出来了，优化了系统的结果，增强的系统的扩展性，提高了代码的可读性</p>
+</blockquote>
+</li>
+<li><p>结构型模式</p>
+<p><em>Adapter , Bridge , Composite , Decorator , Flyweight , Proxy</em></p>
+</li>
+<li><p>行为型模式</p>
+<p><em>Chain of Responsibility , Command , Interpreter , Iterator , Mediator , Memento , Observer , Strategy , Template Method , Visitor , Null Objects</em></p>
+</li>
+</ul>
+<h2 id="官方资料"><a href="#官方资料" class="headerlink" title="官方资料"></a>官方资料</h2><ul>
+<li><a href="https://www.oodesign.com/" target="_blank" rel="noopener">最简洁权威的设计模式网站 ：OODesign</a></li>
+</ul>
+<h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><h3 id="自己的理解"><a href="#自己的理解" class="headerlink" title="自己的理解"></a>自己的理解</h3><p>通俗的讲，责任链模式就是把逻辑的处理过程交给一个链表来处理，链表的每个节点判断自身是否能处理此逻辑，如果不能处理则交给一下节点，直到有节点能处理为止。对客户客户端来说只用关心头节点</p>
+<p><img src="/content/image/zerenlian.png" alt="zerenlianmoshi"></p>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> Node next;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> String <span class="title">getLevel</span><span class="params">()</span></span>; </span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Message message)</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setNext</span><span class="params">(Node next)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.next = next;</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">exec</span><span class="params">(Message message)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.getLevel().equals(message.getType()))&#123;</span><br><span class="line">			<span class="keyword">this</span>.handle(message);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(Objects.isNull(<span class="keyword">this</span>.next))&#123;</span><br><span class="line">			log.error(<span class="string">"当前消息没有节点可以处理 "</span> + message.toString());</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">this</span>.next.exec(message);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeadNode</span> <span class="keyword">extends</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getLevel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"1"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">		log.info(<span class="string">"头节点处理逻辑 "</span> + message.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecondNode</span> <span class="keyword">extends</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getLevel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"2"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">		log.info(<span class="string">"中间节点处理逻辑 "</span> + message.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TailNode</span> <span class="keyword">extends</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getLevel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"3"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">		log.info(<span class="string">"尾节点处理逻辑 "</span> + message.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String type;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Node tail = <span class="keyword">new</span> TailNode();</span><br><span class="line">		Node second = <span class="keyword">new</span> SecondNode();</span><br><span class="line">		Node chain = <span class="keyword">new</span> HeadNode();</span><br><span class="line">		</span><br><span class="line">		second.setNext(tail);</span><br><span class="line">		chain.setNext(second);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; <span class="number">20</span> ; i ++)&#123;</span><br><span class="line">			Message message = <span class="keyword">new</span> Message();</span><br><span class="line">			message.setType(String.valueOf((<span class="keyword">int</span>)(Math.random() * <span class="number">5</span>)));</span><br><span class="line">			message.setValue(i);</span><br><span class="line">			chain.exec(message);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="责任链模式的优缺点"><a href="#责任链模式的优缺点" class="headerlink" title="责任链模式的优缺点"></a>责任链模式的优缺点</h3><ul>
+<li>优点 : 将数据和处理逻辑分离解耦，能提高代码的可读性，可以写出优雅的代码，提高系统的灵活性</li>
+<li>缺点：<em>性能问题</em>，如果链条很长则可能会出现性能问题。调试不方便，在spring中节点是注入的，调试不太方便。</li>
+</ul>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><blockquote>
+<p>Factory Pattern</p>
+<ul>
+<li>creates objects without exposing the instantiation logic to the client.</li>
+<li>refers to the newly created object through a common interface</li>
+</ul>
+</blockquote>
+<p>工厂模式</p>
+<p><img src="E:\code\myBog\source\image\factorypattern.png" alt=""></p>
+<h2 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h2><h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><p>定义：<em>Separate the  construction of a complex object from its representation ao that the same construction process can create different representations</em>（将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建出不同的表现）</p>
+<h2 id="对象池模式"><a href="#对象池模式" class="headerlink" title="对象池模式"></a>对象池模式</h2><p>定义: <em>reuse and share objects that are expensive to create</em> （重用和分享哪些重量级的对象）,<em>Clients of an object pull “feel” like they are owners of a service although the service is shared among many other clients.</em>  （虽然服务端在多个客户端之间分享过这个对象，但是客户端拿到之后感觉就像是它完全拥有了一样），对象池模式可以简单的这样理解：</p>
+<ul>
+<li>提高效率，资源重用</li>
+<li>池化，连接池，线程池就是对象池模式的具体表现</li>
+</ul>
+<p><img src="E:\code\myBog\source\image\objectspool.png" alt="object pool"></p>
+<h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><p>原型模式也是一个创建型模式，说的是对象的创建不是通过new来进行，而是把已有的对象当做原型来克隆产生。从而达到提高效率的目的。</p>
+<p><em>对象在克隆的时候要注意区分<strong>深拷贝</strong>和<strong>浅拷贝</strong>，默认的拷贝方式是浅拷贝</em>。实现深拷贝的方法有这么几种</p>
+<ul>
+<li>手工赋值，效率比较高，但是代码繁琐。被处理的属性需要实现Cloneable接口</li>
+<li>将对象转换为流，然后通过流再转为新的对象，需要实现和Serilizeable接口，可以使用commons-lang包中的SerilizationUtils.copy方法</li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#到底什么是设计模式"><span class="toc-number">1.</span> <span class="toc-text">到底什么是设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#五大设计原则"><span class="toc-number">1.1.</span> <span class="toc-text">五大设计原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设计模式的分类"><span class="toc-number">1.2.</span> <span class="toc-text">设计模式的分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#官方资料"><span class="toc-number">2.</span> <span class="toc-text">官方资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#责任链模式"><span class="toc-number">3.</span> <span class="toc-text">责任链模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自己的理解"><span class="toc-number">3.1.</span> <span class="toc-text">自己的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码示例"><span class="toc-number">3.2.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#责任链模式的优缺点"><span class="toc-number">3.3.</span> <span class="toc-text">责任链模式的优缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工厂模式"><span class="toc-number">4.</span> <span class="toc-text">工厂模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板方法模式"><span class="toc-number">5.</span> <span class="toc-text">模板方法模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建造者模式"><span class="toc-number">6.</span> <span class="toc-text">建造者模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象池模式"><span class="toc-number">7.</span> <span class="toc-text">对象池模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型模式"><span class="toc-number">8.</span> <span class="toc-text">原型模式</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
