@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>老鸟眼中的JVM知识体系-常用JVM参数总结和调优经验 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>老鸟眼中的JVM知识体系-常用JVM参数总结和调优经验</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月09日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>Oracle有JVM参数的文档，但是JVM的参数非常多，常用的就那么10几个，所以这里把自己常用的JVM参数总结下来，方便日后查阅</p>
+</blockquote>
+<h3 id="JVM参数设置的方式"><a href="#JVM参数设置的方式" class="headerlink" title="JVM参数设置的方式"></a>JVM参数设置的方式</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-XX:+<span class="tag">&lt;<span class="name">option</span>&gt;</span> 开启JVM的参数</span><br><span class="line"></span><br><span class="line">-XX:-<span class="tag">&lt;<span class="name">option</span>&gt;</span> 关闭JVM的参数</span><br><span class="line"></span><br><span class="line">-XX:<span class="tag">&lt;<span class="name">option</span>&gt;</span>=<span class="tag">&lt;<span class="name">value</span>&gt;</span> 给选项赋一个值</span><br></pre></td></tr></table></figure>
+<h3 id="常用的JVM参数总结"><a href="#常用的JVM参数总结" class="headerlink" title="常用的JVM参数总结"></a>常用的JVM参数总结</h3><h4 id="JVM调试参数"><a href="#JVM调试参数" class="headerlink" title="JVM调试参数"></a>JVM调试参数</h4><ul>
+<li><strong>-XX:+TraceClassLoading</strong>              <em>开启类的加载信息详情功能，开启之后可以打印出类的加载信息</em></li>
+<li><strong>-XX:+TraceClassUnLoading</strong>        <em>开启类的卸载信息详情功能，开启之后可以打印出类的卸载信息</em></li>
+<li><strong>-XX:+PrintGCDetails</strong>                    <em>开启GC日志详情的功能，开启之后会打印出GC的详细情况</em></li>
+<li><strong>-XX:+PrintCommandLineFlags</strong>  打印出用户设置过的JVM参数和参数值</li>
+<li><strong>-XX:+PrintFlagsFinal</strong>                    打印出所有的JVM参数和参数值</li>
+<li><strong>XX:+PrintTenuringDistribution</strong> 跟踪Survor区中对象的年龄分布，GC日志中会有对象的年龄分区信息</li>
+</ul>
+<h4 id="JVM设置参数"><a href="#JVM设置参数" class="headerlink" title="JVM设置参数"></a>JVM设置参数</h4><ul>
+<li><p><strong>-Xmx2048m</strong>                                    设置最大堆内存是2048M</p>
+</li>
+<li><p><strong>-Xms2048m</strong>                                     设置最小堆内存是2048M</p>
+</li>
+<li><p><strong>-Xmn1024m</strong>                                    设置年轻代大小是1024m</p>
+</li>
+<li><p><strong>-Xss128k</strong>                                          设置每个线程的堆栈大小为128k</p>
+<blockquote>
+<p> JDK5.0以后每个线程堆栈大小为1M，以前每个线程堆栈大小为256K，适当减少这个值可以提高可创建的线程数</p>
+</blockquote>
+</li>
+<li><p><strong>-XX:NewRatio=4</strong>                            设置年轻代与老年代的大小比值是1：4，即年轻代占堆内存的五分之一</p>
+</li>
+<li><p><strong>-XX:SurvivorRatio=4</strong>                     设置年轻代中Eden区和Survivor的大小比值为4，即Eden占新生代的6分之4</p>
+</li>
+<li><p><strong>-XX：MaxTenuringThreshold=10</strong> 设置新生代对象晋升进老年代的年龄阀值，10代表10岁的时候晋升。默认值是15</p>
+</li>
+<li><p><strong>HandlePromotionFailure=true</strong>  设置是否允许担保失败，一般都是设置为true，允许担保失败，防止频繁的fullGC</p>
+</li>
+<li><p><strong>-XX:CMSInitiatingOccupancyFraction=75</strong>  老年代内存使用比达到75%开始触发老年代GC</p>
+</li>
+<li><p><strong>-XX:PermSize=128m</strong>                      设置持久代的初始化大小为128m,在jvm8以前的版本中有效</p>
+</li>
+<li><p><strong>-XX:MaxPermSize=256m</strong>              设置持久代的最大大小为256m，在jvm8以前的版本中有效</p>
+</li>
+<li></li>
+</ul>
+<h3 id="JVM调优经验"><a href="#JVM调优经验" class="headerlink" title="JVM调优经验"></a>JVM调优经验</h3><h4 id="JVM调优原则"><a href="#JVM调优原则" class="headerlink" title="JVM调优原则"></a>JVM调优原则</h4><ul>
+<li><p>1，短命对象晋升到老年代的数量力求最小化</p>
+</li>
+<li><p>2，新生代GC次数和停顿时间的最小化</p>
+</li>
+<li><blockquote>
+<p>1和2 是相互矛盾的，这就需要通过调整来找到一个相对合理的参数。实践证明，在保证老年代增长缓慢的情况下，2的数值越小越好</p>
+</blockquote>
+</li>
+<li><p>明确系统是响应时间优先还是吞吐量优先，根据不同的业务类型选择不同的GC收集器</p>
+</li>
+</ul>
+<h4 id="JVM调优方法"><a href="#JVM调优方法" class="headerlink" title="JVM调优方法"></a>JVM调优方法</h4><ul>
+<li>明确系统中对象的年龄分布情况。</li>
+<li></li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM参数设置的方式"><span class="toc-number">1.</span> <span class="toc-text">JVM参数设置的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的JVM参数总结"><span class="toc-number">2.</span> <span class="toc-text">常用的JVM参数总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM调试参数"><span class="toc-number">2.1.</span> <span class="toc-text">JVM调试参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM设置参数"><span class="toc-number">2.2.</span> <span class="toc-text">JVM设置参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM调优经验"><span class="toc-number">3.</span> <span class="toc-text">JVM调优经验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM调优原则"><span class="toc-number">3.1.</span> <span class="toc-text">JVM调优原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM调优方法"><span class="toc-number">3.2.</span> <span class="toc-text">JVM调优方法</span></a></li></ol></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

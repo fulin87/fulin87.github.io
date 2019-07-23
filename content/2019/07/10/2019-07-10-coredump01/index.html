@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>一次生产故障引发的思考 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>一次生产故障引发的思考</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年07月10日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>一个月以前我负责的系统突然发生了两次严重的宕机事故，这里总结一下事情的来龙去脉，梳理一下事故的原因和因此而获得的宝贵经验</p>
+</blockquote>
+<h3 id="事故经过"><a href="#事故经过" class="headerlink" title="事故经过"></a>事故经过</h3><blockquote>
+<p>6月14号，星期五下班前夕，大家都沉浸在马上要过周末的兴奋之中。</p>
+<p>17：30</p>
+<p>突然收到运维工程师的一条消息：mmkt系统宕机了。mmkt由3个节点组成：A,B,C</p>
+<p>17：31 </p>
+<p>收到这个信息，直觉就是是不是有异常的流量，很快自己就否定了这个假设：因为mmkt这个系统是一个消息系统，就算有异常流量，消息队列也会起到消峰的作用。然后我尝试连接C服务器看看服务器的各项性能指标和系统运行日志奇怪的一幕发生了：SSH竟然连不了，提示：<strong>-bash: fock : Cannot allocate memory</strong>. 三台服务器中有一台出现这种情况。但是另外两台也不能正常提供服务了。</p>
+<p>17：35<br>尝试连接A机器，这次连上了，操作系统的内存，CPU，网络，IO都很正常，没有什么异常情况，查看mmkt的运行日志，发现大量的异常： <strong>java.lang.OutOfMemoryError:Unable to create new native thread</strong></p>
+<p>难道程序中有大量创建线程吗，脑海中马上回忆了一下mmkt系统中用到的线程池和对外的API，前者有最大线程数的限制，后者有熔断机制，都不会引发这种异常，那到底是什么原因呢？</p>
+<p>17：40</p>
+<p>运维工程师再次通知，A,B,C三台机器全部宕机了，而且SSH都已经不能连接，操作系统发生了coredump.也就是说现在这三台机器上具体到底发生了什么，大家一点头绪都没有。</p>
+<p>17：45</p>
+<p>经过大家的讨论，决定先联系数据中心对A,B,C三台机器进行物理重启，因为这是唯一的方法。</p>
+<p>17：47</p>
+<p>数据中心对A,B,C三台机器重启之后，A,B,C三台机器上的服务逐步恢复，本来以为系统已经正常了，但是很快相同的问题又出现了。这时候大家额头都开始冒汗。眼睁睁的看着系统再次宕机，紧接着大家进行了简单的讨论：结论是先对三台机器进行物理重启，然后暂停mmkt，这次三台机器没有再发生coredump</p>
+<p>18：00</p>
+<p>机器是暂时稳定了，但是mmkt系统依然处于停止状态，现在的当务之急是恢复mmkt。关键是到底是什么问题引发了<strong>java.lang.OutOfMemoryError:Unable to create new native thread</strong> ，人们总是对自己不太了解的技术缺乏信息，mmkt系统使用了一项新的技术：ignite，对于ignite的很多底层的细节知之甚少，ignite的数据持久化也是2个月以来系统的唯一变化点，所以，我们推测是ignite的数据持久化导致了这次生产故障。</p>
+<p>18：05</p>
+<p>向架构师汇报了我们的判断之后，架构师发话：尽快解决问题，一定要在21：00之前解决。接下来我们就进入了紧张的编码，调试，测试阶段。</p>
+<p>19：00</p>
+<p>代码终于改好了，上线了。这次mmkt启动正常了。大伙终于放心了，接下来的事情就是彻底搞清楚问题的原因，在测试环境重新的任务了。</p>
+<p><strong>正在大家以为问题已经解决了……</strong></p>
+<p>一周之后</p>
+<p>6月22号</p>
+<p>正是周末，突然微信群炸锅了，mmkt再次发生宕机故障，接着就是coredump。相同的现象，相同的过程再次重新，这次大家都傻眼了，这是怎么回事？ignite的问题不是已经解决了吗？</p>
+</blockquote>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#事故经过"><span class="toc-number">1.</span> <span class="toc-text">事故经过</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

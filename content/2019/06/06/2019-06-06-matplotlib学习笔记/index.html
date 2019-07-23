@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>matplotlib学习笔记 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>matplotlib学习笔记</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年06月06日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/python/">python</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>最近在学习机器学习的过程中接触到了matplotlib，感觉非常有趣，但是这个绘图库的学习成本还是比较高的，知识点很多，很容易遗忘，这里记录一下自己的理解，方便复习</p>
+</blockquote>
+<h2 id="matplotlib是什么"><a href="#matplotlib是什么" class="headerlink" title="matplotlib是什么"></a>matplotlib是什么</h2><p>matplotlib是python的一个2D绘图库，提供了类似MATLAB的API</p>
+<h2 id="matplotlib的用法"><a href="#matplotlib的用法" class="headerlink" title="matplotlib的用法"></a>matplotlib的用法</h2><h3 id="figure"><a href="#figure" class="headerlink" title="figure"></a>figure</h3><p>figure相当于画布，可以设置背景颜色，尺寸</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">figure = plt.figure(facesize=(<span class="number">100</span>,<span class="number">100</span>),facecolor=<span class="string">'blue'</span>) <span class="comment"># 设置一个画布，尺寸是100*100,颜色是蓝色</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="subplot"><a href="#subplot" class="headerlink" title="subplot()"></a>subplot()</h3><p>subplot相当于在画布上画一个子图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment"># 作图1</span></span><br><span class="line">plt.subplot(<span class="number">221</span>) <span class="comment"># 子图占据画布的2行2列，这是第一个子图</span></span><br><span class="line">plt.plot(x, x)</span><br><span class="line"><span class="comment"># 作图2</span></span><br><span class="line">plt.subplot(<span class="number">222</span>) <span class="comment"># 子图占据画布的2行2列，这是第二个画布</span></span><br><span class="line">plt.plot(x, -x)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="subplots"><a href="#subplots" class="headerlink" title="subplots()"></a>subplots()</h3><p>subplots相当于画一个子图，同时自带画布</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">figure, ax1 = plt.subplots(<span class="number">1</span>,<span class="number">1</span>,sharex=<span class="keyword">True</span>) <span class="comment"># 用subplots创建一个画布figure和一个坐标系ax1</span></span><br><span class="line"></span><br><span class="line">ax2 = ax1.twinx() <span class="comment"># 创建一个坐标系ax2,和ax1公用x坐标</span></span><br><span class="line"></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">4</span> * np.pi, <span class="number">100</span>)</span><br><span class="line">y = np.sin(x)</span><br><span class="line"></span><br><span class="line">x2 = np.linspace(<span class="number">0</span>, <span class="number">4</span> * np.pi, <span class="number">100</span>)</span><br><span class="line">y2 = np.cos(x2)</span><br><span class="line"></span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.plot(x2,y2)</span><br><span class="line">figure.set_facecolor(<span class="string">'blue'</span>)  <span class="comment"># 将画布的颜色设置为蓝色</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="plot"><a href="#plot" class="headerlink" title="plot()"></a>plot()</h3><p>plot()相当于绘图命令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = np.arange(<span class="number">0</span>,<span class="number">5</span>,<span class="number">0.1</span>)</span><br><span class="line">plt.plot(t,t,t,t**<span class="number">2</span>,t,t**<span class="number">3</span>) <span class="comment"># 一次绘多条曲线</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="show"><a href="#show" class="headerlink" title="show()"></a>show()</h3><p>show()相当于显示绘制的图像</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#matplotlib是什么"><span class="toc-number">1.</span> <span class="toc-text">matplotlib是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#matplotlib的用法"><span class="toc-number">2.</span> <span class="toc-text">matplotlib的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#figure"><span class="toc-number">2.1.</span> <span class="toc-text">figure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#subplot"><span class="toc-number">2.2.</span> <span class="toc-text">subplot()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#subplots"><span class="toc-number">2.3.</span> <span class="toc-text">subplots()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#plot"><span class="toc-number">2.4.</span> <span class="toc-text">plot()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#show"><span class="toc-number">2.5.</span> <span class="toc-text">show()</span></a></li></ol></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

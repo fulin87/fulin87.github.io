@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>老鸟眼中的JVM知识体系(3)-垃圾回收 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>老鸟眼中的JVM知识体系(3)-垃圾回收</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月06日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>java的内存管理中垃圾回收是很重要的一部分,在java程序员的职业生涯中具有基石性的重要地位，java的内存垃圾回收是怎样的机制呢，java程序员在写代码的时候是不用刻意关心垃圾回收的，但是在大规模，高并发系统中如果出现了系统瓶颈，垃圾回收就是很重要的优化项…</p>
+</blockquote>
+<p>说起垃圾回收，随之而来的问题就是：</p>
+<ul>
+<li>如果判定内存中的对象是垃圾？</li>
+<li>如何回收？</li>
+<li>何时回收？</li>
+</ul>
+<p>、</p>
+<h3 id="如何判定对象是垃圾"><a href="#如何判定对象是垃圾" class="headerlink" title="如何判定对象是垃圾"></a>如何判定对象是垃圾</h3><ul>
+<li>引用计数法。 <em>实现简单，判定效率高，但是对循环引用问题无能为力</em>，目前没有JVM采用这种方式</li>
+<li>可达性分析。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> lombok.Setter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 人为的创造一个循环引用，但是GC会进行回收，说明JDK8使用的垃圾收集策略的垃圾判定依据不是引用计数法。</span></span><br><span class="line"><span class="comment"> * 虚拟机参数 -verbose:gc -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> fulin</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GcTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Object ref;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">GcTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">byte</span> [] bytes = <span class="keyword">new</span> <span class="keyword">byte</span> [<span class="number">20</span> * <span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		GcTest gc1 = <span class="keyword">new</span> GcTest();</span><br><span class="line">		GcTest gc2 = <span class="keyword">new</span> GcTest();</span><br><span class="line">		gc1.setRef(gc2);</span><br><span class="line">		gc2.setRef(gc1);</span><br><span class="line">		</span><br><span class="line">		gc1 = <span class="keyword">null</span>;</span><br><span class="line">		gc2 = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">		System.gc();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出如下，说明进行了垃圾回收</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[GC (System.gc()) [PSYoungGen: <span class="number">21790</span><span class="keyword">K</span>-&gt;<span class="number">744</span><span class="keyword">K</span>(<span class="number">37888</span><span class="keyword">K</span>)] <span class="number">42270</span><span class="keyword">K</span>-&gt;<span class="number">21232</span><span class="keyword">K</span>(<span class="number">123904</span><span class="keyword">K</span>), <span class="number">0.0018128</span> secs] [<span class="keyword">Times</span>: user=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.00</span> secs] </span><br><span class="line">[<span class="keyword">Full</span> GC (System.gc()) [PSYoungGen: <span class="number">744</span><span class="keyword">K</span>-&gt;<span class="number">0</span><span class="keyword">K</span>(<span class="number">37888</span><span class="keyword">K</span>)] [ParOldGen: <span class="number">20488</span><span class="keyword">K</span>-&gt;<span class="number">552</span><span class="keyword">K</span>(<span class="number">86016</span><span class="keyword">K</span>)] <span class="number">21232</span><span class="keyword">K</span>-&gt;<span class="number">552</span><span class="keyword">K</span>(<span class="number">123904</span><span class="keyword">K</span>), [Metaspace: <span class="number">2627</span><span class="keyword">K</span>-&gt;<span class="number">2627</span><span class="keyword">K</span>(<span class="number">1056768</span><span class="keyword">K</span>)], <span class="number">0.0059047</span> secs] [<span class="keyword">Times</span>: user=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.00</span> secs] </span><br><span class="line">Heap</span><br><span class="line"> PSYoungGen      total <span class="number">37888</span><span class="keyword">K</span>, used <span class="number">655</span><span class="keyword">K</span> [<span class="number">0x00000000d6400000</span>, <span class="number">0x00000000d8e00000</span>, <span class="number">0x0000000100000000</span>)</span><br><span class="line">  eden space <span class="number">32768</span><span class="keyword">K</span>, <span class="number">2</span>% used [<span class="number">0x00000000d6400000</span>,<span class="number">0x00000000d64a3ee8</span>,<span class="number">0x00000000d8400000</span>)</span><br><span class="line">  from space <span class="number">5120</span><span class="keyword">K</span>, <span class="number">0</span>% used [<span class="number">0x00000000d8400000</span>,<span class="number">0x00000000d8400000</span>,<span class="number">0x00000000d8900000</span>)</span><br><span class="line">  to   space <span class="number">5120</span><span class="keyword">K</span>, <span class="number">0</span>% used [<span class="number">0x00000000d8900000</span>,<span class="number">0x00000000d8900000</span>,<span class="number">0x00000000d8e00000</span>)</span><br><span class="line"> ParOldGen       total <span class="number">86016</span><span class="keyword">K</span>, used <span class="number">552</span><span class="keyword">K</span> [<span class="number">0x0000000082c00000</span>, <span class="number">0x0000000088000000</span>, <span class="number">0x00000000d6400000</span>)</span><br><span class="line">  object space <span class="number">86016</span><span class="keyword">K</span>, <span class="number">0</span>% used [<span class="number">0x0000000082c00000</span>,<span class="number">0x0000000082c8a0f0</span>,<span class="number">0x0000000088000000</span>)</span><br><span class="line"> Metaspace       used <span class="number">2634</span><span class="keyword">K</span>, capacity <span class="number">4486</span><span class="keyword">K</span>, committed <span class="number">4864</span><span class="keyword">K</span>, reserved <span class="number">1056768</span><span class="keyword">K</span></span><br><span class="line">  class space    used <span class="number">280</span><span class="keyword">K</span>, capacity <span class="number">386</span><span class="keyword">K</span>, committed <span class="number">512</span><span class="keyword">K</span>, reserved <span class="number">1048576</span><span class="keyword">K</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可达性分析中什么可以作为GCroot呢？</p>
+<ul>
+<li>虚拟机栈中的引用</li>
+<li>方法区中的类属性所引用的对象</li>
+<li>方法区中的常量所引用的对象</li>
+<li>本地方法栈中所引用的对象</li>
+</ul>
+</li>
+</ul>
+<h3 id="如何回收"><a href="#如何回收" class="headerlink" title="如何回收"></a>如何回收</h3><ul>
+<li><p>垃圾回收策略</p>
+<ul>
+<li><p>标记-清除 算法。先标记，然后清除。</p>
+<ul>
+<li>内存碎片的问题</li>
+<li>因为有内存碎片，没有足够的连续区域的时候，会导致重复GC，影响性能</li>
+</ul>
+</li>
+<li><p>复制 算法</p>
+<ul>
+<li><p>可以理解为将内存分成了2部分，每次GC先标记，然后将没有标记的移动到另一部分，清除第一部分</p>
+</li>
+<li><p>提高了标记-清除 算法的性能</p>
+</li>
+<li>但是引入了新的问题：造成了空间的浪费</li>
+<li>主要针对新生代</li>
+</ul>
+</li>
+<li><p>标记整理 算法</p>
+<ul>
+<li>主要针对老年代</li>
+<li>和标记清除最大的区别是在清除之前先进行整理，将需要回收的和不需要回收的进行区分和整理，然后直接清除需要清除的区域</li>
+</ul>
+</li>
+<li><p>分代 收集算法</p>
+<ul>
+<li>将内存进行分代</li>
+<li>根据不同的分代使用不同的垃圾回收算法</li>
+<li>新生代使用标记清除，复制算法</li>
+<li>老年代使用标记整理算法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>与GC细节相关的配置</p>
+</li>
+</ul>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"><span class="symbol">verbose:</span>gc</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>+PrintGCDetails</span></span><br></pre></td></tr></table></figure>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何判定对象是垃圾"><span class="toc-number">1.</span> <span class="toc-text">如何判定对象是垃圾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何回收"><span class="toc-number">2.</span> <span class="toc-text">如何回收</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

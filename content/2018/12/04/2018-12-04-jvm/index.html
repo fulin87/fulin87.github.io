@@ -10,7 +10,7 @@
     <link rel="icon" href="">
   
     
-  <title>老鸟眼中的JVM知识体系 | 水货程序员的笔记</title>
+  <title>老鸟眼中的JVM知识体系(1)-Java体系 | 水货程序员的笔记</title>
   <link rel="stylesheet" href="/content/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
@@ -56,7 +56,7 @@
   <div class="content">
     <article>
         <section class="content markdown-body">
-          <h1>老鸟眼中的JVM知识体系</h1>
+          <h1>老鸟眼中的JVM知识体系(1)-Java体系</h1>
           <div class='post-meta'>
             <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月04日</time>
             
@@ -77,12 +77,67 @@
 <p>现在大家说java，其实是包含了两部分 <strong>java语言本身</strong> 和 <strong>JVM</strong>,众所周知，java是跨平台的。<br>与其说java是跨平台的，不如说字节码是跨平台的。JVM本身不是跨平台的，不跨平台的JVM可以执行相同的字节码，从而间接的实现了字节码的跨平台运行。这里的字节码不一定是通过java语言编译获取，也可以通过其他语言间接得到，甚至直接编写。</p>
 </blockquote>
 <p><img src="/content/image/jvmkuapingtai.PNG" alt="java跨平台"></p>
-<blockquote>
+<h4 id="java技术体系"><a href="#java技术体系" class="headerlink" title="java技术体系"></a>java技术体系</h4><blockquote>
 <p>因此 JVM是java技术的基石。平时我们所说的java规范分为两部分</p>
 </blockquote>
 <ul>
-<li>java语言规范</li>
+<li>java语言规范<ul>
+<li>JDK的API</li>
+<li>第三方的类库（非必须，但是非常重要，比如spring）</li>
+</ul>
+</li>
 <li>JVM规范（字节码规范是属于JVM规范的一部分）</li>
+</ul>
+<h4 id="JAVASE-JAVAME-JAVAEE到底是什么"><a href="#JAVASE-JAVAME-JAVAEE到底是什么" class="headerlink" title="JAVASE,JAVAME,JAVAEE到底是什么"></a>JAVASE,JAVAME,JAVAEE到底是什么</h4><ul>
+<li>JAVASE是 standard edite，主要是开发桌面应用,如Eclipse</li>
+<li>JAVAME，mobile edite,开发移动应用，代表性的有nokia S60</li>
+<li>JAVAEE，企业级应用，由13种技术组成</li>
+</ul>
+<h3 id="java语言的发展历程"><a href="#java语言的发展历程" class="headerlink" title="java语言的发展历程"></a>java语言的发展历程</h3><blockquote>
+<p>虽然网络上有大量的文章介绍java的发展历程，这里我还是想用自已的思路总结一下，方便自己复习和查阅</p>
+</blockquote>
+<ul>
+<li>1995 年 Sun公司的<em>詹姆斯高斯林</em>领导的一个项目开发了一门语言 <strong>oak</strong> </li>
+<li>1996年 <strong>oak</strong> 正式更名为java，同时java1.0发布，正式喊出了一个著名的口号：<em>once write,run everywhere</em></li>
+<li>1996年9月<strong>javaOne</strong>大会举行</li>
+<li>1997年jdk1.0发布，包括内部类，反射，JDBC, rmi等</li>
+<li>1998年2月jdk1.2发布，首次提出三大方向：J2SE , J2EE, J2ME。而且JVM中内置JIT了，出现了HotSpot虚拟机</li>
+<li>2000年jdk1.3发布，代表性的有Timer。而且2000年以后，java进入了一个高速发展的阶段</li>
+<li>2004年jdk1.4发布，jdk1.4是一个里程碑式的版本，是一个java走向成熟的版本<ul>
+<li>jdk1.4中增加了很多的新特性，比如NIO，正则表达式，日志，xml解析器</li>
+<li>同时基于jdk1.4出现了大量优秀的框架，代表性的有 Struts,Hibenate,spring1.x</li>
+<li>jdk1.4这个时候已经基本完善了</li>
+</ul>
+</li>
+<li><p>2004年9月份jdk1.5发布，在这个版本中对java语法进行了大量的改进</p>
+<ul>
+<li>自动装箱，拆箱</li>
+<li>增强for循环,JUC包优化了线程的使用</li>
+<li>枚举，泛型，注解</li>
+<li>基于jdk1.5出现了spring2.x</li>
+</ul>
+</li>
+<li><p>2006年jdk1.6发布，同时规范名字的命令：JAVASE,JAVAEE,JAVAME,jdk6</p>
+<ul>
+<li>提供脚本语言支持</li>
+<li>提供了编译API和微型的http服务器API</li>
+<li>同年Sun公司宣布将java开源</li>
+<li>同时Sun公司陷入财务和收购相关的问题，接下来没能保持2年一个版本的发布频率</li>
+</ul>
+</li>
+<li>2009年jdk7发布<ul>
+<li>lambad 表达式，模块化</li>
+<li>同年Oracle收购Sun公司，收购价74亿美金</li>
+<li>同年很多人对java的前景表示担忧</li>
+</ul>
+</li>
+<li>2014年jdk8发布<ul>
+<li>lambta表达式</li>
+<li>新的日期API</li>
+<li>流式处理</li>
+<li>java在Oracle手中继续发扬光大，前途光明</li>
+</ul>
+</li>
 </ul>
 <h3 id="JVM到底是什么"><a href="#JVM到底是什么" class="headerlink" title="JVM到底是什么"></a>JVM到底是什么</h3><p> 通俗的说JVM就是运行在主机上的一个程序，是一个java进程。JVM由三大部分组成</p>
 <ul>
@@ -90,8 +145,77 @@
 <li>运行时数据区</li>
 <li>执行引擎</li>
 </ul>
-<p> 平时我们所说的堆和栈都是属于运行时数据区。JVM的类加载子系统是非常强大和灵活的，JVM允许我们在程序运行的过程中加载类，这给我们提供了很大的灵活性，也为热部署提供了可能。</p>
-<h3 id="jvm的运行模式"><a href="#jvm的运行模式" class="headerlink" title="jvm的运行模式"></a>jvm的运行模式</h3><pre><code>client 模式 java -client启用
+<blockquote>
+<p>平时我们所说的堆和栈都是属于运行时数据区。JVM的类加载子系统是非常强大和灵活的，JVM允许我们在程序运行的过程中加载类，这给我们提供了很大的灵活性，也为热部署提供了可能。</p>
+</blockquote>
+<h4 id="有哪些著名的虚拟机"><a href="#有哪些著名的虚拟机" class="headerlink" title="有哪些著名的虚拟机"></a>有哪些著名的虚拟机</h4><ul>
+<li><p>Sun Classic VM</p>
+<ul>
+<li><p>世界上第一款商业的java虚拟机。现在已经完全被淘汰</p>
+</li>
+<li><p>只有解释器，想编译执行只能使用JIT外挂</p>
+</li>
+<li>因为是解释执行，所以运行效率低，这也是为什么java给人的感觉效率低，其实后来一点都不低</li>
+</ul>
+</li>
+<li><p>Exact VM</p>
+<ul>
+<li>非常短暂的虚拟机，只在Solaris平台发布过</li>
+<li>已经具有了高性能虚拟机的雏形</li>
+</ul>
+</li>
+<li><p>Hotspot VM</p>
+<ul>
+<li>Longview Technologies公司开发</li>
+<li>因为Sun公司注意到其在JIT上的优秀理念，收购了Longview Technologies</li>
+<li>Sun公司对java开源之后，其开始称霸java虚拟机领域</li>
+</ul>
+</li>
+<li><p>jRockit VM</p>
+<ul>
+<li><p>BEA开发，世界上最快的java虚拟机，不包含解析器，全部靠及时编译实现，所以速度非常快</p>
+</li>
+<li><p>BEA后来被Oracle收购，jRockit虚拟机后来在JDK8中有体现</p>
+</li>
+</ul>
+</li>
+<li><p>J9 VM</p>
+<ul>
+<li>IBM开发，和Hotspot类似，全能性的著名虚拟机。是IBM的java应用执行平台。</li>
+</ul>
+</li>
+<li><p>Dalvik VM</p>
+<ul>
+<li>google出品。安卓系统使用。不是真正的java虚拟机，不能直接执行class文件。</li>
+</ul>
+</li>
+<li><p>Microsoft VM。在java的诞生初期，微软和java非常友好</p>
+<ul>
+<li>微软想把java绑定到自己的产品中去。只能运行在windows平台下。</li>
+<li>后来Sun公司状告微软侵犯商品权，并以这个虚拟机为证据</li>
+<li>微软败诉，赔偿巨额赔款。从此微软就不在开发虚拟机，转而开始搞.NET平台</li>
+</ul>
+</li>
+<li><p>Azul VM</p>
+<ul>
+<li>真正的高性能虚拟机，碾压HotSpot.可以管理数十个CPU和数百G的内存</li>
+</ul>
+</li>
+<li><p>Liquid VM</p>
+<ul>
+<li>也是高性能的虚拟机，碾压HotSpot.本身就相当于是一个操作系统一样</li>
+</ul>
+</li>
+<li><p>Taobao VM</p>
+<ul>
+<li>阿里巴巴基于Hotspot深度定制的一款java虚拟机</li>
+<li>对硬件依赖比较高，只支持Intel的CPU，牺牲了跨平台性，提高了性能</li>
+<li>据说本地方法调用开销非常小</li>
+<li>是中国人的骄傲</li>
+</ul>
+</li>
+</ul>
+<h4 id="jvm的运行模式是什么"><a href="#jvm的运行模式是什么" class="headerlink" title="jvm的运行模式是什么"></a>jvm的运行模式是什么</h4><pre><code>client 模式 java -client启用
 server 模式 java -server启动
 </code></pre><p>client模式启动的是Client VM的实现，可以减少启动时间和内存占用,一般用在java客户端上,比如java的GUI程序</p>
 <p>server模式启动的是server VM的实现，启动时间会有点长，但是程序运行速度更快</p>
@@ -99,20 +223,23 @@ server 模式 java -server启动
 <pre><code>自适应编译(JIT)
 快速内存分配和垃圾回收
 线程同步
-</code></pre><h3 id="jvm调优的目标"><a href="#jvm调优的目标" class="headerlink" title="jvm调优的目标"></a>jvm调优的目标</h3><pre><code>尽可能大的吞吐量,尽可能小的GC停顿时间（吞吐量是GC时间在总时间中的占比，比值越小，吞吐量越高）
+</code></pre><h4 id="jvm调优的目标"><a href="#jvm调优的目标" class="headerlink" title="jvm调优的目标"></a>jvm调优的目标</h4><pre><code>尽可能大的吞吐量,尽可能小的GC停顿时间（吞吐量是GC时间在总时间中的占比，比值越小，吞吐量越高）
 </code></pre><h3 id="JVM的垃圾收集器"><a href="#JVM的垃圾收集器" class="headerlink" title="JVM的垃圾收集器"></a>JVM的垃圾收集器</h3><pre><code>串行收集器 &gt;&gt; 适合单处理器小数据集
 并行收集器 &gt;&gt; 吞吐量优先，多个线程执行GC，系统一定会出现短时Stop the World
 并发收集器 &gt;&gt; 响应时间优先，GC时系统不会出现Stop the World
 </code></pre><ul>
 <li><p>选择垃圾收集器的原则</p>
 <ul>
-<li>如果应用的数据集小于100M，或者在单个处理器上运行，没有暂停时间要求，则使用串行收集器</li>
-<li>如果系统的吞吐量是第一优先级而且系统的暂停是可以接受的，使用并行收集器</li>
-<li>如果系统的响应时间比吞吐量更重要，并且垃圾收集暂停必须小于1s,则使用并发收集器</li>
+<li><p>如果应用的数据集小于100M，或者在单个处理器上运行，没有暂停时间要求，则使用串行收集器</p>
+</li>
+<li><p>如果系统的吞吐量是第一优先级而且系统的暂停是可以接受的，使用并行收集器</p>
+</li>
+<li><p>如果系统的响应时间比吞吐量更重要，并且垃圾收集暂停必须小于1s,则使用并发收集器</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"><span class="symbol">XX:</span>+UseSerialGC 使用串行收集器（串行）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>+UseParallelGC 使用并行收集器(并行）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>-UseParallelOldGC 关闭并行压缩（并行）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>+UseConcMarkSweepGC 启用CMS收集器(并发）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>+UseG1GC	启用G1收集器(并发）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>ParallelGCThreads=&lt;N&gt; 调整并行收集器的GC线程数量</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ul>
-<p>###<br>    -XX:+UseSerialGC 使用串行收集器（串行）<br>    -XX:+UseParallelGC 使用并行收集器(并行）<br>    -XX:-UseParallelOldGC 关闭并行压缩（并行）<br>    -XX:+UseConcMarkSweepGC 启用CMS收集器(并发）<br>    -XX:+UseG1GC    启用G1收集器(并发）<br>    -XX:ParallelGCThreads=<n> 调整并行收集器的GC线程数量</n></p>
 <h3 id="java字节码"><a href="#java字节码" class="headerlink" title="java字节码"></a>java字节码</h3><p>  字节码的整体结构,按照顺序依次是</p>
 <pre><code> * Magic Number 
      &gt; 魔数，4个字节。值为0xCAFEBABE 由java语言的作者James Gosling定义的
@@ -146,53 +273,11 @@ server 模式 java -server启动
 <p><img src="/content/image/leijiegou1.PNG" alt="字节码结构1"></p>
 <h3 id="volatile为什么不能实现线程安全"><a href="#volatile为什么不能实现线程安全" class="headerlink" title="volatile为什么不能实现线程安全"></a>volatile为什么不能实现线程安全</h3><p><a href="https://blog.csdn.net/qq_33330687/article/details/80990729" target="_blank" rel="noopener">为什么volatile不能保证线程安全</a></p>
 <p><a href="https://blog.csdn.net/wuzhilon88/article/details/49201891" target="_blank" rel="noopener">jvm调优</a></p>
-<h3 id="平时遇到的异常"><a href="#平时遇到的异常" class="headerlink" title="平时遇到的异常"></a>平时遇到的异常</h3><h4 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h4><pre><code>/**
- * 
- * @author fulin16
- * 
- * 模拟 Java heap space 溢出
- * 运行参数：-verbose:gc -Xms10M -Xmx10M -Xss128k -XX:+PrintGCDetails
- */
-class Person{}
-public class HeapException {
-    public static void main(String[] args) {
-        List&lt;Person&gt; list = new ArrayList&lt;Person&gt;();
-        while(true){
-            list.add(new Person());
-        }
-    }
-}
-
-//堆中存放的是实例化的对象，如果堆中的对象
-</code></pre><blockquote>
-<p>异常堆栈</p>
-</blockquote>
-<pre><code>[GC (Allocation Failure) [PSYoungGen: 2528K-&gt;496K(2560K)] 6226K-&gt;6244K(9728K), 0.0036614 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
-[Full GC (Ergonomics) [PSYoungGen: 496K-&gt;0K(2560K)] [ParOldGen: 5748K-&gt;5117K(7168K)] 6244K-&gt;5117K(9728K), [Metaspace: 2660K-&gt;2660K(1056768K)], 0.0733379 secs] [Times: user=0.16 sys=0.00, real=0.07 secs] 
-[GC (Allocation Failure) [PSYoungGen: 2048K-&gt;512K(2560K)] 7165K-&gt;7180K(9728K), 0.0027150 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
-[Full GC (Ergonomics) [PSYoungGen: 512K-&gt;0K(2560K)] [ParOldGen: 6668K-&gt;6227K(7168K)] 7180K-&gt;6227K(9728K), [Metaspace: 2660K-&gt;2660K(1056768K)], 0.0365703 secs] [Times: user=0.14 sys=0.00, real=0.04 secs] 
-[Full GC (Ergonomics) [PSYoungGen: 1391K-&gt;863K(2560K)] [ParOldGen: 6227K-&gt;6735K(7168K)] 7618K-&gt;7599K(9728K), [Metaspace: 2660K-&gt;2660K(1056768K)], 0.0618754 secs] [Times: user=0.11 sys=0.00, real=0.06 secs] 
-[Full GC (Allocation Failure) [PSYoungGen: 863K-&gt;863K(2560K)] [ParOldGen: 6735K-&gt;6724K(7168K)] 7599K-&gt;7588K(9728K), [Metaspace: 2660K-&gt;2660K(1056768K)], 0.0571520 secs] [Times: user=0.11 sys=0.00, real=0.06 secs] 
-Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
-    at java.util.Arrays.copyOf(Arrays.java:3210)
-    at java.util.Arrays.copyOf(Arrays.java:3181)
-    at java.util.ArrayList.grow(ArrayList.java:261)
-    at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:235)
-    at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:227)
-    at java.util.ArrayList.add(ArrayList.java:458)
-    at com.fulin.exception.HeapException.main(HeapException.java:27)
-Heap
- PSYoungGen      total 2560K, used 945K [0x00000000ffd00000, 0x0000000100000000, 0x0000000100000000)
-  eden space 2048K, 46% used [0x00000000ffd00000,0x00000000ffdec6e0,0x00000000fff00000)
-  from space 512K, 0% used [0x00000000fff00000,0x00000000fff00000,0x00000000fff80000)
-  to   space 512K, 0% used [0x00000000fff80000,0x00000000fff80000,0x0000000100000000)
- ParOldGen       total 7168K, used 6724K [0x00000000ff600000, 0x00000000ffd00000, 0x00000000ffd00000)
-  object space 7168K, 93% used [0x00000000ff600000,0x00000000ffc91060,0x00000000ffd00000)
- Metaspace       used 2692K, capacity 4486K, committed 4864K, reserved 1056768K
-  class space    used 289K, capacity 386K, committed 512K, reserved 1048576K
-</code></pre><p>###JVM相关的比较权威的人</p>
-<ul>
+<h3 id="JVM相关的比较权威的人"><a href="#JVM相关的比较权威的人" class="headerlink" title="JVM相关的比较权威的人"></a>JVM相关的比较权威的人</h3><ul>
 <li>R大</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://docs.oracle.com/javase/8/javase-books.htm" target="_blank" rel="noopener">Java8官方文档</a></li>
 </ul>
 
         </section>
@@ -205,7 +290,7 @@ Heap
     <div class="toc-container">
         <h1>目录</h1>
         <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#java到底是什么"><span class="toc-number">1.</span> <span class="toc-text">java到底是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM到底是什么"><span class="toc-number">2.</span> <span class="toc-text">JVM到底是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jvm的运行模式"><span class="toc-number">3.</span> <span class="toc-text">jvm的运行模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jvm调优的目标"><span class="toc-number">4.</span> <span class="toc-text">jvm调优的目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM的垃圾收集器"><span class="toc-number">5.</span> <span class="toc-text">JVM的垃圾收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java字节码"><span class="toc-number">6.</span> <span class="toc-text">java字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile为什么不能实现线程安全"><span class="toc-number">7.</span> <span class="toc-text">volatile为什么不能实现线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#平时遇到的异常"><span class="toc-number">8.</span> <span class="toc-text">平时遇到的异常</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆溢出"><span class="toc-number">8.1.</span> <span class="toc-text">堆溢出</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#java到底是什么"><span class="toc-number">1.</span> <span class="toc-text">java到底是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java技术体系"><span class="toc-number">1.1.</span> <span class="toc-text">java技术体系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JAVASE-JAVAME-JAVAEE到底是什么"><span class="toc-number">1.2.</span> <span class="toc-text">JAVASE,JAVAME,JAVAEE到底是什么</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java语言的发展历程"><span class="toc-number">2.</span> <span class="toc-text">java语言的发展历程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM到底是什么"><span class="toc-number">3.</span> <span class="toc-text">JVM到底是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#有哪些著名的虚拟机"><span class="toc-number">3.1.</span> <span class="toc-text">有哪些著名的虚拟机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jvm的运行模式是什么"><span class="toc-number">3.2.</span> <span class="toc-text">jvm的运行模式是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jvm调优的目标"><span class="toc-number">3.3.</span> <span class="toc-text">jvm调优的目标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM的垃圾收集器"><span class="toc-number">4.</span> <span class="toc-text">JVM的垃圾收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java字节码"><span class="toc-number">5.</span> <span class="toc-text">java字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile为什么不能实现线程安全"><span class="toc-number">6.</span> <span class="toc-text">volatile为什么不能实现线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM相关的比较权威的人"><span class="toc-number">7.</span> <span class="toc-text">JVM相关的比较权威的人</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol>
         </div>
     </div>
     

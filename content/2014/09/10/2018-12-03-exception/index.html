@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>java中异常和JVM关系 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>java中异常和JVM关系</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2014年09月10日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/java/">java</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>经常听到有人说：系统宕机了，因为OOM导致的，那么OOM真的会直接导致JVM进程退出吗？</p>
+</blockquote>
+<h3 id="JVM进程退出和异常的关系"><a href="#JVM进程退出和异常的关系" class="headerlink" title="JVM进程退出和异常的关系"></a>JVM进程退出和异常的关系</h3><ul>
+<li><p>JVM进程退出会发生在以下场景</p>
+<ul>
+<li>JVM进程中没有任何非守护进程在运行会导致JVM进程退出</li>
+<li>在某一个java线程中显示调用了System.exit()返回，会导致JVM进程终止</li>
+<li>在某一个java线程中显示调用了Runtime.getRuntime().exit()，会导致JVM进程终止</li>
+<li>在某一个java线程中显示调用了Runtime.getRuntime().halt()，会导致JVM进程终止</li>
+<li>通过操作系统发生关闭信号，比如kill命令，会导致JVM进程终止</li>
+</ul>
+</li>
+<li><p>JVM进程终止和异常没有直接关系</p>
+<blockquote>
+<p> 为什么平时生产故障经常会有这样的情况：JVM进程终止了，然后排查的过程中会发现有OOM异常，这给人一种错觉：<em>OOM会导致 JVM 进程终止</em>，其实这完全是错误，根本不是这么回事</p>
+</blockquote>
+<p>java中Exception和Error都是Throwable的子类，都是可以被try catch语句进行处理的。Throwable的来源有两种：<em>JVM抛出</em>  和 <em>程序中的throw语句抛出</em></p>
+<ul>
+<li>java中的异常都是线程自己处理的，不存在JVM来处理异常这种说法，不知道从哪里流传出来的说异常层层抛出最后是JVM来处理，这完全是错误的。</li>
+<li>线程处理异常的方式就是要么自己定义异常处理逻辑，要么终止线程。</li>
+<li>为什么OOM经常伴随这JVM的终止了？因为OOM发生后很大的概率导致线程纷纷死亡，最终JVM进程中没有非守护进程，从而导致JVM退出。</li>
+</ul>
+</li>
+<li></li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM进程退出和异常的关系"><span class="toc-number">1.</span> <span class="toc-text">JVM进程退出和异常的关系</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
