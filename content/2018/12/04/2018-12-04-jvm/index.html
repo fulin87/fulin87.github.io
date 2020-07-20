@@ -235,7 +235,7 @@ server 模式 java -server启动
 <li><p>如果系统的吞吐量是第一优先级而且系统的暂停是可以接受的，使用并行收集器</p>
 </li>
 <li><p>如果系统的响应时间比吞吐量更重要，并且垃圾收集暂停必须小于1s,则使用并发收集器</p>
-<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"><span class="symbol">XX:</span>+UseSerialGC 使用串行收集器（串行）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>+UseParallelGC 使用并行收集器(并行）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>-UseParallelOldGC 关闭并行压缩（并行）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>+UseConcMarkSweepGC 启用CMS收集器(并发）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>+UseG1GC	启用G1收集器(并发）</span></span><br><span class="line"><span class="ruby">-<span class="symbol">XX:</span>ParallelGCThreads=&lt;N&gt; 调整并行收集器的GC线程数量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseSerialGC 使用串行收集器（串行）</span><br><span class="line">-XX:+UseParallelGC 使用并行收集器(并行）</span><br><span class="line">-XX:-UseParallelOldGC 关闭并行压缩（并行）</span><br><span class="line">-XX:+UseConcMarkSweepGC 启用CMS收集器(并发）</span><br><span class="line">-XX:+UseG1GC	启用G1收集器(并发）</span><br><span class="line">-XX:ParallelGCThreads=&lt;N&gt; 调整并行收集器的GC线程数量</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -302,7 +302,7 @@ server 模式 java -server启动
   <footer>
   <div class="copyright">
     <div>
-      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
     </div>
     <div>
       Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>

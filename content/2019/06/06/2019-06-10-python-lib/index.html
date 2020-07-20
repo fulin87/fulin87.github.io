@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>python2和python3以及python常用工具包的那些事 | 水货程序员的笔记</title>
+  <link rel="stylesheet" href="/content/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/content/">
+      <span>水货程序员的笔记</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/content/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/content/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>python2和python3以及python常用工具包的那些事</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年06月06日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/content/categories/python/">python</a>
+  </div>
+
+
+
+            
+            
+          </div>
+          <blockquote>
+<p>python 可以大幅度的提升我们工作的效率，自己写的一些python小工具非常实用，但是经常面临一个问题，自己的电脑环境换了之后python的包就需要安装，这时候搞一个环境就比较麻烦，这里总结一下自己经常用的一些包的安装和使用方法</p>
+</blockquote>
+<h2 id="python2和python3"><a href="#python2和python3" class="headerlink" title="python2和python3"></a>python2和python3</h2><p>曾经看过一个段子：“python2和python3的关系，就是java和javaScript的关系”，虽然有点夸张，但是也充分说明了python2和python3之间的巨大差异。</p>
+<p>同时使用python2和python3，我推荐使用py的方式，因为这是python官方推荐的方式</p>
+<ul>
+<li><strong>py -2 test.py</strong>  #使用python2运行test.py</li>
+<li><strong>py -3 test.py</strong>  #使用python3运行test.py</li>
+<li><strong>#! python2</strong>     #脚本文件的最开始加上这个，然后 <strong>py test.py</strong> 表示使用python2运行test.py</li>
+<li><p><strong>#! python3</strong>     #脚本文件的最开始加上这个，然后 <strong>py test.py</strong> 表示使用python3运行test.py</p>
+</li>
+<li><p><strong>py -2 -m pip install package</strong>  #表示安装Python2的package</p>
+</li>
+<li><p><strong>py -3 -m pip install package</strong>  #表示安装python3的package</p>
+</li>
+<li><p><strong>py -3 -m pip install –upgrade pip</strong>  #升级python3的pip</p>
+<hr>
+</li>
+</ul>
+<h3 id="kafka-python"><a href="#kafka-python" class="headerlink" title="kafka-python"></a>kafka-python</h3><ul>
+<li>python的kafka客户的，可以非常方便的操作kafka</li>
+<li>py -3 m pip install kafka-python</li>
+</ul>
+<h2 id="我的-requirements-txt"><a href="#我的-requirements-txt" class="headerlink" title="我的 requirements.txt"></a>我的 requirements.txt</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kafka-python==1.4.7</span><br><span class="line">redis==3.3.11</span><br><span class="line">requests==2.22.0</span><br><span class="line">pycrypto==2.6.1</span><br></pre></td></tr></table></figure>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#python2和python3"><span class="toc-number">1.</span> <span class="toc-text">python2和python3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#kafka-python"><span class="toc-number">1.1.</span> <span class="toc-text">kafka-python</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我的-requirements-txt"><span class="toc-number">2.</span> <span class="toc-text">我的 requirements.txt</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/content/lib/in-view.min.js"></script>
+<script src="/content/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
