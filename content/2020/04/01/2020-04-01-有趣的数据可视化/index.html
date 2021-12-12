@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
+
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            很好玩的两个数据可视化工具 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
+    </a>
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2020/04/01/2020-04-01-%E6%9C%89%E8%B6%A3%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%89%E8%B6%A3%E7%9A%84manim"><span class="toc-number">2.</span> <span class="toc-text">1. 有趣的manim</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.1.</span> <span class="toc-text">测试过程中遇到的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LaTeX%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86"><span class="toc-number">2.2.</span> <span class="toc-text">LaTeX相关的知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#manim%E7%9A%84%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3"><span class="toc-number">2.3.</span> <span class="toc-text">manim的帮助文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#manim%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-number">2.4.</span> <span class="toc-text">manim相关资料</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E8%B6%A3%E7%9A%84prosessing"><span class="toc-number">3.</span> <span class="toc-text">有趣的prosessing</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
+          
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
+          
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2020/04/01/2020-04-01-%E6%9C%89%E8%B6%A3%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">很好玩的两个数据可视化工具</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2020-04-01
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2021-11-23
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/python/">python</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
+  </div>
+</div>
+
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
+<p>最近有一个想法，想把算法的具体运行过程用数据可视化的形式做成视频，放在B站上，这样既是自身知识的一种沉淀，又相当于经营了一个视频账号，在寻找视频制作工具的过程中，发现两个数据可视化工具非常有趣，<strong>manim</strong> 和 <strong>processing</strong></p>
+</blockquote>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="1-有趣的manim"><a href="#1-有趣的manim" class="headerlink" title="1. 有趣的manim"></a>1. 有趣的manim</h2><p>manim是著名youtube主播3Blue1Brown自己开发并开源的视频制作框架，非常强大。3Blue1Brown自己制作的视频，每一期我基本都看过，惊为天人。看了他的视频我也萌生了自己做视频的想法，想做有些算法演示方面的视频，这里记录一下manim的学习笔记。</p>
+<ul>
+<li><strong>git clone <a target="_blank" rel="noopener" href="https://github.com/3b1b/manim">https://github.com/3b1b/manim</a></strong></li>
+<li><strong>py -3 -m pip install -r requirement.txt</strong></li>
+<li>验证是否安装成功 <strong>py -3 -m manim -h</strong>   会显示manim的帮助文档</li>
+<li>生成第一个动画 <strong>py -3 -m manim example_scene.py SquareToCircle -pl</strong></li>
+</ul>
+<h3 id="测试过程中遇到的问题"><a href="#测试过程中遇到的问题" class="headerlink" title="测试过程中遇到的问题"></a>测试过程中遇到的问题</h3><p>在运行带有公式的文字排版的测试视频的时候报错了，而且都与 <strong>MIKTex</strong> 有关，这是一个排版工具，一般都与安装包有关，经常几次尝试和更新最终成功了，manim用到了LaTeX</p>
+<p>LaTeX是一个非常强大的排版系统</p>
+<h3 id="LaTeX相关的知识"><a href="#LaTeX相关的知识" class="headerlink" title="LaTeX相关的知识"></a>LaTeX相关的知识</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">texdoc</span> ctex 命令可以查看ctex相关的文档</span><br><span class="line"><span class="symbol">texdoc</span> lshort-zh-<span class="meta">cn</span> 命令可以查看LaTeX文档</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="manim的帮助文档"><a href="#manim的帮助文档" class="headerlink" title="manim的帮助文档"></a>manim的帮助文档</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">usage: manim.py [-h] [-p] [-w] [-s] [-l] [-m] [<span class="comment">--high_quality] [-g] [-i] [-f]</span></span><br><span class="line">                [-t] [-q] [-<span class="keyword">a</span>] [-o FILE_NAME] [-n START_AT_ANIMATION_NUMBER]</span><br><span class="line">                [-r RESOLUTION] [-c COLOR] [<span class="comment">--sound] [--leave_progress_bars]</span></span><br><span class="line">                [<span class="comment">--media_dir MEDIA_DIR] [--video_dir VIDEO_DIR]</span></span><br><span class="line">                [<span class="comment">--tex_dir TEX_DIR] [--livestream] [--to-twitch]</span></span><br><span class="line">                [<span class="comment">--with-key TWITCH_KEY]</span></span><br><span class="line">                [<span class="built_in">file</span>] [scene_names [scene_names ...]]</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line">  <span class="built_in">file</span>                  path <span class="built_in">to</span> <span class="built_in">file</span> holding <span class="keyword">the</span> python code <span class="keyword">for</span> <span class="keyword">the</span> scene</span><br><span class="line">  scene_names           Name <span class="keyword">of</span> <span class="keyword">the</span> Scene class you want <span class="built_in">to</span> see</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, <span class="comment">--help            show this help message and exit</span></span><br><span class="line">  -p, <span class="comment">--preview         Automatically open the saved file once its done</span></span><br><span class="line">  -w, <span class="comment">--write_to_movie  Render the scene as a movie file</span></span><br><span class="line">  -s, <span class="comment">--save_last_frame</span></span><br><span class="line">                        Save <span class="keyword">the</span> <span class="keyword">last</span> frame</span><br><span class="line">  -l, <span class="comment">--low_quality     Render at a low quality (for faster rendering)</span></span><br><span class="line">  -m, <span class="comment">--medium_quality  Render at a medium quality</span></span><br><span class="line">  <span class="comment">--high_quality        Render at a high quality</span></span><br><span class="line">  -g, <span class="comment">--save_pngs       Save each frame as a png</span></span><br><span class="line">  -i, <span class="comment">--save_as_gif     Save the video as gif</span></span><br><span class="line">  -f, <span class="comment">--show_file_in_finder</span></span><br><span class="line">                        Show <span class="keyword">the</span> output <span class="built_in">file</span> <span class="keyword">in</span> finder</span><br><span class="line">  -t, <span class="comment">--transparent     Render to a movie file with an alpha channel</span></span><br><span class="line">  -q, <span class="comment">--quiet</span></span><br><span class="line">  -<span class="keyword">a</span>, <span class="comment">--write_all       Write all the scenes from a file</span></span><br><span class="line">  -o FILE_NAME, <span class="comment">--file_name FILE_NAME</span></span><br><span class="line">                        Specify <span class="keyword">the</span> name <span class="keyword">of</span> <span class="keyword">the</span> output <span class="built_in">file</span>, ifit should be</span><br><span class="line">                        different <span class="built_in">from</span> <span class="keyword">the</span> scene class name</span><br><span class="line">  -n START_AT_ANIMATION_NUMBER, <span class="comment">--start_at_animation_number START_AT_ANIMATION_NUMBER</span></span><br><span class="line">                        Start rendering <span class="keyword">not</span> <span class="built_in">from</span> <span class="keyword">the</span> <span class="keyword">first</span> animation, butfrom</span><br><span class="line">                        another, specified <span class="keyword">by</span> its index. If you passin <span class="literal">two</span></span><br><span class="line">                        <span class="literal">comma</span> separated values, e.g. <span class="string">&quot;3,6&quot;</span>, <span class="keyword">it</span> will endthe</span><br><span class="line">                        rendering <span class="keyword">at</span> <span class="keyword">the</span> <span class="keyword">second</span> <span class="built_in">value</span></span><br><span class="line">  -r RESOLUTION, <span class="comment">--resolution RESOLUTION</span></span><br><span class="line">                        Resolution, passed <span class="keyword">as</span> <span class="string">&quot;height,width&quot;</span></span><br><span class="line">  -c COLOR, <span class="comment">--color COLOR</span></span><br><span class="line">                        Background color</span><br><span class="line">  <span class="comment">--sound               Play a success/failure sound</span></span><br><span class="line">  <span class="comment">--leave_progress_bars</span></span><br><span class="line">                        Leave progress bars displayed <span class="keyword">in</span> terminal</span><br><span class="line">  <span class="comment">--media_dir MEDIA_DIR</span></span><br><span class="line">                        <span class="built_in">directory</span> <span class="built_in">to</span> <span class="built_in">write</span> media</span><br><span class="line">  <span class="comment">--video_dir VIDEO_DIR</span></span><br><span class="line">                        <span class="built_in">directory</span> <span class="built_in">to</span> <span class="built_in">write</span> video</span><br><span class="line">  <span class="comment">--tex_dir TEX_DIR     directory to write tex</span></span><br><span class="line">  <span class="comment">--livestream          Run in streaming mode</span></span><br><span class="line">  <span class="comment">--to-twitch           Stream to twitch</span></span><br><span class="line">  <span class="comment">--with-key TWITCH_KEY</span></span><br><span class="line">                        Stream key <span class="keyword">for</span> twitch</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="manim相关资料"><a href="#manim相关资料" class="headerlink" title="manim相关资料"></a>manim相关资料</h3><p><a target="_blank" rel="noopener" href="https://github.com/3b1b/manim">github地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://space.bilibili.com/88461692">bilibili官方频道</a></p>
+<p><a target="_blank" rel="noopener" href="https://eulertour.com/docs/">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://manim.ml/index.html#">文档集散地</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/cai-hust/manim-tutorial-CN">有用的文档</a></p>
+<h2 id="有趣的prosessing"><a href="#有趣的prosessing" class="headerlink" title="有趣的prosessing"></a>有趣的prosessing</h2><p>和manim相比， processing就简单很多，而且对java程序员更加友好</p>
+
+    </div>
+    <!--文末结束语-->
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
+        
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2020/05/23/2020-05-23-dubbo%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">
+                    dubbo知识点梳理
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2020/04/01/2020-04-01-%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">      
+                    重学数据结构
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
+
+
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+
+</body>
+</html>

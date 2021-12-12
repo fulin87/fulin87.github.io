@@ -1,76 +1,257 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>Linux基础知识点三之硬件信息 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            Linux基础知识点三之硬件信息 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2016/08/21/2016-08-21-SSH3/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E4%B8%AD%E6%9F%A5%E9%98%85%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">1.</span> <span class="toc-text">Linux中查阅硬件信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU"><span class="toc-number">1.1.</span> <span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98"><span class="toc-number">1.2.</span> <span class="toc-text">内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98"><span class="toc-number">1.3.</span> <span class="toc-text">磁盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1"><span class="toc-number">1.4.</span> <span class="toc-text">网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOIS"><span class="toc-number">1.5.</span> <span class="toc-text">BOIS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E4%B8%AD%E7%9A%84%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">Linux中的磁盘分区和目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E5%8F%8B%E7%9A%84%E7%B2%BE%E5%BD%A9%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">网友的精彩总结</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2016/08/21/2016-08-21-SSH3/">Linux基础知识点三之硬件信息</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2016-08-21
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2018-02-06
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/linux/">linux</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>Linux基础知识点三之硬件信息</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月21日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>Linux不像windows那么直观，或者是我自己使用windows时间很长了，在windows下，对磁盘，分区，硬件信息都能很好的查看和理解，但是自从接触Linux后，长期以来，对Linux下的硬件；分区和目录的关系一直比较模糊，所以，特意花了一些时间来整理。</p>
 </blockquote>
 <h2 id="Linux中查阅硬件信息"><a href="#Linux中查阅硬件信息" class="headerlink" title="Linux中查阅硬件信息"></a>Linux中查阅硬件信息</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><p> 命令：<code>lscpu</code> 可以显示CPU的统计信息</p>
@@ -96,7 +277,8 @@ L1i cache:             32K
 L2 cache:              256K
 L3 cache:              12288K
 NUMA node0 CPU(s):     0
-</code></pre><p> 命令 <code>cat /proc/cpuinfo</code> 可以知道每个cpu信息，如每个CPU的型号，主频等</p>
+</code></pre>
+<p> 命令 <code>cat /proc/cpuinfo</code> 可以知道每个cpu信息，如每个CPU的型号，主频等</p>
 <pre><code>processor    : 0
 vendor_id    : GenuineIntel
 cpu family    : 6
@@ -122,12 +304,14 @@ clflush size    : 64
 cache_alignment    : 64
 address sizes    : 40 bits physical, 48 bits virtual
 power management:
-</code></pre><h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><p> 命令 <code>free -m</code> 查看内存的统计信息</p>
+</code></pre>
+<h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><p> 命令 <code>free -m</code> 查看内存的统计信息</p>
 <pre><code>             total       used       free     shared    buffers     cached
 Mem:          1878       1026        852         31        173        394
 -/+ buffers/cache:        458       1419
 Swap:         5119         49       5070
-</code></pre><p> 命令 <code>cat /proc/meminfo</code> 查看内存的详细使用情况</p>
+</code></pre>
+<p> 命令 <code>cat /proc/meminfo</code> 查看内存的详细使用情况</p>
 <pre><code>MemTotal:        1923396 kB
 MemFree:          873108 kB
 Buffers:          177256 kB
@@ -170,7 +354,8 @@ HugePages_Surp:        0
 Hugepagesize:       2048 kB
 DirectMap4k:        8192 kB
 DirectMap2M:     2088960 kB
-</code></pre><p> 命令 <code>dmidecode -t memory</code> 查看内存硬件信息,这里不做过多介绍</p>
+</code></pre>
+<p> 命令 <code>dmidecode -t memory</code> 查看内存硬件信息,这里不做过多介绍</p>
 <pre><code># dmidecode 2.12
 SMBIOS 2.4 present.
 
@@ -220,7 +405,8 @@ Memory Module Information
         Installed Size: 2048 MB (Single-bank Connection)
         Enabled Size: 2048 MB (Single-bank Connection)
         Error Status: OK
-</code></pre><h3 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h3><p> 命令 <code>lsblk</code> 查看磁盘分区分布</p>
+</code></pre>
+<h3 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h3><p> 命令 <code>lsblk</code> 查看磁盘分区分布</p>
 <pre><code>NAME                         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda                            8:0    0   30G  0 disk 
 ├─sda1                         8:1    0  200M  0 part /boot
@@ -230,7 +416,8 @@ sda                            8:0    0   30G  0 disk
 sdb                            8:16   0   30G  0 disk 
 └─VolGroup00-LVroot (dm-1)   253:1    0 54.8G  0 lvm  /
 sr0                           11:0    1 1024M  0 rom 
-</code></pre><p> 命令 <code>fdisk -l</code> 查看磁盘和分区的详细信息</p>
+</code></pre>
+<p> 命令 <code>fdisk -l</code> 查看磁盘和分区的详细信息</p>
 <pre><code>Disk /dev/sda: 32.2 GB, 32212254720 bytes
 64 heads, 32 sectors/track, 30720 cylinders
 Units = cylinders of 2048 * 512 = 1048576 bytes
@@ -264,10 +451,12 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 Disk identifier: 0x00000000
-</code></pre><p> <img src="/content/image/diskTotal.PNG" alt=""></p>
-<h3 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h3><p> 命令 <code>lspci | grep -i &#39;eth&#39;</code> 查看网卡信息</p>
+</code></pre>
+<p> <img src="/content/image/diskTotal.PNG"></p>
+<h3 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h3><p> 命令 <code> lspci | grep -i &#39;eth&#39;</code> 查看网卡信息</p>
 <pre><code>0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
-</code></pre><h3 id="BOIS"><a href="#BOIS" class="headerlink" title="BOIS"></a>BOIS</h3><p> 命令 <code>dmidecode -t bios</code> 查看当前的BOIS信息</p>
+</code></pre>
+<h3 id="BOIS"><a href="#BOIS" class="headerlink" title="BOIS"></a>BOIS</h3><p> 命令 <code>dmidecode -t bios</code> 查看当前的BOIS信息</p>
 <pre><code># dmidecode 2.12
 SMBIOS 2.4 present.
 
@@ -303,8 +492,9 @@ BIOS Information
         Targeted content distribution is supported
     BIOS Revision: 4.6
     Firmware Revision: 0.0
-</code></pre><h2 id="Linux中的磁盘分区和目录"><a href="#Linux中的磁盘分区和目录" class="headerlink" title="Linux中的磁盘分区和目录"></a>Linux中的磁盘分区和目录</h2><p> 首先先看看磁盘的逻辑物理结构图</p>
-<p> <img src="/content/image/disk.PNG" alt=""></p>
+</code></pre>
+<h2 id="Linux中的磁盘分区和目录"><a href="#Linux中的磁盘分区和目录" class="headerlink" title="Linux中的磁盘分区和目录"></a>Linux中的磁盘分区和目录</h2><p> 首先先看看磁盘的逻辑物理结构图</p>
+<p> <img src="/content/image/disk.PNG"></p>
 <p> 常见的硬盘一般分为三类。IDE硬盘，SCSI硬盘和SATA硬盘。通常我们电脑上的硬盘都是IDE和SATA，而服务器一般用SCSI硬盘。SCSI的硬盘接口设备叫sd，第一块硬盘就是sda，第二块硬盘是sdb…以此类推。Linux规定，一块硬盘上主分区和扩展分区总数不能超过4个，扩展分区又可以包含逻辑分区。主分区的命名方式分别是sda1，sda2，sda3，sda4。而逻辑分区从sd5开始，没有数量限制，命名方式为sd5，sd6…sd无穷大。主分区可以简单的理解为windows下的C盘，也就是系统分区，是引导操作系统必要的分区。而逻辑分区可以简单的理解为windows下的CDE盘等等。</p>
 <p> Linux磁盘分区不像windows把分区用盘符区分。在Linux中是先建立一个以根目录<code>/</code>为根节点的目录树,然后将磁盘分区挂载到相应的目录上，对于Linux文件系统的约定大致如下：</p>
 <pre><code>/bin        ##存放系统的核心最常用的命令
@@ -318,7 +508,8 @@ BIOS Information
 /tmp        ##临时文件存放点
 /usr        ##非系统的程序和命令
 /var        ##数据目录，一般数据库文件也存放在此目录下
-</code></pre><p> 至于不同目录上挂载的分区大小分配，要根据linux文件系统的规则和作用来。</p>
+</code></pre>
+<p> 至于不同目录上挂载的分区大小分配，要根据linux文件系统的规则和作用来。</p>
 <p> <code>/boot</code> 需挂载主分区，因为是内核和启动文件，不需要太大 500M 就足够用了。单独挂载boot是为了保证系统启动的稳定性，防止其他的硬盘分区坏了影响启动</p>
 <p> <code>/var</code> 是数据目录，可以挂载容量大一点的分区,比如分配20G。其他依次类推</p>
 <p> <code>/</code> 我的理解是一定需要给根目录挂载分区</p>
@@ -329,103 +520,82 @@ BIOS Information
 <li>一块磁盘的分区表仅有64bytes大小，仅支持4个分区表信息（主分区+扩展分区）。</li>
 <li>磁盘分区的最小单位是柱面</li>
 <li>扩展分区不能直接使用，还需要在扩展分区的基础上创建逻辑分区</li>
-<li><p>扩展分区有自己的分区表，因此，扩展分区下面的逻辑分区可以有多个</p>
-<p><em>需要深刻的理解Linux的文件系统和系统分区，这里和 windows 是有很大区别的，如果不理解透彻，会带来很多的疑问</em></p>
-</li>
+<li>扩展分区有自己的分区表，因此，扩展分区下面的逻辑分区可以有多个</li>
 </ul>
-<h2 id="网友的精彩总结"><a href="#网友的精彩总结" class="headerlink" title="网友的精彩总结"></a>网友的精彩总结</h2><p>  <strong><a href="https://www.zhihu.com/question/22484307" target="_blank" rel="noopener">知乎的总结</a></strong></p>
-<p>  <strong><a href="http://blog.csdn.net/tianxueer/article/details/2689117" target="_blank" rel="noopener">磁盘的物理结构</a></strong></p>
-<p>  <strong><a href="http://baike.baidu.com/link?url=fdduBeLwvNeGlVfEYj-jT7QIe5FNgLKAfJKgdha6HkIMIQxIsaAYxWSTc_zbHfGudbiCOlEnHVGNHUXR2GIdt2OP3t90ByA4DLXZymMaqFdeturBjey9DW9jLULzJqjMMRNZn-PAahrdvPMvIvQRfa" target="_blank" rel="noopener">Linux中磁盘分区</a></strong></p>
+<p> <em>需要深刻的理解Linux的文件系统和系统分区，这里和 windows 是有很大区别的，如果不理解透彻，会带来很多的疑问</em></p>
+<h2 id="网友的精彩总结"><a href="#网友的精彩总结" class="headerlink" title="网友的精彩总结"></a>网友的精彩总结</h2><p>  <strong><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22484307">知乎的总结</a></strong></p>
+<p>  <strong><a target="_blank" rel="noopener" href="http://blog.csdn.net/tianxueer/article/details/2689117">磁盘的物理结构</a></strong></p>
+<p>  <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=fdduBeLwvNeGlVfEYj-jT7QIe5FNgLKAfJKgdha6HkIMIQxIsaAYxWSTc_zbHfGudbiCOlEnHVGNHUXR2GIdt2OP3t90ByA4DLXZymMaqFdeturBjey9DW9jLULzJqjMMRNZn-PAahrdvPMvIvQRfa">Linux中磁盘分区</a></strong></p>
 
-        </section>
-    </article>
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux中查阅硬件信息"><span class="toc-number">1.</span> <span class="toc-text">Linux中查阅硬件信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU"><span class="toc-number">1.1.</span> <span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存"><span class="toc-number">1.2.</span> <span class="toc-text">内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#磁盘"><span class="toc-number">1.3.</span> <span class="toc-text">磁盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网卡"><span class="toc-number">1.4.</span> <span class="toc-text">网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOIS"><span class="toc-number">1.5.</span> <span class="toc-text">BOIS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux中的磁盘分区和目录"><span class="toc-number">2.</span> <span class="toc-text">Linux中的磁盘分区和目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网友的精彩总结"><span class="toc-number">3.</span> <span class="toc-text">网友的精彩总结</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2016/08/22/2016-08-22-SSH4/">
+                    Linux基础知识点四之常用技巧和运行级别
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2016/08/20/2016-08-20-SSH2/">      
+                    Linux基础知识点二之文件系统
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

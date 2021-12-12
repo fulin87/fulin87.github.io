@@ -1,87 +1,272 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>搭建自己的代理服务器 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            搭建自己的代理服务器 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2018/08/16/2018-08-16-shadowsocks/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E9%80%89%E9%9C%80%E8%A6%81%E6%9C%89%E4%B8%80%E5%8F%B0%E4%BD%8D%E4%BA%8E%E5%9B%BD%E5%A4%96%E7%9A%84%E4%B8%BB%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text">首选需要有一台位于国外的主机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Shadowsocks-%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">安装 Shadowsocks 服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%81%9C%E6%AD%A2"><span class="toc-number">5.</span> <span class="toc-text">启动与停止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">7.</span> <span class="toc-text">安装</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2018/08/16/2018-08-16-shadowsocks/">搭建自己的代理服务器</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2018-08-16
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>搭建自己的代理服务器</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年08月16日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/life/">life</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>为了科学的上网，我自己搭建了一个Shadowsocks代理服务。这里记录一下自己搭建的过程</p>
 </blockquote>
-<h3 id="首选需要有一台位于国外的主机"><a href="#首选需要有一台位于国外的主机" class="headerlink" title="首选需要有一台位于国外的主机"></a>首选需要有一台位于国外的主机</h3><p> 这里我选择的是国外的虚拟机,使用的是<a href="https://my.vultr.com" target="_blank" rel="noopener">云服务器厂商</a>的云服务,之所以选择这个是因为它支持支付宝支付。其他的需要使用信用卡的厂商，我总感觉不安全</p>
-<h3 id="安装-Shadowsocks-服务"><a href="#安装-Shadowsocks-服务" class="headerlink" title="安装 Shadowsocks 服务"></a>安装 Shadowsocks 服务</h3><pre><code>$ yum update    #这个命令的作用是更新一个yum源
-$ git clone https://github.com/flyzy2005/ss-fly
-</code></pre><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre><code>$ ss-fly/ss-fly.sh -i 123456 1024  #这里的123456是密码,1024是代理端口
-</code></pre><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code>默认的配置文件位于 /etc/shadowsock.json
-</code></pre><h3 id="启动与停止"><a href="#启动与停止" class="headerlink" title="启动与停止"></a>启动与停止</h3><pre><code>停止ss服务：ssserver -c /etc/shadowsocks.json -d stop
-启动ss服务：ssserver -c /etc/shadowsocks.json -d start
-重启ss服务：ssserver -c /etc/shadowsocks.json -d restart
-</code></pre><blockquote>
+<h3 id="首选需要有一台位于国外的主机"><a href="#首选需要有一台位于国外的主机" class="headerlink" title="首选需要有一台位于国外的主机"></a>首选需要有一台位于国外的主机</h3><p> 这里我选择的是国外的虚拟机,使用的是<a target="_blank" rel="noopener" href="https://my.vultr.com/">云服务器厂商</a>的云服务,之所以选择这个是因为它支持支付宝支付。其他的需要使用信用卡的厂商，我总感觉不安全</p>
+<h3 id="安装-Shadowsocks-服务"><a href="#安装-Shadowsocks-服务" class="headerlink" title="安装 Shadowsocks 服务"></a>安装 Shadowsocks 服务</h3><pre><code>    $ yum update    #这个命令的作用是更新一个yum源
+    $ git clone https://github.com/flyzy2005/ss-fly
+</code></pre>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre><code>    $ ss-fly/ss-fly.sh -i 123456 1024  #这里的123456是密码,1024是代理端口
+</code></pre>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code>    默认的配置文件位于 /etc/shadowsock.json
+</code></pre>
+<h3 id="启动与停止"><a href="#启动与停止" class="headerlink" title="启动与停止"></a>启动与停止</h3><pre><code>    停止ss服务：ssserver -c /etc/shadowsocks.json -d stop
+    启动ss服务：ssserver -c /etc/shadowsocks.json -d start
+    重启ss服务：ssserver -c /etc/shadowsocks.json -d restart
+</code></pre>
+<blockquote>
 <p>使用了一段时间之后，发现vpn的速度不理想，看视频非常慢，于是找了各种办法进行加速，最终发现最简单快捷的加速方案还是bbr加速，以下是bbr加速的相关知识</p>
 </blockquote>
 <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>TCP BBR是google推出的TCP拥塞控制算法，目的是在有一定丢包率的网络链路上尽量跑满带宽，适合高延迟，高带宽的网络链接。</p>
@@ -119,97 +304,80 @@ sysctl net.ipv4.tcp_available_congestion_control
 
 lsmod | grep bbr
     tcp_bbr                20480  2
-</code></pre><p>现在好了，可以看youtube的1080p的视频了，爽！！！</p>
+</code></pre>
+<p>​    </p>
+<p>现在好了，可以看youtube的1080p的视频了，爽！！！</p>
+<p>​    </p>
 
-        </section>
-    </article>
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#首选需要有一台位于国外的主机"><span class="toc-number">1.</span> <span class="toc-text">首选需要有一台位于国外的主机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Shadowsocks-服务"><span class="toc-number">2.</span> <span class="toc-text">安装 Shadowsocks 服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">3.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动与停止"><span class="toc-number">5.</span> <span class="toc-text">启动与停止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-number">6.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">7.</span> <span class="toc-text">安装</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2018/08/20/2018-08-20-kafka-merkdown/">
+                    kafka学习笔记
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2018/06/25/2018-06-25-MQ-learn/">      
+                    消息队列学习笔记
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

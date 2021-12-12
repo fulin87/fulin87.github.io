@@ -1,76 +1,257 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>老鸟眼中的JVM知识体系(1)-Java体系 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            老鸟眼中的JVM知识体系(1)-Java体系 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2018/12/04/2018-12-04-jvm/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#java%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">java到底是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB"><span class="toc-number">1.1.</span> <span class="toc-text">java技术体系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JAVASE-JAVAME-JAVAEE%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.2.</span> <span class="toc-text">JAVASE,JAVAME,JAVAEE到底是什么</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">java语言的发展历程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">3.</span> <span class="toc-text">JVM到底是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E5%93%AA%E4%BA%9B%E8%91%97%E5%90%8D%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">3.1.</span> <span class="toc-text">有哪些著名的虚拟机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jvm%E7%9A%84%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">3.2.</span> <span class="toc-text">jvm的运行模式是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jvm%E8%B0%83%E4%BC%98%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="toc-number">3.3.</span> <span class="toc-text">jvm调优的目标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM%E7%9A%84%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">JVM的垃圾收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">java字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="toc-number">6.</span> <span class="toc-text">volatile为什么不能实现线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM%E7%9B%B8%E5%85%B3%E7%9A%84%E6%AF%94%E8%BE%83%E6%9D%83%E5%A8%81%E7%9A%84%E4%BA%BA"><span class="toc-number">7.</span> <span class="toc-text">JVM相关的比较权威的人</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2018/12/04/2018-12-04-jvm/">老鸟眼中的JVM知识体系(1)-Java体系</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2018-12-04
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>老鸟眼中的JVM知识体系(1)-Java体系</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月04日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>写了多年的java代码之后，现在以一个老鸟的视角来看java，真的和刚开始的时候是有天壤之别的，依然记得当初跑出第一个 <em>Hello World</em> 时候的感觉：<em>运行一个程序竟然什么感觉都没有，竟然如此平凡</em>。现在看来，当年的自己还是太稚嫩了，一个简单的 <em>Hello World</em> 其实已经包含了java技术体系中最核心，最重要的东西—–<strong>JVM</strong></p>
 </blockquote>
 <h3 id="java到底是什么"><a href="#java到底是什么" class="headerlink" title="java到底是什么"></a>java到底是什么</h3><blockquote>
@@ -97,13 +278,20 @@
 <p>虽然网络上有大量的文章介绍java的发展历程，这里我还是想用自已的思路总结一下，方便自己复习和查阅</p>
 </blockquote>
 <ul>
-<li>1995 年 Sun公司的<em>詹姆斯高斯林</em>领导的一个项目开发了一门语言 <strong>oak</strong> </li>
-<li>1996年 <strong>oak</strong> 正式更名为java，同时java1.0发布，正式喊出了一个著名的口号：<em>once write,run everywhere</em></li>
-<li>1996年9月<strong>javaOne</strong>大会举行</li>
-<li>1997年jdk1.0发布，包括内部类，反射，JDBC, rmi等</li>
-<li>1998年2月jdk1.2发布，首次提出三大方向：J2SE , J2EE, J2ME。而且JVM中内置JIT了，出现了HotSpot虚拟机</li>
-<li>2000年jdk1.3发布，代表性的有Timer。而且2000年以后，java进入了一个高速发展的阶段</li>
-<li>2004年jdk1.4发布，jdk1.4是一个里程碑式的版本，是一个java走向成熟的版本<ul>
+<li><p>1995 年 Sun公司的<em>詹姆斯高斯林</em>领导的一个项目开发了一门语言 <strong>oak</strong> </p>
+</li>
+<li><p>1996年 <strong>oak</strong> 正式更名为java，同时java1.0发布，正式喊出了一个著名的口号：<em>once write,run everywhere</em></p>
+</li>
+<li><p>1996年9月<strong>javaOne</strong>大会举行</p>
+</li>
+<li><p>1997年jdk1.0发布，包括内部类，反射，JDBC, rmi等</p>
+</li>
+<li><p>1998年2月jdk1.2发布，首次提出三大方向：J2SE , J2EE, J2ME。而且JVM中内置JIT了，出现了HotSpot虚拟机</p>
+</li>
+<li><p>2000年jdk1.3发布，代表性的有Timer。而且2000年以后，java进入了一个高速发展的阶段</p>
+</li>
+<li><p>2004年jdk1.4发布，jdk1.4是一个里程碑式的版本，是一个java走向成熟的版本</p>
+<ul>
 <li>jdk1.4中增加了很多的新特性，比如NIO，正则表达式，日志，xml解析器</li>
 <li>同时基于jdk1.4出现了大量优秀的框架，代表性的有 Struts,Hibenate,spring1.x</li>
 <li>jdk1.4这个时候已经基本完善了</li>
@@ -125,13 +313,15 @@
 <li>同时Sun公司陷入财务和收购相关的问题，接下来没能保持2年一个版本的发布频率</li>
 </ul>
 </li>
-<li>2009年jdk7发布<ul>
+<li><p>2009年jdk7发布</p>
+<ul>
 <li>lambad 表达式，模块化</li>
 <li>同年Oracle收购Sun公司，收购价74亿美金</li>
 <li>同年很多人对java的前景表示担忧</li>
 </ul>
 </li>
-<li>2014年jdk8发布<ul>
+<li><p>2014年jdk8发布</p>
+<ul>
 <li>lambta表达式</li>
 <li>新的日期API</li>
 <li>流式处理</li>
@@ -155,7 +345,8 @@
 </li>
 <li><p>只有解释器，想编译执行只能使用JIT外挂</p>
 </li>
-<li>因为是解释执行，所以运行效率低，这也是为什么java给人的感觉效率低，其实后来一点都不低</li>
+<li><p>因为是解释执行，所以运行效率低，这也是为什么java给人的感觉效率低，其实后来一点都不低</p>
+</li>
 </ul>
 </li>
 <li><p>Exact VM</p>
@@ -217,158 +408,141 @@
 </ul>
 <h4 id="jvm的运行模式是什么"><a href="#jvm的运行模式是什么" class="headerlink" title="jvm的运行模式是什么"></a>jvm的运行模式是什么</h4><pre><code>client 模式 java -client启用
 server 模式 java -server启动
-</code></pre><p>client模式启动的是Client VM的实现，可以减少启动时间和内存占用,一般用在java客户端上,比如java的GUI程序</p>
+</code></pre>
+<p>client模式启动的是Client VM的实现，可以减少启动时间和内存占用,一般用在java客户端上,比如java的GUI程序</p>
 <p>server模式启动的是server VM的实现，启动时间会有点长，但是程序运行速度更快</p>
 <p>不管是client还是server模式有些底层技术是通用的：</p>
 <pre><code>自适应编译(JIT)
 快速内存分配和垃圾回收
 线程同步
-</code></pre><h4 id="jvm调优的目标"><a href="#jvm调优的目标" class="headerlink" title="jvm调优的目标"></a>jvm调优的目标</h4><pre><code>尽可能大的吞吐量,尽可能小的GC停顿时间（吞吐量是GC时间在总时间中的占比，比值越小，吞吐量越高）
-</code></pre><h3 id="JVM的垃圾收集器"><a href="#JVM的垃圾收集器" class="headerlink" title="JVM的垃圾收集器"></a>JVM的垃圾收集器</h3><pre><code>串行收集器 &gt;&gt; 适合单处理器小数据集
+</code></pre>
+<h4 id="jvm调优的目标"><a href="#jvm调优的目标" class="headerlink" title="jvm调优的目标"></a>jvm调优的目标</h4><pre><code>尽可能大的吞吐量,尽可能小的GC停顿时间（吞吐量是GC时间在总时间中的占比，比值越小，吞吐量越高）
+</code></pre>
+<h3 id="JVM的垃圾收集器"><a href="#JVM的垃圾收集器" class="headerlink" title="JVM的垃圾收集器"></a>JVM的垃圾收集器</h3><pre><code>串行收集器 &gt;&gt; 适合单处理器小数据集
 并行收集器 &gt;&gt; 吞吐量优先，多个线程执行GC，系统一定会出现短时Stop the World
 并发收集器 &gt;&gt; 响应时间优先，GC时系统不会出现Stop the World
-</code></pre><ul>
-<li><p>选择垃圾收集器的原则</p>
+</code></pre>
 <ul>
+<li><p>选择垃圾收集器的原则</p>
+</li>
 <li><p>如果应用的数据集小于100M，或者在单个处理器上运行，没有暂停时间要求，则使用串行收集器</p>
 </li>
 <li><p>如果系统的吞吐量是第一优先级而且系统的暂停是可以接受的，使用并行收集器</p>
 </li>
 <li><p>如果系统的响应时间比吞吐量更重要，并且垃圾收集暂停必须小于1s,则使用并发收集器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseSerialGC 使用串行收集器（串行）</span><br><span class="line">-XX:+UseParallelGC 使用并行收集器(并行）</span><br><span class="line">-XX:-UseParallelOldGC 关闭并行压缩（并行）</span><br><span class="line">-XX:+UseConcMarkSweepGC 启用CMS收集器(并发）</span><br><span class="line">-XX:+UseG1GC	启用G1收集器(并发）</span><br><span class="line">-XX:ParallelGCThreads=&lt;N&gt; 调整并行收集器的GC线程数量</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-XX:+UseSerialGC 使用串行收集器（串行）</span></span><br><span class="line"><span class="deletion">-XX:+UseParallelGC 使用并行收集器(并行）</span></span><br><span class="line"><span class="deletion">-XX:-UseParallelOldGC 关闭并行压缩（并行）</span></span><br><span class="line"><span class="deletion">-XX:+UseConcMarkSweepGC 启用CMS收集器(并发）</span></span><br><span class="line"><span class="deletion">-XX:+UseG1GC	启用G1收集器(并发）</span></span><br><span class="line"><span class="deletion">-XX:ParallelGCThreads=&lt;N&gt; 调整并行收集器的GC线程数量</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="java字节码"><a href="#java字节码" class="headerlink" title="java字节码"></a>java字节码</h3><p>  字节码的整体结构,按照顺序依次是</p>
 <pre><code> * Magic Number 
      &gt; 魔数，4个字节。值为0xCAFEBABE 由java语言的作者James Gosling定义的
 * Version
-
+    
     &gt; 版本号，4个字节,前两个字节是minor_version，后两个字节是major_version
 * Constant Pool
-
+    
     &gt; 常量池，2 + n 个字节
 * Access Flags
-
+    
     &gt; 访问标志符,2个字节
 * This Class Name
-
+    
     &gt; 当前类的名字,2个字节
 * Supper Class Name
-
+    
     &gt; 父类的名字,2个字节
 * Interfaces
-
+    
     &gt; 接口,2+n个字节。一个类可能会实现多个接口，所以是2+n个字节
 * Fields
-
+    
     &gt; 成员变量,2+n个字节
 * Method
-
+    
     &gt; 方法,2+n个字节
 * Attributes
     &gt; 属性，2+n个字节
-</code></pre><p><img src="/content/image/leijiegou.PNG" alt="字节码结构"></p>
+    
+</code></pre>
+<p><img src="/content/image/leijiegou.PNG" alt="字节码结构"></p>
 <p><img src="/content/image/leijiegou1.PNG" alt="字节码结构1"></p>
-<h3 id="volatile为什么不能实现线程安全"><a href="#volatile为什么不能实现线程安全" class="headerlink" title="volatile为什么不能实现线程安全"></a>volatile为什么不能实现线程安全</h3><p><a href="https://blog.csdn.net/qq_33330687/article/details/80990729" target="_blank" rel="noopener">为什么volatile不能保证线程安全</a></p>
-<p><a href="https://blog.csdn.net/wuzhilon88/article/details/49201891" target="_blank" rel="noopener">jvm调优</a></p>
+<h3 id="volatile为什么不能实现线程安全"><a href="#volatile为什么不能实现线程安全" class="headerlink" title="volatile为什么不能实现线程安全"></a>volatile为什么不能实现线程安全</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33330687/article/details/80990729">为什么volatile不能保证线程安全</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuzhilon88/article/details/49201891">jvm调优</a></p>
 <h3 id="JVM相关的比较权威的人"><a href="#JVM相关的比较权威的人" class="headerlink" title="JVM相关的比较权威的人"></a>JVM相关的比较权威的人</h3><ul>
 <li>R大</li>
 </ul>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a href="https://docs.oracle.com/javase/8/javase-books.htm" target="_blank" rel="noopener">Java8官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/javase-books.htm">Java8官方文档</a></li>
 </ul>
 
-        </section>
-    </article>
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#java到底是什么"><span class="toc-number">1.</span> <span class="toc-text">java到底是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java技术体系"><span class="toc-number">1.1.</span> <span class="toc-text">java技术体系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JAVASE-JAVAME-JAVAEE到底是什么"><span class="toc-number">1.2.</span> <span class="toc-text">JAVASE,JAVAME,JAVAEE到底是什么</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java语言的发展历程"><span class="toc-number">2.</span> <span class="toc-text">java语言的发展历程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM到底是什么"><span class="toc-number">3.</span> <span class="toc-text">JVM到底是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#有哪些著名的虚拟机"><span class="toc-number">3.1.</span> <span class="toc-text">有哪些著名的虚拟机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jvm的运行模式是什么"><span class="toc-number">3.2.</span> <span class="toc-text">jvm的运行模式是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jvm调优的目标"><span class="toc-number">3.3.</span> <span class="toc-text">jvm调优的目标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM的垃圾收集器"><span class="toc-number">4.</span> <span class="toc-text">JVM的垃圾收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java字节码"><span class="toc-number">5.</span> <span class="toc-text">java字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile为什么不能实现线程安全"><span class="toc-number">6.</span> <span class="toc-text">volatile为什么不能实现线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM相关的比较权威的人"><span class="toc-number">7.</span> <span class="toc-text">JVM相关的比较权威的人</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2018/12/05/2018-12-05-jvm2/">
+                    老鸟眼中的JVM知识体系(2)-JVM体系结构
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2018/11/05/2018-11-05-mybatis/">      
+                    mybatis相关知识点的总结
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

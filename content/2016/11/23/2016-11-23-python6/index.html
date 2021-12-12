@@ -1,76 +1,257 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>python基础知识点之常用标准模块 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            python基础知识点之常用标准模块 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2016/11/23/2016-11-23-python6/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#random-%E6%A8%A1%E5%9D%97%EF%BC%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%A8%A1%E5%9D%97%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">random 模块（随机数模块）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shelve-%E6%A8%A1%E5%9D%97"><span class="toc-number">2.</span> <span class="toc-text">shelve 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#re-%E6%A8%A1%E5%9D%97"><span class="toc-number">3.</span> <span class="toc-text">re 模块</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2016/11/23/2016-11-23-python6/">python基础知识点之常用标准模块</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2016-11-23
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>python基础知识点之常用标准模块</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年11月23日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/python/">python</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>python中的标准模块有很多实用的功能，将常用的操作进行了封装，掌握了常用的标准模块的功能可以大幅度的提高工作效率</p>
 </blockquote>
 <h2 id="random-模块（随机数模块）"><a href="#random-模块（随机数模块）" class="headerlink" title="random 模块（随机数模块）"></a>random 模块（随机数模块）</h2><pre><code>import random
@@ -88,22 +269,24 @@ random.shuffles(s)
     #将列表s的元素随机的混乱处理，处理之后，s中的元素位置就变了
 random.sample(s,n)
     #随机的返回序列s中的n个元素，返回类型是列表
-</code></pre><h2 id="shelve-模块"><a href="#shelve-模块" class="headerlink" title="shelve 模块"></a>shelve 模块</h2><p> shelve 模块使用数据库驱动实现了字典对象的持久保存. shelve 对象使用字符串作为键, 但值可以是任意类型,我们简单的理解为shelve对象就是一个字典。</p>
+</code></pre>
+<h2 id="shelve-模块"><a href="#shelve-模块" class="headerlink" title="shelve 模块"></a>shelve 模块</h2><p> shelve 模块使用数据库驱动实现了字典对象的持久保存. shelve 对象使用字符串作为键, 但值可以是任意类型,我们简单的理解为shelve对象就是一个字典。</p>
 <pre><code>import shelve
-db = shelve.open(&apos;D://dbdata.db&apos;)
-db[&apos;person&apos;]=range(100)
+db = shelve.open(&#39;D://dbdata.db&#39;)
+db[&#39;person&#39;]=range(100)
 db.close()
-</code></pre><p> 使用shelve比较简单，但是要注意，最后一定要调用其close()方法。</p>
+</code></pre>
+<p> 使用shelve比较简单，但是要注意，最后一定要调用其close()方法。</p>
 <h2 id="re-模块"><a href="#re-模块" class="headerlink" title="re 模块"></a>re 模块</h2><p> re 模块提供了一系列功能强大的正则表达式工具, 它允许你快速检查给定字符串是否与给定的模式匹配 (使用 match 函数), 或者包含这个模式 (使用 search 函数)</p>
 <pre><code>compile(): 创建模式对象
 search():  从字符串中根据模式搜索匹配
 
 match():   根据模式匹配字符串，返回Match object对象
-    &gt;&gt;&gt; m = re.match(r&apos;www\.(.*)\..{3}&apos;,&apos;www.python.org&apos;)
+    &gt;&gt;&gt; m = re.match(r&#39;www\.(.*)\..&#123;3&#125;&#39;,&#39;www.python.org&#39;)
     &gt;&gt;&gt; m.group(1)
-    &apos;python&apos;
+    &#39;python&#39;
     &gt;&gt;&gt; m.group(0)
-    &apos;www.python.org&apos;
+    &#39;www.python.org&#39;
     &gt;&gt;&gt; m.start(1)
     4
     &gt;&gt;&gt; m.end(1)
@@ -113,124 +296,105 @@ match():   根据模式匹配字符串，返回Match object对象
     &gt;&gt;&gt; 
 split():   根据模式的匹配项来分割字符串
     &gt;&gt;&gt; import re
-    &gt;&gt;&gt; some_text = &apos;alpha,beta,,,,gamma delta&apos;
-    &gt;&gt;&gt; re.split(&apos;[, ]+&apos;,some_text)
-    [&apos;alpha&apos;, &apos;beta&apos;, &apos;gamma&apos;, &apos;delta&apos;]
-    &gt;&gt;&gt; re.split(&apos;[, ]+&apos;,some_text,maxsplit=2)
-    [&apos;alpha&apos;, &apos;beta&apos;, &apos;gamma delta&apos;]
-    &gt;&gt;&gt; re.split(&apos;[, ]+&apos;,some_text,maxsplit=1)
-    [&apos;alpha&apos;, &apos;beta,,,,gamma delta&apos;]
+    &gt;&gt;&gt; some_text = &#39;alpha,beta,,,,gamma delta&#39;
+    &gt;&gt;&gt; re.split(&#39;[, ]+&#39;,some_text)
+    [&#39;alpha&#39;, &#39;beta&#39;, &#39;gamma&#39;, &#39;delta&#39;]
+    &gt;&gt;&gt; re.split(&#39;[, ]+&#39;,some_text,maxsplit=2)
+    [&#39;alpha&#39;, &#39;beta&#39;, &#39;gamma delta&#39;]
+    &gt;&gt;&gt; re.split(&#39;[, ]+&#39;,some_text,maxsplit=1)
+    [&#39;alpha&#39;, &#39;beta,,,,gamma delta&#39;]
 
 findall(): 列出字符串中符合模式的所有匹配项
-    &gt;&gt;&gt; pat = &apos;[a-zA-Z]+&apos;
-    &gt;&gt;&gt; text = &apos;&quot;Hm...Err -- are you sure?&quot; he said, sounding insecure.&apos;
+    &gt;&gt;&gt; pat = &#39;[a-zA-Z]+&#39;
+    &gt;&gt;&gt; text = &#39;&quot;Hm...Err -- are you sure?&quot; he said, sounding insecure.&#39;
     &gt;&gt;&gt; re.findall(pat,text)
-    [&apos;Hm&apos;, &apos;Err&apos;, &apos;are&apos;, &apos;you&apos;, &apos;sure&apos;, &apos;he&apos;, &apos;said&apos;, &apos;sounding&apos;, &apos;insecure&apos;]
-    &gt;&gt;&gt; pat2 = r&apos;[.?\-&quot;,]+&apos;
+    [&#39;Hm&#39;, &#39;Err&#39;, &#39;are&#39;, &#39;you&#39;, &#39;sure&#39;, &#39;he&#39;, &#39;said&#39;, &#39;sounding&#39;, &#39;insecure&#39;]
+    &gt;&gt;&gt; pat2 = r&#39;[.?\-&quot;,]+&#39;
     &gt;&gt;&gt; re.findall(pat2,text)
-    [&apos;&quot;&apos;, &apos;...&apos;, &apos;--&apos;, &apos;?&quot;&apos;, &apos;,&apos;, &apos;.&apos;]
+    [&#39;&quot;&#39;, &#39;...&#39;, &#39;--&#39;, &#39;?&quot;&#39;, &#39;,&#39;, &#39;.&#39;]
 
 sub():     利用表达式的匹配项替换指定的字符串
-    &gt;&gt;&gt; pat = &apos;{name}&apos;
-    &gt;&gt;&gt; text = &apos;Dear {name}&apos;
-    &gt;&gt;&gt; re.sub(pat,&apos;Mr,Gumby&apos;,text)
-    &apos;Dear Mr,Gumby&apos;
+    &gt;&gt;&gt; pat = &#39;&#123;name&#125;&#39;
+    &gt;&gt;&gt; text = &#39;Dear &#123;name&#125;&#39;
+    &gt;&gt;&gt; re.sub(pat,&#39;Mr,Gumby&#39;,text)
+    &#39;Dear Mr,Gumby&#39;
 
 escape():  转义正则表达式中所用的特殊字符
-    &gt;&gt;&gt; re.escape(&apos;www.python.org&apos;)
-    &apos;www\\.python\\.org&apos;
-    &gt;&gt;&gt; re.escape(&apos;But where is the ambiguity?&apos;)
-    &apos;But\\ where\\ is\\ the\\ ambiguity\\?&apos;
+    &gt;&gt;&gt; re.escape(&#39;www.python.org&#39;)
+    &#39;www\\.python\\.org&#39;
+    &gt;&gt;&gt; re.escape(&#39;But where is the ambiguity?&#39;)
+    &#39;But\\ where\\ is\\ the\\ ambiguity\\?&#39;
 </code></pre>
-        </section>
-    </article>
+
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#random-模块（随机数模块）"><span class="toc-number">1.</span> <span class="toc-text">random 模块（随机数模块）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shelve-模块"><span class="toc-number">2.</span> <span class="toc-text">shelve 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#re-模块"><span class="toc-number">3.</span> <span class="toc-text">re 模块</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2016/11/24/2016-11-24-python7/">
+                    python基础知识点之常用数据库API
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2016/11/22/2016-11-22-python5/">      
+                    python基础知识点OOP总结
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

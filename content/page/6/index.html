@@ -1,405 +1,896 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+    
+    
+    
+    
+    <title>
+          
+            水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
-          
-            <a href="/content/" class="item-link">首页</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/about" class="item-link">关于</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
-  </div>
-</header>
-
-  <main id='index'>
-  <div class="posts-list">
-    
-      <section>
-        <a href="/content/2016/10/10/2016-10-10-tui-xiu-shi-db/">
-          <h3 class='post-head'>
-            忒修斯之船 & 数据库
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p><code>这是一个古老的哲学问题</code></p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年10月10日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/life/">life</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/10/10/2016-10-12-fastJSON/">
-          <h3 class='post-head'>
-            FastJson的使用与源码解读
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年10月10日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/10/08/2016-10-08-move-yangdecang/">
-          <h3 class='post-head'>
-            杨德昌的那些经典电影
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年10月08日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/life/">life</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/09/27/2016-09-27-mysql-right/">
-          <h3 class='post-head'>
-            mysql中sql优化的常识总结
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月27日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/mysql/">mysql</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/09/26/2016-09-26-mysql-log/">
-          <h3 class='post-head'>
-            mysql的数据备份和恢复
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月26日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/mysql/">mysql</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/09/26/2016-09-26-job/">
-          <h3 class='post-head'>
-            全栈还是专攻，这是一个问题
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月26日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/life/">life</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/09/23/2016-09-23-mysql-explain/">
-          <h3 class='post-head'>
-            mysql中使用explain来分析Sql语句的性能
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月23日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/mysql/">mysql</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/09/22/2016-09-22-mysql-update/">
-          <h3 class='post-head'>
-            mysql中sql优化的思路和原则
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月22日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/mysql/">mysql</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/09/21/2016-09-21-mysql/">
-          <h3 class='post-head'>
-            mysql 基础知识
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月21日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/mysql/">mysql</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/09/20/2016-09-20-plantUML/">
-          <h3 class='post-head'>
-            plantUML的使用
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月20日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-  </div>
-  <aside>
-    
-    
-    
-      <div class="categories">
-        <h1>
-          文章分类
-        </h1>
-        <div class="content">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/content/categories/Excel/">Excel</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/JDK源码/">JDK源码</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/MQ/">MQ</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/excel/">excel</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/life/">life</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/life在/">life在</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/mysql/">mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/redis/">redis</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/ruby/">ruby</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/tool/">tool</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/vi/">vi</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/其他/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/存储/">存储</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/算法/">算法</a></li></ul>
-        </div>
-      </div>
-    
-    
-  </aside>
-</main>
-
-  <div class="paging">
-  <div class="paging-container">
-    
-    <div class='page-prev'>
-      <a href="/content/page/5/">上一页</a>
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
     </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
     
+        <v-list id="sub-menu" class="font-weight-medium" dense>
+            
+                
+                    <v-list-item href="/content/categories/java/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="7" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>java</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E6%9D%82%E9%A1%B9/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="11" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>杂项</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E5%AD%98%E5%82%A8/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="8" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>存储</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/linux/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>linux</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="4" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>中间件</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>所思所想</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/life/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>life</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="30" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>编程语言</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E5%B7%A5%E5%85%B7/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="5" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>工具</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/python/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>python</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E7%AE%97%E6%B3%95/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>算法</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+        </v-list>    
     
-    <div class='page-next'>
-      <a href="/content/page/7/">下一页</a>
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
     </div>
-    
-  </div>
 </div>
 
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
+          
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
+          
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 index-card">
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-10-29
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/10/29/2016-10-29-outlookerr/">windows软件图标异常的恢复方法</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+作为一个有轻微强迫症的用户，遇到一点不协调的东西，都会有点不舒服，一周以前，我电脑中的outlook图标出现了异常，变成了很难看的样子，一直想把这个图标恢复，没有找到什么好的办法，咨询了很多人，也没有解决，这个事一直耿耿于怀，直到今天，才解决，这里记录一下解决办法……
+
+异常之后的图标 
+解决办法1,切换至用户家目录中的本地数据目录，比如我的目录是：C：\User\870850\AppData\Local
+2,找到文件：iconcache.db
+3,将iconcache.db文件删除
+4,重启系统
+
+原理 C：\User\870850\AppData\Local\iconcache.d...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/10/29/2016-10-29-outlookerr/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-10-27
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/10/27/2016-10-27-fildAndDisk/">Linux中的文件大小和磁盘占有空间的关系</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+文件的真实大小和文件占有的磁盘空间不是一回事，根本的原因是由于系统和磁盘的存储机制决定的。最具有代表性的是crontab定时任务执行之后由sendmail产生的文件。下面详细分析一下整个过程。
+
+crontab 定时任务产生的问题 现在有一台服务器A
+# cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 5.4 (Tikanga)
+
+# rpm -qa|grep sendmail
+sendmail-8.13.8-2.el5
+
+ 是centos 5.4这个版本，而且已经安装了sendmail软件。
+ 有几个cr...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/10/27/2016-10-27-fildAndDisk/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-10-27
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/10/27/2016-10-28-VBAmima/">Excel VBA工程密码破解的方法</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+今天无意中发现一个破解Excel VBA工程密码的方法，经测试在2003,2007,2010这三个版本上都可以正常使用，今记录在此。
+
+vba工程加密之后 对excel的VBA工程进行加密，是一种非常必要的手段，可以防止代码被人篡改。但是有时会出现密码遗忘的问题，怎么找回原来的密码或者重新设置密码呢？
+ 
+解决办法 偶然间发现一个很好的解决方法，使用HXD软件直接修改。
+ 
+
+用HXD打开excel。
+搜索“DPB=”，并替换成“DPx=”，保存文件。
+打开文件了，对VBA工程进行修改密码，这一步非常重要不然还是看不了源代码。
+再次打开exlel,用新的密码打开VBA工程，搞定！
+
+ ...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/10/27/2016-10-28-VBAmima/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-10-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/10/20/2016-10-20-regular/">正则表达式知识点</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+正则表达式就是一套处理字符串的规则和方法，基本上是以行为单位对字符串进行处理，通过特殊符号的辅助，我们可以快速的过滤替换字符串，这里的正则表达式不是linux中所有命令都能用的，大部分是三剑客（sed,grep,awk）用的，和开发语言使用的正则表达式有区别。
+这里作为自己常用的正则表达式的一个汇总，也作为复习使用
+
+基本正则表达式
+^dog 以dog开头
+ ls -l /home | grep ^d  #过滤出/home目录下的子目录
+ grep -v ^# /home/config.conf #过滤掉config.conf中的注释内容
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
+[^dog] 不包含dog
+
+dog$ 以...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/10/20/2016-10-20-regular/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-10-14
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/10/14/2016-10-14-Junit/">系统学习Junit4</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+减少程序中的bug的一个有效的方法是编写程序逻辑的同时进行单元测试，尽早发现问题。同时Junit作为开源类库， 受欢迎程度 是非常高的，已经成为java单元测试事实上的标准，有必要做深入的学习。
+
+Junit的官方信息
+Junit官网
+github地址
+
+学习笔记最佳实践
+源代码和测试代码要分开放在不同的目录，不能混在一起
+测试类和目标类最好在同一个包下面,这样可以包的导入，因为他们的class文件位于同一个包下
+要明白单元测试不能保证代码正确，只能说明代码没有明显的错误，这个要看测试用例的选择
+单元测试是检测程序的输入数据和输出数据（异常）是否符合预期
+测试用例与测试用例之间应该绝对...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/10/14/2016-10-14-Junit/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-10-10
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/10/10/2016-10-10-tui-xiu-shi-db/">忒修斯之船 &amp; 数据库</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          这是一个古老的哲学问题
+
+忒修斯的船在海上航行了几百年,它被不间断地维修和替换部件。只要一块木板腐烂了，它就会被替换掉，以此类推，直到所有的功能部件都不是最开始的那些了。问题是，最终产生的这艘船是否还是原来的那艘特修斯之船，还是一艘完全不同的船？如果不是原来的船，那么在什么时候它不再是原来的船了？哲学家托马斯·霍布斯后来对此进来了延伸，如果用特修斯之船上取下来的老部件来重新建造一艘新的船，那么两艘船中哪艘才是真正的特修斯之船？
+
+几百年来，人们在这个问题上争论不休，谁也不能彻底说服对方，但是这个看似不能解决的问题却能带给我们一定的启发，那就是可以解释生活中的现象
+
+一群能力超群的软件工程...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/10/10/2016-10-10-tui-xiu-shi-db/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-10-10
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/10/10/2016-10-12-fastJSON/">FastJson的使用与源码解读</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+**FastJSON是一个处理JSON**的 java 工具包， json （反序列化）和对象转 json （序列化）两部分的功能。是由阿里使用Apache License 2.0协议开源，易用，无依赖，性能优越，唯一不足的是文档不完善，用户需要自己根据源码来摸索。这里记录一下自己的学习历程，作为我膜拜大师杰作，虚心偷技的成果，也方便来者学习。
+
+主要功能
+FastJson的最主要的使用入口是 com.alibaba.fastjson.JSON 的一系列静态方法
+ // 把JSON文本parse为JSONObject或者JSONArray 
+ public static final O...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/10/10/2016-10-12-fastJSON/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-10-08
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/10/08/2016-10-08-move-yangdecang/">杨德昌的那些经典电影</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+在今年的十一国庆，老婆带着孩子回老家了，我一个人在家，这是少有的属于自己的时间，从一个安静的上午一直持续到晚上，我默默的看完了杨德昌的《一 一》;《枯岭街少年杀人事件》;《恐怖分子》这三部电影，这是迄今为止，我看过的最好看的几部华语电影，没有之一，看完之后，我感觉我的世界观都变了……
+
+慢的力量看似缓慢舒缓的叙事背后，却隐藏着巨大的力量，这是看这几部电影最大的感受。
+让我从此喜欢上了一切&quot;慢&quot;的事物，突然发现周围的一切都协调了。
+
+改变了又能怎么样这是《一 一》里面的一句台词，“多年之后，和当年的初恋再次相遇，虽然都依然爱着对方，又能怎么样？
+我现在至少还有家人。”...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/10/08/2016-10-08-move-yangdecang/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-27
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/27/2016-09-27-mysql-right/">mysql中sql优化的常识总结</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+mysql的性能优化牵扯的范围很广，大致可以分为：索引优化，查询优化，查询缓存，服务器设置优化，操作系统和硬件优化，应用层面优化（web服务器，缓存）等等。这里仅仅总结一下编写sql语句时应该注意的细节。
+
+编写高质量的sql语句的基本原则
+尽量避免全表扫描
+查询尽量使用索引
+尽量避免排序
+DML语句尽量在一个数据库事务中完成
+
+具体的优化技巧如下1,禁止使用　select * from table ;尽量查询特定的字段.
+  select * 会增加数据库开销
+
+2,尽量不使用游标.
+  游标比常规的sql语句需要更大的开销
+
+3,尽量不要在索引字段上进行运算.
+  在索引字段上进行...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/27/2016-09-27-mysql-right/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-26
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/26/2016-09-26-mysql-log/">mysql的数据备份和恢复</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+数据库的备份和恢复是每个DBA必须掌握的技能。作为开发人员来说，适当的了解，也是有必要的。曾经我就遇到过一个面试官问过我：是否会进行数据库备份和恢复，什么是热备份，什么是冷备份。当然，我不能说这是DBA的工作，只能怪自己学的不够广。当学会了数据库的备份和恢复，再次使用数据库的时候，视野就更开阔了。
+
+mysql的二进制日志 说起mysql的备份和恢复，就必须说mysql的二进制日志，它记录的是所有mysql数据库发生变更的信息，因此对数据库非常重要
+
+主要作用有以下几个方面
+
+可以用于数据库基于时间点的还原
+可以用来分析数据库发生变更的情况，比如程序程序bug导致数据库数据更改等。
+二...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/26/2016-09-26-mysql-log/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+   
+</v-card>  
+
+
+  <div id="pagination" class="text-center">
+    <v-pagination 
+      v-model="currentPage" 
+      :length=10 
+      @input="PageChange" 
+      prev-icon="chevron_left"
+      next-icon="chevron_right"
+      color="secondary"
+    ></v-pagination>
   </div>
-</footer>
+         
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
+
+
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
 
 
 

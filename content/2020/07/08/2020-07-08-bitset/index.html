@@ -1,162 +1,331 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>彻底搞懂JDK中的BitSet | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            彻底搞懂JDK中的BitSet | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2020/07/08/2020-07-08-bitset/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2020/07/08/2020-07-08-bitset/">彻底搞懂JDK中的BitSet</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2020-07-08
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>彻底搞懂JDK中的BitSet</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2020年07月08日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/JDK源码/">JDK源码</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>BitMap是一种在特定场景下非常高效的数据结构，这里记录一下JDK中BitSet的源码分析结果，对关键方法进行详细注释。其他的BitMap其实大同小异</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*	</span></span><br><span class="line"><span class="comment">  BitSet实现了按需增长的位向量。组成它的bit都有一个boolean值。bit通过一个整数来定位</span></span><br><span class="line"><span class="comment">  可以对每一个bit进行检查，设置或者清除。两个BitSet可以通过逻辑运算（AND,OR,XOR）来对自身的内容进行</span></span><br><span class="line"><span class="comment">  变更。</span></span><br><span class="line"><span class="comment"> 	</span></span><br><span class="line"><span class="comment">  默认情况下，每一个bit都被初始化为false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BitSet</span> <span class="keyword">implements</span> <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> ADDRESS_BITS_PER_WORD = <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> BITS_PER_WORD = <span class="number">1</span> &lt;&lt; ADDRESS_BITS_PER_WORD;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> BIT_INDEX_MASK = BITS_PER_WORD - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> WORD_MASK = <span class="number">0xffffffffffffffffL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//序列话的时候使用</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ObjectStreamField[] serialPersistentFields = &#123;</span><br><span class="line">        <span class="keyword">new</span> ObjectStreamField(<span class="string">"bits"</span>, <span class="keyword">long</span>[].class),</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//BitSet底层数据存储的数据结构，是一个long数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span>[] words;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//使用了的word</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> wordsInUse = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">boolean</span> sizeIsSticky = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">wordIndex</span><span class="params">(<span class="keyword">int</span> bitIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bitIndex &gt;&gt; ADDRESS_BITS_PER_WORD;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkInvariants</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">assert</span>(wordsInUse == <span class="number">0</span> || words[wordsInUse - <span class="number">1</span>] != <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">assert</span>(wordsInUse &gt;= <span class="number">0</span> &amp;&amp; wordsInUse &lt;= words.length);</span><br><span class="line">        <span class="keyword">assert</span>(wordsInUse == words.length || words[wordsInUse] == <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">recalculateWordsInUse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Traverse the bitset until a used word is found</span></span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = wordsInUse-<span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">            <span class="keyword">if</span> (words[i] != <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        wordsInUse = i+<span class="number">1</span>; <span class="comment">// The new logical size</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BitSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        initWords(BITS_PER_WORD);</span><br><span class="line">        sizeIsSticky = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BitSet</span><span class="params">(<span class="keyword">int</span> nbits)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// nbits can't be negative; size 0 is OK</span></span><br><span class="line">        <span class="keyword">if</span> (nbits &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NegativeArraySizeException(<span class="string">"nbits &lt; 0: "</span> + nbits);</span><br><span class="line"></span><br><span class="line">        initWords(nbits);</span><br><span class="line">        sizeIsSticky = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initWords</span><span class="params">(<span class="keyword">int</span> nbits)</span> </span>&#123;</span><br><span class="line">        words = <span class="keyword">new</span> <span class="keyword">long</span>[wordIndex(nbits-<span class="number">1</span>) + <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">BitSet</span><span class="params">(<span class="keyword">long</span>[] words)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.words = words;</span><br><span class="line">        <span class="keyword">this</span>.wordsInUse = words.length;</span><br><span class="line">        checkInvariants();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//对BitSet的容量进行扩容</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> wordsRequired)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (words.length &lt; wordsRequired) &#123;</span><br><span class="line">            <span class="comment">// Allocate larger of doubled size or required size</span></span><br><span class="line">            <span class="keyword">int</span> request = Math.max(<span class="number">2</span> * words.length, wordsRequired);</span><br><span class="line">            words = Arrays.copyOf(words, request);</span><br><span class="line">            sizeIsSticky = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//确保BitSet可以容纳给定的索引</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">expandTo</span><span class="params">(<span class="keyword">int</span> wordIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> wordsRequired = wordIndex+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (wordsInUse &lt; wordsRequired) &#123;</span><br><span class="line">            ensureCapacity(wordsRequired);</span><br><span class="line">            wordsInUse = wordsRequired;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//对Bit位进行反转</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">flip</span><span class="params">(<span class="keyword">int</span> bitIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (bitIndex &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"bitIndex &lt; 0: "</span> + bitIndex);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> wordIndex = wordIndex(bitIndex);</span><br><span class="line">        expandTo(wordIndex);</span><br><span class="line"></span><br><span class="line">        words[wordIndex] ^= (<span class="number">1L</span> &lt;&lt; bitIndex); <span class="comment">//这里是实现位反转的关键方法,异或运算</span></span><br><span class="line"></span><br><span class="line">        recalculateWordsInUse();</span><br><span class="line">        checkInvariants();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//设置Bit位</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> bitIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (bitIndex &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"bitIndex &lt; 0: "</span> + bitIndex);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> wordIndex = wordIndex(bitIndex);</span><br><span class="line">        expandTo(wordIndex);</span><br><span class="line"></span><br><span class="line">        words[wordIndex] |= (<span class="number">1L</span> &lt;&lt; bitIndex); <span class="comment">// Restores invariants</span></span><br><span class="line"></span><br><span class="line">        checkInvariants();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   	<span class="comment">//获取Bit位的值</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> bitIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (bitIndex &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"bitIndex &lt; 0: "</span> + bitIndex);</span><br><span class="line"></span><br><span class="line">        checkInvariants();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> wordIndex = wordIndex(bitIndex);</span><br><span class="line">        <span class="keyword">return</span> (wordIndex &lt; wordsInUse)</span><br><span class="line">            &amp;&amp; ((words[wordIndex] &amp; (<span class="number">1L</span> &lt;&lt; bitIndex)) != <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*	</span></span><br><span class="line"><span class="comment">  BitSet实现了按需增长的位向量。组成它的bit都有一个boolean值。bit通过一个整数来定位</span></span><br><span class="line"><span class="comment">  可以对每一个bit进行检查，设置或者清除。两个BitSet可以通过逻辑运算（AND,OR,XOR）来对自身的内容进行</span></span><br><span class="line"><span class="comment">  变更。</span></span><br><span class="line"><span class="comment"> 	</span></span><br><span class="line"><span class="comment">  默认情况下，每一个bit都被初始化为false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BitSet</span> <span class="keyword">implements</span> <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> ADDRESS_BITS_PER_WORD = <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> BITS_PER_WORD = <span class="number">1</span> &lt;&lt; ADDRESS_BITS_PER_WORD;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> BIT_INDEX_MASK = BITS_PER_WORD - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> WORD_MASK = <span class="number">0xffffffffffffffffL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//序列话的时候使用</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ObjectStreamField[] serialPersistentFields = &#123;</span><br><span class="line">        <span class="keyword">new</span> ObjectStreamField(<span class="string">&quot;bits&quot;</span>, <span class="keyword">long</span>[].class),</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//BitSet底层数据存储的数据结构，是一个long数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span>[] words;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//使用了的word</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> wordsInUse = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">boolean</span> sizeIsSticky = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">wordIndex</span><span class="params">(<span class="keyword">int</span> bitIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bitIndex &gt;&gt; ADDRESS_BITS_PER_WORD;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkInvariants</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">assert</span>(wordsInUse == <span class="number">0</span> || words[wordsInUse - <span class="number">1</span>] != <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">assert</span>(wordsInUse &gt;= <span class="number">0</span> &amp;&amp; wordsInUse &lt;= words.length);</span><br><span class="line">        <span class="keyword">assert</span>(wordsInUse == words.length || words[wordsInUse] == <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">recalculateWordsInUse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Traverse the bitset until a used word is found</span></span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = wordsInUse-<span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">            <span class="keyword">if</span> (words[i] != <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        wordsInUse = i+<span class="number">1</span>; <span class="comment">// The new logical size</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BitSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        initWords(BITS_PER_WORD);</span><br><span class="line">        sizeIsSticky = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BitSet</span><span class="params">(<span class="keyword">int</span> nbits)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// nbits can&#x27;t be negative; size 0 is OK</span></span><br><span class="line">        <span class="keyword">if</span> (nbits &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NegativeArraySizeException(<span class="string">&quot;nbits &lt; 0: &quot;</span> + nbits);</span><br><span class="line"></span><br><span class="line">        initWords(nbits);</span><br><span class="line">        sizeIsSticky = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initWords</span><span class="params">(<span class="keyword">int</span> nbits)</span> </span>&#123;</span><br><span class="line">        words = <span class="keyword">new</span> <span class="keyword">long</span>[wordIndex(nbits-<span class="number">1</span>) + <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">BitSet</span><span class="params">(<span class="keyword">long</span>[] words)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.words = words;</span><br><span class="line">        <span class="keyword">this</span>.wordsInUse = words.length;</span><br><span class="line">        checkInvariants();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//对BitSet的容量进行扩容</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> wordsRequired)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (words.length &lt; wordsRequired) &#123;</span><br><span class="line">            <span class="comment">// Allocate larger of doubled size or required size</span></span><br><span class="line">            <span class="keyword">int</span> request = Math.max(<span class="number">2</span> * words.length, wordsRequired);</span><br><span class="line">            words = Arrays.copyOf(words, request);</span><br><span class="line">            sizeIsSticky = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//确保BitSet可以容纳给定的索引</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">expandTo</span><span class="params">(<span class="keyword">int</span> wordIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> wordsRequired = wordIndex+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (wordsInUse &lt; wordsRequired) &#123;</span><br><span class="line">            ensureCapacity(wordsRequired);</span><br><span class="line">            wordsInUse = wordsRequired;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//对Bit位进行反转</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">flip</span><span class="params">(<span class="keyword">int</span> bitIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (bitIndex &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">&quot;bitIndex &lt; 0: &quot;</span> + bitIndex);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> wordIndex = wordIndex(bitIndex);</span><br><span class="line">        expandTo(wordIndex);</span><br><span class="line"></span><br><span class="line">        words[wordIndex] ^= (<span class="number">1L</span> &lt;&lt; bitIndex); <span class="comment">//这里是实现位反转的关键方法,异或运算</span></span><br><span class="line"></span><br><span class="line">        recalculateWordsInUse();</span><br><span class="line">        checkInvariants();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//设置Bit位</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> bitIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (bitIndex &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">&quot;bitIndex &lt; 0: &quot;</span> + bitIndex);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> wordIndex = wordIndex(bitIndex);</span><br><span class="line">        expandTo(wordIndex);</span><br><span class="line"></span><br><span class="line">        words[wordIndex] |= (<span class="number">1L</span> &lt;&lt; bitIndex); <span class="comment">// Restores invariants</span></span><br><span class="line"></span><br><span class="line">        checkInvariants();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   	<span class="comment">//获取Bit位的值</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> bitIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (bitIndex &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">&quot;bitIndex &lt; 0: &quot;</span> + bitIndex);</span><br><span class="line"></span><br><span class="line">        checkInvariants();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> wordIndex = wordIndex(bitIndex);</span><br><span class="line">        <span class="keyword">return</span> (wordIndex &lt; wordsInUse)</span><br><span class="line">            &amp;&amp; ((words[wordIndex] &amp; (<span class="number">1L</span> &lt;&lt; bitIndex)) != <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-        </section>
-    </article>
+
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2020/07/24/2016-10-12-idea-keys/">
+                    IDEA快捷键
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2020/05/23/2020-05-23-dubbo%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">      
+                    dubbo知识点梳理
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

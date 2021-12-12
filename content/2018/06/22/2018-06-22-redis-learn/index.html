@@ -1,88 +1,270 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>《redis设计与实现》读书笔记 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            《redis设计与实现》读书笔记 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2018/06/22/2018-06-22-redis-learn/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">redis的数据结构的实现机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%8A%A8%E6%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.1.</span> <span class="toc-text">简单动态字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E4%B8%AD%E7%9A%84%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">redis中的链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-number">1.3.</span> <span class="toc-text">字典</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis%E9%9B%86%E7%BE%A4"><span class="toc-number">2.</span> <span class="toc-text">redis集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-number">2.1.</span> <span class="toc-text">redis的主从复制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">redis的高可用方案</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2018/06/22/2018-06-22-redis-learn/">《redis设计与实现》读书笔记</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2018-06-22
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>《redis设计与实现》读书笔记</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年06月22日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/redis/">redis</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>这里记录一下阅读《redis 设计与实现》一书的读书笔记。</p>
 </blockquote>
 <ul>
-<li>本书的官方网站，看了一眼，内容很丰富啊 <strong><a href="http://redisbook.com" target="_blank" rel="noopener">本书官网</a></strong></li>
+<li>本书的官方网站，看了一眼，内容很丰富啊 <strong><a target="_blank" rel="noopener" href="http://redisbook.com/">本书官网</a></strong></li>
 </ul>
 <h2 id="redis的数据结构的实现机制"><a href="#redis的数据结构的实现机制" class="headerlink" title="redis的数据结构的实现机制"></a>redis的数据结构的实现机制</h2><h3 id="简单动态字符串"><a href="#简单动态字符串" class="headerlink" title="简单动态字符串"></a>简单动态字符串</h3><p>redis的字符串对象的数据结构：</p>
-<pre><code>struct sdshdr{
+<pre><code>struct sdshdr&#123;
     int len;     //记录buf数组中已经使用的字节的数量,等于字符串的长度
     int free;     //记录buf数组中未使用的字节的数量
     char buf[]; //字节数组，用于保存字符串
-}
-</code></pre><p>redis中字符串的优点：</p>
+&#125;
+</code></pre>
+<p>redis中字符串的优点：</p>
 <ul>
 <li>获取字符串长度的复杂度是O(1)</li>
 <li>API是安全的不会造成缓冲区溢出</li>
@@ -98,16 +280,17 @@
 </ul>
 <p>redis中链表的数据结构</p>
 <p>redis中使用了两种hash算法，分别是<strong>djb</strong> 和 <strong>murmurhash</strong></p>
-<pre><code>typedef struct listNode{
+<pre><code>typedef struct listNode&#123;
     //前置节点
     struct listNode * prev;
     //后置节点
     struct listNode * next;
     //节点的值
     void * value;
-}listNode;
-</code></pre><p>redis中list的数据结构</p>
-<pre><code>typedef struct list{
+&#125;listNode;
+</code></pre>
+<p>redis中list的数据结构</p>
+<pre><code>typedef struct list&#123;
     //表头节点
     listNode * head;
     //表尾节点
@@ -120,30 +303,32 @@
     void (*free)(void *ptr);
     //节点值对比函数
     int (*match)(void *ptr,void *key);
-}list;
-</code></pre><p><img src="/content/image/redis_list1.PNG" alt=""></p>
+&#125;list;
+</code></pre>
+<p><img src="/content/image/redis_list1.PNG"></p>
 <p>redis的链表实现是双端链表,而且是无环链表，redis链表可以保存各种不同类型的值</p>
 <h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>哈希表的节点：</p>
-<pre><code>typeof struct dictEntry{
+<pre><code>typeof struct dictEntry&#123;
     //键
     void *key;
     //值
-    union{
+    union&#123;
         void *val;
         uint64_tu64;
         int64_ts64;
-    } v;
+    &#125; v;
     //指向下一个哈希表节点，形成链表
     struct dictEntry *next;
-} dictEntry;
-</code></pre><ul>
+&#125; dictEntry;
+</code></pre>
+<ul>
 <li>key属性保存着键值对中的键</li>
 <li>v属性保存着键值对中的值</li>
 <li>值可以是一个指针，或者是一个uint64/int64的整数</li>
 <li>next属性是指向另一个哈希表节点的指针,依次来解决哈希冲突</li>
 </ul>
 <p>redis字典的数据结构</p>
-<pre><code>typedf struct dict {
+<pre><code>typedf struct dict &#123;
     //类型特定函数
     dictType *type;
     //私有数据
@@ -152,14 +337,15 @@
     dictht ht[2];
     //rehash索引，当rehash不在进行时，值为-1
     int rehashidx;
-}
-</code></pre><ul>
+&#125;
+</code></pre>
+<ul>
 <li>ht属性是一个包含两个项的数组，数组中的每一个项都是一个dictht哈希表</li>
 <li>一般情况下，字典只使用ht[0]哈希表，ht[1]哈希表只会对ht[0]哈希表进行rehash时使用。</li>
 <li>rehashidx记录了rehash目前的进度,如果没有在进行rehash则其值为-1</li>
 <li>redis使用MurmurHash2算法来进行键的哈希运算</li>
 </ul>
-<p><img src="/content/image/redis_dict1.PNG" alt=""></p>
+<p><img src="/content/image/redis_dict1.PNG"></p>
 <ul>
 <li>redis的rehash使用的是渐进式rehash</li>
 <li>每次对字典进行curd操作时，程序除了执行指定的操作之外，还会顺带执行一部分rehash操作</li>
@@ -185,139 +371,130 @@
 <li>memecache只支持String结构，Redis有比较丰富的数据结构</li>
 <li>value的大小，redis可以达到1G，memcache只有1M</li>
 </ul>
-<h2 id="redis集群"><a href="#redis集群" class="headerlink" title="redis集群"></a>redis集群</h2><h3 id="redis的主从复制"><a href="#redis的主从复制" class="headerlink" title="redis的主从复制"></a>redis的主从复制</h3><p><img src="/content/image/redis_sync.PNG" alt=""></p>
+<h2 id="redis集群"><a href="#redis集群" class="headerlink" title="redis集群"></a>redis集群</h2><h3 id="redis的主从复制"><a href="#redis的主从复制" class="headerlink" title="redis的主从复制"></a>redis的主从复制</h3><p><img src="/content/image/redis_sync.PNG"></p>
 <pre><code>slaveof 192.168.182.128 6379       //可以实现当前机器成128：6379这台机器的从服务器
 slaveof no one                    //取消当前机器的主从同步关系
-</code></pre><p><strong>注意</strong></p>
+</code></pre>
+<p><strong>注意</strong></p>
 <pre><code>主服务器需要配置 bind:0.0.0.0 才能监听所有的ip过来的请求
-</code></pre><p>redis的复制功能包括同步（sync)和命令传播(command propagate)两个操作</p>
+</code></pre>
+<p>redis的复制功能包括同步（sync)和命令传播(command propagate)两个操作</p>
 <pre><code>同步：是将从服务器的状态更新成主服务器的状态
 命令传播：可以理解成是增量同步
-</code></pre><p>同步的过程：</p>
+</code></pre>
+<p>同步的过程：</p>
 <pre><code>1，从服务器向主服务器发送sync命令
 2，主服务器收到sync命令执行BGSAVE命令，生成RDB文件，并使用一个缓冲区记录从现在开始执行的所有写命令
 3，主服务器生成RDB文件完毕会向从服务器发送这个文件，从服务器载入这个文件，将自己的数据更新成和主服务器完全一致
 4，主服务器将缓冲区中的所有写命令发送给从服务器，从服务器执行这些命令
-</code></pre><p>命令传播过程：</p>
+</code></pre>
+<p>命令传播过程：</p>
 <pre><code>主服务器需要将自己的写命令发送给从服务器，由从服务器执行
-</code></pre><p><strong>注意</strong></p>
+</code></pre>
+<p><strong>注意</strong></p>
 <pre><code>SYNC是一个非常耗费资源的操作
 1，主服务器执行BGSAVE命令会耗费大量的CPU，内存和IO资源
 2，主服务器发送RDB文件耗费大量的带宽和流量
 3，从服务器载入RDB文件会阻塞所有的名请求
-</code></pre><p><strong>Redis2.8 以后版本的复制功能</strong></p>
+</code></pre>
+<p><strong>Redis2.8 以后版本的复制功能</strong></p>
 <pre><code>1，使用PSYNC代替SYNC
 2，PSYNC具有完整同步和部分同步的功能
 3，完整同步是在初次同步的时候，和SYNC没有什么区别
 4，部分同步用于在从服务器断线后的同步
-</code></pre><p>部分同步的实现依赖三个重要的概念</p>
+</code></pre>
+<p>部分同步的实现依赖三个重要的概念</p>
 <pre><code>1，复制偏移量，可以理解为是命令传播的字节数据量的总大小
 2，复制积压缓冲区，主服务器维护的一个固定长度的FIFO队列
 3，服务器运行ID
-</code></pre><p>为了实现从服务器在断线之后和主服务器的数据一致性，需要进行同步，到底是全量同步还是部分同步，Redis主服务器依靠的是<em>复制积压缓冲区</em>来实现的</p>
+</code></pre>
+<p>为了实现从服务器在断线之后和主服务器的数据一致性，需要进行同步，到底是全量同步还是部分同步，Redis主服务器依靠的是<em>复制积压缓冲区</em>来实现的</p>
 <pre><code>1，复制积压缓冲区是一个固定大小的先进先出的队列，默认大小是1M
 2，主服务器进行命令传播时会将命令发送给从服务器，同时会将命令写入复制积压缓冲区
 3，复制积压缓冲区不仅会保存命令还会记录每个字节的复制偏移量
 4，当从服务器重新连上主服务器时，通过PSYNC命令会把自己的复制偏移量发送给主服务器
 5，主服务器会根据从服务器的复制偏移量来决定使用哪一种同步操作
 6，如果偏移量之后的数据还在复制积压缓冲区中则只需部分同步，否则执行全量同步
-</code></pre><p><strong>注意</strong></p>
+</code></pre>
+<p><strong>注意</strong></p>
 <p>复制积压缓冲区的大小的设计原则：</p>
 <pre><code>复制积压缓冲区的大小  =  2 * second * write_size_per_second
 
 second : 从服务器断线后重新连接主服务器所需的平均时间，单位秒
 write_size_per_second : 主服务器平均每秒产生的写命令数据量（单位是M)
-</code></pre><h2 id="redis的高可用方案"><a href="#redis的高可用方案" class="headerlink" title="redis的高可用方案"></a>redis的高可用方案</h2><pre><code>由一个或多个sentinel实例组成的Sentinel系统可以监控任意多个主服务器和从服务器，并在
 </code></pre>
-        </section>
-    </article>
+<h2 id="redis的高可用方案"><a href="#redis的高可用方案" class="headerlink" title="redis的高可用方案"></a>redis的高可用方案</h2><pre><code>由一个或多个sentinel实例组成的Sentinel系统可以监控任意多个主服务器和从服务器，并在
+</code></pre>
+
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis的数据结构的实现机制"><span class="toc-number">1.</span> <span class="toc-text">redis的数据结构的实现机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单动态字符串"><span class="toc-number">1.1.</span> <span class="toc-text">简单动态字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis中的链表"><span class="toc-number">1.2.</span> <span class="toc-text">redis中的链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典"><span class="toc-number">1.3.</span> <span class="toc-text">字典</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis集群"><span class="toc-number">2.</span> <span class="toc-text">redis集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis的主从复制"><span class="toc-number">2.1.</span> <span class="toc-text">redis的主从复制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis的高可用方案"><span class="toc-number">3.</span> <span class="toc-text">redis的高可用方案</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2018/06/25/2018-06-25-MQ-learn/">
+                    消息队列学习笔记
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2018/01/31/2018-10-08-spring%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/">      
+                    spring知识梳理
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

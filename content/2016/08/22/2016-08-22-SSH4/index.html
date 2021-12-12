@@ -1,145 +1,344 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>Linux基础知识点四之常用技巧和运行级别 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            Linux基础知识点四之常用技巧和运行级别 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2016/08/22/2016-08-22-SSH4/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="toc-number">1.</span> <span class="toc-text">linux使用小技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">linux运行级别</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2016/08/22/2016-08-22-SSH4/">Linux基础知识点四之常用技巧和运行级别</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2016-08-22
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2018-02-06
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/linux/">linux</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>Linux基础知识点四之常用技巧和运行级别</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月22日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>在使用 linux 的过程中有很多技巧和零散的知识点，对这些知识点进行整理和记录，是一个不错的习惯，因为人难免会遗忘，记录在这里，以后如果忘记了，来这里查询，很快就能记起来</p>
 </blockquote>
 <h2 id="linux使用小技巧"><a href="#linux使用小技巧" class="headerlink" title="linux使用小技巧"></a>linux使用小技巧</h2><ul>
 <li><p>快速的回到上一次的目录</p>
-<pre><code>OLDPWD 这个环境变量存放的是上一次的目录
-env | grep -i old # 查看OLDPWD这个环境变量的值 
-cd - # 快速的回到上一次的目录
-</code></pre></li>
+<pre><code> OLDPWD 这个环境变量存放的是上一次的目录
+ env | grep -i old # 查看OLDPWD这个环境变量的值 
+ cd - # 快速的回到上一次的目录
+</code></pre>
+</li>
 <li><p>快速的使用之前使用过的命令</p>
-<pre><code>history 命令之后使用 `!行号` 可以直接调用对应的命令
-</code></pre></li>
+<pre><code> history 命令之后使用 `!行号` 可以直接调用对应的命令
+</code></pre>
+</li>
 <li><p>快速回到家目录</p>
-<pre><code>cd ~ 回到家目录
-</code></pre></li>
+<pre><code> cd ~ 回到家目录
+</code></pre>
+</li>
 <li><p>查看最近更新的文件</p>
-<pre><code>ls -lrt #r是逆序；t是按修改时间;结果是最后更新的在最下面
-</code></pre></li>
+<pre><code> ls -lrt #r是逆序；t是按修改时间;结果是最后更新的在最下面
+</code></pre>
+</li>
 <li><p>使 grep 过滤的字符串有颜色</p>
-<pre><code>grep &apos;www&apos; --color=auto /tmp/test
-</code></pre></li>
+<pre><code> grep &#39;www&#39; --color=auto /tmp/test
+</code></pre>
+</li>
 <li><p>增加一个别名</p>
-<pre><code>vi /etc/profile
-alias grep=&apos;grep --color=auto&apos; #这里的=两边不能有空格
-</code></pre></li>
+<pre><code> vi /etc/profile
+ alias grep=&#39;grep --color=auto&#39; #这里的=两边不能有空格
+</code></pre>
+</li>
 <li><p>查看压缩包中的内容</p>
-<pre><code>gar tf test.tar.gz
-</code></pre></li>
+<pre><code> gar tf test.tar.gz
+</code></pre>
+</li>
 <li><p>压缩的时候排除文件</p>
 <ul>
 <li><p>方法一</p>
-<pre><code>tar zcvf test.tar.gz --exclude ./test/fulin1.test ./test
-</code></pre></li>
+<pre><code>  tar zcvf test.tar.gz --exclude ./test/fulin1.test ./test
+</code></pre>
+</li>
 <li><p>方法二</p>
-<pre><code>先把不需要打包的文件的文件名放入一个文件a.txt
-tar zcvfX test.tar.gz a.txt ./test/
-</code></pre></li>
+<pre><code>  先把不需要打包的文件的文件名放入一个文件a.txt
+  tar zcvfX test.tar.gz a.txt ./test/
+</code></pre>
+</li>
 </ul>
 </li>
 <li><p>将查找的结果打包</p>
-<pre><code>tar zcvf test.tar.gz `find . -type d -name fulin`
-</code></pre></li>
+<pre><code> tar zcvf test.tar.gz `find . -type d -name fulin`
+</code></pre>
+</li>
 <li><p>查询文件的行号</p>
-<pre><code>wc -l /etc/service
-cat -n /etc/service | tail -1
-</code></pre></li>
+<pre><code> wc -l /etc/service
+ cat -n /etc/service | tail -1
+</code></pre>
+</li>
 <li><p>echo 不换行输出</p>
-<pre><code>echo -n &quot;124&quot;
-</code></pre></li>
+<pre><code> echo -n &quot;124&quot;
+</code></pre>
+</li>
 <li><p>查找具有suid的命令</p>
-<pre><code>find /usr/bin/ -type f -perm 4755 -exec ls -l {} \;
-</code></pre></li>
+<pre><code> find /usr/bin/ -type f -perm 4755 -exec ls -l &#123;&#125; \;
+</code></pre>
+</li>
 <li><p>查看开机自启动服务</p>
-<pre><code>chkconfig --list | grep 3:on
-</code></pre></li>
+<pre><code> chkconfig --list | grep 3:on
+</code></pre>
+</li>
 <li><p>查看系统是否安装了sendmail软件</p>
-<pre><code>rpm -qa|grep sendmail
-</code></pre></li>
+<pre><code> rpm -qa|grep sendmail
+</code></pre>
+</li>
 <li><p>检查软件安装是否正常，也就是上一条命令的退出状态,如果是0就正常</p>
-<pre><code>echo $?
-</code></pre></li>
+<pre><code> echo $?
+</code></pre>
+</li>
 <li><p>检查某个端口是否开启</p>
-<pre><code>lsof -i :80
-</code></pre></li>
+<pre><code> lsof -i :80
+</code></pre>
+</li>
 <li><p>一次性删除某个程序所有的线程,这里删除uwsgi的所有线程</p>
-<pre><code>ps -ef|grep uwsgi|grep -v grep|cut -c 9-15|xargs kill -9
-</code></pre></li>
+<pre><code> ps -ef|grep uwsgi|grep -v grep|cut -c 9-15|xargs kill -9
+</code></pre>
+</li>
 </ul>
 <h2 id="linux运行级别"><a href="#linux运行级别" class="headerlink" title="linux运行级别"></a>linux运行级别</h2><p> 先看看linux的启动流程图</p>
-<p><img src="/content/image/start.PNG" alt=""></p>
+<p><img src="/content/image/start.PNG"></p>
 <p> 在目录 <code>/etc/rc.d/init.d</code> 下有很多服务器脚本程序，一般称为服务。</p>
 <p> 在 <code>/etc/rc.d</code> 下有7个名为rcN.d的目录，对应系统的7个运行级别。</p>
 <p> 在rcN.d目录下都是一些符合连接(软连接)文件，这些文件都指向 <code>/etc/init.d</code> 目录下的service脚本文件，命名规则是 <code>K+nn+服务名</code> 或者 <code>S+nn+服务名</code> ，其中nn是两位阿拉伯数字</p>
@@ -152,95 +351,76 @@ cat -n /etc/service | tail -1
 5 : X11 图形化
 6 : redboot (Do NOT set initdefault to this) 重启模式    ，需要慎重使用
 </code></pre>
-        </section>
-    </article>
+
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux使用小技巧"><span class="toc-number">1.</span> <span class="toc-text">linux使用小技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux运行级别"><span class="toc-number">2.</span> <span class="toc-text">linux运行级别</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2016/08/23/2016-08-23-SSH5/">
+                    Linux基础知识点五之权限管理
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2016/08/21/2016-08-21-SSH3/">      
+                    Linux基础知识点三之硬件信息
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

@@ -1,79 +1,260 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>Nginx知识点汇总 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            Nginx知识点汇总 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2014/10/31/2014-10-31-nginx/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">nginx介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text">nginx的主要功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">nginx的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.2.</span> <span class="toc-text">nginx的适用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text">nginx的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8nginx"><span class="toc-number">4.</span> <span class="toc-text">使用nginx</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2014/10/31/2014-10-31-nginx/">Nginx知识点汇总</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2014-10-31
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>Nginx知识点汇总</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2014年10月31日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>nginx的使用越来越广泛，在工作中也有接触，把与其相关的知识点记录一下，免得遗忘了</p>
 </blockquote>
-<h2 id="nginx介绍"><a href="#nginx介绍" class="headerlink" title="nginx介绍"></a>nginx介绍</h2><p> <strong><a href="http://nginx.org/" target="_blank" rel="noopener">nginx</a></strong> 是由一位叫Igor Sysoev的俄罗斯人开发的www软件，是一个高性能的http和反向代理服务器</p>
+<h2 id="nginx介绍"><a href="#nginx介绍" class="headerlink" title="nginx介绍"></a>nginx介绍</h2><p> <strong><a target="_blank" rel="noopener" href="http://nginx.org/">nginx</a></strong> 是由一位叫Igor Sysoev的俄罗斯人开发的www软件，是一个高性能的http和反向代理服务器</p>
 <h2 id="nginx的主要功能"><a href="#nginx的主要功能" class="headerlink" title="nginx的主要功能"></a>nginx的主要功能</h2><ul>
 <li>web服务</li>
 <li>反向代理</li>
@@ -85,11 +266,10 @@
 <li>功能种类比较多，每一个功能都不是特别强</li>
 <li>支持epoll模型，使的nginx可以支持高并发</li>
 <li>利用nginx可以对ip限速，可以限制连接数</li>
-<li><p>配置简单，更灵活</p>
-<p>原理见下图（和apache做对比）</p>
-<p><img src="/content/image/nginx01.PNG" alt=""></p>
-</li>
+<li>配置简单，更灵活</li>
 </ul>
+<p> 原理见下图（和apache做对比）</p>
+<p> <img src="/content/image/nginx01.PNG"></p>
 <h3 id="nginx的适用场景"><a href="#nginx的适用场景" class="headerlink" title="nginx的适用场景"></a>nginx的适用场景</h3><ul>
 <li>静态服务器（图片，视频服务，html,js,css,flv）</li>
 <li>动态服务，nginx + fastcgi</li>
@@ -98,268 +278,271 @@
 </ul>
 <h2 id="nginx的安装"><a href="#nginx的安装" class="headerlink" title="nginx的安装"></a>nginx的安装</h2><ul>
 <li><p>先更换<code>yum</code>源，更改成阿里的<code>yum</code>源</p>
-<pre><code># wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
-</code></pre></li>
+<pre><code> # wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+</code></pre>
+</li>
 <li><p>安装pcre这个软件</p>
 <p> PCRE(Perl Compatible Regular Expressions)是一个Perl库，可以兼容正则表达式，nginx的一些功能依赖这个。</p>
-<pre><code># yum install pcre pcre-devel -y
-</code></pre></li>
+<pre><code> # yum install pcre pcre-devel -y
+</code></pre>
+</li>
 <li><p>安装openssl这个软件</p>
 <p> nginx如果要支持https需要这个软件的支持，所以需要安装</p>
-<pre><code># yum install openssl openssl-devel -y
-</code></pre></li>
+<pre><code> # yum install openssl openssl-devel -y
+</code></pre>
+</li>
 <li><p>下载nginx，尽量选择一年一前的稳定版本</p>
-<pre><code># cd /home/fulin/tools
-# wget http://nginx.org/download/nginx-1.11.5.tar.gz
-</code></pre></li>
+<pre><code> # cd /home/fulin/tools
+ # wget http://nginx.org/download/nginx-1.11.5.tar.gz
+</code></pre>
+</li>
 <li><p>创建一个用户来运行nginx，不能登录，没有家目录</p>
-<pre><code># useradd nginx -s /sbin/nologin -M
-</code></pre></li>
+<pre><code> # useradd nginx -s /sbin/nologin -M
+</code></pre>
+</li>
 <li><p>安装c，c++编译器</p>
-<pre><code># yum -y install make gcc gcc-c++ ncurses-devel
-</code></pre></li>
+<pre><code> # yum -y install make gcc gcc-c++ ncurses-devel
+</code></pre>
+</li>
 <li><p>安装nginx</p>
 <p> <em>解压</em></p>
-<pre><code># tar xf nginx-1.11.5.tar.gz
-</code></pre><p> <em>进入目录</em></p>
-<pre><code># cd nginx-1.11.5
-</code></pre><p> <em>安装前检测</em></p>
-<pre><code># ./configure --user=nginx --group=nginx --prefix=/application/nginx1.11.5 --with-http_stub_status_module --with-http_ssl_module
-</code></pre><p> <em>查看是否检测通过，0为通过</em></p>
-<pre><code># echo $?
-</code></pre><p> <em>编译安装</em></p>
-<pre><code># make
-# make install
-</code></pre><p> <em>做一个软链接，作用是去掉版本号</em></p>
-<pre><code># ln -s /application/nginx1.11.5/ /application/nginx
-# cd /application/nginx/
-</code></pre></li>
+<pre><code> # tar xf nginx-1.11.5.tar.gz
+</code></pre>
+<p> <em>进入目录</em></p>
+<pre><code> # cd nginx-1.11.5
+</code></pre>
+<p> <em>安装前检测</em></p>
+<pre><code> # ./configure --user=nginx --group=nginx --prefix=/application/nginx1.11.5 --with-http_stub_status_module --with-http_ssl_module
+</code></pre>
+<p> <em>查看是否检测通过，0为通过</em></p>
+<pre><code> # echo $?
+</code></pre>
+<p> <em>编译安装</em></p>
+<pre><code> # make
+ # make install
+</code></pre>
+<p> <em>做一个软链接，作用是去掉版本号</em></p>
+<pre><code> # ln -s /application/nginx1.11.5/ /application/nginx
+ # cd /application/nginx/
+</code></pre>
+</li>
 </ul>
 <h2 id="使用nginx"><a href="#使用nginx" class="headerlink" title="使用nginx"></a>使用nginx</h2><ul>
 <li><p>启动</p>
-<pre><code># /application/nginx/sbin/nginx
-</code></pre></li>
+<pre><code> # /application/nginx/sbin/nginx
+</code></pre>
+</li>
 <li><p>检查语法，也就是检查配置文件的语法</p>
-<pre><code># /application/nginx/sbin/nginx -t
-</code></pre></li>
+<pre><code> # /application/nginx/sbin/nginx -t
+</code></pre>
+</li>
 <li><p>重启</p>
-<pre><code># /application/nginx/sbin/nginx -s reload
-</code></pre></li>
+<pre><code> # /application/nginx/sbin/nginx -s reload
+</code></pre>
+</li>
 <li><p>停止nginx服务</p>
-<pre><code># /application/nginx/sbin/nginx -s stop
-</code></pre></li>
+<pre><code> # /application/nginx/sbin/nginx -s stop
+</code></pre>
+</li>
 <li><p>访问</p>
-<pre><code>http://192.168.116.131:80
-</code></pre></li>
+<pre><code> http://192.168.116.131:80
+</code></pre>
+</li>
 <li><p>排错</p>
 <p> 看网络通不通</p>
-<pre><code>ping 192.168.116.131
-</code></pre><p> 端口通不通</p>
-<pre><code>telnet 192.168.116.131 80
-</code></pre><p> 查看nginx的错误日志</p>
-<pre><code>/application/nginx/log/error.log
-</code></pre></li>
+<pre><code> ping 192.168.116.131
+</code></pre>
+<p> 端口通不通</p>
+<pre><code> telnet 192.168.116.131 80
+</code></pre>
+<p> 查看nginx的错误日志</p>
+<pre><code> /application/nginx/log/error.log
+</code></pre>
+</li>
 <li><p>nginx的目录结构</p>
-<pre><code>├── client_body_temp    #客户端临时文件
-├── conf                #nginx配置文件
-│   ├── fastcgi.conf
-│   ├── fastcgi.conf.default
-│   ├── fastcgi_params
-│   ├── fastcgi_params.default
-│   ├── koi-utf
-│   ├── koi-win
-│   ├── mime.types
-│   ├── mime.types.default
-│   ├── nginx.conf        #默认的配置文件
-│   ├── nginx.conf.default #默认配置文件的备份文件
-│   ├── scgi_params
-│   ├── scgi_params.default
-│   ├── uwsgi_params
-│   ├── uwsgi_params.default
-│   └── win-utf
-├── fastcgi_temp    #临时目录
-├── html            #默认站点目录
-│   ├── 50x.html    #错误页面
-│   └── index.html    #默认首页
-├── logs            #默认日志目录
-│   ├── access.log    #nginx的访问日志，可以通过此文件查看用户访问情况
-│   ├── error.log    #nginx的错误日志
-│   └── nginx.pid    #nginx启动后会把所有的进程ID号写入此文件
-├── proxy_temp        
-├── sbin            #nginx命令的目录，比如nginx的启动命令：nginx
-│   └── nginx
-├── scgi_temp        #临时目录
-└── uwsgi_temp        #临时目录
-</code></pre></li>
+<pre><code> ├── client_body_temp    #客户端临时文件
+ ├── conf                #nginx配置文件
+ │   ├── fastcgi.conf
+ │   ├── fastcgi.conf.default
+ │   ├── fastcgi_params
+ │   ├── fastcgi_params.default
+ │   ├── koi-utf
+ │   ├── koi-win
+ │   ├── mime.types
+ │   ├── mime.types.default
+ │   ├── nginx.conf        #默认的配置文件
+ │   ├── nginx.conf.default #默认配置文件的备份文件
+ │   ├── scgi_params
+ │   ├── scgi_params.default
+ │   ├── uwsgi_params
+ │   ├── uwsgi_params.default
+ │   └── win-utf
+ ├── fastcgi_temp    #临时目录
+ ├── html            #默认站点目录
+ │   ├── 50x.html    #错误页面
+ │   └── index.html    #默认首页
+ ├── logs            #默认日志目录
+ │   ├── access.log    #nginx的访问日志，可以通过此文件查看用户访问情况
+ │   ├── error.log    #nginx的错误日志
+ │   └── nginx.pid    #nginx启动后会把所有的进程ID号写入此文件
+ ├── proxy_temp        
+ ├── sbin            #nginx命令的目录，比如nginx的启动命令：nginx
+ │   └── nginx
+ ├── scgi_temp        #临时目录
+ └── uwsgi_temp        #临时目录
+</code></pre>
+</li>
 <li><p>nginx的配置文件,nginx.conf</p>
-<pre><code>默认用户
-#user  nobody;    
-子进程的个数，一般与cpu的核数相当
-worker_processes  1;  
-
-错误日志，错误日志基本的级别从低往高：debug,info,notice,error
-#error_log  logs/error.log;
-#error_log  logs/error.log  notice;
-#error_log  logs/error.log  info;
-
-nginx的进程号
-#pid        logs/nginx.pid;
-
-nginx处理的最大连接数量
-events {
-    worker_connections  1024;
-}
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-
-    记录的访问日志的格式
-    #log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;
-    #                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
-    #                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
-
-    记录访问日志
-    #access_log  logs/access.log  main;
-
-    sendfile        on;
-    #tcp_nopush     on;
-
-    #keepalive_timeout  0;
-    keepalive_timeout  65;
-
-    #gzip  on;
-
-    虚拟主机
-    server {
-        监听的端口好
-        listen       80;
-        域名
-        server_name  localhost;
-
-        #charset koi8-r;
-        访问日志
-        #access_log  logs/host.access.log  main;
-
-        根据前面的结果执行后面的任务，就是执行RUI跳转的
-        location / {
-            root   html;
-            index  index.html index.htm;
-        }
-        错误页面
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }
-}
-</code></pre></li>
+<pre><code> 默认用户
+ #user  nobody;    
+ 子进程的个数，一般与cpu的核数相当
+ worker_processes  1;  
+ 
+ 错误日志，错误日志基本的级别从低往高：debug,info,notice,error
+ #error_log  logs/error.log;
+ #error_log  logs/error.log  notice;
+ #error_log  logs/error.log  info;
+ 
+ nginx的进程号
+ #pid        logs/nginx.pid;
+ 
+ nginx处理的最大连接数量
+ events &#123;
+     worker_connections  1024;
+ &#125;
+ 
+ http &#123;
+     include       mime.types;
+     default_type  application/octet-stream;
+ 
+     记录的访问日志的格式
+     #log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+     #                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+     #                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+ 
+     记录访问日志
+     #access_log  logs/access.log  main;
+ 
+     sendfile        on;
+     #tcp_nopush     on;
+ 
+     #keepalive_timeout  0;
+     keepalive_timeout  65;
+ 
+     #gzip  on;
+ 
+     虚拟主机
+     server &#123;
+         监听的端口好
+         listen       80;
+         域名
+         server_name  localhost;
+ 
+         #charset koi8-r;
+         访问日志
+         #access_log  logs/host.access.log  main;
+ 
+         根据前面的结果执行后面的任务，就是执行RUI跳转的
+         location / &#123;
+             root   html;
+             index  index.html index.htm;
+         &#125;
+         错误页面
+         error_page   500 502 503 504  /50x.html;
+         location = /50x.html &#123;
+             root   html;
+         &#125;
+     &#125;
+ &#125;
+</code></pre>
+</li>
 <li><p>用nginx实现简单的负载均衡</p>
 <p> <code>upstream</code> 是nginx的一个模块，可以实现负载均衡的功能，也就是反向代理。<br> <code>upstream</code> backend标签中的server代表一个目标服务器。<br> <code>max_fails</code> 是最多请求失效次数时将节点去除<br> <code>fail_timeout</code> 是请求超时时间</p>
-<pre><code>upstream backend{
- server 10.202.33.86:8080 max_fails=3 fail_timeout=30s;
- server 10.202.33.87:8080 max_fails=3 fail_timeout=30s;
-}
-
-server {
-    listen       80;
-    server_name  www.etiantian.org;
-    location / {
-        proxy_pass http://backend;
-    }
-}
-</code></pre></li>
+<pre><code> upstream backend&#123;
+  server 10.202.33.86:8080 max_fails=3 fail_timeout=30s;
+  server 10.202.33.87:8080 max_fails=3 fail_timeout=30s;
+ &#125;
+ 
+ server &#123;
+     listen       80;
+     server_name  www.etiantian.org;
+     location / &#123;
+         proxy_pass http://backend;
+     &#125;
+ &#125;
+</code></pre>
+</li>
 </ul>
 
-        </section>
-    </article>
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx介绍"><span class="toc-number">1.</span> <span class="toc-text">nginx介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx的主要功能"><span class="toc-number">2.</span> <span class="toc-text">nginx的主要功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx的优点"><span class="toc-number">2.1.</span> <span class="toc-text">nginx的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx的适用场景"><span class="toc-number">2.2.</span> <span class="toc-text">nginx的适用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx的安装"><span class="toc-number">3.</span> <span class="toc-text">nginx的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用nginx"><span class="toc-number">4.</span> <span class="toc-text">使用nginx</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2014/11/01/2014-11-01-quickLinux/">
+                    Linux中的快捷键汇总
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2014/10/19/2014-10-19-%E6%9E%B6%E6%9E%84/">      
+                    技术选型和经验总结
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

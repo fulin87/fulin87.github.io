@@ -1,76 +1,257 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>老鸟眼中的JVM知识体系(3)-垃圾回收 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            老鸟眼中的JVM知识体系(3)-垃圾回收 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2018/12/06/2018-12-06-jvm3/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%9E%83%E5%9C%BE"><span class="toc-number">1.</span> <span class="toc-text">如何判定对象是垃圾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9B%9E%E6%94%B6"><span class="toc-number">2.</span> <span class="toc-text">如何回收</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2018/12/06/2018-12-06-jvm3/">老鸟眼中的JVM知识体系(3)-垃圾回收</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2018-12-06
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>老鸟眼中的JVM知识体系(3)-垃圾回收</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月06日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>java的内存管理中垃圾回收是很重要的一部分,在java程序员的职业生涯中具有基石性的重要地位，java的内存垃圾回收是怎样的机制呢，java程序员在写代码的时候是不用刻意关心垃圾回收的，但是在大规模，高并发系统中如果出现了系统瓶颈，垃圾回收就是很重要的优化项…</p>
 </blockquote>
 <p>说起垃圾回收，随之而来的问题就是：</p>
@@ -85,8 +266,10 @@
 <li>可达性分析。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> lombok.Setter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 人为的创造一个循环引用，但是GC会进行回收，说明JDK8使用的垃圾收集策略的垃圾判定依据不是引用计数法。</span></span><br><span class="line"><span class="comment"> * 虚拟机参数 -verbose:gc -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> fulin</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GcTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Object ref;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">GcTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">byte</span> [] bytes = <span class="keyword">new</span> <span class="keyword">byte</span> [<span class="number">20</span> * <span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		GcTest gc1 = <span class="keyword">new</span> GcTest();</span><br><span class="line">		GcTest gc2 = <span class="keyword">new</span> GcTest();</span><br><span class="line">		gc1.setRef(gc2);</span><br><span class="line">		gc2.setRef(gc1);</span><br><span class="line">		</span><br><span class="line">		gc1 = <span class="keyword">null</span>;</span><br><span class="line">		gc2 = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">		System.gc();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>输出如下，说明进行了垃圾回收</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[GC (System.gc()) [PSYoungGen: 21790K-&gt;744K(37888K)] 42270K-&gt;21232K(123904K), 0.0018128 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] </span><br><span class="line">[Full GC (System.gc()) [PSYoungGen: 744K-&gt;0K(37888K)] [ParOldGen: 20488K-&gt;552K(86016K)] 21232K-&gt;552K(123904K), [Metaspace: 2627K-&gt;2627K(1056768K)], 0.0059047 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] </span><br><span class="line">Heap</span><br><span class="line"> PSYoungGen      total 37888K, used 655K [0x00000000d6400000, 0x00000000d8e00000, 0x0000000100000000)</span><br><span class="line">  eden space 32768K, 2% used [0x00000000d6400000,0x00000000d64a3ee8,0x00000000d8400000)</span><br><span class="line">  from space 5120K, 0% used [0x00000000d8400000,0x00000000d8400000,0x00000000d8900000)</span><br><span class="line">  to   space 5120K, 0% used [0x00000000d8900000,0x00000000d8900000,0x00000000d8e00000)</span><br><span class="line"> ParOldGen       total 86016K, used 552K [0x0000000082c00000, 0x0000000088000000, 0x00000000d6400000)</span><br><span class="line">  object space 86016K, 0% used [0x0000000082c00000,0x0000000082c8a0f0,0x0000000088000000)</span><br><span class="line"> Metaspace       used 2634K, capacity 4486K, committed 4864K, reserved 1056768K</span><br><span class="line">  class space    used 280K, capacity 386K, committed 512K, reserved 1048576K</span><br></pre></td></tr></table></figure>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span><span class="variable">GC</span> <span class="punctuation">(</span><span class="variable">System</span><span class="operator">.</span><span class="variable">gc</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">[</span><span class="variable">PSYoungGen</span><span class="operator">:</span> <span class="number">21790</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">744</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">37888</span><span class="built_in">K</span><span class="punctuation">)</span><span class="punctuation">]</span> <span class="number">42270</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">21232</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">123904</span><span class="built_in">K</span><span class="punctuation">)</span><span class="operator">,</span> <span class="number">0.0018128</span> <span class="variable">secs</span><span class="punctuation">]</span> <span class="punctuation">[</span><span class="built_in">Times</span><span class="operator">:</span> <span class="variable">user</span><span class="operator">=</span><span class="number">0.00</span> <span class="variable">sys</span><span class="operator">=</span><span class="number">0.00</span><span class="operator">,</span> <span class="variable">real</span><span class="operator">=</span><span class="number">0.00</span> <span class="variable">secs</span><span class="punctuation">]</span> </span><br><span class="line"><span class="punctuation">[</span><span class="built_in">Full</span> <span class="variable">GC</span> <span class="punctuation">(</span><span class="variable">System</span><span class="operator">.</span><span class="variable">gc</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">[</span><span class="variable">PSYoungGen</span><span class="operator">:</span> <span class="number">744</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">0</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">37888</span><span class="built_in">K</span><span class="punctuation">)</span><span class="punctuation">]</span> <span class="punctuation">[</span><span class="variable">ParOldGen</span><span class="operator">:</span> <span class="number">20488</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">552</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">86016</span><span class="built_in">K</span><span class="punctuation">)</span><span class="punctuation">]</span> <span class="number">21232</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">552</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">123904</span><span class="built_in">K</span><span class="punctuation">)</span><span class="operator">,</span> <span class="punctuation">[</span><span class="variable">Metaspace</span><span class="operator">:</span> <span class="number">2627</span><span class="built_in">K</span><span class="operator">-&gt;</span><span class="number">2627</span><span class="built_in">K</span><span class="punctuation">(</span><span class="number">1056768</span><span class="built_in">K</span><span class="punctuation">)</span><span class="punctuation">]</span><span class="operator">,</span> <span class="number">0.0059047</span> <span class="variable">secs</span><span class="punctuation">]</span> <span class="punctuation">[</span><span class="built_in">Times</span><span class="operator">:</span> <span class="variable">user</span><span class="operator">=</span><span class="number">0.00</span> <span class="variable">sys</span><span class="operator">=</span><span class="number">0.00</span><span class="operator">,</span> <span class="variable">real</span><span class="operator">=</span><span class="number">0.00</span> <span class="variable">secs</span><span class="punctuation">]</span> </span><br><span class="line"><span class="variable">Heap</span></span><br><span class="line"> <span class="variable">PSYoungGen</span>      <span class="variable">total</span> <span class="number">37888</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">used</span> <span class="number">655</span><span class="built_in">K</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x00000000d6400000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000d8e00000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x0000000100000000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">eden</span> <span class="variable">space</span> <span class="number">32768</span><span class="built_in">K</span><span class="operator">,</span> <span class="number">2</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x00000000d6400000</span><span class="operator">,</span><span class="number">0</span><span class="variable">x00000000d64a3ee8</span><span class="operator">,</span><span class="number">0</span><span class="variable">x00000000d8400000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">from</span> <span class="variable">space</span> <span class="number">5120</span><span class="built_in">K</span><span class="operator">,</span> <span class="number">0</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x00000000d8400000</span><span class="operator">,</span><span class="number">0</span><span class="variable">x00000000d8400000</span><span class="operator">,</span><span class="number">0</span><span class="variable">x00000000d8900000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">to</span>   <span class="variable">space</span> <span class="number">5120</span><span class="built_in">K</span><span class="operator">,</span> <span class="number">0</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x00000000d8900000</span><span class="operator">,</span><span class="number">0</span><span class="variable">x00000000d8900000</span><span class="operator">,</span><span class="number">0</span><span class="variable">x00000000d8e00000</span><span class="punctuation">)</span></span><br><span class="line"> <span class="variable">ParOldGen</span>       <span class="variable">total</span> <span class="number">86016</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">used</span> <span class="number">552</span><span class="built_in">K</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x0000000082c00000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x0000000088000000</span><span class="operator">,</span> <span class="number">0</span><span class="variable">x00000000d6400000</span><span class="punctuation">)</span></span><br><span class="line">  <span class="variable">object</span> <span class="variable">space</span> <span class="number">86016</span><span class="built_in">K</span><span class="operator">,</span> <span class="number">0</span><span class="operator">%</span> <span class="variable">used</span> <span class="punctuation">[</span><span class="number">0</span><span class="variable">x0000000082c00000</span><span class="operator">,</span><span class="number">0</span><span class="variable">x0000000082c8a0f0</span><span class="operator">,</span><span class="number">0</span><span class="variable">x0000000088000000</span><span class="punctuation">)</span></span><br><span class="line"> <span class="variable">Metaspace</span>       <span class="variable">used</span> <span class="number">2634</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">capacity</span> <span class="number">4486</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">committed</span> <span class="number">4864</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">reserved</span> <span class="number">1056768</span><span class="built_in">K</span></span><br><span class="line">  <span class="variable">class</span> <span class="variable">space</span>    <span class="variable">used</span> <span class="number">280</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">capacity</span> <span class="number">386</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">committed</span> <span class="number">512</span><span class="built_in">K</span><span class="operator">,</span> <span class="variable">reserved</span> <span class="number">1048576</span><span class="built_in">K</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>可达性分析中什么可以作为GCroot呢？</p>
 <ul>
@@ -112,8 +295,10 @@
 </li>
 <li><p>提高了标记-清除 算法的性能</p>
 </li>
-<li>但是引入了新的问题：造成了空间的浪费</li>
-<li>主要针对新生代</li>
+<li><p>但是引入了新的问题：造成了空间的浪费</p>
+</li>
+<li><p>主要针对新生代</p>
+</li>
 </ul>
 </li>
 <li><p>标记整理 算法</p>
@@ -135,97 +320,78 @@
 <li><p>与GC细节相关的配置</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-verbose:gc</span><br><span class="line">-XX:+PrintGCDetails</span><br></pre></td></tr></table></figure>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-verbose:gc</span></span><br><span class="line"><span class="deletion">-XX:+PrintGCDetails</span></span><br></pre></td></tr></table></figure>
 
-        </section>
-    </article>
+
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何判定对象是垃圾"><span class="toc-number">1.</span> <span class="toc-text">如何判定对象是垃圾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何回收"><span class="toc-number">2.</span> <span class="toc-text">如何回收</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2018/12/08/2018-12-10-jvm7/">
+                    老鸟眼中的JVM知识体系(6)-调试工具
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2018/12/06/2018-12-07-jvm4/">      
+                    老鸟眼中的JVM知识体系(4)-垃圾收集器与内存分配回收策略
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

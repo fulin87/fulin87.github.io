@@ -1,190 +1,352 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>互联网架构相关名称解释 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            互联网架构相关名称解释 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2014/12/30/2014-12-30-web-name/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83"><span class="toc-number">2.</span> <span class="toc-text">灰度发布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-B%E6%B5%8B%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">A&#x2F;B测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">高可用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">5.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E7%81%BE"><span class="toc-number">6.</span> <span class="toc-text">容灾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SOA"><span class="toc-number">7.</span> <span class="toc-text">SOA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIT-UAT-DEV-PRO"><span class="toc-number">8.</span> <span class="toc-text">SIT&#x2F;UAT&#x2F;DEV&#x2F;PRO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95"><span class="toc-number">9.</span> <span class="toc-text">回归测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E5%85%B3%E4%BA%92%E8%81%94%E7%BD%91%E6%9E%B6%E6%9E%84%E7%9A%84%E7%B2%BE%E5%BD%A9%E5%8D%9A%E6%96%87"><span class="toc-number">10.</span> <span class="toc-text">有关互联网架构的精彩博文</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2014/12/30/2014-12-30-web-name/">互联网架构相关名称解释</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2014-12-30
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>互联网架构相关名称解释</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2014年12月30日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>一个合格的后端开发工程师的学习路线大体上是这样的: <strong>计算机基础理论 -&gt; 操作系统 -&gt; 计算机语言 -&gt; 数据库 -&gt; 互联网架构 -&gt; 大数据技术</strong>  当然这里省略了很多的细节，但是我认为大致的方向是这样的，现在的技术日新月异,有很多名词是上学的时候没有学过的，需要工作中积累。</p>
 </blockquote>
-<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p> <strong><a href="http://baike.baidu.com/link?url=PgrBVJsVc0Z0ZhfZ3b08YEdkUUfigsdhNIJKr1pphogwntwgbe_aSeVFGnG3zwsV41Pu2_7ShyAFHulSchZHPnDVwbi8wub9amz5jUiO8nPbbHmPDcL6Np9jOH4m-qs4W56JEYF-f7a170S2_wMeA_" target="_blank" rel="noopener">百度百科的解释</a></strong></p>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p> <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=PgrBVJsVc0Z0ZhfZ3b08YEdkUUfigsdhNIJKr1pphogwntwgbe_aSeVFGnG3zwsV41Pu2_7ShyAFHulSchZHPnDVwbi8wub9amz5jUiO8nPbbHmPDcL6Np9jOH4m-qs4W56JEYF-f7a170S2_wMeA_">百度百科的解释</a></strong></p>
 <p>  中间件我的理解就是一种介于操作系统和业务系统之间的一种软件系统或者技术。</p>
-<h2 id="灰度发布"><a href="#灰度发布" class="headerlink" title="灰度发布"></a>灰度发布</h2><p> <strong><a href="http://baike.baidu.com/link?url=3bQ92ecrVPqTulYjgFtQ8aYBuV0KwkXyISE2GN6wm1TdFGYL6UGIuJfBLuJOBCTfCbp5ZGXcwOBa20xnjsf4ZY1zCyeeGwCYo0dBcHAy8VfvxPxY3HYJ8XX3fiUEj2Vw" target="_blank" rel="noopener">百度百科的解释</a></strong></p>
+<h2 id="灰度发布"><a href="#灰度发布" class="headerlink" title="灰度发布"></a>灰度发布</h2><p> <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=3bQ92ecrVPqTulYjgFtQ8aYBuV0KwkXyISE2GN6wm1TdFGYL6UGIuJfBLuJOBCTfCbp5ZGXcwOBa20xnjsf4ZY1zCyeeGwCYo0dBcHAy8VfvxPxY3HYJ8XX3fiUEj2Vw">百度百科的解释</a></strong></p>
 <p> 灰度发布我自己的理解就是：在保证系统不停机的情况下，逐步发布，替换，针对效果十分理想而进行全面发布或者回滚。和A/B测试有重叠的地方。</p>
-<h2 id="A-B测试"><a href="#A-B测试" class="headerlink" title="A/B测试"></a>A/B测试</h2><p> <strong><a href="http://baike.baidu.com/link?url=6rZxP5pTzB2Jb_muT9tdwvzzOf7MXDmy_HuK05XrFq-qGHgrEasXisxdK0OLa3hvqZBZIoelqOfOR4yYccfEhY8ZpsOccO1p2BKBSH6gdQu" target="_blank" rel="noopener">百度百科的解释</a></strong></p>
+<h2 id="A-B测试"><a href="#A-B测试" class="headerlink" title="A/B测试"></a>A/B测试</h2><p> <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=6rZxP5pTzB2Jb_muT9tdwvzzOf7MXDmy_HuK05XrFq-qGHgrEasXisxdK0OLa3hvqZBZIoelqOfOR4yYccfEhY8ZpsOccO1p2BKBSH6gdQu">百度百科的解释</a></strong></p>
 <p> A/B测试我自己的理解就是在不知道用户真正的需求的时候，做A/B两套或者更多的方案，在生产环境进行验证，由用户的行为数据来决定到底使用那一套方案的测试。</p>
-<h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><p> <strong><a href="http://baike.baidu.com/link?url=uBJRDHZ2TVawCjBsAwUBl0DvrsbAYiqBFiom-7FG2JQHhnQebjNCuNq0z49QzUc1h4hzXrq-3P4oeuk3EGXHbMEwYgq8jmP5M3ly5bgFntwCwiZAg00uyEsbES2nkmLc" target="_blank" rel="noopener">百度百科的解释</a></strong></p>
-<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><p> <strong><a href="http://baike.baidu.com/link?url=5A9DS5Tv_zgAr2no_4jhtypJSEBCofNM4MudmaubzrYhE0QTyA_hhH2FlJl_-63wsWr5krluw_-qPPm1B-fKlZeJQW6qpUlLZh4pmMybdMWAVPGLztgOd10Jv5IHfeut" target="_blank" rel="noopener">百度百科的解释</a></strong></p>
+<h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><p> <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=uBJRDHZ2TVawCjBsAwUBl0DvrsbAYiqBFiom-7FG2JQHhnQebjNCuNq0z49QzUc1h4hzXrq-3P4oeuk3EGXHbMEwYgq8jmP5M3ly5bgFntwCwiZAg00uyEsbES2nkmLc">百度百科的解释</a></strong></p>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><p> <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=5A9DS5Tv_zgAr2no_4jhtypJSEBCofNM4MudmaubzrYhE0QTyA_hhH2FlJl_-63wsWr5krluw_-qPPm1B-fKlZeJQW6qpUlLZh4pmMybdMWAVPGLztgOd10Jv5IHfeut">百度百科的解释</a></strong></p>
 <p> 负载均衡，我的理解就是均衡器，有点类似于MVC中的C，在互联网架构中具有举足轻重的地位，没有它，其他的技术无从谈起。</p>
-<h2 id="容灾"><a href="#容灾" class="headerlink" title="容灾"></a>容灾</h2><p> <strong><a href="http://baike.baidu.com/link?url=FAeSIHuua6xRFdvGSvTguAaj7BrLwR0HM0_V33ZVS-GGCjoVNzd76ij_IN4od76BEVm7_ZkM1dRkSphUyxLZJh8GeupJsNY9Vea3Sk6DTje" target="_blank" rel="noopener">百度百科的解释</a></strong></p>
+<h2 id="容灾"><a href="#容灾" class="headerlink" title="容灾"></a>容灾</h2><p> <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=FAeSIHuua6xRFdvGSvTguAaj7BrLwR0HM0_V33ZVS-GGCjoVNzd76ij_IN4od76BEVm7_ZkM1dRkSphUyxLZJh8GeupJsNY9Vea3Sk6DTje">百度百科的解释</a></strong></p>
 <p> 容灾，我的理解就是：为了保证系统的连续可用性，而准备的一套备用方案，好比是没有办法的办法，做容灾是需要成本和规范的。</p>
-<h2 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h2><p> <strong><a href="http://baike.baidu.com/link?url=dMRPh-oIDgr2fRWGy_u8kyqXhsW59UosT01TZvx6sMv2ciJ2uXgD7B9FQ0pkbDnUXdYarCl6oUjzf1bIejC_va" target="_blank" rel="noopener">百度百科的解释</a></strong>    </p>
+<h2 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h2><p> <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=dMRPh-oIDgr2fRWGy_u8kyqXhsW59UosT01TZvx6sMv2ciJ2uXgD7B9FQ0pkbDnUXdYarCl6oUjzf1bIejC_va">百度百科的解释</a></strong>    </p>
 <p> SOA我的理解就是对系统进行拆分，拆成一个一个的子服务，然后由Client调用，这也是面向接口思想的最好体现。</p>
-<h2 id="SIT-UAT-DEV-PRO"><a href="#SIT-UAT-DEV-PRO" class="headerlink" title="SIT/UAT/DEV/PRO"></a>SIT/UAT/DEV/PRO</h2><p> <strong><a href="http://blog.csdn.net/kaiwii/article/details/9446243" target="_blank" rel="noopener">网友的精彩解释</a></strong></p>
+<h2 id="SIT-UAT-DEV-PRO"><a href="#SIT-UAT-DEV-PRO" class="headerlink" title="SIT/UAT/DEV/PRO"></a>SIT/UAT/DEV/PRO</h2><p> <strong><a target="_blank" rel="noopener" href="http://blog.csdn.net/kaiwii/article/details/9446243">网友的精彩解释</a></strong></p>
 <p> 我的理解是，这些是软件工程中的不同测试环境。</p>
 <pre><code>DEV:开发人员使用的环境，开发环境
 SIT:功能集成测试环境，测试环境
 UAT:用户验收环境，用户体验环境
 PRO:正式环境，也叫生产环境，是真正的环境。
-</code></pre><h2 id="回归测试"><a href="#回归测试" class="headerlink" title="回归测试"></a>回归测试</h2><p> <strong><a href="http://baike.baidu.com/link?url=u4JX6jEBIlfz77k6_Vo2jcXNnzm2ZeGqpyCOefTv4iR3pCOqAkIjgWV0t_e_-Q2WX4Kr30XEao7MFM_zkQr7_fA1cclpNrMsnv7gY-efGrRGEg5BSSWvArgeEiFEB11S" target="_blank" rel="noopener">百度百科的解释</a></strong></p>
+</code></pre>
+<h2 id="回归测试"><a href="#回归测试" class="headerlink" title="回归测试"></a>回归测试</h2><p> <strong><a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=u4JX6jEBIlfz77k6_Vo2jcXNnzm2ZeGqpyCOefTv4iR3pCOqAkIjgWV0t_e_-Q2WX4Kr30XEao7MFM_zkQr7_fA1cclpNrMsnv7gY-efGrRGEg5BSSWvArgeEiFEB11S">百度百科的解释</a></strong></p>
 <p> 回归测试，我的理解就是冒烟测试，主要作用是保证核心功能的可用性。</p>
-<h2 id="有关互联网架构的精彩博文"><a href="#有关互联网架构的精彩博文" class="headerlink" title="有关互联网架构的精彩博文"></a>有关互联网架构的精彩博文</h2><p> <strong><a href="http://mp.weixin.qq.com/s?__biz=MzA4NDc2MDQ1Nw==&amp;mid=2650238076&amp;idx=1&amp;sn=26a8ef34afb15a7fb0101e1ace6cbc51&amp;chksm=87e18e9ab096078ced8ecc55a39d2d4298b77f24351a29353fb4a49d4b8891103578be50680e&amp;scene=0#wechat_redirect" target="_blank" rel="noopener">一号店的架构演进</a></strong></p>
+<h2 id="有关互联网架构的精彩博文"><a href="#有关互联网架构的精彩博文" class="headerlink" title="有关互联网架构的精彩博文"></a>有关互联网架构的精彩博文</h2><p> <strong><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzA4NDc2MDQ1Nw==&mid=2650238076&idx=1&sn=26a8ef34afb15a7fb0101e1ace6cbc51&chksm=87e18e9ab096078ced8ecc55a39d2d4298b77f24351a29353fb4a49d4b8891103578be50680e&scene=0#wechat_redirect">一号店的架构演进</a></strong></p>
 
-        </section>
-    </article>
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#中间件"><span class="toc-number">1.</span> <span class="toc-text">中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灰度发布"><span class="toc-number">2.</span> <span class="toc-text">灰度发布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-B测试"><span class="toc-number">3.</span> <span class="toc-text">A/B测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高可用"><span class="toc-number">4.</span> <span class="toc-text">高可用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡"><span class="toc-number">5.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容灾"><span class="toc-number">6.</span> <span class="toc-text">容灾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SOA"><span class="toc-number">7.</span> <span class="toc-text">SOA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIT-UAT-DEV-PRO"><span class="toc-number">8.</span> <span class="toc-text">SIT/UAT/DEV/PRO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回归测试"><span class="toc-number">9.</span> <span class="toc-text">回归测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有关互联网架构的精彩博文"><span class="toc-number">10.</span> <span class="toc-text">有关互联网架构的精彩博文</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2015/03/25/2015-03-25-git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">
+                    git要点总结
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2014/11/01/2014-11-01-quickLinux/">      
+                    Linux中的快捷键汇总
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

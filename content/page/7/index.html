@@ -1,405 +1,891 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+    
+    
+    
+    
+    <title>
+          
+            水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
-          
-            <a href="/content/" class="item-link">首页</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/about" class="item-link">关于</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
-  </div>
-</header>
-
-  <main id='index'>
-  <div class="posts-list">
-    
-      <section>
-        <a href="/content/2016/09/09/2016-09-09-java-collection/">
-          <h3 class='post-head'>
-            java集合备忘录
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月09日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/09/06/2016-09-10-java-equals-hashCode/">
-          <h3 class='post-head'>
-            Object的equals和hashCode和clone方法
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月06日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/08/26/2016-08-26-SSH8/">
-          <h3 class='post-head'>
-            Linux基础知识点八请求的过程
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月26日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/08/25/2016-08-25-SSH7/">
-          <h3 class='post-head'>
-            Linux基础知识点七之用户管理
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月25日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/08/24/2016-08-24-SSH6/">
-          <h3 class='post-head'>
-            Linux基础知识点六之定时任务
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月24日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/08/23/2016-08-23-SSH5/">
-          <h3 class='post-head'>
-            Linux基础知识点五之权限管理
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月23日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/08/22/2016-08-22-SSH4/">
-          <h3 class='post-head'>
-            Linux基础知识点四之常用技巧和运行级别
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月22日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/08/21/2016-08-21-SSH3/">
-          <h3 class='post-head'>
-            Linux基础知识点三之硬件信息
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月21日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/08/20/2016-08-20-SSH2/">
-          <h3 class='post-head'>
-            Linux基础知识点二之文件系统
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月20日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2016/08/18/2016-08-18-SSH1/">
-          <h3 class='post-head'>
-            Linux基础知识点一之重要目录和基础命令
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月18日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/linux/">linux</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-  </div>
-  <aside>
-    
-    
-    
-      <div class="categories">
-        <h1>
-          文章分类
-        </h1>
-        <div class="content">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/content/categories/Excel/">Excel</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/JDK源码/">JDK源码</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/MQ/">MQ</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/excel/">excel</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/life/">life</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/life在/">life在</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/mysql/">mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/redis/">redis</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/ruby/">ruby</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/tool/">tool</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/vi/">vi</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/其他/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/存储/">存储</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/算法/">算法</a></li></ul>
-        </div>
-      </div>
-    
-    
-  </aside>
-</main>
-
-  <div class="paging">
-  <div class="paging-container">
-    
-    <div class='page-prev'>
-      <a href="/content/page/6/">上一页</a>
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
     </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
     
+        <v-list id="sub-menu" class="font-weight-medium" dense>
+            
+                
+                    <v-list-item href="/content/categories/java/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="7" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>java</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E6%9D%82%E9%A1%B9/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="11" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>杂项</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E5%AD%98%E5%82%A8/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="8" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>存储</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/linux/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>linux</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="4" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>中间件</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>所思所想</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/life/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>life</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="30" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>编程语言</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E5%B7%A5%E5%85%B7/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="5" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>工具</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/python/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>python</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E7%AE%97%E6%B3%95/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>算法</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+        </v-list>    
     
-    <div class='page-next'>
-      <a href="/content/page/8/">下一页</a>
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
     </div>
-    
-  </div>
 </div>
 
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
+          
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
+          
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 index-card">
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-26
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/26/2016-09-26-job/">全栈还是专攻，这是一个问题</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+经常会浏览一下招聘网站，一方面，可以了解现在的市场行情，另一方面，可以了解目前行业使用的技术都有什么，具体有些什么要求，这是我根据我浏览很多信息之后的一点感悟
+
+以下是我在某job上截取的一段用人单位的提出的技能要求:
+1、计算机相关专业本科及以上学历，3年以上Java开发工作经验；
+2、熟悉MVC设计模式，熟悉Java领域常用的开源框架，如Spring、Struts、Ibatis、Hibernate等；
+3、熟悉面向对象编程思想和设计模式；
+4、熟悉多线程编程，熟悉socket编程、WebService接口技术；
+5、熟悉MINA、Volley等网络通信应用框架，有MINA开发经验者...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/26/2016-09-26-job/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-23
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/23/2016-09-23-mysql-explain/">mysql中使用explain来分析Sql语句的性能</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+SQL优化的基本思路就是，先找到性能差的语句，然后找到性能差的原因，然后优化。当我们找到目标SQL之后，可以使用explain来分析SQL语句的执行过程，说白了就是看看这个语句的执行计划，找到性能瓶颈。
+
+语法explain &lt;语句&gt;  //explain是专门分析select等查询语句的执行计划的
+
+例子
+执行以下sql语句，看一下它的执行计划(这是一个比较复杂的查询了，比较典型)
+ EXPLAIN 
+     SELECT
+         o.order_id,
+         o.order_sn,
+         o.parent_order_sn,
+    ...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/23/2016-09-23-mysql-explain/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-22
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/22/2016-09-22-mysql-update/">mysql中sql优化的思路和原则</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+大部分系统的性能瓶颈都是IO操作，数据库的IO消耗是其中的重要组成部分，SQL语句性能的优化是很有必要的，如果一开始不注意，后期的改动成本是比较大的,下面是根据我自己的经验总结的一套sql优化的思路和方法，不一定是最好的，但是却真实的产生过效果。
+
+入乎其内；出乎其外 为什么人类到今天为止对宇宙的认识都很有限？因为我们自己就在宇宙之中；为什么人类到今天为止对海洋的认识都很少？因为人类从来没有正真的进入过海洋！
+ 一样的道理，认识一个事物，最有效的方式就是：先站在事物的外面观察观察它，然后进入事物的内部再研究它，这样才是最全面的。
+ 对于SQL来说，平时使用sql，编写sql语句就相当于...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/22/2016-09-22-mysql-update/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-21
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/21/2016-09-21-mysql/">mysql 基础知识</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+大道至简，世间的道理都是相似的……  就比如学东西吧，以前总是东学一点，西学一点。到头来发现什么都会，什么都不精，所以，到头来才明白：少才是多，less is more。数据库，以后就选择mysql了。
+
+mysql的安装因为仅做学习使用，这里只讲centos下的 mysql 安装过程，其他环境下的不做过多解释。而且，这里介绍的也是最方便的安装过程，不一定是最好的方式
+
+操作系统信息
+ Description:        CentOS Linux release 7.2.1511 (Core) 
+ Release:        7.2.1511
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
+首先查看本系统有没有安装 ma...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/21/2016-09-21-mysql/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%B7%A5%E5%85%B7/">工具></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/20/2016-09-20-plantUML/">plantUML的使用</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+经常需要画一些图，比如类图，时序图，用例图等，最近接触到一款有趣的工具，是eclipse的一个插件:plantUML。这里只记录最基础的地方，以后再来完善
+
+安装 直接访问 plantUML官网
+问题 安装好插件之后，此时只能使用plantUML画一些时序图，并不能从类文件直接生成类图，这时候还需要安装和配置一个十分牛*的画图工具： Graphviz
+plantUml的使用  这是使用plantUml画的一个Junit运行的时序图
+@startuml
+    actor user #blue 
+    user -&gt; Client : 1,开始
+    Client -&gt; ...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/20/2016-09-20-plantUML/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-09
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/09/2016-09-09-java-collection/">java集合备忘录</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+java集合的运用和认识的深入程度是一个java程序员水平的重要体现，但是要想把这一部分的内容理解透彻，深刻掌握是需要整理和总结的。以前总结过，但是没有形成文字，时间长了难免会忘记，现在记录在此。
+
+###java集合的总体框架
+java集合类框架有两个顶层接口,有多个子接口和抽象类，若干实现类。这些接口和类可以抽象的分成2类：一类是”序列”,一类是”键值对”。其实就是下面这两类：
+java.util.Collection
+java.util.Map
+
+这里我们不讨论抽象类，直接说实现类。Collection的具体实现分成两部分：List相关的和Set相关的。List和Set都是接口。...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/09/2016-09-09-java-collection/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-09-06
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/09/06/2016-09-10-java-equals-hashCode/">Object的equals和hashCode和clone方法</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+Object类是Java中其他所有类的祖先，没有Object类Java面向对象无从谈起。作为其他所有类的基类，Object具有哪些属性和行为，是Java语言设计背后的思维体现。Object类位于java.lang包中，java.lang包包含着Java最基础和核心的类，在编译时会自动导入。Object类没有定义属性，一共有13个方法,这里我重点记录3个方法：equals,hashCode,clone，
+
+###equals方法==与equals在Java中经常被使用，大家也都知道==与equals的区别：==表示的是变量值完成相同（对于基础类型，地址中存储的是值，引用类型则存储指向实际...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/09/06/2016-09-10-java-equals-hashCode/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-08-26
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/08/26/2016-08-26-SSH8/">Linux基础知识点八请求的过程</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+linux的网络基础知识，整理一下，用的时候可以来看看
+
+用户访问网站的流程 
+DNS解析的过程 
+与网络相关的常用功能
+修改主机名
+ # hostname fulin_pc
+ 临时修改主机名为 fulin_pc
+ 
+ # vi /etc/sysconfig/network
+ HOSTNAME=fulin_pc
+ 永久修改主机名为 fulin_pc
+
+ # vi /etc/hosts
+ 将主机名修改为新的主机名
+
+
+
+
+经过上面三步才算完成主机名的修改，第三步不能少，否则会导致服务启动很慢，而且服务容易报错。
+
+
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/08/26/2016-08-26-SSH8/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-08-25
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/08/25/2016-08-25-SSH7/">Linux基础知识点七之用户管理</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+Linux的用户管理是重要的基础知识，必须全面掌握。
+
+为什么要进行用户管理 Linux是个多用户多任务的分时操作系统，所以一个要使用系统资源的用户都必须先向系统管理员申请一个账号，然后以这个账号的身份进入系统。用户的账号一方面能帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也能帮助用户组织文件，并为用户提供安全性保护。每个用户账号都拥有一个惟一的用户名和用户口令。用户在登录时键入正确的用户名和口令后，才能进入系统和自己的主目录
+与用户管理相关的重要目录用户信息文件：    
+    /etc/passwd
+密码文件：
+    /etc/shadow
+用户...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/08/25/2016-08-25-SSH7/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-08-24
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/08/24/2016-08-24-SSH6/">Linux基础知识点六之定时任务</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+Linux的定时任务是必须要掌握的技能，与Linux定时任务相关的知识点，记录在此。
+
+ linux的定时任务分为两类：
+系统自身定期执行的任务/var/log/message
+/var/log/secure
+
+此外还有：
+# ls -l /etc/ | grep cron
+-rw-------.  1 root root      541 Jul 27  2015 anacrontab
+drwxr-xr-x.  2 root root       20 Jun 20 20:35 cron.d
+drwxr-xr-x.  2 root root       62 Jun 20 20:35...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/08/24/2016-08-24-SSH6/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+   
+</v-card>  
+
+
+  <div id="pagination" class="text-center">
+    <v-pagination 
+      v-model="currentPage" 
+      :length=10 
+      @input="PageChange" 
+      prev-icon="chevron_left"
+      next-icon="chevron_right"
+      color="secondary"
+    ></v-pagination>
   </div>
-</footer>
+         
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
+
+
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
 
 
 

@@ -1,76 +1,257 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>python爬虫框架crapy | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            python爬虫框架crapy | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2018/10/04/2018-10-04-scrapy/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#scrapy%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">scrapy的命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8selenium%E7%88%AC%E5%8F%96%E5%A4%A9%E7%8C%AB%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E9%A1%B5%E7%9A%84%E4%BB%B7%E6%A0%BC"><span class="toc-number"></span> <span class="toc-text">用selenium爬取天猫商品详情页的价格</span></a>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2018/10/04/2018-10-04-scrapy/">python爬虫框架crapy</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2018-10-04
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>python爬虫框架crapy</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年10月04日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/python/">python</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>scrapy是python中最著名的爬虫软件，最近需要写爬虫，所以使用了这个框架，这里记录一下scrapy的知识点</p>
 </blockquote>
 <h3 id="scrapy的命令"><a href="#scrapy的命令" class="headerlink" title="scrapy的命令"></a>scrapy的命令</h3><pre><code>scrapy startproject demo     //生成一个scrapy项目
@@ -84,16 +265,17 @@ scrapy view http://taobao.com //下载一个网页，用于调试，可见哪些
 scrapy shell http://taobao.com //用于调试的命令行，非常方便
 scrapy version -v             //输出一些scrapy依赖库的版本
 scrapy bench http://taobao.com //测试当前硬件的爬行速度
-</code></pre><p>用scrapy爬取天猫数据的时候，发现天猫的反爬机制非常强大，接口隐藏的很深，爬取一段时间后竟然要求登录，为了绕开他的反爬机制，使用了selenium来模拟浏览器的行为</p>
+</code></pre>
+<p>用scrapy爬取天猫数据的时候，发现天猫的反爬机制非常强大，接口隐藏的很深，爬取一段时间后竟然要求登录，为了绕开他的反爬机制，使用了selenium来模拟浏览器的行为</p>
 <h2 id="用selenium爬取天猫商品详情页的价格"><a href="#用selenium爬取天猫商品详情页的价格" class="headerlink" title="用selenium爬取天猫商品详情页的价格"></a>用selenium爬取天猫商品详情页的价格</h2><p>需求：给定一个天猫详情页的url，返回详情页的价格</p>
 <p>实现：flask实现web服务，提供rest接口，接收请求后使用selenium模拟浏览器，然后抓取页面数据</p>
 <pre><code>#! python2
 # coding: UTF-8
-&apos;&apos;&apos;
+&#39;&#39;&#39;
 Created on 2018年10月4日
 
 @author: fulin16
-&apos;&apos;&apos;
+&#39;&#39;&#39;
 
 from flask import Flask,request
 import json
@@ -108,24 +290,24 @@ import time
 app = Flask(__name__)
 # browser = webdriver.Chrome()
 
-&apos;&apos;&apos;
+&#39;&#39;&#39;
     code : 0,正常;1,请求方式不正确;2,获取请求参数异常
     data : 根据url爬取到的数据
     msg  : 响应描述信息
-&apos;&apos;&apos;
-@app.route(&quot;/getPrice&quot;,methods=[&apos;GET&apos;,&apos;POST&apos;,&apos;PUT&apos;])
+&#39;&#39;&#39;
+@app.route(&quot;/getPrice&quot;,methods=[&#39;GET&#39;,&#39;POST&#39;,&#39;PUT&#39;])
 def resaveUrl():
-    url = &apos;&apos;
-    result = {
-        &apos;code&apos;:0,
-        &apos;data&apos;:&apos;&apos;,
-        &apos;msg&apos;:&apos;&apos;
-    }
+    url = &#39;&#39;
+    result = &#123;
+        &#39;code&#39;:0,
+        &#39;data&#39;:&#39;&#39;,
+        &#39;msg&#39;:&#39;&#39;
+    &#125;
     try:
-        if request.method == &apos;GET&apos;:
+        if request.method == &#39;GET&#39;:
             #使用的是get请求
-            url = request.args.get(&apos;url&apos;, &apos;&apos;)
-        elif request.method == &apos;POST&apos;:
+            url = request.args.get(&#39;url&#39;, &#39;&#39;)
+        elif request.method == &#39;POST&#39;:
             #使用的是post请求
             if not request.json:
                 #post过来的数据不是json
@@ -134,152 +316,133 @@ def resaveUrl():
                 print &quot;是json&quot;
                 #post过来的数据是json
                 data = request.get_data()
-                url = json.loads(data)[&apos;url&apos;]
+                url = json.loads(data)[&#39;url&#39;]
         else:
-            url = &apos;&apos;
-            result[&apos;code&apos;] = 1
-            result[&apos;msg&apos;] = &apos;只支持GET或者POST请求方式&apos;
-            return json.dumps(result,separators=(&apos;,&apos;,&apos;:&apos;),ensure_ascii=False)
+            url = &#39;&#39;
+            result[&#39;code&#39;] = 1
+            result[&#39;msg&#39;] = &#39;只支持GET或者POST请求方式&#39;
+            return json.dumps(result,separators=(&#39;,&#39;,&#39;:&#39;),ensure_ascii=False)
     except Exception :
-        result[&apos;code&apos;] = 2
-        result[&apos;msg&apos;] = &apos;爬虫系统获取请求参数出现异常&apos;
-        return json.dumps(result,separators=(&apos;,&apos;,&apos;:&apos;),ensure_ascii=False)
-
+        result[&#39;code&#39;] = 2
+        result[&#39;msg&#39;] = &#39;爬虫系统获取请求参数出现异常&#39;
+        return json.dumps(result,separators=(&#39;,&#39;,&#39;:&#39;),ensure_ascii=False)
+    
     #根据URL进行数据的爬取
     if(url.startswith(&quot;https://detail.tmall.com&quot;)):
         #天猫
-        result[&apos;data&apos;] = spiderTianMaoWithSelenuim(url)
-        #result[&apos;data&apos;] = spiderTianMao(url)
-    return json.dumps(result,separators=(&apos;,&apos;,&apos;:&apos;),ensure_ascii=False)
+        result[&#39;data&#39;] = spiderTianMaoWithSelenuim(url)
+        #result[&#39;data&#39;] = spiderTianMao(url)
+    return json.dumps(result,separators=(&#39;,&#39;,&#39;:&#39;),ensure_ascii=False)
 
 #通过接口来爬取天猫
 def spiderTianMao(url):
-    splitList = url.split(&apos;&amp;&apos;)
-    pId = splitList[0].split(&apos;id=&apos;)[1]
+    splitList = url.split(&#39;&amp;&#39;)
+    pId = splitList[0].split(&#39;id=&#39;)[1]
     detailUrl = &quot;https://mdskip.taobao.com/core/initItemDetail.htm?isUseInventoryCenter=false&amp;cartEnable=true&amp;service3C=false&amp;isApparel=true&amp;isSecKill=false&amp;tmallBuySupport=true&amp;isAreaSell=false&amp;tryBeforeBuy=false&amp;offlineShop=false&amp;itemId=&quot;+ pId +&quot;&amp;showShopProm=false&amp;isPurchaseMallPage=false&amp;isRegionLevel=false&amp;household=false&amp;sellerPreview=false&amp;queryMemberRight=true&amp;addressLevel=2&amp;isForbidBuyItem=false&quot;
-#     detailUrl = detailUrl.format({&apos;id&apos;:pId})
+#     detailUrl = detailUrl.format(&#123;&#39;id&#39;:pId&#125;)
     print detailUrl
-    headers={
-        &apos;Referer&apos;:url,
-        &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36&apos;,
-        &apos;Accept-Language&apos;:&apos;zh-CN,zh;q=0.9&apos;,
-        &apos;Accept-Encoding&apos;:&apos;gzip,deflate,br&apos;
-    }
+    headers=&#123;
+        &#39;Referer&#39;:url,
+        &#39;User-Agent&#39;:&#39;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36&#39;,
+        &#39;Accept-Language&#39;:&#39;zh-CN,zh;q=0.9&#39;,
+        &#39;Accept-Encoding&#39;:&#39;gzip,deflate,br&#39;
+    &#125;
     response = requests.get(url=detailUrl,headers=headers,verify=False)
     print response
     print response.content
     return response.content
-
+    
 
 #通过selenuim爬取天猫数据
 def spiderTianMaoWithSelenuim(url):
-    browser = webdriver.PhantomJS(service_args=[&apos;--load-images=false&apos;,&apos;--disk-cache=true&apos;,&apos;--ignore-ssl-errors=true&apos;, &apos;--ssl-protocol=TLSv1&apos;])
+    browser = webdriver.PhantomJS(service_args=[&#39;--load-images=false&#39;,&#39;--disk-cache=true&#39;,&#39;--ignore-ssl-errors=true&#39;, &#39;--ssl-protocol=TLSv1&#39;])
     browser.set_window_size(1400,900)
     browser.get(url)
     #time.sleep(2)
-    browser.find_element_by_xpath(&apos;//*[@id=&quot;sufei-dialog-close&quot;]&apos;).click()
+    browser.find_element_by_xpath(&#39;//*[@id=&quot;sufei-dialog-close&quot;]&#39;).click()
     browser.execute_script(&quot;window.scrollBy(0,3000)&quot;)
     browser.execute_script(&quot;window.scrollBy(0,-3000)&quot;)
     price = WebDriverWait(browser,20).until(
-        EC.presence_of_element_located((By.XPATH,&apos;//*[@id=&quot;J_StrPriceModBox&quot;]/dd/span&apos;))
+        EC.presence_of_element_located((By.XPATH,&#39;//*[@id=&quot;J_StrPriceModBox&quot;]/dd/span&#39;))
     )
     priceValue = price.text
     print priceValue
     browser.close()
     return priceValue
 
-if __name__ == &apos;__main__&apos;:
+if __name__ == &#39;__main__&#39;:
     app.run()
 </code></pre>
-        </section>
-    </article>
+
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#scrapy的命令"><span class="toc-number">1.</span> <span class="toc-text">scrapy的命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用selenium爬取天猫商品详情页的价格"><span class="toc-number"></span> <span class="toc-text">用selenium爬取天猫商品详情页的价格</span></a>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2018/11/05/2018-11-05-mybatis/">
+                    mybatis相关知识点的总结
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2018/08/20/2018-08-20-kafka-merkdown/">      
+                    kafka学习笔记
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

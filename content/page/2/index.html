@@ -1,405 +1,867 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+    
+    
+    
+    
+    <title>
+          
+            水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
-          
-            <a href="/content/" class="item-link">首页</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/about" class="item-link">关于</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
-  </div>
-</header>
-
-  <main id='index'>
-  <div class="posts-list">
-    
-      <section>
-        <a href="/content/2019/05/29/2019-05-29-document/">
-          <h3 class='post-head'>
-            常用官方文档
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年05月29日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/其他/">其他</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2019/05/01/2019-05-01-coderebuild/">
-          <h3 class='post-head'>
-            代码重构的思考
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年05月01日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2019/04/21/2019-04-21-pattern/">
-          <h3 class='post-head'>
-            总结一下我使用过的设计模式
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年04月21日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2019/03/20/2019-03-20-elasticsearch/">
-          <h3 class='post-head'>
-            Elasticsearch实践总结
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年03月20日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/存储/">存储</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2019/02/20/2019-02-20-gailv/">
-          <h3 class='post-head'>
-            神奇的本福德定律
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年02月20日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2019/01/20/2019-01-20-ignite/">
-          <h3 class='post-head'>
-            ignite实战总结
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年01月20日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2018/12/09/2018-12-09-jvm6/">
-          <h3 class='post-head'>
-            老鸟眼中的JVM知识体系-常用JVM参数总结和调优经验
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月09日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2018/12/08/2018-12-10-jvm7/">
-          <h3 class='post-head'>
-            老鸟眼中的JVM知识体系(6)-调试工具
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月08日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2018/12/08/2018-12-08-jvm5/">
-          <h3 class='post-head'>
-            老鸟眼中的JVM知识体系(5)-字节码
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月08日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/content/2018/12/06/2018-12-06-jvm3/">
-          <h3 class='post-head'>
-            老鸟眼中的JVM知识体系(3)-垃圾回收
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <blockquote>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年12月06日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/java/">java</a>
-  </div>
-
-
-
-          
-          
-        </div>
-      </section>
-    
-  </div>
-  <aside>
-    
-    
-    
-      <div class="categories">
-        <h1>
-          文章分类
-        </h1>
-        <div class="content">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/content/categories/Excel/">Excel</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/JDK源码/">JDK源码</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/MQ/">MQ</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/excel/">excel</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/life/">life</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/life在/">life在</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/mysql/">mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/redis/">redis</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/ruby/">ruby</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/tool/">tool</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/vi/">vi</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/其他/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/存储/">存储</a></li><li class="category-list-item"><a class="category-list-link" href="/content/categories/算法/">算法</a></li></ul>
-        </div>
-      </div>
-    
-    
-  </aside>
-</main>
-
-  <div class="paging">
-  <div class="paging-container">
-    
-    <div class='page-prev'>
-      <a href="/content/">上一页</a>
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
     </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
     
+        <v-list id="sub-menu" class="font-weight-medium" dense>
+            
+                
+                    <v-list-item href="/content/categories/java/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="7" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>java</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E6%9D%82%E9%A1%B9/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="11" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>杂项</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E5%AD%98%E5%82%A8/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="8" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>存储</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/linux/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>linux</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="4" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>中间件</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>所思所想</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/life/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>life</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="30" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>编程语言</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E5%B7%A5%E5%85%B7/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="5" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>工具</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/python/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>python</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/%E7%AE%97%E6%B3%95/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>算法</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+        </v-list>    
     
-    <div class='page-next'>
-      <a href="/content/page/3/">下一页</a>
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
     </div>
-    
-  </div>
 </div>
 
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
+          
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
+          
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 index-card">
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-07-10
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/07/10/2019-07-10-coredump01/">一次生产故障的总结</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+一个月以前我负责的系统突然发生了两次严重的宕机事故，现在终于有时间静下来做一下总结了。
+
+事故经过事故的经过比较复杂，这里简单的概括一下大致是这样的：MMKT（系统的代号）由3个服务节点组成，在6月14日突然其中一个节点宕机，接着另外2个节点依次宕机。当时我们尝试SSH连接进服务器排查原因。现象是这样的： 
+1-bash: fock : Cannot allocate memory.
+运维工程师给出的解释是服务器操作系统core dump了，为了尽快恢复服务，联系数据中心对服务器进行了强制重启，服务得以恢复。服务恢复以后开始进行原因调查，通过查询监控数据发现，MMKT进程并没有什么异常...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/07/10/2019-07-10-coredump01/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-06-06
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/06/06/2019-06-06-matplotlib/">matplotlib学习笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+最近在学习机器学习的过程中接触到了matplotlib，感觉非常有趣，但是这个绘图库的学习成本还是比较高的，知识点很多，很容易遗忘，这里记录一下自己的理解，方便复习
+
+matplotlib是什么matplotlib是python的一个2D绘图库，提供了类似MATLAB的API
+matplotlib的用法figurefigure相当于画布，可以设置背景颜色，尺寸
+ 123import matplotlib.pyplot as pltfigure = plt.figure(facesize=(100,100),facecolor=&#x27;blue&#x27;) # 设置一个画布，尺寸是...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/06/06/2019-06-06-matplotlib/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-06-06
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/06/06/2019-06-10-python-lib/">python2和python3以及python常用工具包的那些事</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+python 可以大幅度的提升我们工作的效率，自己写的一些python小工具非常实用，但是经常面临一个问题，自己的电脑环境换了之后python的包就需要安装，这时候搞一个环境就比较麻烦，这里总结一下自己经常用的一些包的安装和使用方法
+
+python2和python3曾经看过一个段子：“python2和python3的关系，就是java和javaScript的关系”，虽然有点夸张，但是也充分说明了python2和python3之间的巨大差异。
+同时使用python2和python3，我推荐使用py的方式，因为这是python官方推荐的方式
+
+py -2 test.py  #使用pytho...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/06/06/2019-06-10-python-lib/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-06-05
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/06/05/2019-06-05-books/">我的书单</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+平时发现的好书在这里整理成册，并附上简单的书评
+
+《醉汉的脚步》2019年3月已经看完，这是一本讲述随机性的书，对于理解混沌，理解概率论帮助很大。要是我在高中的时候能够看到这本书该多好。
+《创新者的窘境》2019年4月已经看完，很多观点在多个地方看到过，没有太大的感觉，印象不深。
+《深入理解计算机系统》还没有看完。程序员进阶必看书。
+《冰与火之歌》2019年12月已经看完，是迄今为止看过的最长的国外小说。相比电视剧，书中多了很多精彩的细节，比如武器的名字：寒冰，碎心，长爪 等，不知道为什么，看这本书的时候，我总是想起《红楼梦》。书中没有什么华丽的辞藻，但是平淡的语言却构建出了一个精彩纷...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/06/05/2019-06-05-books/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-05-29
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/05/29/2019-05-29-document/">常用官方文档</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+经常需要查询有些官方网站的文档，这里进行一下汇总，方便平时查阅。以前走了不少弯路，总是轻信网友的结论，吃过很多次亏之后才发现，原来真相就在那里，就在官网上。
+
+MySql 官方文档
+JVM 官方参数解释
+JVM 优秀的总结
+JDK8 官方文档
+tensorflow 官网
+Hibenate-validate 官方文档
+Excel 官方文档
+numPy 官网
+numPy 官网快速入门
+numPy 官网全面入门
+Python 官方文档
+matplotlib 官网
+
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/05/29/2019-05-29-document/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-05-01
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/05/01/2019-05-01-coderebuild/">代码重构的思考</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+总结一下有关代码重构的思考和实践经验
+
+为什么大部分系统都会越来越乱这里所说的系统不仅仅是指软件系统，可以是一个抽象的宏观的概念。比如硬件系统，社会组织。
+整理干净的房间，过一段时间就会变的凌乱不堪
+一辆崭新的汽车，使用几年之后会变的老化，部件损坏,落满灰尘
+一个团队，随着人数的增长，管理起来会越来越困难
+那么到底是为什么呢？
+热力学第二定律这是 定律 不是 定理 ，这是我们宇宙的根本法则。我上高中的时候，学到这个定律的时候，老师只是轻描淡写的进行介绍和解释，现在回想起来真是觉得可惜。这个定律最开始是热力学中的概念，指热量不会自发的从低温物体转移至高温物体，除非有外界做功。后来人们在此...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/05/01/2019-05-01-coderebuild/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-04-21
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/04/21/2019-04-21-pattern/">总结一下我使用过的设计模式</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+设计模式是java的精髓所在，深刻的体现了抽象和封装。能否运用好设计模式是衡量一个java程序员水平的重要分水岭，是衡量设计能力的一个综合指标。这里总结一下实际使用过的设计模式。
+
+到底什么是设计模式设计模式并不是软件领域特有的东西，而是一个跨领域的概念。从某种程度上讲，软件其实是对硬件的模拟，设计模式也是从硬件领域借鉴来一系列最佳实践。设计模式存在的意义就是实现代码的高内聚 ，低耦合 ，可扩展 ，实现代码逻辑的优雅
+软件经过多年的发展，前人总结一套设计思想和方法，最终提炼出了5大设计原则和26种设计模式，26种设计模式又可以分成三大类。
+五大设计原则
+开闭原则（Open Close ...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/04/21/2019-04-21-pattern/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-03-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/03/20/2019-03-20-elasticsearch/">Elasticsearch实践总结</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+我最早听说 ElasticSearch 是在2014年初，记得当时还是在华为做外包，在开会的时候，有人提出有一个数据查询的需求做不到，原因是数据库的单表数据量达到了2千万，儿查询又需要多表关联。这是，架构师提出使用ElasticSearch来做。
+
+索引存储数据到ES的行为就叫 索引
+
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/03/20/2019-03-20-elasticsearch/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-02-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/02/20/2019-02-20-gailv/">神奇的本福德定律</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+《醉汉的脚步》是一本讲述随机性相关知识的书籍，其中有一个非常有趣的知识点：本福德定律
+
+本福特定律，也称为本福德法则，说明一堆从实际生活得出的数据中，
+以1为首位数字的数的出现机率约为总数的三成，接近期望值1/9的3倍，
+推广来说，越大的数字，以它为首几位的数出现的机率就越低；
+精确地数学表述为：在b进位制中，以数n起头的数出现的机率为logb(n + 1) − logb(n)
+
+在十进制中，首位数字出现的概率为：
+d    1        2        3        4        5        6        7        8        9
+p    30...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/02/20/2019-02-20-gailv/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-01-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/01/20/2019-01-20-ignite/">ignite实战总结</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+最近所负责的项目使用了ignite，系统的性能提升了3倍，这里记录一下ignite使用过程中的一些知识点
+
+为什么要使用ignite 首先，为什么要使用ignite呢？我们公司主要是为了解决redis存在的高可用问题而引入了ignite。在使用的过程中发现，ignite不仅有优秀的缓存特性，还有其他异常强大的功能，刚好能解决平时系统遇到的一些棘手的问题
+
+ignite的数据网格。可以实现redis的功能，同时ignite的内存固化以及数据的分片和备份机制可以实现数据的安全
+ignite的计算网格和分布式线程池。可以实现”减少数据传输，发布计算任务”的模式来最大限度的发挥集群的计算能力
+...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/01/20/2019-01-20-ignite/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+   
+</v-card>  
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
+  <div id="pagination" class="text-center">
+    <v-pagination 
+      v-model="currentPage" 
+      :length=10 
+      @input="PageChange" 
+      prev-icon="chevron_left"
+      next-icon="chevron_right"
+      color="secondary"
+    ></v-pagination>
   </div>
-</footer>
+         
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
+
+
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
 
 
 

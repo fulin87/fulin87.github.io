@@ -1,81 +1,262 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>python基础知识点之常用数据库API | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            python基础知识点之常用数据库API | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2016/11/24/2016-11-24-python7/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DB-API%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">DB-API简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DB-API%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">DB-API详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.1.</span> <span class="toc-text">模块接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1-connection"><span class="toc-number">2.2.</span> <span class="toc-text">数据库连接对象(connection)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B8%E6%A0%87%E5%AF%B9%E8%B1%A1%EF%BC%88cursor%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">游标对象（cursor）</span></a></li></ol></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2016/11/24/2016-11-24-python7/">python基础知识点之常用数据库API</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2016-11-24
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>python基础知识点之常用数据库API</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年11月24日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/python/">python</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>记录一下学习python的过程中与数据库有关的知识点</p>
 </blockquote>
 <h2 id="DB-API简介"><a href="#DB-API简介" class="headerlink" title="DB-API简介"></a>DB-API简介</h2><p> 一个处理 Python 数据库事务的特殊兴趣小组（SIG，special interest group）为了统一python访问数据库的接口，制定了一个规范<code>DB-API</code>,这套规范定义了一系列必须的对象和数据库存取方式, 以便为各种各样的底层数据库系统和多种多样的数据库接口程序提供一致的访问接口</p>
 <p> 通过DB-API规范访问数据库的流程如下：</p>
-<p> <img src="/content/image/python7.PNG" alt=""></p>
+<p> <img src="/content/image/python7.PNG"></p>
 <h2 id="DB-API详解"><a href="#DB-API详解" class="headerlink" title="DB-API详解"></a>DB-API详解</h2><p> <strong>DB-API对以下几个方面做了规范</strong></p>
 <ul>
 <li>模块接口</li>
@@ -84,11 +265,12 @@
 </ul>
 <h3 id="模块接口"><a href="#模块接口" class="headerlink" title="模块接口"></a>模块接口</h3><p> 数据库的访问是通过连接对象（connection objects）来实现的。程序模块中必须提供以下形式的连接对象构造函数：</p>
 <pre><code>connect(parameters...)
-</code></pre><p> 数据库连接对象的构造函数，返回值为Connection对象实例。 由于目的数据库不同，函数接收数量不等的一些参数。</p>
+</code></pre>
+<p> 数据库连接对象的构造函数，返回值为Connection对象实例。 由于目的数据库不同，函数接收数量不等的一些参数。</p>
 <p> 模块中必须定义下面这些模块级的属性：</p>
 <pre><code>apilevel
     字符串常量，表明支持的DB API版本。
-    目前只允许取值&apos;1.0&apos;和&apos;2.0&apos;。
+    目前只允许取值&#39;1.0&#39;和&#39;2.0&#39;。
     如果没有定义本常量，默认为DB-API 1.0DB-API
 
 threadsafety    
@@ -98,7 +280,7 @@ threadsafety
     1     线程可以共享模块，但是不能共享连接对象（connections）。
     2     线程可以共享模块和连接对象。
     3     线程安全，线程间可以共享模块、连接对象以及游标对象
-
+    
     上文中共享的意思是两个线程在没有使用互斥信号
     （mutex semaphore）锁的情况下， 同时使用一个资源。
 
@@ -109,11 +291,11 @@ threadsafety
 paramstyle        
     字符串常量声明模块使用的SQL语句中的参数引出方式。可能的取值如下
 
-    &apos;qmark&apos;         问号方式，例如：&apos;...WHERE name=?&apos;
-    &apos;numeric&apos;       序数方式，例如：&apos;...WHERE name=:1&apos;
-    &apos;named&apos;         命名方式，例如：&apos;...WHERE name=:name&apos;
-    &apos;format&apos;        通用方式例如：&apos;...WHERE name=%s&apos;
-    &apos;pyformat&apos;      python扩展方式例如：&apos;...WHERE name=%(name)s&apos;
+    &#39;qmark&#39;         问号方式，例如：&#39;...WHERE name=?&#39;
+    &#39;numeric&#39;       序数方式，例如：&#39;...WHERE name=:1&#39;
+    &#39;named&#39;         命名方式，例如：&#39;...WHERE name=:name&#39;
+    &#39;format&#39;        通用方式例如：&#39;...WHERE name=%s&#39;
+    &#39;pyformat&#39;      python扩展方式例如：&#39;...WHERE name=%(name)s&#39;
 
 Warning 
     当有严重警告时触发，例如插入数据是被截断等等。
@@ -123,7 +305,8 @@ Error
     这应该是警告以外所有其他错误类的基类。你可以使用这个类在单一
     的‘except’语句中捕捉所有的错误。警告（Warnings）不应认为是错误，
     因此不应该以此类作为基类，而只应该以Python StandardError作为基类。
-</code></pre><h3 id="数据库连接对象-connection"><a href="#数据库连接对象-connection" class="headerlink" title="数据库连接对象(connection)"></a>数据库连接对象(connection)</h3><p> 连接对象应该具有下面的方法：</p>
+</code></pre>
+<h3 id="数据库连接对象-connection"><a href="#数据库连接对象-connection" class="headerlink" title="数据库连接对象(connection)"></a>数据库连接对象(connection)</h3><p> 连接对象应该具有下面的方法：</p>
 <pre><code>close()
     马上关闭数据连接（而不是当__del__方法被调用的时候）。
 
@@ -152,7 +335,8 @@ rollback()
 cursor()
     方法返回给定连接上建立的游标对象（Cursor Object）。如果数据库
     没有提供对应的游标对象，那么将由程序来模拟实现游标功能
-</code></pre><h3 id="游标对象（cursor）"><a href="#游标对象（cursor）" class="headerlink" title="游标对象（cursor）"></a>游标对象（cursor）</h3><p>游标对象表示数据库游标，游标用来管理获取结果操作的上下文对象。同一个连接对象创建的游标对象不是彼此隔离的，也就是说一个游标对象对数据库造成的变化将会对于其他游标对象立即可见。而不同的连接对象创建的游标，则可能是隔离的也可能是非隔离的，这取决于数据库对事务的支持的实现（参见连接对象的.rollback()和.commit()方法）。</p>
+</code></pre>
+<h3 id="游标对象（cursor）"><a href="#游标对象（cursor）" class="headerlink" title="游标对象（cursor）"></a>游标对象（cursor）</h3><p>游标对象表示数据库游标，游标用来管理获取结果操作的上下文对象。同一个连接对象创建的游标对象不是彼此隔离的，也就是说一个游标对象对数据库造成的变化将会对于其他游标对象立即可见。而不同的连接对象创建的游标，则可能是隔离的也可能是非隔离的，这取决于数据库对事务的支持的实现（参见连接对象的.rollback()和.commit()方法）。</p>
 <p>游标对象应具有以下的方法和属性：</p>
 <pre><code>description 
     这是一个只读属性，是7个项目组成的tulip的序列。
@@ -167,7 +351,7 @@ cursor()
         scale, 
         null_ok
     )
-
+    
     其中，前两个项目(name and type_code)时必须的，其他的五项是可选的。
     如果没有意义可以设置为None。
 
@@ -178,16 +362,16 @@ cursor()
 
 rowcount 
     这是一个只读属性
-
+    
     描述的是最后一次数据库操作影响的数据行数
     （执行.execute系列方法）。 可以是数据查询语句（DQL），
-    比如&apos;select&apos;等返回的数据行，也可以是数据操纵语句（DML ）
-    比如&apos;update&apos; 和&apos;insert&apos;语句等所影响的数据行。
+    比如&#39;select&#39;等返回的数据行，也可以是数据操纵语句（DML ）
+    比如&#39;update&#39; 和&#39;insert&#39;语句等所影响的数据行。
 
     如果还没有执行过任何语句，或者操作本身影响的函数由于数据访问接口的原因不能检测到。则本属性的值为-1
-
+    
     注：将来的版本有可能重新定义后一种情况，使其取值为空（None）而不是-1。
-
+        
 callproc(procname[,parameters])
     (由于并非每种数据库都支持存储过程，此方法是可选的)
 
@@ -210,110 +394,110 @@ execute(operation[,parameters])
     准备和执行数据库操作（查询或其他命令）。
     所提供参数将会被绑定到语句中的变量。变量的定义和数据库模块有关。
     （请参见模块的paramstyle属性的描述）。
-
+    
     游标对象将会保留这个操作的引用，如果一个后续的相同的操作被调用，
     游标对象将会以此来进行优化。当有相同的操作调用（不同的参数变量被传递）
     时，这是最为有效的优化。
-
+    
     一项数据库操作，为了获得最大的执行效率，最好先期使用方法.setinputsizes() 来
     指定参数的类型和大小。执行时实际给出的参数和预定义的不同也是合法的，模块的实现
     需要容忍这个问题，即使以效率的损失为代价。
-
+    
     参数可以以tuples的tuple或list的形式提供，例如当在一次调用中插入多行数据。但是
     这种调用应被认为是抛弃的不建议使用，应该使用专用的方法.executemany() 。
-
+    
     没有对返回值进行明确界定。
 
 executemany(operation,seq_of_parameters) 
     准备数据库操作（查询或其他命令），然后以序列的序列形式的函数
     来执行该操作。
-
+    
     模块开发这可以自由选择是转化为一系列的.execute() 方法调用，还是以
     数组操作的形式，以便使数据库把这个序列的操作作为一个整体。
-
+    
     使用此方法，可能产生一个或多个由未知的行为构成的结果集。
     建议模块作者（而不是要求）当检测到一次调用已经产生结果集时抛出例外。
-
+    
     对于.execute()方法的描述同样可适于此方法。
-
+    
     返回值未定义。
 
 fetchone()
     从一查询结果集中获取下一行数据，返回值为一个值的序列，如果没有更多数据
     了则返回None。
-
+    
     如果上次的.execute系列方法的调用没有生成任何结果集()或还没有进行任何数据
     库操作的调用，则调用此方法将抛出例外（Error或其子类）。
 
 .fetchmany([size=cursor.arraysize])
-
+      
     Fetch the next set of rows of a query result, returning a
     sequence of sequences (e.g. a list of tuples). An empty
     sequence is returned when no more rows are available.
-
+    
     The number of rows to fetch per call is specified by the
-    parameter.  If it is not given, the cursor&apos;s arraysize
+    parameter.  If it is not given, the cursor&#39;s arraysize
     determines the number of rows to be fetched. The method
     should try to fetch as many rows as indicated by the size
     parameter. If this is not possible due to the specified
     number of rows not being available, fewer rows may be
     returned.
-
+    
     An Error (or subclass) exception is raised if the previous
     call to .execute*() did not produce any result set or no
     call was issued yet.
-
+    
     Note there are performance considerations involved with
     the size parameter.  For optimal performance, it is
     usually best to use the arraysize attribute.  If the size
     parameter is used, then it is best for it to retain the
     same value from one .fetchmany() call to the next.
-
+        
 fetchall() 
 
     Fetch all (remaining) rows of a query result, returning
     them as a sequence of sequences (e.g. a list of tuples).
-    Note that the cursor&apos;s arraysize attribute can affect the
+    Note that the cursor&#39;s arraysize attribute can affect the
     performance of this operation.
-
+    
     An Error (or subclass) exception is raised if the previous
     call to .execute*() did not produce any result set or no
     call was issued yet.
-
+        
 nextset() 
-
+      
     (This method is optional since not all databases support
     multiple result sets. [3])
-
+    
     This method will make the cursor skip to the next
     available set, discarding any remaining rows from the
     current set.
-
+    
     If there are no more sets, the method returns
     None. Otherwise, it returns a true value and subsequent
     calls to the fetch methods will return rows from the next
     result set.
-
+    
     An Error (or subclass) exception is raised if the previous
     call to .execute*() did not produce any result set or no
     call was issued yet.
 
 arraysize
-
+      
     This read/write attribute specifies the number of rows to
     fetch at a time with .fetchmany(). It defaults to 1
     meaning to fetch a single row at a time.
-
+    
     Implementations must observe this value with respect to
     the .fetchmany() method, but are free to interact with the
     database a single row at a time. It may also be used in
     the implementation of .executemany().
-
+        
 setinputsizes(sizes)
-
+      
     This can be used before a call to .execute*() to
-    predefine memory areas for the operation&apos;s parameters.
-
+    predefine memory areas for the operation&#39;s parameters.
+    
     sizes is specified as a sequence -- one item for each
     input parameter.  The item should be a Type Object that
     corresponds to the input that will be used, or it should
@@ -321,33 +505,34 @@ setinputsizes(sizes)
     parameter.  If the item is None, then no predefined memory
     area will be reserved for that column (this is useful to
     avoid predefined areas for large inputs).
-
+    
     This method would be used before the .execute*() method
     is invoked.
-
+    
     Implementations are free to have this method do nothing
     and users are free to not use it.
-
+        
 setoutputsize(size[,column])
-
+      
     Set a column buffer size for fetches of large columns
     (e.g. LONGs, BLOBs, etc.).  The column is specified as an
     index into the result sequence.  Not specifying the column
     will set the default size for all large columns in the
     cursor.
-
+    
     This method would be used before the .execute*() method
     is invoked.
-
+    
     Implementations are free to have this method do nothing
     and users are free to not use it.
-</code></pre><p>##sqlite3连接实例</p>
+</code></pre>
+<p>##sqlite3连接实例</p>
 <pre><code>&gt;&gt;&gt; import sqlite3
-&gt;&gt;&gt; conn = sqlite3.connect(r&apos;D:\test.db&apos;)
+&gt;&gt;&gt; conn = sqlite3.connect(r&#39;D:\test.db&#39;)
 &gt;&gt;&gt; cursor = conn.cursor()
-&gt;&gt;&gt; cursor.execute(&apos;create table user (id varchar(20) primary key,name varchar(20))&apos;)
+&gt;&gt;&gt; cursor.execute(&#39;create table user (id varchar(20) primary key,name varchar(20))&#39;)
 &lt;sqlite3.Cursor object at 0x03119BE0&gt;
-&gt;&gt;&gt; cursor.execute(&apos;insert into user (id,name) values(\&apos;1\&apos;,\&apos;Michael\&apos;)&apos;)
+&gt;&gt;&gt; cursor.execute(&#39;insert into user (id,name) values(\&#39;1\&#39;,\&#39;Michael\&#39;)&#39;)
 &lt;sqlite3.Cursor object at 0x03119BE0&gt;
 &gt;&gt;&gt; cursor.rowcount
 1
@@ -355,22 +540,23 @@ setoutputsize(size[,column])
 &gt;&gt;&gt; conn.commit()
 &gt;&gt;&gt; conn.close()
 
-&gt;&gt;&gt; conn = sqlite3.connect(r&apos;D:\test.db&apos;)
+&gt;&gt;&gt; conn = sqlite3.connect(r&#39;D:\test.db&#39;)
 &gt;&gt;&gt; curo = conn.cursor()
-&gt;&gt;&gt; curo.execute(&apos;select * from user&apos;)
+&gt;&gt;&gt; curo.execute(&#39;select * from user&#39;)
 &lt;sqlite3.Cursor object at 0x03119C20&gt;
 &gt;&gt;&gt; info = curo.fetchall()
 &gt;&gt;&gt; info
-[(u&apos;1&apos;, u&apos;Michael&apos;)]
-</code></pre><p>##mysql连接实例</p>
+[(u&#39;1&#39;, u&#39;Michael&#39;)]
+</code></pre>
+<p>##mysql连接实例</p>
 <pre><code>&gt;&gt;&gt; import MySQLdb
-&gt;&gt;&gt; conn = MySQLdb.connect(host = &apos;xx.xxx.xx.xx&apos;,\
+&gt;&gt;&gt; conn = MySQLdb.connect(host = &#39;xx.xxx.xx.xx&#39;,\
                    port = 3306,\
-                   user = &apos;xxx&apos;,\
-                   passwd = &apos;xxxx&apos;,\
-                   db = &apos;xxx&apos;)
+                   user = &#39;xxx&#39;,\
+                   passwd = &#39;xxxx&#39;,\
+                   db = &#39;xxx&#39;)
 &gt;&gt;&gt; cur = conn.cursor()
-&gt;&gt;&gt; cur.execute(&apos;select * from vc_admin limit 10&apos;)
+&gt;&gt;&gt; cur.execute(&#39;select * from vc_admin limit 10&#39;)
 &gt;&gt;&gt; info = cur.fetchall()
 &gt;&gt;&gt; for i in info:
         print i[0],i[1]
@@ -386,95 +572,76 @@ setoutputsize(size[,column])
 8285 255139
 8287 255140
 </code></pre>
-        </section>
-    </article>
+
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DB-API简介"><span class="toc-number">1.</span> <span class="toc-text">DB-API简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DB-API详解"><span class="toc-number">2.</span> <span class="toc-text">DB-API详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块接口"><span class="toc-number">2.1.</span> <span class="toc-text">模块接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库连接对象-connection"><span class="toc-number">2.2.</span> <span class="toc-text">数据库连接对象(connection)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#游标对象（cursor）"><span class="toc-number">2.3.</span> <span class="toc-text">游标对象（cursor）</span></a></li></ol></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2016/11/26/2016-11-26-uwsgi-python/">
+                    nginx+uwsgi+python+mysql+flask 实战过程
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2016/11/23/2016-11-23-python6/">      
+                    python基础知识点之常用标准模块
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>

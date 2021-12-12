@@ -1,76 +1,257 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  
-    <link rel="icon" href="">
-  
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-  <title>mysql的数据备份和恢复 | 水货程序员的笔记</title>
-  <link rel="stylesheet" href="/content/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
-</head>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/content/css/main.css">
 
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            mysql的数据备份和恢复 | 水货程序员的笔记
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/content/">
-      <span>水货程序员的笔记</span>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/content/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
     </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/content/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/content/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/content/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/content/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/content/2016/09/26/2016-09-26-mysql-log/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%97%A5%E5%BF%97"><span class="toc-number">1.</span> <span class="toc-text">mysql的二进制日志</span></a></li></ol>
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2021 
+                fuliln
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/content/" rel="home">水货程序员的笔记</a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
           
-            <a href="/content/" class="item-link">首页</a>
+            
+            <v-btn icon href="/content/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="/content/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
           
-            <a href="/content/about" class="item-link">关于</a>
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
           
-        </li>
-      
-        <li class="nav-item">
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
           
-            <a href="/content/archives" class="item-link">归档</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/content/tags" class="item-link">标签</a>
-          
-        </li>
-      
-    </ul>
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/content/2016/09/26/2016-09-26-mysql-log/">mysql的数据备份和恢复</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2016-09-26
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2020-12-15
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;<a class="category-link" href="/content/categories/%E5%AD%98%E5%82%A8/">存储</a>
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
   </div>
-</header>
+</div>
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>mysql的数据备份和恢复</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年09月26日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/content/categories/mysql/">mysql</a>
-  </div>
-
-
-
-            
-            
-          </div>
-          <blockquote>
+    
+    
+    
+    
+    <div class="post-content typo">
+        <blockquote>
 <p>数据库的备份和恢复是每个DBA必须掌握的技能。作为开发人员来说，适当的了解，也是有必要的。曾经我就遇到过一个面试官问过我：是否会进行数据库备份和恢复，什么是热备份，什么是冷备份。当然，我不能说这是DBA的工作，只能怪自己学的不够广。当学会了数据库的备份和恢复，再次使用数据库的时候，视野就更开阔了。</p>
 </blockquote>
 <h3 id="mysql的二进制日志"><a href="#mysql的二进制日志" class="headerlink" title="mysql的二进制日志"></a>mysql的二进制日志</h3><p> 说起mysql的备份和恢复，就必须说mysql的二进制日志，它记录的是所有mysql数据库发生变更的信息，因此对数据库非常重要</p>
@@ -84,222 +265,210 @@
 </li>
 <li><p>二进制日志功能配置</p>
 <ul>
-<li><p>开启bin_log日志功能,在my.cnf中修改，在[mysqld]下增加:</p>
-<pre><code>log-bin=/tmp/mysql-log
-binlog_format=mixed
-</code></pre></li>
+<li>开启bin_log日志功能,在my.cnf中修改，在[mysqld]下增加:<pre><code> log-bin=/tmp/mysql-log
+ binlog_format=mixed
+</code></pre>
+</li>
 </ul>
 </li>
 <li><p>查看二进制日志功能是否开启</p>
-<pre><code>mysql&gt; show variables like &apos;%log_bin%&apos;;
-+---------------------------------+----------------------+
-| Variable_name                   | Value                |
-+---------------------------------+----------------------+
-| log_bin                         | ON                   |
-| log_bin_basename                | /tmp/mysql-log       |
-| log_bin_index                   | /tmp/mysql-log.index |
-| log_bin_trust_function_creators | OFF                  |
-| log_bin_use_v1_row_events       | OFF                  |
-| sql_log_bin                     | ON                   |
-+---------------------------------+----------------------+
-6 rows in set
-</code></pre></li>
+<pre><code> mysql&gt; show variables like &#39;%log_bin%&#39;;
+ +---------------------------------+----------------------+
+ | Variable_name                   | Value                |
+ +---------------------------------+----------------------+
+ | log_bin                         | ON                   |
+ | log_bin_basename                | /tmp/mysql-log       |
+ | log_bin_index                   | /tmp/mysql-log.index |
+ | log_bin_trust_function_creators | OFF                  |
+ | log_bin_use_v1_row_events       | OFF                  |
+ | sql_log_bin                     | ON                   |
+ +---------------------------------+----------------------+
+ 6 rows in set
+</code></pre>
+</li>
 <li><p>查看二进制文件的情况</p>
-<pre><code>mysql&gt; show master logs;
-+------------------+-----------+
-| Log_name         | File_size |
-+------------------+-----------+
-| mysql-log.000001 |       143 |
-| mysql-log.000002 |       562 |
-+------------------+-----------+
-2 rows in set
-</code></pre><p> 或者</p>
-<pre><code>mysql&gt; show binary logs;
-+------------------+-----------+
-| Log_name         | File_size |
-+------------------+-----------+
-| mysql-log.000001 |       143 |
-| mysql-log.000002 |       562 |
-+------------------+-----------+
-2 rows in set
-</code></pre></li>
+<pre><code> mysql&gt; show master logs;
+ +------------------+-----------+
+ | Log_name         | File_size |
+ +------------------+-----------+
+ | mysql-log.000001 |       143 |
+ | mysql-log.000002 |       562 |
+ +------------------+-----------+
+ 2 rows in set
+</code></pre>
+<p> 或者</p>
+<pre><code> mysql&gt; show binary logs;
+ +------------------+-----------+
+ | Log_name         | File_size |
+ +------------------+-----------+
+ | mysql-log.000001 |       143 |
+ | mysql-log.000002 |       562 |
+ +------------------+-----------+
+ 2 rows in set
+</code></pre>
+</li>
 <li><p>切换二进制文件</p>
-<pre><code>mysql&gt; flush logs;
-Query OK, 0 rows affected
+<pre><code> mysql&gt; flush logs;
+ Query OK, 0 rows affected
 
-mysql&gt; show binary logs;
-+------------------+-----------+
-| Log_name         | File_size |
-+------------------+-----------+
-| mysql-log.000001 |       143 |
-| mysql-log.000002 |       609 |
-| mysql-log.000003 |       120 |
-+------------------+-----------+
-3 rows in set
-</code></pre></li>
+ mysql&gt; show binary logs;
+ +------------------+-----------+
+ | Log_name         | File_size |
+ +------------------+-----------+
+ | mysql-log.000001 |       143 |
+ | mysql-log.000002 |       609 |
+ | mysql-log.000003 |       120 |
+ +------------------+-----------+
+ 3 rows in set
+</code></pre>
+</li>
 <li><p>删除或者初始化二进制文件</p>
-<pre><code>mysql&gt; reset master;
-Query OK, 0 rows affected
-
-mysql&gt; show binary logs;
-+------------------+-----------+
-| Log_name         | File_size |
-+------------------+-----------+
-| mysql-log.000001 |       120 |
-+------------------+-----------+
-1 row in set
-</code></pre></li>
+<pre><code> mysql&gt; reset master;
+ Query OK, 0 rows affected
+ 
+ mysql&gt; show binary logs;
+ +------------------+-----------+
+ | Log_name         | File_size |
+ +------------------+-----------+
+ | mysql-log.000001 |       120 |
+ +------------------+-----------+
+ 1 row in set
+</code></pre>
+</li>
 <li><p>指定二进制日志失效期</p>
-<pre><code>mysql&gt; show variables like &quot;%expire%&quot;;
-+--------------------------------+-------+
-| Variable_name                  | Value |
-+--------------------------------+-------+
-| disconnect_on_expired_password | ON    |
-| expire_logs_days               | 0     |
-+--------------------------------+-------+
-2 rows in set
+<pre><code> mysql&gt; show variables like &quot;%expire%&quot;;
+ +--------------------------------+-------+
+ | Variable_name                  | Value |
+ +--------------------------------+-------+
+ | disconnect_on_expired_password | ON    |
+ | expire_logs_days               | 0     |
+ +--------------------------------+-------+
+ 2 rows in set
 
-mysql&gt; set global  expire_logs_days=5;
-Query OK, 0 rows affected
-
-mysql&gt; show variables like &quot;%expire%&quot;;
-+--------------------------------+-------+
-| Variable_name                  | Value |
-+--------------------------------+-------+
-| disconnect_on_expired_password | ON    |
-| expire_logs_days               | 5     |
-+--------------------------------+-------+
-2 rows in set
-</code></pre></li>
+ mysql&gt; set global  expire_logs_days=5;
+ Query OK, 0 rows affected
+ 
+ mysql&gt; show variables like &quot;%expire%&quot;;
+ +--------------------------------+-------+
+ | Variable_name                  | Value |
+ +--------------------------------+-------+
+ | disconnect_on_expired_password | ON    |
+ | expire_logs_days               | 5     |
+ +--------------------------------+-------+
+ 2 rows in set
+</code></pre>
+</li>
 <li><p>二进制日志的格式的查看和格式介绍,这里仅做了解,有三种</p>
-<pre><code>mysql&gt; show variables like &apos;%format%&apos;;
-+--------------------------+-------------------+
-| Variable_name            | Value             |
-+--------------------------+-------------------+
-| binlog_format            | MIXED             |
-| date_format              | %Y-%m-%d          |
-| datetime_format          | %Y-%m-%d %H:%i:%s |
-| default_week_format      | 0                 |
-| innodb_file_format       | Antelope          |
-| innodb_file_format_check | ON                |
-| innodb_file_format_max   | Antelope          |
-| time_format              | %H:%i:%s          |
-+--------------------------+-------------------+
-8 rows in set
+<pre><code> mysql&gt; show variables like &#39;%format%&#39;;
+ +--------------------------+-------------------+
+ | Variable_name            | Value             |
+ +--------------------------+-------------------+
+ | binlog_format            | MIXED             |
+ | date_format              | %Y-%m-%d          |
+ | datetime_format          | %Y-%m-%d %H:%i:%s |
+ | default_week_format      | 0                 |
+ | innodb_file_format       | Antelope          |
+ | innodb_file_format_check | ON                |
+ | innodb_file_format_max   | Antelope          |
+ | time_format              | %H:%i:%s          |
+ +--------------------------+-------------------+
+ 8 rows in set
 
-Row : 日志中会记录成每一行数据被修改的形式，然后在 slave 端再对相同的数据进行修改
-Statement ： 每一条会修改数据的 SQL 都会记录到 master 的 bin-log 中。slave 在复制的时候 SQL 进程会解析成和原来 master 端执行过的相同的 SQL 再次执行。
-Mixed : MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 statement 和 row 之间选择一种,相当于前两种的混合。
-</code></pre></li>
+ Row : 日志中会记录成每一行数据被修改的形式，然后在 slave 端再对相同的数据进行修改
+ Statement ： 每一条会修改数据的 SQL 都会记录到 master 的 bin-log 中。slave 在复制的时候 SQL 进程会解析成和原来 master 端执行过的相同的 SQL 再次执行。
+ Mixed : MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 statement 和 row 之间选择一种,相当于前两种的混合。
+</code></pre>
+</li>
 <li><p>查看二进制日志文件的内容</p>
-<pre><code># mysqlbinlog mysql-log.00000
+<pre><code> # mysqlbinlog mysql-log.00000
 
-SET TIMESTAMP=1474882546/*!*/;
-insert into t select * from t
-/*!*/;
-# at 739
-#160926  2:35:46 server id 1  end_log_pos 770 CRC32 0x45bf6de6     Xid = 98
-COMMIT/*!*/;
-# at 770
-#160926  2:35:47 server id 1  end_log_pos 849 CRC32 0xdcad682e     Query    thread_id=1    exec_time=0    error_code=0
-SET TIMESTAMP=1474882547/*!*/;
-BEGIN
-/*!*/;
-# at 849
-#160926  2:35:47 server id 1  end_log_pos 952 CRC32 0x596b7cf9     Query    thread_id=1    exec_time=0    error_code=0
-</code></pre><p> 仔细观察会发现，这里记录了数据库的每一次查询和修改过程，就像数据库的变更记录一样，难怪可以用来恢复数据。</p>
+ SET TIMESTAMP=1474882546/*!*/;
+ insert into t select * from t
+ /*!*/;
+ # at 739
+ #160926  2:35:46 server id 1  end_log_pos 770 CRC32 0x45bf6de6     Xid = 98
+ COMMIT/*!*/;
+ # at 770
+ #160926  2:35:47 server id 1  end_log_pos 849 CRC32 0xdcad682e     Query    thread_id=1    exec_time=0    error_code=0
+ SET TIMESTAMP=1474882547/*!*/;
+ BEGIN
+ /*!*/;
+ # at 849
+ #160926  2:35:47 server id 1  end_log_pos 952 CRC32 0x596b7cf9     Query    thread_id=1    exec_time=0    error_code=0
+</code></pre>
+<p> 仔细观察会发现，这里记录了数据库的每一次查询和修改过程，就像数据库的变更记录一样，难怪可以用来恢复数据。</p>
 </li>
 </ul>
 
-        </section>
-    </article>
+    </div>
+    <!--文末结束语-->
     
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
         
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql的二进制日志"><span class="toc-number">1.</span> <span class="toc-text">mysql的二进制日志</span></a></li></ol>
-        </div>
+            <div class="post-nav-button float-left">
+                <v-icon>chevron_left</v-icon>
+                <a class="font-weight-bold text-left" href="/content/2016/09/27/2016-09-27-mysql-right/">
+                    mysql中sql优化的常识总结
+                </a>
+            </div>
+              
+          
+            <div class="post-nav-button float-right">
+                <a class="font-weight-bold text-right" href="/content/2016/09/26/2016-09-26-job/">      
+                    全栈还是专攻，这是一个问题
+                </a>
+                <v-icon>chevron_right</v-icon>
+            </div>
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2021 fuliln</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
     
-  </aside>
-</main>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/content/js/main.js"></script>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/content/lib/in-view.min.js"></script>
-<script src="/content/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
 
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
 
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
-      
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
-
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.js"></script>
 
 
 </body>
