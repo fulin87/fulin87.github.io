@@ -150,22 +150,6 @@
             </v-list-item-content>
             </v-list-item>
         
-            
-            <v-list-item href="https://garybear.cn/" link>
-            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                我的博客
-            </v-list-item-content>
-            </v-list-item>
-        
-            
-            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
-            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                说明文档
-            </v-list-item-content>
-            </v-list-item>
-        
     </v-list>
     <v-divider></v-divider>
     
@@ -310,23 +294,13 @@
         <div class="footer-social">
             
                 
-                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                <v-btn icon href="/content/fulin87@sina.com" target="_blank">
                     <v-icon>fas fa-envelope</v-icon>
                 </v-btn>
             
                 
-                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                <v-btn icon href="https://github.com/fulin87" target="_blank">
                     <v-icon>fab fa-github</v-icon>
-                </v-btn>
-            
-                
-                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
-                    <v-icon>fab fa-steam</v-icon>
-                </v-btn>
-            
-                
-                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
-                    <v-icon>fab fa-weibo</v-icon>
                 </v-btn>
             
         </div>
@@ -383,16 +357,6 @@
               <v-icon>account_circle</v-icon>
             </v-btn>
           
-            
-            <v-btn icon href="https://garybear.cn/">
-              <v-icon>rss_feed</v-icon>
-            </v-btn>
-          
-            
-            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
-              <v-icon>insert_drive_file</v-icon>
-            </v-btn>
-          
         </div>
       </div>    
     </div>
@@ -431,6 +395,8 @@
       <div class="index-article-content">
         
           
+
+
 定时任务(Job)是一个非常常见的功能，很多系统都有，但是实现健壮，稳定的定时任务并不是很多人认为的那样那么简单
 
 一个优秀的定时任务应该满足以下这些要求
@@ -442,7 +408,7 @@
 
 分布式环境下的多节点调度定时任务的基本要求是定时运行，但是100%准时只是存在于理想中罢了。将定时任务的调度和具体的业务逻辑分离，保证调度中心的高可用是一个最佳实践
 业务逻辑应该有一个被调度的统一入口，在统一入口做一些公共逻辑的处理，然后分发到具体的任务中执行。也就是使用策略模式。
-运行完毕一定要有信息反馈定时任务很多都是批处理任务，异步...
+运行完毕一定要有信息反馈定时任务很多都是批处理任务，...
         
       </div>
       
