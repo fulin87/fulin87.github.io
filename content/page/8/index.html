@@ -138,7 +138,7 @@
             <v-list-item href="/content/archives/" link>
             <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
             <v-list-item-content>
-                归档
+                Archives
             </v-list-item-content>
             </v-list-item>
         
@@ -146,7 +146,7 @@
             <v-list-item href="/content/about/" link>
             <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
             <v-list-item-content>
-                关于
+                About
             </v-list-item-content>
             </v-list-item>
         
@@ -287,6 +287,30 @@
                     </v-list-item>
                 
             
+                
+                    <v-list-item href="/content/categories/go/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>go</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/excel/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>excel</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
         </v-list>    
     
 
@@ -308,7 +332,7 @@
         <div class="footer-content">
             
                 <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
                 </span>
                 <br>
             
@@ -376,6 +400,93 @@
         <v-row no-gutters>
           <v-col cols="auto">
             <div class="index-article-header-date font-weight-medium">
+              2016-08-25
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/08/25/2016-08-25-SSH7/">Linux基础知识点七之用户管理</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+Linux的用户管理是重要的基础知识，必须全面掌握。
+
+为什么要进行用户管理 Linux是个多用户多任务的分时操作系统，所以一个要使用系统资源的用户都必须先向系统管理员申请一个账号，然后以这个账号的身份进入系统。用户的账号一方面能帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也能帮助用户组织文件，并为用户提供安全性保护。每个用户账号都拥有一个惟一的用户名和用户口令。用户在登录时键入正确的用户名和口令后，才能进入系统和自己的主目录
+与用户管理相关的重要目录用户信息文件：    
+    /etc/passwd
+密码文件：
+    /etc/shadow
+用户...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/08/25/2016-08-25-SSH7/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2016-08-24
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2016/08/24/2016-08-24-SSH6/">Linux基础知识点六之定时任务</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+Linux的定时任务是必须要掌握的技能，与Linux定时任务相关的知识点，记录在此。
+
+ linux的定时任务分为两类：
+系统自身定期执行的任务/var/log/message
+/var/log/secure
+
+此外还有：
+# ls -l /etc/ | grep cron
+-rw-------.  1 root root      541 Jul 27  2015 anacrontab
+drwxr-xr-x.  2 root root       20 Jun 20 20:35 cron.d
+drwxr-xr-x.  2 root root       62 Jun 20 20:35...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2016/08/24/2016-08-24-SSH6/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
               2016-08-23
             </div>
           </v-col>
@@ -415,7 +526,7 @@ Linux权限管理chmod 管理权限
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/08/23/2016-08-23-SSH5/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/08/23/2016-08-23-SSH5/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -468,7 +579,7 @@ linux使用小技巧
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/08/22/2016-08-22-SSH4/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/08/22/2016-08-22-SSH4/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -509,7 +620,7 @@ CPU(s):             ...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/08/21/2016-08-21-SSH3/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/08/21/2016-08-21-SSH3/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -558,7 +669,7 @@ Linux中一切皆文件，所有一定要对其文件有深入的认识。
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/08/20/2016-08-20-SSH2/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/08/20/2016-08-20-SSH2/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -607,7 +718,7 @@ Linux中一切皆文件，所有一定要对其文件有深入的认识。
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/08/18/2016-08-18-SSH1/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/08/18/2016-08-18-SSH1/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -649,7 +760,7 @@ Linux中一切皆文件，所有一定要对其文件有深入的认识。
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/02/25/2016-02-25-grow/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/02/25/2016-02-25-grow/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -701,7 +812,7 @@ Except...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/02/20/2016-02-20-asList/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/02/20/2016-02-20-asList/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -745,90 +856,7 @@ Except...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/12/01/2015-12-07-leader/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2015-11-20
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2015/11/20/2015-11-20-ruby/">与ruby有关的笔记</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-ruby这几年的名气越来越大了，甚至传说ruby是进行web开发效率最高的语言。前段时间折腾自己的github个人博客，接触到jekyll，进而接触到ruby，就稍微了解了一下。感觉ruby跟python和node这两种语言非常接近。这里记一下自己了解到的一点点有限的知识，防止遗忘。
-
-ruby的包管理工具:gem像ruby，pyhon,node这几种语言都有自己的包管理工具，用起来真的感觉非常的爽，唯一不好的地方是：有时候下载的网速太慢了。遇到这种情况，就需要更换源。
-gem -v                                     #gem版本
-gem sour...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/11/20/2015-11-20-ruby/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2015-11-19
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%B7%A5%E5%85%B7/">工具></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2015/11/19/2015-11-19-vim/">vi的基本配置和常用命令</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-vi或者vim功能的强大是毋庸置疑的。全键盘的操作体验，快速定位，流畅的编辑能力。但是还是有一些细节是需要注意的。这里记录一下我平时使用vim的配置情况和一些容易忘记的命令,方便以后查阅。
-
-vi的基本配置(.vimrc文件的配置)syn on                      &quot;语法支持
-
-&quot;common conf \&#123;\&#123;             通用配置
-
-&quot;设置文件的代码输出
-set encoding=utf-8          
-set termencoding=utf-8     
-set fileencoding...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/11/19/2015-11-19-vim/">阅读更多</v-btn>
+        <v-btn text href="/content/2015/12/01/2015-12-07-leader/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 

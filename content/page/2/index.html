@@ -138,7 +138,7 @@
             <v-list-item href="/content/archives/" link>
             <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
             <v-list-item-content>
-                归档
+                Archives
             </v-list-item-content>
             </v-list-item>
         
@@ -146,7 +146,7 @@
             <v-list-item href="/content/about/" link>
             <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
             <v-list-item-content>
-                关于
+                About
             </v-list-item-content>
             </v-list-item>
         
@@ -287,6 +287,30 @@
                     </v-list-item>
                 
             
+                
+                    <v-list-item href="/content/categories/go/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>go</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/excel/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>excel</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
         </v-list>    
     
 
@@ -308,7 +332,7 @@
         <div class="footer-content">
             
                 <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
                 </span>
                 <br>
             
@@ -376,6 +400,103 @@
         <v-row no-gutters>
           <v-col cols="auto">
             <div class="index-article-header-date font-weight-medium">
+              2019-08-10
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/08/10/2019-08-10-securety/">加密和解密</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+最近在做的一些需求涉及到和几个银行之间的数据交互，而银行对数据安全的要求很高，其中一项就是加密，之前也零零散散的使用过java中的加密和解密，但是没有进行过系统的总结，这里进行一下梳理
+
+java中的加密解密相关的API
+MessageDigest 类支持构建MD5,SHA两种加密算法
+Mac类支持构建HMAC算法
+Cipher类可以构建如DES、AES、Blowfish对称加密算法，以及RSA、DSA、DH等多种非对称加密算法
+Signature类可以用于数字签名和签名验证
+Certificate类可以用于操作证书
+
+
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/08/10/2019-08-10-securety/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-08-10
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/java/">java></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/08/10/2019-10-02-Docker/">Docker笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+记录下自己学习Docker的相关知识点，复习的时候使用
+
+Docker出现的原因一切都得从云计算说起，
+Docker的三大要素
+镜像
+
+Container
+
+仓库
+
+
+Docker是怎样运行的Docker是一个CS架构的系统，docker的守护进程运行在主机上和Client通过socket通讯。
+Docker为什么比VM快
+docker有比虚拟机更少的抽象层
+docker使用的是虚拟机的内核
+cocker新建一个容器的时候不需要重新加载一个操作系统内核
+
+Docker常用命令
+123docker version 	//显示docker的版本信息docker info		//显示dock...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/08/10/2019-10-02-Docker/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
               2019-07-10
             </div>
           </v-col>
@@ -404,7 +525,7 @@
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/07/10/2019-07-10-coredump01/">阅读更多</v-btn>
+        <v-btn text href="/content/2019/07/10/2019-07-10-coredump01/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -443,7 +564,7 @@ matplotlib的用法figurefigure相当于画布，可以设置背景颜色，尺�
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/06/06/2019-06-06-matplotlib/">阅读更多</v-btn>
+        <v-btn text href="/content/2019/06/06/2019-06-06-matplotlib/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -483,7 +604,7 @@ py -2 test.py  #使用pytho...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/06/06/2019-06-10-python-lib/">阅读更多</v-btn>
+        <v-btn text href="/content/2019/06/06/2019-06-10-python-lib/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -523,7 +644,7 @@ py -2 test.py  #使用pytho...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/06/05/2019-06-05-books/">阅读更多</v-btn>
+        <v-btn text href="/content/2019/06/05/2019-06-05-books/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -572,7 +693,7 @@ matplotlib 官网
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/05/29/2019-05-29-document/">阅读更多</v-btn>
+        <v-btn text href="/content/2019/05/29/2019-05-29-document/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -614,7 +735,7 @@ matplotlib 官网
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/05/01/2019-05-01-coderebuild/">阅读更多</v-btn>
+        <v-btn text href="/content/2019/05/01/2019-05-01-coderebuild/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -654,7 +775,7 @@ matplotlib 官网
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/04/21/2019-04-21-pattern/">阅读更多</v-btn>
+        <v-btn text href="/content/2019/04/21/2019-04-21-pattern/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -692,92 +813,7 @@ matplotlib 官网
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/03/20/2019-03-20-elasticsearch/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2019-02-20
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2019/02/20/2019-02-20-gailv/">神奇的本福德定律</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-《醉汉的脚步》是一本讲述随机性相关知识的书籍，其中有一个非常有趣的知识点：本福德定律
-
-本福特定律，也称为本福德法则，说明一堆从实际生活得出的数据中，
-以1为首位数字的数的出现机率约为总数的三成，接近期望值1/9的3倍，
-推广来说，越大的数字，以它为首几位的数出现的机率就越低；
-精确地数学表述为：在b进位制中，以数n起头的数出现的机率为logb(n + 1) − logb(n)
-
-在十进制中，首位数字出现的概率为：
-d    1        2        3        4        5        6        7        8        9
-p    30...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/02/20/2019-02-20-gailv/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2019-01-20
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2019/01/20/2019-01-20-ignite/">ignite实战总结</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-最近所负责的项目使用了ignite，系统的性能提升了3倍，这里记录一下ignite使用过程中的一些知识点
-
-为什么要使用ignite 首先，为什么要使用ignite呢？我们公司主要是为了解决redis存在的高可用问题而引入了ignite。在使用的过程中发现，ignite不仅有优秀的缓存特性，还有其他异常强大的功能，刚好能解决平时系统遇到的一些棘手的问题
-
-ignite的数据网格。可以实现redis的功能，同时ignite的内存固化以及数据的分片和备份机制可以实现数据的安全
-ignite的计算网格和分布式线程池。可以实现”减少数据传输，发布计算任务”的模式来最大限度的发挥集群的计算能力
-...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/01/20/2019-01-20-ignite/">阅读更多</v-btn>
+        <v-btn text href="/content/2019/03/20/2019-03-20-elasticsearch/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 

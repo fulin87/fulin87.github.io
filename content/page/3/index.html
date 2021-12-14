@@ -138,7 +138,7 @@
             <v-list-item href="/content/archives/" link>
             <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
             <v-list-item-content>
-                归档
+                Archives
             </v-list-item-content>
             </v-list-item>
         
@@ -146,7 +146,7 @@
             <v-list-item href="/content/about/" link>
             <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
             <v-list-item-content>
-                关于
+                About
             </v-list-item-content>
             </v-list-item>
         
@@ -287,6 +287,30 @@
                     </v-list-item>
                 
             
+                
+                    <v-list-item href="/content/categories/go/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>go</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/excel/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>excel</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
         </v-list>    
     
 
@@ -308,7 +332,7 @@
         <div class="footer-content">
             
                 <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
                 </span>
                 <br>
             
@@ -376,6 +400,91 @@
         <v-row no-gutters>
           <v-col cols="auto">
             <div class="index-article-header-date font-weight-medium">
+              2019-02-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/02/20/2019-02-20-gailv/">神奇的本福德定律</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+《醉汉的脚步》是一本讲述随机性相关知识的书籍，其中有一个非常有趣的知识点：本福德定律
+
+本福特定律，也称为本福德法则，说明一堆从实际生活得出的数据中，
+以1为首位数字的数的出现机率约为总数的三成，接近期望值1/9的3倍，
+推广来说，越大的数字，以它为首几位的数出现的机率就越低；
+精确地数学表述为：在b进位制中，以数n起头的数出现的机率为logb(n + 1) − logb(n)
+
+在十进制中，首位数字出现的概率为：
+d    1        2        3        4        5        6        7        8        9
+p    30...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/02/20/2019-02-20-gailv/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2019-01-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2019/01/20/2019-01-20-ignite/">ignite实战总结</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+最近所负责的项目使用了ignite，系统的性能提升了3倍，这里记录一下ignite使用过程中的一些知识点
+
+为什么要使用ignite 首先，为什么要使用ignite呢？我们公司主要是为了解决redis存在的高可用问题而引入了ignite。在使用的过程中发现，ignite不仅有优秀的缓存特性，还有其他异常强大的功能，刚好能解决平时系统遇到的一些棘手的问题
+
+ignite的数据网格。可以实现redis的功能，同时ignite的内存固化以及数据的分片和备份机制可以实现数据的安全
+ignite的计算网格和分布式线程池。可以实现”减少数据传输，发布计算任务”的模式来最大限度的发挥集群的计算能力
+...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2019/01/20/2019-01-20-ignite/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
               2018-12-09
             </div>
           </v-col>
@@ -408,7 +517,7 @@ JVM参数设置的方式12345-XX:+&lt;option&gt; 开启JVM的参数-XX:-&lt;opti
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/12/09/2018-12-09-jvm6/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/12/09/2018-12-09-jvm6/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -452,7 +561,7 @@ javap -verbose 命令将会分析该字节码文件的
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/12/08/2018-12-08-jvm5/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/12/08/2018-12-08-jvm5/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -495,7 +604,7 @@ jinfo这是一个被严重低估的命令，不仅可以查看java进程的配�
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/12/08/2018-12-10-jvm7/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/12/08/2018-12-10-jvm7/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -543,7 +652,7 @@ java的内存管理中垃圾回收是很重要的一部分,在java程序员的�
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/12/06/2018-12-06-jvm3/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/12/06/2018-12-06-jvm3/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -593,7 +702,7 @@ Serial收集器不适合使用在服务端，但是可以适当的使用在内�
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/12/06/2018-12-07-jvm4/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/12/06/2018-12-07-jvm4/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -642,7 +751,7 @@ java中的 goto 是唯一一个保留关键字，不让用户使用，JVM暂时�
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/12/05/2018-12-05-jvm2/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/12/05/2018-12-05-jvm2/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -680,7 +789,7 @@ java到底是什么
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/12/04/2018-12-04-jvm/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/12/04/2018-12-04-jvm/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -722,100 +831,7 @@ mybatis的相关历史mybatis的前身是ibatis。ibatis曾经是apache的一个
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/11/05/2018-11-05-mybatis/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2018-10-04
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2018/10/04/2018-10-04-scrapy/">python爬虫框架crapy</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-scrapy是python中最著名的爬虫软件，最近需要写爬虫，所以使用了这个框架，这里记录一下scrapy的知识点
-
-scrapy的命令scrapy startproject demo     //生成一个scrapy项目
-scrapy genspider -l          //列出scrapy的默认爬虫模板
-scrapy genspider -t basic baidu baidu.com //使用basic模板生成一个爬虫
-scrapy check                 //对代码进行检查
-scrapy list                    //列出所有的...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/10/04/2018-10-04-scrapy/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2018-08-20
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2018/08/20/2018-08-20-kafka-merkdown/">kafka学习笔记</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-kafka是什么?
-常用的消息系统有哪些？既然有了那么多的消息系统为什么还需要kafka，其设计目标是什么？
-
-消息系统的分类
-Peer-to-Peer
-
-发布/订阅
- 发布/订阅的解耦能力比p2p模型更强
-
-
-
-消息系统的适用场景
-解耦：各个系统之间通过消息系统这个统一的接口交换数据，无须了解彼此的存在
-冗余：部分消息系统具有持久化能力，可规避消息处理前丢失的风险
-扩展：消息系统是统一的数据接口，各系统可独立扩展
-削峰：消息系统可顶住峰值流量，业务系统可根据处理能力从消息系统中获取并处理对应量的请求
-可恢复：系统中部分组件失效并不会影响整个系统。
-异步通信：在不需要立即处理请求的场景...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/08/20/2018-08-20-kafka-merkdown/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/11/05/2018-11-05-mybatis/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 

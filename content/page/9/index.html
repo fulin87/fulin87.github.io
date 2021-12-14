@@ -138,7 +138,7 @@
             <v-list-item href="/content/archives/" link>
             <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
             <v-list-item-content>
-                归档
+                Archives
             </v-list-item-content>
             </v-list-item>
         
@@ -146,7 +146,7 @@
             <v-list-item href="/content/about/" link>
             <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
             <v-list-item-content>
-                关于
+                About
             </v-list-item-content>
             </v-list-item>
         
@@ -287,6 +287,30 @@
                     </v-list-item>
                 
             
+                
+                    <v-list-item href="/content/categories/go/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>go</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/excel/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>excel</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
         </v-list>    
     
 
@@ -308,7 +332,7 @@
         <div class="footer-content">
             
                 <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
                 </span>
                 <br>
             
@@ -376,6 +400,89 @@
         <v-row no-gutters>
           <v-col cols="auto">
             <div class="index-article-header-date font-weight-medium">
+              2015-11-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2015/11/20/2015-11-20-ruby/">与ruby有关的笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+ruby这几年的名气越来越大了，甚至传说ruby是进行web开发效率最高的语言。前段时间折腾自己的github个人博客，接触到jekyll，进而接触到ruby，就稍微了解了一下。感觉ruby跟python和node这两种语言非常接近。这里记一下自己了解到的一点点有限的知识，防止遗忘。
+
+ruby的包管理工具:gem像ruby，pyhon,node这几种语言都有自己的包管理工具，用起来真的感觉非常的爽，唯一不好的地方是：有时候下载的网速太慢了。遇到这种情况，就需要更换源。
+gem -v                                     #gem版本
+gem sour...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2015/11/20/2015-11-20-ruby/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2015-11-19
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%B7%A5%E5%85%B7/">工具></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2015/11/19/2015-11-19-vim/">vi的基本配置和常用命令</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+vi或者vim功能的强大是毋庸置疑的。全键盘的操作体验，快速定位，流畅的编辑能力。但是还是有一些细节是需要注意的。这里记录一下我平时使用vim的配置情况和一些容易忘记的命令,方便以后查阅。
+
+vi的基本配置(.vimrc文件的配置)syn on                      &quot;语法支持
+
+&quot;common conf \&#123;\&#123;             通用配置
+
+&quot;设置文件的代码输出
+set encoding=utf-8          
+set termencoding=utf-8     
+set fileencoding...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2015/11/19/2015-11-19-vim/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
               2015-05-27
             </div>
           </v-col>
@@ -404,7 +511,7 @@
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/05/27/2015-05-27-good-life/">阅读更多</v-btn>
+        <v-btn text href="/content/2015/05/27/2015-05-27-good-life/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -442,7 +549,7 @@
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/05/20/2015-05-20-%E6%94%B9%E5%8F%98/">阅读更多</v-btn>
+        <v-btn text href="/content/2015/05/20/2015-05-20-%E6%94%B9%E5%8F%98/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -480,7 +587,7 @@ eclipse中的svn插件的问题&nbsp;&nbsp;&nbsp;&nbsp;eclipse中的svn插件叫
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/05/20/2015-06-12-eclipse/">阅读更多</v-btn>
+        <v-btn text href="/content/2015/05/20/2015-06-12-eclipse/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -514,7 +621,7 @@ eclipse中的svn插件的问题&nbsp;&nbsp;&nbsp;&nbsp;eclipse中的svn插件叫
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/03/25/2015-03-25-git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">阅读更多</v-btn>
+        <v-btn text href="/content/2015/03/25/2015-03-25-git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -555,7 +662,7 @@ A/B测试 ...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/12/30/2014-12-30-web-name/">阅读更多</v-btn>
+        <v-btn text href="/content/2014/12/30/2014-12-30-web-name/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -613,7 +720,7 @@ ctrl+l
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/11/01/2014-11-01-quickLinux/">阅读更多</v-btn>
+        <v-btn text href="/content/2014/11/01/2014-11-01-quickLinux/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -666,7 +773,7 @@ nginx的...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/10/31/2014-10-31-nginx/">阅读更多</v-btn>
+        <v-btn text href="/content/2014/10/31/2014-10-31-nginx/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -714,83 +821,7 @@ nginx的...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/10/19/2014-10-19-%E6%9E%B6%E6%9E%84/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2014-10-12
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2014/10/12/2014-10-12-mysql-schema/">mysql数据库的information_schema是什么</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-information_schema数据库是MySQL自带的，它提供了访问数据库元数据的方式。什么是元数据呢？元数据是关于数据的数据，如数据库名或表名，列的数据类型，或访问权限等。有些时候用于表述该信息的其他术语包括“数据词典”和“系统目录”。在MySQL中，把 information_schema 看作是一个数据库，确切说是信息数据库。其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权 限等。在INFORMATION_SCHEMA中，有数个只读表。它们实际上是视图，而不是基本表，因此，你将无法看到与之相关的任何文件。
-
-info...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/10/12/2014-10-12-mysql-schema/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2014-10-10
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2014/10/10/2014-10-10-excel-vba/">Excel VBA连接mysql数据库</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-因为会使用Excel VBA，这给工作带来了很多便利，也给同事解决了很多问题。今天有一个同事问我Excel 能否直接连接mysql数据库，然后获取某个表的信息。经过一番研究，发现，这完全是可以的，而且，基于此功能，完全可以用excel来做一个mysql的客户端工具，先把相关的代码记录再次，以免遗忘。
-
-数据库连接信息Public Const IP As String = &quot;xx.xxx.xx.xxx&quot;
-Public Const DB_NAME As String = &quot;xx&quot;
-Public Const USER As String = &quot...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/10/10/2014-10-10-excel-vba/">阅读更多</v-btn>
+        <v-btn text href="/content/2014/10/19/2014-10-19-%E6%9E%B6%E6%9E%84/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 

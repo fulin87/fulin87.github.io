@@ -138,7 +138,7 @@
             <v-list-item href="/content/archives/" link>
             <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
             <v-list-item-content>
-                归档
+                Archives
             </v-list-item-content>
             </v-list-item>
         
@@ -146,7 +146,7 @@
             <v-list-item href="/content/about/" link>
             <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
             <v-list-item-content>
-                关于
+                About
             </v-list-item-content>
             </v-list-item>
         
@@ -287,6 +287,30 @@
                     </v-list-item>
                 
             
+                
+                    <v-list-item href="/content/categories/go/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>go</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/excel/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>excel</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
         </v-list>    
     
 
@@ -308,7 +332,7 @@
         <div class="footer-content">
             
                 <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
                 </span>
                 <br>
             
@@ -395,8 +419,6 @@
       <div class="index-article-content">
         
           
-
-
 定时任务(Job)是一个非常常见的功能，很多系统都有，但是实现健壮，稳定的定时任务并不是很多人认为的那样那么简单
 
 一个优秀的定时任务应该满足以下这些要求
@@ -408,12 +430,88 @@
 
 分布式环境下的多节点调度定时任务的基本要求是定时运行，但是100%准时只是存在于理想中罢了。将定时任务的调度和具体的业务逻辑分离，保证调度中心的高可用是一个最佳实践
 业务逻辑应该有一个被调度的统一入口，在统一入口做一些公共逻辑的处理，然后分发到具体的任务中执行。也就是使用策略模式。
-运行完毕一定要有信息反馈定时任务很多都是批处理任务，...
+运行完毕一定要有信息反馈定时任务很多都是批处理任务，异步...
         
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2021/11/25/2021-11-25-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">阅读更多</v-btn>
+        <v-btn text href="/content/2021/11/25/2021-11-25-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2021-10-01
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/go/">go></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2021/10/01/go-lang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">go lang学习笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+这里记录一下自己学习go lang的过程中遇到的一些问题，方便日后复习
+
+vscode中配置go环境
+安装gopls
+123456go env -w GO111MODULE=ongo env -w GOPROXY=https://goproxy.cn,directgo get -v golang.org/x/tools/goplsgo install github.com/ramya-rao-a/go-outline@latestgo install github.com/uudashr/gopkgs/v2/cmd/gopkgs@latestgo install golang.org/...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2021/10/01/go-lang%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2021-01-02
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/excel/">excel></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2021/01/02/2021-01-02-excel%E6%8B%86%E5%88%86%E5%B7%A5%E5%85%B7/">将Excel文件按某一列拆分成多个文件小工具</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+将一个Excel文件按照某一列的值拆分成多个文件
+
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253Sub 保留表头拆分数据为若干新工作簿()    &#x27;定义程序所需变量    Dim arr, d As Object, k, t, i&amp;, lc%, rng As Range, c%        &#x27;指定根据那一列来拆分    c = Application.InputBox(&quot;请输入拆分列号&quot;,...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2021/01/02/2021-01-02-excel%E6%8B%86%E5%88%86%E5%B7%A5%E5%85%B7/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -456,7 +554,7 @@ Netty是什么，能做什么netty是一个通讯框架
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2020/11/20/2020-11-20-netty%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多</v-btn>
+        <v-btn text href="/content/2020/11/20/2020-11-20-netty%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -493,7 +591,7 @@ IntelliJ Idea 常用快捷键列表Ctrl+Shift + Enter，语句完成“！”，
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2020/07/24/2016-10-12-idea-keys/">阅读更多</v-btn>
+        <v-btn text href="/content/2020/07/24/2016-10-12-idea-keys/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -530,7 +628,7 @@ BitMap是一种在特定场景下非常高效的数据结构，这里记录一�
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2020/07/08/2020-07-08-bitset/">阅读更多</v-btn>
+        <v-btn text href="/content/2020/07/08/2020-07-08-bitset/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -575,7 +673,7 @@ SPI 的具体约定如下：
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2020/05/23/2020-05-23-dubbo%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">阅读更多</v-btn>
+        <v-btn text href="/content/2020/05/23/2020-05-23-dubbo%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -614,7 +712,7 @@ git clone https://github.com/3b1b...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2020/04/01/2020-04-01-%E6%9C%89%E8%B6%A3%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">阅读更多</v-btn>
+        <v-btn text href="/content/2020/04/01/2020-04-01-%E6%9C%89%E8%B6%A3%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -658,7 +756,7 @@ git clone https://github.com/3b1b...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2020/04/01/2020-04-01-%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">阅读更多</v-btn>
+        <v-btn text href="/content/2020/04/01/2020-04-01-%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -697,104 +795,7 @@ git clone https://github.com/3b1b...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2020/01/31/2014-09-11-maven/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2019-08-10
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2019/08/10/2019-08-10-securety/">加密和解密</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-最近在做的一些需求涉及到和几个银行之间的数据交互，而银行对数据安全的要求很高，其中一项就是加密，之前也零零散散的使用过java中的加密和解密，但是没有进行过系统的总结，这里进行一下梳理
-
-java中的加密解密相关的API
-MessageDigest 类支持构建MD5,SHA两种加密算法
-Mac类支持构建HMAC算法
-Cipher类可以构建如DES、AES、Blowfish对称加密算法，以及RSA、DSA、DH等多种非对称加密算法
-Signature类可以用于数字签名和签名验证
-Certificate类可以用于操作证书
-
-
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/08/10/2019-08-10-securety/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2019-08-10
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/java/">java></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2019/08/10/2019-10-02-Docker/">Docker笔记</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-记录下自己学习Docker的相关知识点，复习的时候使用
-
-Docker出现的原因一切都得从云计算说起，
-Docker的三大要素
-镜像
-
-Container
-
-仓库
-
-
-Docker是怎样运行的Docker是一个CS架构的系统，docker的守护进程运行在主机上和Client通过socket通讯。
-Docker为什么比VM快
-docker有比虚拟机更少的抽象层
-docker使用的是虚拟机的内核
-cocker新建一个容器的时候不需要重新加载一个操作系统内核
-
-Docker常用命令
-123docker version 	//显示docker的版本信息docker info		//显示dock...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2019/08/10/2019-10-02-Docker/">阅读更多</v-btn>
+        <v-btn text href="/content/2020/01/31/2014-09-11-maven/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 

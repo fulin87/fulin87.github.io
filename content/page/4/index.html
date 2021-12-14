@@ -138,7 +138,7 @@
             <v-list-item href="/content/archives/" link>
             <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
             <v-list-item-content>
-                归档
+                Archives
             </v-list-item-content>
             </v-list-item>
         
@@ -146,7 +146,7 @@
             <v-list-item href="/content/about/" link>
             <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
             <v-list-item-content>
-                关于
+                About
             </v-list-item-content>
             </v-list-item>
         
@@ -287,6 +287,30 @@
                     </v-list-item>
                 
             
+                
+                    <v-list-item href="/content/categories/go/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>go</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/excel/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>excel</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
         </v-list>    
     
 
@@ -308,7 +332,7 @@
         <div class="footer-content">
             
                 <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
                 </span>
                 <br>
             
@@ -376,6 +400,99 @@
         <v-row no-gutters>
           <v-col cols="auto">
             <div class="index-article-header-date font-weight-medium">
+              2018-10-04
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2018/10/04/2018-10-04-scrapy/">python爬虫框架crapy</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+scrapy是python中最著名的爬虫软件，最近需要写爬虫，所以使用了这个框架，这里记录一下scrapy的知识点
+
+scrapy的命令scrapy startproject demo     //生成一个scrapy项目
+scrapy genspider -l          //列出scrapy的默认爬虫模板
+scrapy genspider -t basic baidu baidu.com //使用basic模板生成一个爬虫
+scrapy check                 //对代码进行检查
+scrapy list                    //列出所有的...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2018/10/04/2018-10-04-scrapy/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2018-08-20
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2018/08/20/2018-08-20-kafka-merkdown/">kafka学习笔记</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+kafka是什么?
+常用的消息系统有哪些？既然有了那么多的消息系统为什么还需要kafka，其设计目标是什么？
+
+消息系统的分类
+Peer-to-Peer
+
+发布/订阅
+ 发布/订阅的解耦能力比p2p模型更强
+
+
+
+消息系统的适用场景
+解耦：各个系统之间通过消息系统这个统一的接口交换数据，无须了解彼此的存在
+冗余：部分消息系统具有持久化能力，可规避消息处理前丢失的风险
+扩展：消息系统是统一的数据接口，各系统可独立扩展
+削峰：消息系统可顶住峰值流量，业务系统可根据处理能力从消息系统中获取并处理对应量的请求
+可恢复：系统中部分组件失效并不会影响整个系统。
+异步通信：在不需要立即处理请求的场景...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2018/08/20/2018-08-20-kafka-merkdown/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
               2018-08-16
             </div>
           </v-col>
@@ -406,7 +523,7 @@
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/08/16/2018-08-16-shadowsocks/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/08/16/2018-08-16-shadowsocks/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -457,7 +574,7 @@ activeMQ实战activeMQ的安装
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/06/25/2018-06-25-MQ-learn/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/06/25/2018-06-25-MQ-learn/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -508,7 +625,7 @@ API是安全的不会造成缓冲区溢出
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/06/22/2018-06-22-redis-learn/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/06/22/2018-06-22-redis-learn/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -552,7 +669,7 @@ spring中的设计模式使用的出神入化IOC容器本身其实就是一个�
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2018/01/31/2018-10-08-spring%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/">阅读更多</v-btn>
+        <v-btn text href="/content/2018/01/31/2018-10-08-spring%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -593,7 +710,7 @@ np...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2017/11/23/2017-11-23-node-npm/">阅读更多</v-btn>
+        <v-btn text href="/content/2017/11/23/2017-11-23-node-npm/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -636,7 +753,7 @@ obj = &#123;&#39;name&#39;:&#39;fulin&#39;,&#39;age&#39;:27,&#39;family&#39;:&#1
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2017/06/01/2017-06-01-python8/">阅读更多</v-btn>
+        <v-btn text href="/content/2017/06/01/2017-06-01-python8/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -681,7 +798,7 @@ ctrl + F3 在当前类中快速搜索，相当于eclipse中的ctrl + k
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2017/04/14/2017-04-14-intellij/">阅读更多</v-btn>
+        <v-btn text href="/content/2017/04/14/2017-04-14-intellij/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -723,90 +840,7 @@ redis的安装
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2017/04/04/2017-04-04-redis/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2017-02-24
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2017/02/24/2017-02-24-mysqldeleterecord/">mysql一次性删除千万级别记录引发的问题和思考</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-昨天，一位同事在A系统的测试环境的mysql数据库中执行了一条DELETE 语句，删除了一千多万条数据，导致监控平台告警，数据库服务器磁盘空间被占满,对于这件事，我们是需要思考和总结的。
-
- 
-为什么会出现磁盘被占满的情况 在mysql数据库中,UPDATE,DELETE,INSERT操作都会记录到一个二进制日志文件中,也就是大家平时所说的binlog,这个日志文件的格式与mysql的一个参数设置有关。
- binlog有很多用途：
-* 根据binlog进行主从同步（常用）
-* 根据binlog进行数据恢复（不常用）
-* 可以用来查询数据库的操作记录
-
- 因此，大量的DML语句对参数大量...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2017/02/24/2017-02-24-mysqldeleterecord/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2017-01-04
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2017/01/04/2017-01-04-php-stop/">php我是怎样从入门到放弃的</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-接手了一个有5年历史的老系统（A系统），系统最开始是用LAMP这个经典组合进行开发的。我想刚好可以乘此机会学习一下PHP，但是当我开始学习后，过了2周，我放弃了…….这里总结一下我从入门到放弃的过程，汗…..
-
-乱就一个字 虽然说任何系统都会朝混乱度大的方向发展，但是一般情况下，如果有人为干预，一个业务系统至少应该有完善的文档，大致的开发，部署流程和规范，代码规范，发布记录等，可是我接手的这个A系统，除了线上的生产环境和代码之外，什么都没有。
- 更要命的是，代码简直是一团糟，变量的命名没有任何规范，一个php文件竟然达到9000行之多，毫无理由的换行，基本没有注释……
- 遇到这样的情况...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2017/01/04/2017-01-04-php-stop/">阅读更多</v-btn>
+        <v-btn text href="/content/2017/04/04/2017-04-04-redis/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 

@@ -138,7 +138,7 @@
             <v-list-item href="/content/archives/" link>
             <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
             <v-list-item-content>
-                归档
+                Archives
             </v-list-item-content>
             </v-list-item>
         
@@ -146,7 +146,7 @@
             <v-list-item href="/content/about/" link>
             <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
             <v-list-item-content>
-                关于
+                About
             </v-list-item-content>
             </v-list-item>
         
@@ -287,6 +287,30 @@
                     </v-list-item>
                 
             
+                
+                    <v-list-item href="/content/categories/go/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>go</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/excel/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>excel</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
         </v-list>    
     
 
@@ -308,7 +332,7 @@
         <div class="footer-content">
             
                 <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
                 </span>
                 <br>
             
@@ -376,6 +400,82 @@
         <v-row no-gutters>
           <v-col cols="auto">
             <div class="index-article-header-date font-weight-medium">
+              2014-10-12
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2014/10/12/2014-10-12-mysql-schema/">mysql数据库的information_schema是什么</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+information_schema数据库是MySQL自带的，它提供了访问数据库元数据的方式。什么是元数据呢？元数据是关于数据的数据，如数据库名或表名，列的数据类型，或访问权限等。有些时候用于表述该信息的其他术语包括“数据词典”和“系统目录”。在MySQL中，把 information_schema 看作是一个数据库，确切说是信息数据库。其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权 限等。在INFORMATION_SCHEMA中，有数个只读表。它们实际上是视图，而不是基本表，因此，你将无法看到与之相关的任何文件。
+
+info...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2014/10/12/2014-10-12-mysql-schema/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2014-10-10
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2014/10/10/2014-10-10-excel-vba/">Excel VBA连接mysql数据库</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+因为会使用Excel VBA，这给工作带来了很多便利，也给同事解决了很多问题。今天有一个同事问我Excel 能否直接连接mysql数据库，然后获取某个表的信息。经过一番研究，发现，这完全是可以的，而且，基于此功能，完全可以用excel来做一个mysql的客户端工具，先把相关的代码记录再次，以免遗忘。
+
+数据库连接信息Public Const IP As String = &quot;xx.xxx.xx.xxx&quot;
+Public Const DB_NAME As String = &quot;xx&quot;
+Public Const USER As String = &quot...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2014/10/10/2014-10-10-excel-vba/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
               2014-10-10
             </div>
           </v-col>
@@ -422,7 +522,7 @@ host only
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/10/10/2014-10-06-vm/">阅读更多</v-btn>
+        <v-btn text href="/content/2014/10/10/2014-10-06-vm/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -469,7 +569,7 @@ JV...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/09/10/2018-12-03-exception/">阅读更多</v-btn>
+        <v-btn text href="/content/2014/09/10/2018-12-03-exception/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -511,7 +611,7 @@ web服务器和应用服务器 如果是初学者，对服务器这个概念应�
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/03/01/2014-03-01-CGI-FASTCGI-WSGI/">阅读更多</v-btn>
+        <v-btn text href="/content/2014/03/01/2014-03-01-CGI-FASTCGI-WSGI/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -554,7 +654,7 @@ java的含义 java的起源 –&gt;  跨平台 –&gt; 字节码，虚拟机
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2013/09/10/2013-09-10-java%E8%99%9A%E6%8B%9F%E6%9C%BA/">阅读更多</v-btn>
+        <v-btn text href="/content/2013/09/10/2013-09-10-java%E8%99%9A%E6%8B%9F%E6%9C%BA/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 

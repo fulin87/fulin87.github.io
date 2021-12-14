@@ -138,7 +138,7 @@
             <v-list-item href="/content/archives/" link>
             <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
             <v-list-item-content>
-                归档
+                Archives
             </v-list-item-content>
             </v-list-item>
         
@@ -146,7 +146,7 @@
             <v-list-item href="/content/about/" link>
             <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
             <v-list-item-content>
-                关于
+                About
             </v-list-item-content>
             </v-list-item>
         
@@ -287,6 +287,30 @@
                     </v-list-item>
                 
             
+                
+                    <v-list-item href="/content/categories/go/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>go</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
+                
+                    <v-list-item href="/content/categories/excel/" link>
+                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
+                            <v-hover v-model="menuHover">
+                                <v-list-item-content>
+                                    <span>excel</span>                              
+                                </v-list-item-content>                           
+                            </v-hover>
+                        </v-badge>
+                    </v-list-item>
+                
+            
         </v-list>    
     
 
@@ -308,7 +332,7 @@
         <div class="footer-content">
             
                 <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                    Total Visitors <span id="busuanzi_value_site_uv"></span>
                 </span>
                 <br>
             
@@ -376,6 +400,89 @@
         <v-row no-gutters>
           <v-col cols="auto">
             <div class="index-article-header-date font-weight-medium">
+              2017-02-24
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%AD%98%E5%82%A8/">存储></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2017/02/24/2017-02-24-mysqldeleterecord/">mysql一次性删除千万级别记录引发的问题和思考</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+昨天，一位同事在A系统的测试环境的mysql数据库中执行了一条DELETE 语句，删除了一千多万条数据，导致监控平台告警，数据库服务器磁盘空间被占满,对于这件事，我们是需要思考和总结的。
+
+ 
+为什么会出现磁盘被占满的情况 在mysql数据库中,UPDATE,DELETE,INSERT操作都会记录到一个二进制日志文件中,也就是大家平时所说的binlog,这个日志文件的格式与mysql的一个参数设置有关。
+ binlog有很多用途：
+* 根据binlog进行主从同步（常用）
+* 根据binlog进行数据恢复（不常用）
+* 可以用来查询数据库的操作记录
+
+ 因此，大量的DML语句对参数大量...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2017/02/24/2017-02-24-mysqldeleterecord/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2017-01-04
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/content/2017/01/04/2017-01-04-php-stop/">php我是怎样从入门到放弃的</a>
+      </div>
+      
+      <div class="index-article-content">
+        
+          
+接手了一个有5年历史的老系统（A系统），系统最开始是用LAMP这个经典组合进行开发的。我想刚好可以乘此机会学习一下PHP，但是当我开始学习后，过了2周，我放弃了…….这里总结一下我从入门到放弃的过程，汗…..
+
+乱就一个字 虽然说任何系统都会朝混乱度大的方向发展，但是一般情况下，如果有人为干预，一个业务系统至少应该有完善的文档，大致的开发，部署流程和规范，代码规范，发布记录等，可是我接手的这个A系统，除了线上的生产环境和代码之外，什么都没有。
+ 更要命的是，代码简直是一团糟，变量的命名没有任何规范，一个php文件竟然达到9000行之多，毫无理由的换行，基本没有注释……
+ 遇到这样的情况...
+        
+      </div>
+      
+      <div class="index-article-readmore ">
+        <v-btn text href="/content/2017/01/04/2017-01-04-php-stop/">Read More</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+  
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
               2016-12-22
             </div>
           </v-col>
@@ -403,7 +510,7 @@
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/12/22/2016-12-22-exceljia/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/12/22/2016-12-22-exceljia/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -448,7 +555,7 @@ uws...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/26/2016-11-26-uwsgi-python/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/11/26/2016-11-26-uwsgi-python/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -494,7 +601,7 @@ DB-API详解 DB-API对以下几个方面做了规范
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/24/2016-11-24-python7/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/11/24/2016-11-24-python7/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -540,7 +647,7 @@ random.choice([1,2,3,4,5])...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/23/2016-11-23-python6/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/11/23/2016-11-23-python6/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -580,7 +687,7 @@ python的类和继承 因为学习过java。感觉python的oop机制的实...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/22/2016-11-22-python5/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/11/22/2016-11-22-python5/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -632,7 +739,7 @@ import和from语句都是可执行的赋值语句
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/21/2016-11-21-python4/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/11/21/2016-11-21-python4/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -677,7 +784,7 @@ rU或Ua           ...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/20/2016-11-20-python3/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/11/20/2016-11-20-python3/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
@@ -728,107 +835,7 @@ elif expres...
       </div>
       
       <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/19/2016-11-19-python2/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2016-11-18
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2016/11/18/2016-11-18-python1/">python基础知识点之数据结构</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-python中的数据结构大致可以分为三类：序列，映射，集合。这里详细的总结一下。
-
-序列 序列的成员有序排列的，并且可以通过下标偏移量访问到它的一个或者几个成员,有序是序列的灵魂。序列有一些通用的方法：连接，重复，切片。
-
-连接（+）
- sq1 = [12,3]
- sq2 = [5,6]
- sq1 + sq2
-
-
-重复（*）
- sq1 = [12,3]
- sq1 * 2
-
-
-切片（[], [:], [::]）
-  
-
-
-字符串
-创建字符串
-  python中创建字符串没有单引号和双引号之分。
-  str1 = &quot;fulin&quot;
-  str2 = &#39;fulin&...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/18/2016-11-18-python1/">阅读更多</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2016-11-17
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2016/11/17/2016-11-17-python0/">python基础知识点之环境</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-学习java的时候，都知道java有很多优秀的第三方jar包，但是管理这些jar包真是一件麻烦事，虽然有像maven这样的依赖管理工具，但是学习成本还是蛮高的。python 的包管理工具pip使用起来非常的舒服，一条命令就可以搞定下载安装，再用不用为包的管理而烦恼了，让人想起那句著名的话：less is more
-
-python的包管理工具pip
-访问：get-pip.py 访问需要的python文件。
-将源代码copy到一个文本文件，将文本文件重命名的get-pip.py。
-通过命令行进入上述文本文件的所在位置，运行一下命令： python get-pip.py    
-
-pip工具...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2016/11/17/2016-11-17-python0/">阅读更多</v-btn>
+        <v-btn text href="/content/2016/11/19/2016-11-19-python2/">Read More</v-btn>
       </div>
       <v-divider></v-divider>
     </article> 
