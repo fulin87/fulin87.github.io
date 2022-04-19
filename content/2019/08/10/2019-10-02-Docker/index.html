@@ -1,358 +1,409 @@
 <!DOCTYPE html>
 <html lang="">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
-    <meta name="renderer" content="webkit"/>
-    <meta name="force-rendering" content="webkit"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
-    
-    
-        <link rel="shortcut icon" href="/images/favicon.ico">
-    
-     
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
-    
-<link rel="stylesheet" href="/content/css/main.css">
 
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="fuliln" />
+  <meta name="description" content="" />
+  
+  
+  <title>
     
+      Docker笔记 
+      
+      
     
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,400italic,600|Roboto+Mono" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/content/css/base.css">
+<link rel="stylesheet" href="/content/css/common.css">
+<link rel="stylesheet" href="/content/iconfont/iconfont.css">
 
 
+  
+
+  
+    
+<link rel="stylesheet" href="/content/css/post.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/content/js/fancybox.js"></script>
 
 
-
-
-
-    
-    
-          
-
-    
-    
-    
-    
-    <title>
-        
-            Docker笔记 | 水货程序员的笔记
-        
-    </title>
-    
-    
 <meta name="generator" content="Hexo 5.4.0"></head>
-<body>
+
+
+  <body>
     <div id="app">
-        <v-app>
-            <v-content id="page">
-                <v-container fluid>
-                    <v-row>
-                        <v-col cols="2" class="d-none d-md-block">
-                            <div id="sidebar" class="float-right">
-    <a href="/content/" rel="home">
-        <v-avatar size=96>
-            <img id="logo" src="/images/avatar.webp">     
-        </v-avatar> 
+      <div class="header">
+  <a href="/">LEEDOM</a>
+</div>
+
+
+      <p class="links">
+  
+    <a title="archives" target="" href="/archives/">
+      <i class="iconfont icon-bookmark"></i>
     </a>
-    <v-divider></v-divider>
-    <div class="mini-menu">
-        <v-btn icon href="/content/">
-            <v-icon>home</v-icon>
-        </v-btn>
-        <v-btn icon href="/content/categories/">
-            <v-icon>folder</v-icon>
-        </v-btn>
-        <v-btn icon href="/content/tags/">
-            <v-icon>bookmark</v-icon>
-        </v-btn>
-        <v-btn icon @click="SetNightMode">
-            <v-icon>{{ nightMode }}</v-icon>
-        </v-btn>
-    </div>
-    <v-list id="main-menu" class="font-weight-bold" flat>
-        
-            
-            <v-list-item href="/content/archives/" link>
-            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                Archives
-            </v-list-item-content>
-            </v-list-item>
-        
-            
-            <v-list-item href="/content/about/" link>
-            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                About
-            </v-list-item-content>
-            </v-list-item>
-        
-    </v-list>
-    <v-divider></v-divider>
-    
-        <div class="post-toc">
-            <a href="/content/2019/08/10/2019-10-02-Docker/" class="toc-header">Table of Contents</a>
-            <div class="toc-content">
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">Docker出现的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E7%9A%84%E4%B8%89%E5%A4%A7%E8%A6%81%E7%B4%A0"><span class="toc-number">2.</span> <span class="toc-text">Docker的三大要素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84"><span class="toc-number">3.</span> <span class="toc-text">Docker是怎样运行的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%94VM%E5%BF%AB"><span class="toc-number">4.</span> <span class="toc-text">Docker为什么比VM快</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text">Docker常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%8D%B7"><span class="toc-number">6.</span> <span class="toc-text">容器数据卷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dockerfile"><span class="toc-number">7.</span> <span class="toc-text">Dockerfile</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Dockerfile%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="toc-number">7.1.</span> <span class="toc-text">Dockerfile的指令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">8.</span> <span class="toc-text">参考文档</span></a></li></ol>
-            </div>
-        </div>
-    
+  
+    <a title="github" target="_blank" href="https://github.com/leedom92/hexo-theme-leedom">
+      <i class="iconfont icon-github"></i>
+    </a>
+  
+    <a title="email" target="" href="">
+      <i class="iconfont icon-envelope"></i>
+    </a>
+  
+    <a title="facebook" target="" href="">
+      <i class="iconfont icon-facebooksquare"></i>
+    </a>
+  
+    <a title="twitter" target="" href="">
+      <i class="iconfont icon-twitter"></i>
+    </a>
+  
+    <a title="wechat" target="" href="">
+      <i class="iconfont icon-wechat"></i>
+    </a>
+  
+    <a title="weibo" target="" href="">
+      <i class="iconfont icon-weibo"></i>
+    </a>
+  
+    <a title="rss" target="_blank" href="/atom.xml">
+      <i class="iconfont icon-rss"></i>
+    </a>
+  
+</p>
 
-    <div id="footer">
-        <div class="footer-social">
-            
-                
-                <v-btn icon href="/content/fulin87@sina.com" target="_blank">
-                    <v-icon>fas fa-envelope</v-icon>
-                </v-btn>
-            
-                
-                <v-btn icon href="https://github.com/fulin87" target="_blank">
-                    <v-icon>fab fa-github</v-icon>
-                </v-btn>
-            
-        </div>
-        <v-divider></v-divider>
-        <div class="footer-content">
-            
-                <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    Total Visitors <span id="busuanzi_value_site_uv"></span>
-                </span>
-                <br>
-            
-            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
-            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
-            <span>
-                &copy; 2015 - 2021 
-                fuliln
-            </span>
-        </div>
-    </div>
-</div>
 
-                        </v-col>
-                        <v-col cols="12" md="10">
-                            <v-row>
-  <v-col cols="12" md="8" align-self="end">
-    <div id="site-header">
-      <div id="site-title">
-        <a href="/content/" rel="home">水货程序员的笔记</a>
-      </div>
-      <div id="site-description"></div>
-      <div id="mobile-menu" class="d-block d-md-none">
-        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
-        <div class="mobile-mini-menu">
-          <v-btn icon href="/">
-              <v-icon>home</v-icon>
-          </v-btn>
-          <v-btn icon href="/categories/">
-              <v-icon>folder</v-icon>
-          </v-btn>
-          <v-btn icon href="/tags/">
-              <v-icon>bookmark</v-icon>
-          </v-btn>
-          <v-btn icon @click="SetNightMode">
-              <v-icon>{{ nightMode }}</v-icon>
-          </v-btn>
-          
-            
-            <v-btn icon href="/content/archives/">
-              <v-icon>archive</v-icon>
-            </v-btn>
-          
-            
-            <v-btn icon href="/content/about/">
-              <v-icon>account_circle</v-icon>
-            </v-btn>
-          
-        </div>
-      </div>    
-    </div>
-  </v-col>  
-  <v-col cols="4" align-self="end" class="d-none d-md-block">
-    <v-col align-self="end">
-      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
-    </v-col> 
-  </v-col>
-</v-row>
+      <div class="main">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-                            <v-card class="elevation-2 post-card">
-    
-    
-        <div class="post-header">
-  <a class="post-header-title font-weight-medium" href="/content/2019/08/10/2019-10-02-Docker/">Docker笔记</a>
-  <div class="post-header-meta">   
-    <span>
-      <v-icon color="">event</v-icon>
-      Posted on:&nbsp;2019-08-10
-    </span>
-    <span>
-      <v-icon color="">event_available</v-icon>
-      Edited on:&nbsp;2021-12-12
-    </span>
-    <span>
-      <v-icon color="">folder</v-icon>
-      In:&nbsp;<a class="category-link" href="/content/categories/java/">java</a>
-    </span>
-    
-    <span>
-      <v-icon color="">visibility</v-icon>
-      Views:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
-    </span>
-    
-  </div>
-</div>
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
 
-    
-    
-    
-    
-    <div class="post-content typo">
-        <blockquote>
-<p>记录下自己学习Docker的相关知识点，复习的时候使用</p>
-</blockquote>
-<h3 id="Docker出现的原因"><a href="#Docker出现的原因" class="headerlink" title="Docker出现的原因"></a>Docker出现的原因</h3><p>一切都得从云计算说起，</p>
+<div class="post">
+  <h3 class="date">
+    Aug 10, 2019
+  </h3>
+  <h1>
+    Docker笔记
+  </h1>
+  <div class="content markdown-body">
+    <h3 id="Docker出现的原因"><a href="#Docker出现的原因" class="headerlink" title="Docker出现的原因"></a>Docker出现的原因</h3><p>一切都得从云计算说起<br>VM是硬件虚拟化,Docker是操作系统虚拟化</p>
 <h3 id="Docker的三大要素"><a href="#Docker的三大要素" class="headerlink" title="Docker的三大要素"></a>Docker的三大要素</h3><ul>
-<li><p>镜像</p>
-</li>
-<li><p>Container</p>
-</li>
-<li><p>仓库</p>
-</li>
+<li>镜像</li>
+<li>Container</li>
+<li>仓库</li>
 </ul>
-<h3 id="Docker是怎样运行的"><a href="#Docker是怎样运行的" class="headerlink" title="Docker是怎样运行的"></a>Docker是怎样运行的</h3><p>Docker是一个CS架构的系统，docker的守护进程运行在主机上和Client通过socket通讯。</p>
+<h3 id="Docker是怎样运行的"><a href="#Docker是怎样运行的" class="headerlink" title="Docker是怎样运行的"></a>Docker是怎样运行的</h3><p>Docker是一个CS架构的系统，docker的守护进程运行在主机上和Client通过socket通讯。<br>容器随着其中运行运用的退出而终止</p>
 <h3 id="Docker为什么比VM快"><a href="#Docker为什么比VM快" class="headerlink" title="Docker为什么比VM快"></a>Docker为什么比VM快</h3><ul>
 <li>docker有比虚拟机更少的抽象层</li>
 <li>docker使用的是虚拟机的内核</li>
 <li>cocker新建一个容器的时候不需要重新加载一个操作系统内核</li>
 </ul>
-<h3 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h3><p><img src="E:\code\myBog\source\image\docker-code.PNG"></p>
+<h3 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h3><p><img src="/Users/fulin/crtwork/openSource/myBog/source/image/docker-code.PNG"></p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version 	<span class="regexp">//</span>显示docker的版本信息</span><br><span class="line">docker info		<span class="regexp">//</span>显示docker的详细信息</span><br><span class="line">docker [commond] --help  <span class="regexp">//</span>显示docker帮助</span><br></pre></td></tr></table></figure>
 
 <p>镜像命令：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker images					<span class="regexp">//</span>查看镜像的信息</span><br><span class="line">docker search   				<span class="regexp">//</span>搜索镜像</span><br><span class="line">docker pull	[image name]:[tag]	<span class="regexp">//</span>下载镜像</span><br><span class="line">docker imi  [image name]		<span class="regexp">//</span>删除镜像</span><br><span class="line">docker history [镜像id]		  <span class="regexp">//</span>查看镜像的历史</span><br><span class="line">docker images -aq			   <span class="regexp">//</span>查看所有镜像的id</span><br><span class="line">docker rmi $(docker images -aq)<span class="regexp">//</span>删除所有镜像</span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 查看镜像的信息</span></span><br><span class="line">docker images	</span><br><span class="line"><span class="meta"># 搜索镜像</span></span><br><span class="line">docker search   </span><br><span class="line"><span class="meta"># 下载镜像</span></span><br><span class="line">docker pull [image name]:[tag]	</span><br><span class="line"><span class="meta"># 删除镜像</span></span><br><span class="line">docker imi  [image name]	</span><br></pre></td></tr></table></figure>
 
 <p>容器命令：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">docker run [image name] 	<span class="regexp">//</span>启动容器</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数说明</span></span><br><span class="line">    --name=<span class="string">&quot;Name&quot;</span>  容器名字，用来区分容器</span><br><span class="line">    -d			   后台方式运行</span><br><span class="line">    -it			   使用交互方式运行，进入容器查看内容</span><br><span class="line">    -p			   指定容器端口</span><br><span class="line">        -p ip:主机端口:容器端口</span><br><span class="line">        -p 主机端口:容器端口</span><br><span class="line">        -p 容器端口</span><br><span class="line">    -P			   指定随机端口</span><br><span class="line"></span><br><span class="line">docker run -it centos <span class="regexp">/bin/</span>bash 	<span class="comment">#启动并进入容器</span></span><br><span class="line">docker run -d centos	<span class="regexp">//</span>后台启动</span><br><span class="line"><span class="keyword">exit</span> 					<span class="regexp">//</span>退出容器</span><br><span class="line">ctrl + P + Q 			<span class="regexp">//</span>退出容器，但是容器在运行中</span><br><span class="line">docker ps 	 			<span class="regexp">//</span>查看当前运行的容器</span><br><span class="line">docker ps -a 			<span class="regexp">//</span>查看当前运行和曾经运行的容器</span><br><span class="line">docker rm [容器ID]	   <span class="regexp">//</span>删除容器，不能删除正在运行的容器</span><br><span class="line">docker rm -f [容器ID]	  <span class="regexp">//</span>强制删除容器</span><br><span class="line"></span><br><span class="line">docker start [容器ID]		<span class="regexp">//</span>启动容器</span><br><span class="line">docker restart [容器ID]	<span class="regexp">//</span>重启容器</span><br><span class="line">docker stop [容器ID]		<span class="regexp">//</span>停止容器</span><br><span class="line">docker stop $(docker ps -aq)  <span class="regexp">//</span>停止所有容器</span><br><span class="line">docker kill [容器ID]		<span class="regexp">//</span>强制停止容器</span><br><span class="line"></span><br><span class="line">docker logs	[容器ID]		<span class="regexp">//</span>查看日志</span><br><span class="line">docker inspect [容器ID]	<span class="regexp">//</span>查看容器的元信息</span><br><span class="line">docker exec -it [容器ID]  <span class="regexp">//</span>进入一个容器，开启一个新的终端</span><br><span class="line">docker attach [容器ID]	<span class="regexp">//</span>进入一个容器正在执行的终端，不会启动新的进程</span><br><span class="line">docker cp [容器id]:file path <span class="regexp">//</span>将容器中的文件拷贝到宿主机中</span><br><span class="line"></span><br><span class="line">docker commit -m=<span class="string">&#x27;提交的描述信息&#x27;</span> -a=<span class="string">&#x27;作者&#x27;</span> [容器ID] 目标镜像名:[tag]			 <span class="regexp">//</span>将容器提交为一个镜像</span><br><span class="line"></span><br><span class="line">docker volume 			 <span class="regexp">//</span>容器卷管理</span><br><span class="line">docker volumn ls 	     <span class="regexp">//</span>查看所有卷的情况</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 启动容器</span></span><br><span class="line">docker run [image name] 	</span><br><span class="line">    --name=<span class="string">&quot;Name&quot;</span>  容器名字，用来区分容器</span><br><span class="line">    -d			   后台方式运行</span><br><span class="line">    -it			   使用交互方式运行，进入容器查看内容</span><br><span class="line">    -p			   指定容器端口</span><br><span class="line">        -p ip:主机端口:容器端口</span><br><span class="line">        -p 主机端口:容器端口</span><br><span class="line">        -p 容器端口</span><br><span class="line">    -P			   指定随机端口</span><br><span class="line"></span><br><span class="line"><span class="meta"># 启动并进入容器</span></span><br><span class="line">docker run -it centos /bin/bash 	</span><br><span class="line"><span class="meta"># 后台启动</span></span><br><span class="line">docker run -d centos	  </span><br><span class="line"><span class="meta"># 退出容器</span></span><br><span class="line">exit</span><br><span class="line"><span class="meta"># 退出容器，但是容器在运行中</span></span><br><span class="line">ctrl + P + Q</span><br><span class="line"><span class="meta"># 查看当前运行的容器</span></span><br><span class="line">docker ps </span><br><span class="line"><span class="meta"># 查看当前运行和曾经运行的容器</span></span><br><span class="line">docker ps -a </span><br><span class="line"><span class="meta"># 删除容器，不能删除正在运行的容器</span></span><br><span class="line">docker rm [容器ID]</span><br><span class="line"><span class="meta"># 强制删除容器,容器会从docker ps -a列表中移除</span></span><br><span class="line">docker rm -f [容器ID]	        </span><br><span class="line"><span class="meta"># 启动容器</span></span><br><span class="line">docker start [容器ID]	</span><br><span class="line"><span class="meta"># 重启容器</span></span><br><span class="line">docker restart [容器ID]	</span><br><span class="line"><span class="meta"># 停止容器,容器会保留在docker ps -a列表中</span></span><br><span class="line">docker stop [容器ID]  </span><br><span class="line"><span class="meta"># 强制停止容器</span></span><br><span class="line">docker kill [容器ID]		</span><br><span class="line"><span class="meta"># 查看日志</span></span><br><span class="line">docker logs [容器ID]</span><br><span class="line"><span class="meta"># 查看容器的元信息</span></span><br><span class="line">docker inspect [容器ID]	    </span><br><span class="line"><span class="meta"># 进入一个容器，开启一个新的终端</span></span><br><span class="line">docker exec -it [容器ID]   </span><br><span class="line"><span class="meta"># 进入一个容器正在执行的终端，不会启动新的进程</span></span><br><span class="line">docker attach [容器ID]	</span><br><span class="line"><span class="meta"># 将容器中的文件拷贝到宿主机中</span></span><br><span class="line">docker cp [容器id]:file path     </span><br><span class="line"><span class="meta"># 将容器提交为一个镜像</span></span><br><span class="line">docker commit -m=<span class="string">&#x27;提交的描述信息&#x27;</span> -a=<span class="string">&#x27;作者&#x27;</span> [容器ID] 目标镜像名:[tag]			 </span><br><span class="line"><span class="meta"># 容器卷管理</span></span><br><span class="line">docker volume 		</span><br><span class="line"><span class="meta"># 查看所有卷的情况</span></span><br><span class="line">docker volumn ls 	        </span><br><span class="line"><span class="meta"># 查看镜像的历史</span></span><br><span class="line">docker history [镜像id]         </span><br></pre></td></tr></table></figure>
 
 <h3 id="容器数据卷"><a href="#容器数据卷" class="headerlink" title="容器数据卷"></a>容器数据卷</h3><p>容器中的数据不应该保存在容器中，因为如果放在容器中，删除容器，数据就会丢。因此：容器中数据有时候需要持久化。 容器之间需要有数据共享的技术，也就是Docker容器中的数据可以同步到宿主机，这就是数据卷技术，将容器中的目录挂载在宿主机上。</p>
 <p>比如，使用容器安装mysql</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方式一： docker <span class="builtin-name">run</span> -v 主机目录:容器目录</span><br></pre></td></tr></table></figure>
 
 <p>具名和匿名挂载</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 匿名挂载</span></span><br><span class="line">docker -v 容器内路径</span><br><span class="line"><span class="meta"># 具名挂载</span></span><br><span class="line">docker -v 卷名:容器内路径</span><br><span class="line">docker -v 卷名:容器内路径:ro   ro代表只读，只能从外部改变</span><br><span class="line">docker -v 卷名:容器内路径:rw	rw代表可读写</span><br><span class="line"><span class="meta"># 指定路径挂载</span></span><br><span class="line">docker -v /宿主机路径:容器内路径</span><br><span class="line"></span><br><span class="line">docker --volumns-from 容器 </span><br></pre></td></tr></table></figure>
-
-
-
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 匿名挂载</span></span><br><span class="line">docker -v 容器内路径</span><br><span class="line"><span class="meta"># 具名挂载</span></span><br><span class="line">docker -v 卷名:容器内路径</span><br><span class="line">docker -v 卷名:容器内路径:ro   ro代表只读，只能从外部改变</span><br><span class="line">docker -v 卷名:容器内路径:rw	rw代表可读写</span><br><span class="line"><span class="meta"># 指定路径挂载</span></span><br><span class="line">docker -v /宿主机路径:容器内路径</span><br><span class="line">docker --volumns-from 容器 </span><br></pre></td></tr></table></figure>
 
 
 <h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><p>dockerfile是用来构建镜像的构建文件，其实就是一个脚本，通过这个脚本可以生成一个镜像</p>
 <ul>
-<li><p>每个指定必须是大写</p>
-</li>
-<li><p>指令从上到下顺序执行</p>
-</li>
-<li><p>#表示注释</p>
-</li>
-<li><p>每一个指令都会创建并提交一个新的镜像层，并提交</p>
-</li>
-<li><p>Dockerfile是面向开发的，已经逐渐称为了软件交付的标准，</p>
-</li>
-<li><p>Dockerimage就是通过Dockerfile构建的一个产品。</p>
-</li>
-<li><p>Docker容器就是Dockerimage运行起来的结果（服务）</p>
-</li>
+<li>每个指定必须是大写</li>
+<li>指令从上到下顺序执行</li>
+<li>#表示注释</li>
+<li>每一个指令都会创建并提交一个新的镜像层，并提交</li>
+<li>Dockerfile是面向开发的，已经逐渐称为了软件交付的标准，</li>
+<li>Dockerimage就是通过Dockerfile构建的一个产品。</li>
+<li>Docker容器就是Dockerimage运行起来的结果（服务）</li>
 </ul>
-<h4 id="Dockerfile的指令"><a href="#Dockerfile的指令" class="headerlink" title="Dockerfile的指令"></a>Dockerfile的指令</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> 		<span class="comment"># 基础镜像，一切从这里构建</span></span><br><span class="line"><span class="keyword">MAINTAINER</span>  <span class="comment"># 镜像是谁写的，作者&lt;邮箱&gt;</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash">			<span class="comment">#镜像构建的时候需要运行的命令</span></span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> 		<span class="comment">#步骤：tomcat镜像</span></span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> 	<span class="comment">#镜像的工作目录</span></span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash">  	<span class="comment">#挂载的目录</span></span></span><br><span class="line"><span class="keyword">EXPOSE</span>  	<span class="comment">#暴露端口配置</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash">			<span class="comment">#指定这个容器启动的时候要运行的命令，只有最后一个会生效</span></span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash">	<span class="comment">#指定这个容器启动的时候要运行的命令，可追加</span></span></span><br><span class="line"><span class="keyword">ONBUILD</span>		<span class="comment">#当构建一个被继承Dockerfile 这个时候会运行ONBUILD,触发指令</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash">		<span class="comment">#类似ADD，将我们的文件拷贝到镜像中</span></span></span><br><span class="line"><span class="keyword">ENV</span>			<span class="comment">#构建的时候设置环境变量</span></span><br></pre></td></tr></table></figure>
-
-
-
-
+<h4 id="Dockerfile的指令"><a href="#Dockerfile的指令" class="headerlink" title="Dockerfile的指令"></a>Dockerfile的指令</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> 		<span class="comment"># 基础镜像，一切从这里构建</span></span><br><span class="line"><span class="keyword">MAINTAINER</span>      <span class="comment"># 镜像是谁写的，作者&lt;邮箱&gt;</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash">		<span class="comment">#镜像构建的时候需要运行的命令</span></span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> 		<span class="comment">#步骤：tomcat镜像</span></span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> 	<span class="comment">#镜像的工作目录</span></span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash">  	<span class="comment">#挂载的目录</span></span></span><br><span class="line"><span class="keyword">EXPOSE</span>  	<span class="comment">#暴露端口配置</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash">		<span class="comment">#指定这个容器启动的时候要运行的命令，只有最后一个会生效</span></span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash">	<span class="comment">#指定这个容器启动的时候要运行的命令，可追加</span></span></span><br><span class="line"><span class="keyword">ONBUILD</span>		<span class="comment">#当构建一个被继承Dockerfile 这个时候会运行ONBUILD,触发指令</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash">		<span class="comment">#类似ADD，将我们的文件拷贝到镜像中</span></span></span><br><span class="line"><span class="keyword">ENV</span>		<span class="comment">#构建的时候设置环境变量</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -f <span class="selector-attr">[dockerfilename]</span> 构建一个docker镜像</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="D:\code\myBog\source\image\docker02.PNG"></p>
+<h4 id="Mac-M1下docker安装mysql"><a href="#Mac-M1下docker安装mysql" class="headerlink" title="Mac M1下docker安装mysql"></a>Mac M1下docker安装mysql</h4><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载docker安装脚本</span></span><br><span class="line"><span class="string">curl</span> -<span class="string">fsSL</span> <span class="string">get</span>.<span class="string">docker</span>.<span class="string">com</span> -<span class="string">o</span> <span class="built_in">get-docker.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉去mysql镜像</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">docker</span> <span class="string">pull</span> <span class="string">mysql</span>/<span class="string">mysql-server:latest</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="comment"># 启动mysql容器</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">docker</span> <span class="string">run</span> <span class="built_in">--name</span> <span class="string">mysql</span> -<span class="string">p</span> <span class="string">3306:3306 </span>-<span class="string">e</span> <span class="string">MYSQL_ROOT_PASSWORD</span>=<span class="string">123456</span> -<span class="string">d</span> <span class="string">mysql</span>/<span class="string">mysql-server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入mysql容器</span></span><br><span class="line"><span class="string">docker</span> <span class="string">exec</span> -<span class="string">it</span> <span class="string">mysql</span> <span class="string">bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入mysql</span></span><br><span class="line"><span class="string">mysql</span> -<span class="string">u</span> <span class="string">root</span> -<span class="string">p</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 授权</span></span><br><span class="line"><span class="string">CREATE</span> <span class="string">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> <span class="string">IDENTIFIED</span> <span class="string">BY</span> <span class="string">&#x27;root&#x27;</span>;</span><br><span class="line"><span class="string">GRANT</span> <span class="string">ALL</span> <span class="string">ON</span> *.* <span class="string">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷新授权</span></span><br><span class="line"><span class="string">flush</span> <span class="string">privileges</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改root密码</span></span><br><span class="line"><span class="string">ALTER</span> <span class="string">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> <span class="string">IDENTIFIED</span> <span class="string">WITH</span> <span class="string">mysql_native_password</span> <span class="string">BY</span> <span class="string">&#x27;123456&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷新权限</span></span><br><span class="line"><span class="string">flush</span> <span class="string">privileges</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="E:\code\myBog\source\image\docker02.PNG"></p>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/187505981">Docker看这一篇就够了</a></p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a target="_blank" rel="noopener" href="https://docs.docker.com/">Docker官方文档</a><br><a target="_blank" rel="noopener" href="https://www.lizrice.com/">lizrice系列文章</a><br><a target="_blank" rel="noopener" href="https://medium.com/@saschagrunert">揭秘容器系列文章</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/187505981">Docker看这一篇就够了</a></p>
 
-    </div>
-    <!--文末结束语-->
+  </div>
+  
     
-        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
-    
-    <!--页脚广告-->
-    
-    <v-divider></v-divider>
-    
-    <div class="post-nav">             
+      <a id="older" class="blog-nav" href="/content/2019/07/10/2019-07-10-coredump01/">OLDER&nbsp;&gt;</a>
+      
         
-            <div class="post-nav-button float-left">
-                <v-icon>chevron_left</v-icon>
-                <a class="font-weight-bold text-left" href="/content/2019/08/10/2019-08-10-securety/">
-                    加密和解密
-                </a>
-            </div>
-              
+          <a id="newer" class="blog-nav" href="/content/2019/08/10/2019-08-10-securety/">&lt;&nbsp;NEWER</a>
           
-            <div class="post-nav-button float-right">
-                <a class="font-weight-bold text-right" href="/content/2019/07/10/2019-07-10-coredump01/">      
-                    一次生产故障的总结
-                </a>
-                <v-icon>chevron_right</v-icon>
-            </div>
+            
+</div>
+        <div class="footer">
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Copyright © Leedom 2021</a>
         
     </div>
-</v-card>
-
-
-
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Theme by Leedom | Powered by Hexo</a>
         
-                            <div id="mobile-footer" class="d-block d-md-none">
-                                <v-divider></v-divider>
-                                <div id="mobile-footer-content">
-                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
-                                    <span> &copy; 2015 - 2021 fuliln</span>
-                                </div>
-                            </div>                   
-                        </v-col>                                            
-                    </v-row>
-                </v-container>
-            </v-content>
-        </v-app>
     </div>
-    
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+  
+</div>
 
-<script src="/content/js/main.js"></script>
+      </div>
 
-
-
-
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
 
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({
-        startOnLoad: true,
-        theme: "default"
-    });</script>
+<script src="/content/js/backtotop.js"></script>
 
 
 
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-box">
+        <div class="search-title">
+          <!-- <span class="search-icon-input">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </span> -->
+          
+            <input type="text" class="search-input" id="search-input" placeholder="$ grep...">
+          
+          <span class="search-close-icon" id="search-close-icon">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-close"></i>
+            </a>
+          </span>
+        </div>
+        <div class="search-result" id="search-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    // inputArea.onclick = function() {
+    //   getSearchFile()
+    //   this.onclick = null
+    // }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        inputArea.focus()
+        getSearchFile()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'><span></ul>";
+      // $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='/" + data_url + "' class='search-result-title'><h2>" + orig_data_title + "</h2></a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<h3 class=\"search-result-abstract\">" + match_content + "...</h3>"
+                }
+                str += "<hr></li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/leedom92/hexo-theme-leedom#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
 
 
-</body>
+
+
+    </div>
+  </body>
 </html>

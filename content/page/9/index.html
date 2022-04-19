@@ -1,877 +1,475 @@
 <!DOCTYPE html>
 <html lang="">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
-    <meta name="renderer" content="webkit"/>
-    <meta name="force-rendering" content="webkit"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
-    
-    
-        <link rel="shortcut icon" href="/images/favicon.ico">
-    
-     
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
-    
-<link rel="stylesheet" href="/content/css/main.css">
 
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="fuliln" />
+  <meta name="description" content="" />
+  
+    <meta name="robots" content="noindex" />
+  
+  
+  <title>
     
+      水货程序员的笔记
     
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,400italic,600|Roboto+Mono" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/content/css/base.css">
+<link rel="stylesheet" href="/content/css/common.css">
+<link rel="stylesheet" href="/content/iconfont/iconfont.css">
 
 
+  
+    
+<link rel="stylesheet" href="/content/css/index.css">
+
+  
+
+  
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/content/js/fancybox.js"></script>
 
 
-
-
-
-    
-    
-    
-        <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        
-            load: ['[tex]/mhchem'],
-        
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        
-            packages: {'[+]': ['mhchem']},
-        
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-          
-
-    
-    
-    
-    
-    <title>
-          
-            水货程序员的笔记
-        
-    </title>
-    
-    
 <meta name="generator" content="Hexo 5.4.0"></head>
-<body>
-    <div id="app">
-        <v-app>
-            <v-content id="page">
-                <v-container fluid>
-                    <v-row>
-                        <v-col cols="2" class="d-none d-md-block">
-                            <div id="sidebar" class="float-right">
-    <a href="/content/" rel="home">
-        <v-avatar size=96>
-            <img id="logo" src="/images/avatar.webp">     
-        </v-avatar> 
-    </a>
-    <v-divider></v-divider>
-    <div class="mini-menu">
-        <v-btn icon href="/content/">
-            <v-icon>home</v-icon>
-        </v-btn>
-        <v-btn icon href="/content/categories/">
-            <v-icon>folder</v-icon>
-        </v-btn>
-        <v-btn icon href="/content/tags/">
-            <v-icon>bookmark</v-icon>
-        </v-btn>
-        <v-btn icon @click="SetNightMode">
-            <v-icon>{{ nightMode }}</v-icon>
-        </v-btn>
-    </div>
-    <v-list id="main-menu" class="font-weight-bold" flat>
-        
-            
-            <v-list-item href="/content/archives/" link>
-            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                Archives
-            </v-list-item-content>
-            </v-list-item>
-        
-            
-            <v-list-item href="/content/about/" link>
-            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                About
-            </v-list-item-content>
-            </v-list-item>
-        
-    </v-list>
-    <v-divider></v-divider>
-    
-        <v-list id="sub-menu" class="font-weight-medium" dense>
-            
-                
-                    <v-list-item href="/content/categories/java/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="7" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>java</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E6%9D%82%E9%A1%B9/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="11" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>杂项</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E5%AD%98%E5%82%A8/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="8" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>存储</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/linux/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>linux</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="4" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>中间件</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>所思所想</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/life/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>life</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="30" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>编程语言</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E5%B7%A5%E5%85%B7/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="5" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>工具</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/python/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>python</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E7%AE%97%E6%B3%95/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>算法</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/go/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>go</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/excel/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>excel</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-        </v-list>    
-    
 
-    <div id="footer">
-        <div class="footer-social">
-            
-                
-                <v-btn icon href="/content/fulin87@sina.com" target="_blank">
-                    <v-icon>fas fa-envelope</v-icon>
-                </v-btn>
-            
-                
-                <v-btn icon href="https://github.com/fulin87" target="_blank">
-                    <v-icon>fab fa-github</v-icon>
-                </v-btn>
-            
-        </div>
-        <v-divider></v-divider>
-        <div class="footer-content">
-            
-                <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    Total Visitors <span id="busuanzi_value_site_uv"></span>
-                </span>
-                <br>
-            
-            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
-            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
-            <span>
-                &copy; 2015 - 2021 
-                fuliln
-            </span>
-        </div>
-    </div>
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <a href="/">LEEDOM</a>
 </div>
 
-                        </v-col>
-                        <v-col cols="12" md="10">
-                            <v-row>
-  <v-col cols="12" md="8" align-self="end">
-    <div id="site-header">
-      <div id="site-title">
-        <a href="/content/" rel="home">水货程序员的笔记</a>
-      </div>
-      <div id="site-description"></div>
-      <div id="mobile-menu" class="d-block d-md-none">
-        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
-        <div class="mobile-mini-menu">
-          <v-btn icon href="/">
-              <v-icon>home</v-icon>
-          </v-btn>
-          <v-btn icon href="/categories/">
-              <v-icon>folder</v-icon>
-          </v-btn>
-          <v-btn icon href="/tags/">
-              <v-icon>bookmark</v-icon>
-          </v-btn>
-          <v-btn icon @click="SetNightMode">
-              <v-icon>{{ nightMode }}</v-icon>
-          </v-btn>
-          
-            
-            <v-btn icon href="/content/archives/">
-              <v-icon>archive</v-icon>
-            </v-btn>
-          
-            
-            <v-btn icon href="/content/about/">
-              <v-icon>account_circle</v-icon>
-            </v-btn>
-          
-        </div>
-      </div>    
-    </div>
-  </v-col>  
-  <v-col cols="4" align-self="end" class="d-none d-md-block">
-    <v-col align-self="end">
-      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
-    </v-col> 
-  </v-col>
-</v-row>
 
-                            <v-card class="elevation-2 index-card">
+      <p class="links">
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2015-11-20
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2015/11/20/2015-11-20-ruby/">与ruby有关的笔记</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-ruby这几年的名气越来越大了，甚至传说ruby是进行web开发效率最高的语言。前段时间折腾自己的github个人博客，接触到jekyll，进而接触到ruby，就稍微了解了一下。感觉ruby跟python和node这两种语言非常接近。这里记一下自己了解到的一点点有限的知识，防止遗忘。
-
-ruby的包管理工具:gem像ruby，pyhon,node这几种语言都有自己的包管理工具，用起来真的感觉非常的爽，唯一不好的地方是：有时候下载的网速太慢了。遇到这种情况，就需要更换源。
-gem -v                                     #gem版本
-gem sour...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/11/20/2015-11-20-ruby/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
+    <a title="archives" target="" href="/archives/">
+      <i class="iconfont icon-bookmark"></i>
+    </a>
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2015-11-19
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E5%B7%A5%E5%85%B7/">工具></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2015/11/19/2015-11-19-vim/">vi的基本配置和常用命令</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-vi或者vim功能的强大是毋庸置疑的。全键盘的操作体验，快速定位，流畅的编辑能力。但是还是有一些细节是需要注意的。这里记录一下我平时使用vim的配置情况和一些容易忘记的命令,方便以后查阅。
-
-vi的基本配置(.vimrc文件的配置)syn on                      &quot;语法支持
-
-&quot;common conf \&#123;\&#123;             通用配置
-
-&quot;设置文件的代码输出
-set encoding=utf-8          
-set termencoding=utf-8     
-set fileencoding...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/11/19/2015-11-19-vim/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
+    <a title="github" target="_blank" href="https://github.com/leedom92/hexo-theme-leedom">
+      <i class="iconfont icon-github"></i>
+    </a>
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2015-05-27
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/">所思所想></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2015/05/27/2015-05-27-good-life/">好的生活习惯</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          &nbsp;&nbsp;&nbsp;
-
- &nbsp;*读了很多年的书，也工作了很多年，到头来发现，有一个好的生活习惯比什么都重要….*。
-
-不良的嗜好抽烟，喝酒 这些都是不良的嗜好，这些不好的习惯会极大的影响自己的精力，身体，浪费宝贵的时间。如果有这些嗜好，戒掉还来得及，在自己还没有老去的时候。
-早睡早起以前读历史书，发现蒋公有一个很好的习惯，那就是早睡早起，这当然与他的军人背景有关，同时蒋公的所有照片中，他都是精神抖擞，衣着整洁的，这与毛公好像不太一样。说实话，我挺佩服蒋公的。现在自己马上要步入而立之年了。人到中年才发现早睡早起不仅身体会感觉舒爽，一天的时间似乎都充裕了…早起，看朝阳...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/05/27/2015-05-27-good-life/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
+    <a title="email" target="" href="">
+      <i class="iconfont icon-envelope"></i>
+    </a>
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2015-05-20
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/life/">life></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2015/05/20/2015-05-20-%E6%94%B9%E5%8F%98/">改变</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
- 我们每天都在说要改变，但是我们每天还是在重复同样的事情。世界上最遥远的距离，就是知道与做到之间的距离
-
-很喜欢这样一句话：如果你真的想做一件事，全世界都会给你让路。
-
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/05/20/2015-05-20-%E6%94%B9%E5%8F%98/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
+    <a title="facebook" target="" href="">
+      <i class="iconfont icon-facebooksquare"></i>
+    </a>
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2015-05-20
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2015/05/20/2015-06-12-eclipse/">eclipse中svn插件的问题及解决</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-经常遇到开发工具的问题，这里记录一下eclipse中与插件相关的问题
-
-eclipse中的svn插件的问题&nbsp;&nbsp;&nbsp;&nbsp;eclipse中的svn插件叫subclipse。一般可以通过Help &gt; eclipse marketPlace &gt; find找到所需要的插件，直接安装就可以了。&nbsp;&nbsp;&nbsp;&nbsp;但是这样安装的插件有一个问题，就是版本不好控制。一般eclipse marketPlace中的插件都是最新版本的。所以有可能会造成兼容性的问题。
-兼容性问题的最佳实践&nbsp;&nbsp;&nbsp;&nbsp;...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/05/20/2015-06-12-eclipse/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
+    <a title="twitter" target="" href="">
+      <i class="iconfont icon-twitter"></i>
+    </a>
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2015-03-25
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/java/">java></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2015/03/25/2015-03-25-git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">git要点总结</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2015/03/25/2015-03-25-git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
+    <a title="wechat" target="" href="">
+      <i class="iconfont icon-wechat"></i>
+    </a>
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2014-12-30
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E6%9D%82%E9%A1%B9/">杂项></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2014/12/30/2014-12-30-web-name/">互联网架构相关名称解释</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-一个合格的后端开发工程师的学习路线大体上是这样的: 计算机基础理论 -&gt; 操作系统 -&gt; 计算机语言 -&gt; 数据库 -&gt; 互联网架构 -&gt; 大数据技术  当然这里省略了很多的细节，但是我认为大致的方向是这样的，现在的技术日新月异,有很多名词是上学的时候没有学过的，需要工作中积累。
-
-中间件 百度百科的解释
-  中间件我的理解就是一种介于操作系统和业务系统之间的一种软件系统或者技术。
-灰度发布 百度百科的解释
- 灰度发布我自己的理解就是：在保证系统不停机的情况下，逐步发布，替换，针对效果十分理想而进行全面发布或者回滚。和A/B测试有重叠的地方。
-A/B测试 ...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/12/30/2014-12-30-web-name/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
+    <a title="weibo" target="" href="">
+      <i class="iconfont icon-weibo"></i>
+    </a>
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2014-11-01
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2014/11/01/2014-11-01-quickLinux/">Linux中的快捷键汇总</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-linux中有很多的快捷键，掌握其中常用的，对提高工作效率有很大帮助，这里做一个汇总。
-
-最常用的快捷键tab  
-    补全
-ctrl+u
-    删除光标之前到行首的字符
-ctrl+k
-    删除光标之前到行尾的字符
-ctrl+c
-    取消当前行输入的命令
-ctrl+a
-    光标移动到行首
-ctrl+e
-    光标移动到行尾
-ctrl+f
-    光标向右移动一个字符位置
-ctrl+b
-    光标向左移动一个字符位置
-ctrl+l
-    清屏
-
- 
-
-
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/11/01/2014-11-01-quickLinux/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
+    <a title="rss" target="_blank" href="/atom.xml">
+      <i class="iconfont icon-rss"></i>
+    </a>
   
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2014-10-31
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2014/10/31/2014-10-31-nginx/">Nginx知识点汇总</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-nginx的使用越来越广泛，在工作中也有接触，把与其相关的知识点记录一下，免得遗忘了
-
-nginx介绍 nginx 是由一位叫Igor Sysoev的俄罗斯人开发的www软件，是一个高性能的http和反向代理服务器
-nginx的主要功能
-web服务
-反向代理
-web缓存
-
-nginx的优点
-高并发（静态小文件），1-2W的并发
-占用资源少，2W并发，10个线程，占用150M内存
-功能种类比较多，每一个功能都不是特别强
-支持epoll模型，使的nginx可以支持高并发
-利用nginx可以对ip限速，可以限制连接数
-配置简单，更灵活
-
- 原理见下图（和apache做对比）
- 
-nginx的...
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/10/31/2014-10-31-nginx/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-  
-    <article class="index-article">
-      
-      <div class="index-article-header">
-        <v-row no-gutters>
-          <v-col cols="auto">
-            <div class="index-article-header-date font-weight-medium">
-              2014-10-19
-            </div>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="auto">
-            
-          </v-col>
-        </v-row>
-        <span>
-          
-            <a class="index-article-header-category font-weight-bold" href="/content/categories/linux/">linux></a>
-           
-        </span> 
-        <a class="index-article-header-title font-weight-medium" href="/content/2014/10/19/2014-10-19-%E6%9E%B6%E6%9E%84/">技术选型和经验总结</a>
-      </div>
-      
-      <div class="index-article-content">
-        
-          
-什么是经验？我认为经验就是：知道什么不能做，同时知道怎么做才好…..
-
-技术选型的原则文档或WEB站点的质量如何? 
-是否有活跃的用户或开发社区? 
-接口程序的质量和稳定性如何?
-性能如何? 
-是否是可扩展易维护的?
-是否安全?
-
- 遇到问题能马上找到解决的方案，这是技术选型的首要原则，其次，在满足现有项目要求的情况下，选择尽量简单的解决方案，就像 奥卡姆剃刀原理 ：如无必要，勿增实体
-性能真的最重要吗可维护性比性能重要
-
- 网上到处充斥着关于各种语言性能的讨论，各种框架性能的讨论，但是性能真的很重要吗？ 对于一个复杂的大型项目，我认为可用性和可维护性的重要性要远远大于性能。
-
-        
-      </div>
-      
-      <div class="index-article-readmore ">
-        <v-btn text href="/content/2014/10/19/2014-10-19-%E6%9E%B6%E6%9E%84/">Read More</v-btn>
-      </div>
-      <v-divider></v-divider>
-    </article> 
-   
-</v-card>  
+</p>
 
 
-  <div id="pagination" class="text-center">
-    <v-pagination 
-      v-model="currentPage" 
-      :length=10 
-      @input="PageChange" 
-      prev-icon="chevron_left"
-      next-icon="chevron_right"
-      color="secondary"
-    ></v-pagination>
-  </div>
-         
-                            <div id="mobile-footer" class="d-block d-md-none">
-                                <v-divider></v-divider>
-                                <div id="mobile-footer-content">
-                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
-                                    <span> &copy; 2015 - 2021 fuliln</span>
-                                </div>
-                            </div>                   
-                        </v-col>                                            
-                    </v-row>
-                </v-container>
-            </v-content>
-        </v-app>
-    </div>
+      <div class="main">
+        <div>
+  <ul>
+    <!-- 遍历渲染文章 -->
     
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+    <li>
+      <h3>Nov 19, 2015</h3>
+      <h2>
+        <a href="/content/2015/11/19/2015-11-19-vim/">
+          
+            
+              <span>vi的基本配置和常用命令</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>May 27, 2015</h3>
+      <h2>
+        <a href="/content/2015/05/27/2015-05-27-good-life/">
+          
+            
+              <span>好的生活习惯</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>May 20, 2015</h3>
+      <h2>
+        <a href="/content/2015/05/20/2015-05-20-%E6%94%B9%E5%8F%98/">
+          
+            
+              <span>改变</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>May 20, 2015</h3>
+      <h2>
+        <a href="/content/2015/05/20/2015-06-12-eclipse/">
+          
+            
+              <span>eclipse中svn插件的问题及解决</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>Mar 25, 2015</h3>
+      <h2>
+        <a href="/content/2015/03/25/2015-03-25-git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">
+          
+            
+              <span>git要点总结</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>Dec 30, 2014</h3>
+      <h2>
+        <a href="/content/2014/12/30/2014-12-30-web-name/">
+          
+            
+              <span>互联网架构相关名称解释</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>Nov 01, 2014</h3>
+      <h2>
+        <a href="/content/2014/11/01/2014-11-01-quickLinux/">
+          
+            
+              <span>Linux中的快捷键汇总</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>Oct 31, 2014</h3>
+      <h2>
+        <a href="/content/2014/10/31/2014-10-31-nginx/">
+          
+            
+              <span>Nginx知识点汇总</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>Oct 19, 2014</h3>
+      <h2>
+        <a href="/content/2014/10/19/2014-10-19-%E6%9E%B6%E6%9E%84/">
+          
+            
+              <span>技术选型和经验总结</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+    <li>
+      <h3>Oct 12, 2014</h3>
+      <h2>
+        <a href="/content/2014/10/12/2014-10-12-mysql-schema/">
+          
+            
+              <span>mysql数据库的information_schema是什么</span>
+            
+          
+        </a>
+      </h2>
+    </li>
+    
+  </ul>
+  
+  <nav class="post-navigation">
+    
+      <a id="prev" class="index-nav" href="/content/page/8/">&lt;&nbsp;NEWER</a>
+    
+    
+      <a id="next" class="index-nav" href="/content/page/10/">OLDER&nbsp;&gt;</a>
+    
+  </nav>
+</div>
 
-<script src="/content/js/main.js"></script>
+        <div class="footer">
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Copyright © Leedom 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Theme by Leedom | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/content/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-box">
+        <div class="search-title">
+          <!-- <span class="search-icon-input">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </span> -->
+          
+            <input type="text" class="search-input" id="search-input" placeholder="$ grep...">
+          
+          <span class="search-close-icon" id="search-close-icon">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-close"></i>
+            </a>
+          </span>
+        </div>
+        <div class="search-result" id="search-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    // inputArea.onclick = function() {
+    //   getSearchFile()
+    //   this.onclick = null
+    // }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        inputArea.focus()
+        getSearchFile()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'><span></ul>";
+      // $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='/" + data_url + "' class='search-result-title'><h2>" + orig_data_title + "</h2></a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<h3 class=\"search-result-abstract\">" + match_content + "...</h3>"
+                }
+                str += "<hr></li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/leedom92/hexo-theme-leedom#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
 
 
 
 
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-
-
-</body>
+    </div>
+  </body>
 </html>

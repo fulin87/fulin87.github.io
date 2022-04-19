@@ -1,401 +1,1444 @@
 <!DOCTYPE html>
 <html lang="">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
-    <meta name="renderer" content="webkit"/>
-    <meta name="force-rendering" content="webkit"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
-    
-    
-        <link rel="shortcut icon" href="/images/favicon.ico">
-    
-     
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
-    
-<link rel="stylesheet" href="/content/css/main.css">
 
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="fuliln" />
+  <meta name="description" content="" />
+  
+  
+  <title>
     
+      archive_a: 2019/1 
+      
+      
     
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,400italic,600|Roboto+Mono" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/content/css/base.css">
+<link rel="stylesheet" href="/content/css/common.css">
+<link rel="stylesheet" href="/content/iconfont/iconfont.css">
 
 
+  
+
+  
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/content/js/fancybox.js"></script>
 
 
-
-
-
-    
-    
-          
-
-    
-    
-    
-    
-    <title>
-          
-            水货程序员的笔记
-        
-    </title>
-    
-    
 <meta name="generator" content="Hexo 5.4.0"></head>
-<body>
-    <div id="app">
-        <v-app>
-            <v-content id="page">
-                <v-container fluid>
-                    <v-row>
-                        <v-col cols="2" class="d-none d-md-block">
-                            <div id="sidebar" class="float-right">
-    <a href="/content/" rel="home">
-        <v-avatar size=96>
-            <img id="logo" src="/images/avatar.webp">     
-        </v-avatar> 
-    </a>
-    <v-divider></v-divider>
-    <div class="mini-menu">
-        <v-btn icon href="/content/">
-            <v-icon>home</v-icon>
-        </v-btn>
-        <v-btn icon href="/content/categories/">
-            <v-icon>folder</v-icon>
-        </v-btn>
-        <v-btn icon href="/content/tags/">
-            <v-icon>bookmark</v-icon>
-        </v-btn>
-        <v-btn icon @click="SetNightMode">
-            <v-icon>{{ nightMode }}</v-icon>
-        </v-btn>
-    </div>
-    <v-list id="main-menu" class="font-weight-bold" flat>
-        
-            
-            <v-list-item href="/content/archives/" link>
-            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                Archives
-            </v-list-item-content>
-            </v-list-item>
-        
-            
-            <v-list-item href="/content/about/" link>
-            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                About
-            </v-list-item-content>
-            </v-list-item>
-        
-    </v-list>
-    <v-divider></v-divider>
-    
-        <v-list id="sub-menu" class="font-weight-medium" dense>
-            
-                
-                    <v-list-item href="/content/categories/java/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="7" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>java</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E6%9D%82%E9%A1%B9/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="11" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>杂项</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E5%AD%98%E5%82%A8/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="8" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>存储</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/linux/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>linux</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="4" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>中间件</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E6%89%80%E6%80%9D%E6%89%80%E6%83%B3/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="13" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>所思所想</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/life/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>life</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="30" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>编程语言</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E5%B7%A5%E5%85%B7/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="5" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>工具</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/python/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>python</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/%E7%AE%97%E6%B3%95/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>算法</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/go/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>go</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-                
-                    <v-list-item href="/content/categories/excel/" link>
-                        <v-badge :value="menuHover" transition="slide-y-transition" inline content="1" >
-                            <v-hover v-model="menuHover">
-                                <v-list-item-content>
-                                    <span>excel</span>                              
-                                </v-list-item-content>                           
-                            </v-hover>
-                        </v-badge>
-                    </v-list-item>
-                
-            
-        </v-list>    
-    
 
-    <div id="footer">
-        <div class="footer-social">
-            
-                
-                <v-btn icon href="/content/fulin87@sina.com" target="_blank">
-                    <v-icon>fas fa-envelope</v-icon>
-                </v-btn>
-            
-                
-                <v-btn icon href="https://github.com/fulin87" target="_blank">
-                    <v-icon>fab fa-github</v-icon>
-                </v-btn>
-            
-        </div>
-        <v-divider></v-divider>
-        <div class="footer-content">
-            
-                <span id="busuanzi_container_site_uv" style="display: none;"> 
-                    Total Visitors <span id="busuanzi_value_site_uv"></span>
-                </span>
-                <br>
-            
-            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
-            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
-            <span>
-                &copy; 2015 - 2021 
-                fuliln
-            </span>
-        </div>
-    </div>
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <a href="/">LEEDOM</a>
 </div>
 
-                        </v-col>
-                        <v-col cols="12" md="10">
-                            <v-row>
-  <v-col cols="12" md="8" align-self="end">
-    <div id="site-header">
-      <div id="site-title">
-        <a href="/content/" rel="home">水货程序员的笔记</a>
-      </div>
-      <div id="site-description"></div>
-      <div id="mobile-menu" class="d-block d-md-none">
-        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
-        <div class="mobile-mini-menu">
-          <v-btn icon href="/">
-              <v-icon>home</v-icon>
-          </v-btn>
-          <v-btn icon href="/categories/">
-              <v-icon>folder</v-icon>
-          </v-btn>
-          <v-btn icon href="/tags/">
-              <v-icon>bookmark</v-icon>
-          </v-btn>
-          <v-btn icon @click="SetNightMode">
-              <v-icon>{{ nightMode }}</v-icon>
-          </v-btn>
-          
-            
-            <v-btn icon href="/content/archives/">
-              <v-icon>archive</v-icon>
-            </v-btn>
-          
-            
-            <v-btn icon href="/content/about/">
-              <v-icon>account_circle</v-icon>
-            </v-btn>
-          
-        </div>
-      </div>    
-    </div>
-  </v-col>  
-  <v-col cols="4" align-self="end" class="d-none d-md-block">
-    <v-col align-self="end">
-      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
-    </v-col> 
-  </v-col>
-</v-row>
 
-                            
-<v-card class="elevation-2 index-card">
-    <v-timeline class="timeline" dense>
-        
-            
-            
-                <v-timeline-item class="timeline-header" color="secondary lighten-2">
-                    <a href="/content/archives/2019" class="timeline-title">2019</a>
-                    <span class="timeline-subtitle">Archives</span>
-                </v-timeline-item>
-                
-            
-            <v-timeline-item fill-dot small color="secondary lighten-2">
-                <div class="timeline-item-post d-none d-md-block">
-                    <span class="timeline-item-time">2019.01.20</span>
-                    <a href="/content/2019/01/20/2019-01-20-ignite/" class="timeline-item-title">ignite实战总结</a>
-                </div>
-                <div class="timeline-item-post-mobile d-block d-md-none">
-                    <span class="timeline-item-time">2019.01.20</span><br>
-                    <a href="/content/2019/01/20/2019-01-20-ignite/" class="timeline-item-title">ignite实战总结</a>
-                </div>
-                <v-divider></v-divider>
-            </v-timeline-item>
-        
-    </v-timeline>
-</v-card>
+      <p class="links">
+  
+    <a title="archives" target="" href="/archives/">
+      <i class="iconfont icon-bookmark"></i>
+    </a>
+  
+    <a title="github" target="_blank" href="https://github.com/leedom92/hexo-theme-leedom">
+      <i class="iconfont icon-github"></i>
+    </a>
+  
+    <a title="email" target="" href="">
+      <i class="iconfont icon-envelope"></i>
+    </a>
+  
+    <a title="facebook" target="" href="">
+      <i class="iconfont icon-facebooksquare"></i>
+    </a>
+  
+    <a title="twitter" target="" href="">
+      <i class="iconfont icon-twitter"></i>
+    </a>
+  
+    <a title="wechat" target="" href="">
+      <i class="iconfont icon-wechat"></i>
+    </a>
+  
+    <a title="weibo" target="" href="">
+      <i class="iconfont icon-weibo"></i>
+    </a>
+  
+    <a title="rss" target="_blank" href="/atom.xml">
+      <i class="iconfont icon-rss"></i>
+    </a>
+  
+</p>
 
-         
-                            <div id="mobile-footer" class="d-block d-md-none">
-                                <v-divider></v-divider>
-                                <div id="mobile-footer-content">
-                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
-                                    <span> &copy; 2015 - 2021 fuliln</span>
-                                </div>
-                            </div>                   
-                        </v-col>                                            
-                    </v-row>
-                </v-container>
-            </v-content>
-        </v-app>
-    </div>
+
+      <div class="main">
+        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+
+<!-- last: 按年份把文章分组，当前遍历到的年份 -->
+<!-- now: 当前遍历到的文章的发布年份 -->
+
+<div class="container archives">
+  <div class="post-list">
     
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2021</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="springboot背后的那些事">
+        <div class="time-m-d">12-03</div>
+        <div class="title">
+          <a href="/content/2021/12/03/2020-12-03-springboot%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">
+            
+              <span>springboot背后的那些事</span>
+            
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2020</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="netty学习笔记">
+        <div class="time-m-d">11-20</div>
+        <div class="title">
+          <a href="/content/2020/11/20/2020-11-20-netty%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+            
+              <span>netty学习笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mac备忘录">
+        <div class="time-m-d">11-20</div>
+        <div class="title">
+          <a href="/content/2020/11/20/2020-12-01-mac%E4%B8%AD%E7%9A%84%E5%BF%85%E5%A4%87%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-copy/">
+            
+              <span>mac备忘录</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="彻底搞懂JDK中的BitSet">
+        <div class="time-m-d">07-08</div>
+        <div class="title">
+          <a href="/content/2020/07/08/2020-07-08-bitset/">
+            
+              <span>彻底搞懂JDK中的BitSet</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="dubbo知识点梳理">
+        <div class="time-m-d">05-23</div>
+        <div class="title">
+          <a href="/content/2020/05/23/2020-05-23-dubbo%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">
+            
+              <span>dubbo知识点梳理</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="重学数据结构">
+        <div class="time-m-d">04-01</div>
+        <div class="title">
+          <a href="/content/2020/04/01/2020-04-01-%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+            
+              <span>重学数据结构</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="很好玩的两个数据可视化工具">
+        <div class="time-m-d">04-01</div>
+        <div class="title">
+          <a href="/content/2020/04/01/2020-04-01-%E6%9C%89%E8%B6%A3%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
+            
+              <span>很好玩的两个数据可视化工具</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="maven相关">
+        <div class="time-m-d">01-31</div>
+        <div class="title">
+          <a href="/content/2020/01/31/2014-09-11-maven/">
+            
+              <span>maven相关</span>
+            
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2019</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="加密和解密">
+        <div class="time-m-d">08-10</div>
+        <div class="title">
+          <a href="/content/2019/08/10/2019-08-10-securety/">
+            
+              <span>加密和解密</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Docker笔记">
+        <div class="time-m-d">08-10</div>
+        <div class="title">
+          <a href="/content/2019/08/10/2019-10-02-Docker/">
+            
+              <span>Docker笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="一次生产故障的总结">
+        <div class="time-m-d">07-10</div>
+        <div class="title">
+          <a href="/content/2019/07/10/2019-07-10-coredump01/">
+            
+              <span>一次生产故障的总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="matplotlib学习笔记">
+        <div class="time-m-d">06-06</div>
+        <div class="title">
+          <a href="/content/2019/06/06/2019-06-06-matplotlib/">
+            
+              <span>matplotlib学习笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python2和python3以及python常用工具包的那些事">
+        <div class="time-m-d">06-06</div>
+        <div class="title">
+          <a href="/content/2019/06/06/2019-06-10-python-lib/">
+            
+              <span>python2和python3以及python常用工具包的那些事</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="我的书单">
+        <div class="time-m-d">06-05</div>
+        <div class="title">
+          <a href="/content/2019/06/05/2019-06-05-books/">
+            
+              <span>我的书单</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="常用官方文档">
+        <div class="time-m-d">05-29</div>
+        <div class="title">
+          <a href="/content/2019/05/29/2019-05-29-document/">
+            
+              <span>常用官方文档</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="代码重构的思考">
+        <div class="time-m-d">05-01</div>
+        <div class="title">
+          <a href="/content/2019/05/01/2019-05-01-coderebuild/">
+            
+              <span>代码重构的思考</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="总结一下我使用过的设计模式">
+        <div class="time-m-d">04-21</div>
+        <div class="title">
+          <a href="/content/2019/04/21/2019-04-21-pattern/">
+            
+              <span>总结一下我使用过的设计模式</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Elasticsearch实践总结">
+        <div class="time-m-d">03-20</div>
+        <div class="title">
+          <a href="/content/2019/03/20/2019-03-20-elasticsearch/">
+            
+              <span>Elasticsearch实践总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="神奇的本福德定律">
+        <div class="time-m-d">02-20</div>
+        <div class="title">
+          <a href="/content/2019/02/20/2019-02-20-gailv/">
+            
+              <span>神奇的本福德定律</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="ignite实战总结">
+        <div class="time-m-d">01-20</div>
+        <div class="title">
+          <a href="/content/2019/01/20/2019-01-20-ignite/">
+            
+              <span>ignite实战总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2018</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="老鸟眼中的JVM知识体系-常用JVM参数总结和调优经验">
+        <div class="time-m-d">12-09</div>
+        <div class="title">
+          <a href="/content/2018/12/09/2018-12-09-jvm6/">
+            
+              <span>老鸟眼中的JVM知识体系-常用JVM参数总结和调优经验</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="老鸟眼中的JVM知识体系(5)-字节码">
+        <div class="time-m-d">12-08</div>
+        <div class="title">
+          <a href="/content/2018/12/08/2018-12-08-jvm5/">
+            
+              <span>老鸟眼中的JVM知识体系(5)-字节码</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="老鸟眼中的JVM知识体系(6)-调试工具">
+        <div class="time-m-d">12-08</div>
+        <div class="title">
+          <a href="/content/2018/12/08/2018-12-10-jvm7/">
+            
+              <span>老鸟眼中的JVM知识体系(6)-调试工具</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="老鸟眼中的JVM知识体系(3)-垃圾回收">
+        <div class="time-m-d">12-06</div>
+        <div class="title">
+          <a href="/content/2018/12/06/2018-12-06-jvm3/">
+            
+              <span>老鸟眼中的JVM知识体系(3)-垃圾回收</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="老鸟眼中的JVM知识体系(4)-垃圾收集器与内存分配回收策略">
+        <div class="time-m-d">12-06</div>
+        <div class="title">
+          <a href="/content/2018/12/06/2018-12-07-jvm4/">
+            
+              <span>老鸟眼中的JVM知识体系(4)-垃圾收集器与内存分配回收策略</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="老鸟眼中的JVM知识体系(2)-JVM体系结构">
+        <div class="time-m-d">12-05</div>
+        <div class="title">
+          <a href="/content/2018/12/05/2018-12-05-jvm2/">
+            
+              <span>老鸟眼中的JVM知识体系(2)-JVM体系结构</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="老鸟眼中的JVM知识体系(1)-Java体系">
+        <div class="time-m-d">12-04</div>
+        <div class="title">
+          <a href="/content/2018/12/04/2018-12-04-jvm/">
+            
+              <span>老鸟眼中的JVM知识体系(1)-Java体系</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="shell学习笔记">
+        <div class="time-m-d">11-06</div>
+        <div class="title">
+          <a href="/content/2018/11/06/2018-11-06-shell/">
+            
+              <span>shell学习笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mybatis相关知识点的总结">
+        <div class="time-m-d">11-05</div>
+        <div class="title">
+          <a href="/content/2018/11/05/2018-11-05-mybatis/">
+            
+              <span>mybatis相关知识点的总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python爬虫框架crapy">
+        <div class="time-m-d">10-04</div>
+        <div class="title">
+          <a href="/content/2018/10/04/2018-10-04-scrapy/">
+            
+              <span>python爬虫框架crapy</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="kafka学习笔记">
+        <div class="time-m-d">08-20</div>
+        <div class="title">
+          <a href="/content/2018/08/20/2018-08-20-kafka-merkdown/">
+            
+              <span>kafka学习笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="搭建自己的代理服务器">
+        <div class="time-m-d">08-16</div>
+        <div class="title">
+          <a href="/content/2018/08/16/2018-08-16-shadowsocks/">
+            
+              <span>搭建自己的代理服务器</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="消息队列学习笔记">
+        <div class="time-m-d">06-25</div>
+        <div class="title">
+          <a href="/content/2018/06/25/2018-06-25-MQ-learn/">
+            
+              <span>消息队列学习笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="《redis设计与实现》读书笔记">
+        <div class="time-m-d">06-22</div>
+        <div class="title">
+          <a href="/content/2018/06/22/2018-06-22-redis-learn/">
+            
+              <span>《redis设计与实现》读书笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="spring知识梳理">
+        <div class="time-m-d">01-31</div>
+        <div class="title">
+          <a href="/content/2018/01/31/2018-10-08-spring%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/">
+            
+              <span>spring知识梳理</span>
+            
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2017</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="node中的包管理工具npm">
+        <div class="time-m-d">11-23</div>
+        <div class="title">
+          <a href="/content/2017/11/23/2017-11-23-node-npm/">
+            
+              <span>node中的包管理工具npm</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python中的json模块和requests模块">
+        <div class="time-m-d">06-01</div>
+        <div class="title">
+          <a href="/content/2017/06/01/2017-06-01-python8/">
+            
+              <span>python中的json模块和requests模块</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Intellij 使用相关的知识点">
+        <div class="time-m-d">04-14</div>
+        <div class="title">
+          <a href="/content/2017/04/14/2017-04-14-intellij/">
+            
+              <span>Intellij 使用相关的知识点</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="redis 知识点总结">
+        <div class="time-m-d">04-04</div>
+        <div class="title">
+          <a href="/content/2017/04/04/2017-04-04-redis/">
+            
+              <span>redis 知识点总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mysql一次性删除千万级别记录引发的问题和思考">
+        <div class="time-m-d">02-24</div>
+        <div class="title">
+          <a href="/content/2017/02/24/2017-02-24-mysqldeleterecord/">
+            
+              <span>mysql一次性删除千万级别记录引发的问题和思考</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="php我是怎样从入门到放弃的">
+        <div class="time-m-d">01-04</div>
+        <div class="title">
+          <a href="/content/2017/01/04/2017-01-04-php-stop/">
+            
+              <span>php我是怎样从入门到放弃的</span>
+            
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2016</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="Excel到底有多厉害之用Excel画系统架构图">
+        <div class="time-m-d">12-22</div>
+        <div class="title">
+          <a href="/content/2016/12/22/2016-12-22-exceljia/">
+            
+              <span>Excel到底有多厉害之用Excel画系统架构图</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="nginx+uwsgi+python+mysql+flask 实战过程">
+        <div class="time-m-d">11-26</div>
+        <div class="title">
+          <a href="/content/2016/11/26/2016-11-26-uwsgi-python/">
+            
+              <span>nginx+uwsgi+python+mysql+flask 实战过程</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python基础知识点之常用数据库API">
+        <div class="time-m-d">11-24</div>
+        <div class="title">
+          <a href="/content/2016/11/24/2016-11-24-python7/">
+            
+              <span>python基础知识点之常用数据库API</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python基础知识点之常用标准模块">
+        <div class="time-m-d">11-23</div>
+        <div class="title">
+          <a href="/content/2016/11/23/2016-11-23-python6/">
+            
+              <span>python基础知识点之常用标准模块</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python基础知识点OOP总结">
+        <div class="time-m-d">11-22</div>
+        <div class="title">
+          <a href="/content/2016/11/22/2016-11-22-python5/">
+            
+              <span>python基础知识点OOP总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python基础知识点模块和包">
+        <div class="time-m-d">11-21</div>
+        <div class="title">
+          <a href="/content/2016/11/21/2016-11-21-python4/">
+            
+              <span>python基础知识点模块和包</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python基础知识点之文件输入和输出">
+        <div class="time-m-d">11-20</div>
+        <div class="title">
+          <a href="/content/2016/11/20/2016-11-20-python3/">
+            
+              <span>python基础知识点之文件输入和输出</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python基础知识点之易错语法">
+        <div class="time-m-d">11-19</div>
+        <div class="title">
+          <a href="/content/2016/11/19/2016-11-19-python2/">
+            
+              <span>python基础知识点之易错语法</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python基础知识点之数据结构">
+        <div class="time-m-d">11-18</div>
+        <div class="title">
+          <a href="/content/2016/11/18/2016-11-18-python1/">
+            
+              <span>python基础知识点之数据结构</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="python基础知识点之环境">
+        <div class="time-m-d">11-17</div>
+        <div class="title">
+          <a href="/content/2016/11/17/2016-11-17-python0/">
+            
+              <span>python基础知识点之环境</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="windows软件图标异常的恢复方法">
+        <div class="time-m-d">10-29</div>
+        <div class="title">
+          <a href="/content/2016/10/29/2016-10-29-outlookerr/">
+            
+              <span>windows软件图标异常的恢复方法</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux中的文件大小和磁盘占有空间的关系">
+        <div class="time-m-d">10-27</div>
+        <div class="title">
+          <a href="/content/2016/10/27/2016-10-27-fildAndDisk/">
+            
+              <span>Linux中的文件大小和磁盘占有空间的关系</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Excel VBA工程密码破解的方法">
+        <div class="time-m-d">10-27</div>
+        <div class="title">
+          <a href="/content/2016/10/27/2016-10-28-VBAmima/">
+            
+              <span>Excel VBA工程密码破解的方法</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="正则表达式知识点">
+        <div class="time-m-d">10-20</div>
+        <div class="title">
+          <a href="/content/2016/10/20/2016-10-20-regular/">
+            
+              <span>正则表达式知识点</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="系统学习Junit4">
+        <div class="time-m-d">10-14</div>
+        <div class="title">
+          <a href="/content/2016/10/14/2016-10-14-Junit/">
+            
+              <span>系统学习Junit4</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="FastJson的使用与源码解读">
+        <div class="time-m-d">10-10</div>
+        <div class="title">
+          <a href="/content/2016/10/10/2016-10-12-fastJSON/">
+            
+              <span>FastJson的使用与源码解读</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="忒修斯之船 & 数据库">
+        <div class="time-m-d">10-10</div>
+        <div class="title">
+          <a href="/content/2016/10/10/2016-10-10-tui-xiu-shi-db/">
+            
+              <span>忒修斯之船 & 数据库</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="杨德昌的那些经典电影">
+        <div class="time-m-d">10-08</div>
+        <div class="title">
+          <a href="/content/2016/10/08/2016-10-08-move-yangdecang/">
+            
+              <span>杨德昌的那些经典电影</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mysql中sql优化的常识总结">
+        <div class="time-m-d">09-27</div>
+        <div class="title">
+          <a href="/content/2016/09/27/2016-09-27-mysql-right/">
+            
+              <span>mysql中sql优化的常识总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mysql的数据备份和恢复">
+        <div class="time-m-d">09-26</div>
+        <div class="title">
+          <a href="/content/2016/09/26/2016-09-26-mysql-log/">
+            
+              <span>mysql的数据备份和恢复</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="全栈还是专攻，这是一个问题">
+        <div class="time-m-d">09-26</div>
+        <div class="title">
+          <a href="/content/2016/09/26/2016-09-26-job/">
+            
+              <span>全栈还是专攻，这是一个问题</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mysql中使用explain来分析Sql语句的性能">
+        <div class="time-m-d">09-23</div>
+        <div class="title">
+          <a href="/content/2016/09/23/2016-09-23-mysql-explain/">
+            
+              <span>mysql中使用explain来分析Sql语句的性能</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mysql中sql优化的思路和原则">
+        <div class="time-m-d">09-22</div>
+        <div class="title">
+          <a href="/content/2016/09/22/2016-09-22-mysql-update/">
+            
+              <span>mysql中sql优化的思路和原则</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mysql 基础知识">
+        <div class="time-m-d">09-21</div>
+        <div class="title">
+          <a href="/content/2016/09/21/2016-09-21-mysql/">
+            
+              <span>mysql 基础知识</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="plantUML的使用">
+        <div class="time-m-d">09-20</div>
+        <div class="title">
+          <a href="/content/2016/09/20/2016-09-20-plantUML/">
+            
+              <span>plantUML的使用</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="java集合备忘录">
+        <div class="time-m-d">09-09</div>
+        <div class="title">
+          <a href="/content/2016/09/09/2016-09-09-java-collection/">
+            
+              <span>java集合备忘录</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Object的equals和hashCode和clone方法">
+        <div class="time-m-d">09-06</div>
+        <div class="title">
+          <a href="/content/2016/09/06/2016-09-10-java-equals-hashCode/">
+            
+              <span>Object的equals和hashCode和clone方法</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux基础知识点八请求的过程">
+        <div class="time-m-d">08-26</div>
+        <div class="title">
+          <a href="/content/2016/08/26/2016-08-26-SSH8/">
+            
+              <span>Linux基础知识点八请求的过程</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux基础知识点七之用户管理">
+        <div class="time-m-d">08-25</div>
+        <div class="title">
+          <a href="/content/2016/08/25/2016-08-25-SSH7/">
+            
+              <span>Linux基础知识点七之用户管理</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux基础知识点六之定时任务">
+        <div class="time-m-d">08-24</div>
+        <div class="title">
+          <a href="/content/2016/08/24/2016-08-24-SSH6/">
+            
+              <span>Linux基础知识点六之定时任务</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux基础知识点五之权限管理">
+        <div class="time-m-d">08-23</div>
+        <div class="title">
+          <a href="/content/2016/08/23/2016-08-23-SSH5/">
+            
+              <span>Linux基础知识点五之权限管理</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux基础知识点四之常用技巧和运行级别">
+        <div class="time-m-d">08-22</div>
+        <div class="title">
+          <a href="/content/2016/08/22/2016-08-22-SSH4/">
+            
+              <span>Linux基础知识点四之常用技巧和运行级别</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux基础知识点三之硬件信息">
+        <div class="time-m-d">08-21</div>
+        <div class="title">
+          <a href="/content/2016/08/21/2016-08-21-SSH3/">
+            
+              <span>Linux基础知识点三之硬件信息</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux基础知识点二之文件系统">
+        <div class="time-m-d">08-20</div>
+        <div class="title">
+          <a href="/content/2016/08/20/2016-08-20-SSH2/">
+            
+              <span>Linux基础知识点二之文件系统</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux基础知识点一之重要目录和基础命令">
+        <div class="time-m-d">08-18</div>
+        <div class="title">
+          <a href="/content/2016/08/18/2016-08-18-SSH1/">
+            
+              <span>Linux基础知识点一之重要目录和基础命令</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="什么是成熟">
+        <div class="time-m-d">02-25</div>
+        <div class="title">
+          <a href="/content/2016/02/25/2016-02-25-grow/">
+            
+              <span>什么是成熟</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="java易错的知识点汇总">
+        <div class="time-m-d">02-20</div>
+        <div class="title">
+          <a href="/content/2016/02/20/2016-02-20-asList/">
+            
+              <span>java易错的知识点汇总</span>
+            
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2015</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="如何当好项目小组长">
+        <div class="time-m-d">12-01</div>
+        <div class="title">
+          <a href="/content/2015/12/01/2015-12-07-leader/">
+            
+              <span>如何当好项目小组长</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="与ruby有关的笔记">
+        <div class="time-m-d">11-20</div>
+        <div class="title">
+          <a href="/content/2015/11/20/2015-11-20-ruby/">
+            
+              <span>与ruby有关的笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="vi的基本配置和常用命令">
+        <div class="time-m-d">11-19</div>
+        <div class="title">
+          <a href="/content/2015/11/19/2015-11-19-vim/">
+            
+              <span>vi的基本配置和常用命令</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="好的生活习惯">
+        <div class="time-m-d">05-27</div>
+        <div class="title">
+          <a href="/content/2015/05/27/2015-05-27-good-life/">
+            
+              <span>好的生活习惯</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="改变">
+        <div class="time-m-d">05-20</div>
+        <div class="title">
+          <a href="/content/2015/05/20/2015-05-20-%E6%94%B9%E5%8F%98/">
+            
+              <span>改变</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="eclipse中svn插件的问题及解决">
+        <div class="time-m-d">05-20</div>
+        <div class="title">
+          <a href="/content/2015/05/20/2015-06-12-eclipse/">
+            
+              <span>eclipse中svn插件的问题及解决</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="git要点总结">
+        <div class="time-m-d">03-25</div>
+        <div class="title">
+          <a href="/content/2015/03/25/2015-03-25-git%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/">
+            
+              <span>git要点总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2014</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="互联网架构相关名称解释">
+        <div class="time-m-d">12-30</div>
+        <div class="title">
+          <a href="/content/2014/12/30/2014-12-30-web-name/">
+            
+              <span>互联网架构相关名称解释</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Linux中的快捷键汇总">
+        <div class="time-m-d">11-01</div>
+        <div class="title">
+          <a href="/content/2014/11/01/2014-11-01-quickLinux/">
+            
+              <span>Linux中的快捷键汇总</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Nginx知识点汇总">
+        <div class="time-m-d">10-31</div>
+        <div class="title">
+          <a href="/content/2014/10/31/2014-10-31-nginx/">
+            
+              <span>Nginx知识点汇总</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="技术选型和经验总结">
+        <div class="time-m-d">10-19</div>
+        <div class="title">
+          <a href="/content/2014/10/19/2014-10-19-%E6%9E%B6%E6%9E%84/">
+            
+              <span>技术选型和经验总结</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="mysql数据库的information_schema是什么">
+        <div class="time-m-d">10-12</div>
+        <div class="title">
+          <a href="/content/2014/10/12/2014-10-12-mysql-schema/">
+            
+              <span>mysql数据库的information_schema是什么</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="VMware 虚拟机使用时要注意的地方">
+        <div class="time-m-d">10-10</div>
+        <div class="title">
+          <a href="/content/2014/10/10/2014-10-06-vm/">
+            
+              <span>VMware 虚拟机使用时要注意的地方</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="Excel VBA连接mysql数据库">
+        <div class="time-m-d">10-10</div>
+        <div class="title">
+          <a href="/content/2014/10/10/2014-10-10-excel-vba/">
+            
+              <span>Excel VBA连接mysql数据库</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="java中异常和JVM关系">
+        <div class="time-m-d">09-10</div>
+        <div class="title">
+          <a href="/content/2014/09/10/2018-12-03-exception/">
+            
+              <span>java中异常和JVM关系</span>
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="CGI FAST-cgi WSGI uWSGI servlet的区别">
+        <div class="time-m-d">03-01</div>
+        <div class="title">
+          <a href="/content/2014/03/01/2014-03-01-CGI-FASTCGI-WSGI/">
+            
+              <span>CGI FAST-cgi WSGI uWSGI servlet的区别</span>
+            
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2013</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="java虚拟机学习笔记">
+        <div class="time-m-d">09-10</div>
+        <div class="title">
+          <a href="/content/2013/09/10/2013-09-10-java%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+            
+              <span>java虚拟机学习笔记</span>
+            
+          </a>
+        </div>
+      </div>
+    
+  </div>
+</div>
 
-<script src="/content/js/main.js"></script>
+        <div class="footer">
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Copyright © Leedom 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Theme by Leedom | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/content/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-box">
+        <div class="search-title">
+          <!-- <span class="search-icon-input">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </span> -->
+          
+            <input type="text" class="search-input" id="search-input" placeholder="$ grep...">
+          
+          <span class="search-close-icon" id="search-close-icon">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-close"></i>
+            </a>
+          </span>
+        </div>
+        <div class="search-result" id="search-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    // inputArea.onclick = function() {
+    //   getSearchFile()
+    //   this.onclick = null
+    // }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        inputArea.focus()
+        getSearchFile()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'><span></ul>";
+      // $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='/" + data_url + "' class='search-result-title'><h2>" + orig_data_title + "</h2></a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<h3 class=\"search-result-abstract\">" + match_content + "...</h3>"
+                }
+                str += "<hr></li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/leedom92/hexo-theme-leedom#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
 
 
 
 
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-
-
-</body>
+    </div>
+  </body>
 </html>
