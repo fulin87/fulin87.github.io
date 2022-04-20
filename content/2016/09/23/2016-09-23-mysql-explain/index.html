@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="" color-mode="light">
 
   <head>
   <meta charset="utf-8">
@@ -14,31 +14,28 @@
       mysql中使用explain来分析Sql语句的性能 
       
       
+      |
     
+     水货程序员的笔记
   </title>
 
   
-    <link rel="apple-touch-icon" href="/images/favicon.png">
-    <link rel="icon" href="/images/favicon.png">
+    <link rel="apple-touch-icon" href="/content/image/manman.jpg">
+    <link rel="icon" href="/content/image/manman.ico">
   
 
   <!-- Raleway-Font -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,400italic,600|Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
   <!-- hexo site css -->
   
+<link rel="stylesheet" href="/content/css/color-scheme.css">
 <link rel="stylesheet" href="/content/css/base.css">
-<link rel="stylesheet" href="/content/css/common.css">
 <link rel="stylesheet" href="/content/iconfont/iconfont.css">
+<link rel="stylesheet" href="/content/css/github-markdown.css">
+<link rel="stylesheet" href="/content/css/highlight.css">
+<link rel="stylesheet" href="/content/css/comments.css">
 
-
-  
-
-  
-    
-<link rel="stylesheet" href="/content/css/post.css">
-
-  
 
   <!-- jquery3.3.1 -->
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -50,78 +47,109 @@
 <script src="/content/js/fancybox.js"></script>
 
 
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
   <body>
     <div id="app">
       <div class="header">
-  <a href="/">LEEDOM</a>
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/content/image/manli.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">林</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/content/">
+          <a href="/content/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/content/archives/">
+          <a href="/content/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/content/categories/">
+          <a href="/content/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/content/about/">
+          <a href="/content/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
 </div>
 
 
-      <p class="links">
-  
-    <a title="archives" target="" href="/archives/">
-      <i class="iconfont icon-bookmark"></i>
-    </a>
-  
-    <a title="github" target="_blank" href="https://github.com/leedom92/hexo-theme-leedom">
-      <i class="iconfont icon-github"></i>
-    </a>
-  
-    <a title="email" target="" href="">
-      <i class="iconfont icon-envelope"></i>
-    </a>
-  
-    <a title="facebook" target="" href="">
-      <i class="iconfont icon-facebooksquare"></i>
-    </a>
-  
-    <a title="twitter" target="" href="">
-      <i class="iconfont icon-twitter"></i>
-    </a>
-  
-    <a title="wechat" target="" href="">
-      <i class="iconfont icon-wechat"></i>
-    </a>
-  
-    <a title="weibo" target="" href="">
-      <i class="iconfont icon-weibo"></i>
-    </a>
-  
-    <a title="rss" target="_blank" href="/atom.xml">
-      <i class="iconfont icon-rss"></i>
-    </a>
-  
-</p>
+<script src="/content/js/activeNav.js"></script>
 
 
-      <div class="main">
+
+      <div class="flex-container">
         <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
 <!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
 <!-- LaTex Display -->
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
 <script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
 </script>
 
-<div class="post">
-  <h3 class="date">
-    Sep 23, 2016
-  </h3>
-  <h1>
-    mysql中使用explain来分析Sql语句的性能
-  </h1>
-  <div class="content markdown-body">
-    <blockquote>
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">mysql中使用explain来分析Sql语句的性能</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2016-09-23 13:07:11
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/content/categories/%E5%AD%98%E5%82%A8/" title="存储">
+                    <b>#</b> 存储
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
 <p>SQL优化的基本思路就是，先找到性能差的语句，然后找到性能差的原因，然后优化。当我们找到目标SQL之后，可以使用explain来分析SQL语句的执行过程，说白了就是看看这个语句的执行计划，找到性能瓶颈。</p>
 </blockquote>
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code>explain &lt;语句&gt;  //explain是专门分析select等查询语句的执行计划的
@@ -261,27 +289,105 @@
 </li>
 </ul>
 
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/content/2016/09/22/2016-09-22-mysql-update/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2016-09-23 13:07:11
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/content/categories/%E5%AD%98%E5%82%A8/" title="存储">
+                        <b>#</b> 存储
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/content/2016/09/26/2016-09-26-job/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-text">例子</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/content/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
   </div>
   
     
-      <a id="older" class="blog-nav" href="/content/2016/09/22/2016-09-22-mysql-update/">OLDER&nbsp;&gt;</a>
-      
-        
-          <a id="newer" class="blog-nav" href="/content/2016/09/26/2016-09-26-job/">&lt;&nbsp;NEWER</a>
-          
-            
-</div>
-        <div class="footer">
-  
     <div class="footer-more">
       
-        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Copyright © Leedom 2021</a>
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2022 Oranges</a>
         
     </div>
   
+    
     <div class="footer-more">
       
-        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Theme by Leedom | Powered by Hexo</a>
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
         
     </div>
   
@@ -289,7 +395,8 @@
 
       </div>
 
-      <div class="back-to-top hidden">
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
   <a href="javascript: void(0)">
     <i class="iconfont icon-chevronup"></i>
   </a>
@@ -300,8 +407,8 @@
 
 
 
-      
-  <div class="search-icon" id="search-icon">
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
     <a href="javascript: void(0)">
       <i class="iconfont icon-search"></i>
     </a>
@@ -309,24 +416,22 @@
 
   <div class="search-overlay hidden">
     <div class="search-content" tabindex="0">
-      <div class="search-box">
-        <div class="search-title">
-          <!-- <span class="search-icon-input">
-            <a href="javascript: void(0)">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </span> -->
-          
-            <input type="text" class="search-input" id="search-input" placeholder="$ grep...">
-          
-          <span class="search-close-icon" id="search-close-icon">
-            <a href="javascript: void(0)">
-              <i class="iconfont icon-close"></i>
-            </a>
-          </span>
-        </div>
-        <div class="search-result" id="search-result"></div>
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
       </div>
+      <div class="search-result" id="search-result"></div>
     </div>
   </div>
 
@@ -334,10 +439,10 @@
     var inputArea = document.querySelector("#search-input")
     var searchOverlayArea = document.querySelector(".search-overlay")
 
-    // inputArea.onclick = function() {
-    //   getSearchFile()
-    //   this.onclick = null
-    // }
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
 
     inputArea.onkeydown = function() {
       if(event.keyCode == 13)
@@ -349,8 +454,7 @@
       if (isHidden) {
         searchOverlayArea.classList.remove('hidden')
         document.body.classList.add('hidden')
-        inputArea.focus()
-        getSearchFile()
+        // inputArea.focus()
       } else {
         searchOverlayArea.classList.add('hidden')
         document.body.classList.remove('hidden')
@@ -371,8 +475,7 @@
       'use strict';
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      $resultContent.innerHTML = "<ul><span class='local-search-empty'><span></ul>";
-      // $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
       $.ajax({
         // 0x01. load xml file
         url: path,
@@ -434,7 +537,7 @@
               }
               // 0x05. show search results
               if (isMatch) {
-                str += "<li><a href='/" + data_url + "' class='search-result-title'><h2>" + orig_data_title + "</h2></a>";
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
                 var content = orig_data_content;
                 if (first_occur >= 0) {
                   // cut out 100 characters
@@ -461,9 +564,9 @@
                     match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
                   });
 
-                  str += "<h3 class=\"search-result-abstract\">" + match_content + "...</h3>"
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
                 }
-                str += "<hr></li>";
+                str += "</li>";
               }
             });
             str += "</ul>";
@@ -476,7 +579,7 @@
         error: function(xhr, status, error) {
           $resultContent.innerHTML = ""
           if (xhr.status === 404) {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/leedom92/hexo-theme-leedom#configuration' target='_black'>configuration</a><span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
           } else {
             $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
           }
@@ -497,6 +600,46 @@
 
 
 
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/content/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + mysql%E4%B8%AD%E4%BD%BF%E7%94%A8explain%E6%9D%A5%E5%88%86%E6%9E%90Sql%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%80%A7%E8%83%BD + '&url=' + http%3A%2F%2Fcolorful.ren%2Fcontent%2F2016%2F09%2F23%2F2016-09-23-mysql-explain%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://colorful.ren/content/2016/09/23/2016-09-23-mysql-explain/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/content/js/shares.js"></script>
+
+
+
+      </div>
     </div>
   </body>
 </html>
