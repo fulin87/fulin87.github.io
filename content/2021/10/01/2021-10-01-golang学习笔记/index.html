@@ -150,12 +150,27 @@ MathJax = {
       </div>
       <div class="markdown-body">
         <blockquote>
-<p>这里记录一下自己学习go lang的过程中遇到的一些问题，方便日后复习</p>
+<p>记录一下自己学习golang的过程中遇到的一些问题和学习心得体会，方便日后复习</p>
 </blockquote>
-<h3 id="vscode中配置go环境"><a href="#vscode中配置go环境" class="headerlink" title="vscode中配置go环境"></a>vscode中配置go环境</h3><ul>
-<li><p>安装gopls</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE=on</span><br><span class="line">go env -w GOPROXY=https:<span class="regexp">//g</span>oproxy.cn,direct</span><br><span class="line">go get -v golang.org<span class="regexp">/x/</span>tools/gopls</span><br><span class="line">go install github.com<span class="regexp">/ramya-rao-a/g</span>o-outline@latest</span><br><span class="line">go install github.com<span class="regexp">/uudashr/g</span>opkgs<span class="regexp">/v2/</span>cmd/gopkgs@latest</span><br><span class="line">go install golang.org<span class="regexp">/x/</span>tools<span class="regexp">/cmd/g</span>oimports@latest</span><br></pre></td></tr></table></figure></li>
+<h3 id="怎样用一句话总结golang"><a href="#怎样用一句话总结golang" class="headerlink" title="怎样用一句话总结golang"></a>怎样用一句话总结golang</h3><p>这里摘录 <em>&lt;&lt;go语言编程&gt;&gt; 许世伟著</em> 中的一段描述来进行总结</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">C</span>语言是纯过程式的，这和它产生的历史背景有关。</span><br><span class="line"><span class="variable">Java</span>语言则是激进的面向对象主义推崇者，典型表现是它不能容忍体系里存在孤立的函数。</span><br><span class="line">而<span class="variable">Go</span>语言没有去否认任何一方，而是用批判吸收的眼光，将所有编程思想做了一次梳理，</span><br><span class="line">融合众家之长，但时刻警惕特性复杂化，极力维持语言特性的简洁，力求小而精。</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="鸭子模型"><a href="#鸭子模型" class="headerlink" title="鸭子模型"></a>鸭子模型</h3><p><em>当看到一只鸟走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子</em><br>鸭子模型关注的不是对象的类型，而是对象的行为表现,golang使用鸭子模型实现接口机制，非常灵活</p>
+<p>go语言选择了鸭子模型来实现接口，这一点非常重要，直接的结果就是：go语言的接口具有非侵入性</p>
+<h3 id="函数和方法"><a href="#函数和方法" class="headerlink" title="函数和方法"></a>函数和方法</h3><ul>
+<li>函数和方法的可变参数其实是一个切片</li>
+<li>可变参数必须是参数列表中的最后一个参数</li>
+<li>go的函数和方法可以有多个返回值,而且返回值可以有名字，其实就是本函数局部变量</li>
+<li>匿名函数如果和函数外的变量产生了作用则就是一个闭包，类似一种绑定关系</li>
+<li>go中是现有”类型”，再有方法，相当于给类型绑定方法，而且类型和方法必须在同一个包中</li>
 </ul>
+<h3 id="golang的并发模型"><a href="#golang的并发模型" class="headerlink" title="golang的并发模型"></a>golang的并发模型</h3><p>golang最强大的地方就是它的并发模型,对于写过java并发程序的人来说,使用go进行并发编程简直就是一种享受。之所以有这种感觉，是因为:</p>
+<p><strong>首先</strong>,可以简单的理解：go的协程比线程要轻很多，开销更小，量变引起质变,golang的性能参数了质的飞越。<br><strong>其次</strong>,go和java的并发模型是不同的。</p>
+<p><em><a target="_blank" rel="noopener" href="https://swtch.com/libtask/">开源协程库 libtask</a></em> 的源代码很值得一读，理解之后就知道协程背后是怎么回事了。</p>
+  <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">java:</span> 基于共享变量实现线程间通讯</span><br><span class="line"><span class="symbol">go:</span>   基于消息实现协程间的通讯</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>&lt;&lt;go语言编程&gt;&gt; 许世伟 著<br><a target="_blank" rel="noopener" href="https://chai2010.cn/advanced-go-programming-book/">go语言高级编程</a></p>
 
       </div>
       
@@ -205,7 +220,7 @@ MathJax = {
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode%E4%B8%AD%E9%85%8D%E7%BD%AEgo%E7%8E%AF%E5%A2%83"><span class="toc-text">vscode中配置go环境</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E6%A0%B7%E7%94%A8%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%80%BB%E7%BB%93golang"><span class="toc-text">怎样用一句话总结golang</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%B8%AD%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-text">鸭子模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-text">函数和方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#golang%E7%9A%84%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B"><span class="toc-text">golang的并发模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-text">参考文献</span></a></li></ol>
       
     </div>
   </div>
